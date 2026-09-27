@@ -8,7 +8,7 @@ use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
 
-use crate::{AgeMode, DomainError};
+use crate::{story::MissionStory, AgeMode, DomainError};
 
 // ── AgeTier ──────────────────────────────────────────────────────────────────
 
@@ -200,6 +200,9 @@ pub struct Challenge {
     pub skill_refs: Vec<Uuid>,
     /// True when the mission requires a family subscription to play.
     pub is_premium: bool,
+    /// The storytelling + gamified-instructor layer (Popi's story, chapters,
+    /// games). Optional: missions without one play the classic way.
+    pub story: Option<MissionStory>,
     pub created_at: DateTime<Utc>,
 }
 
@@ -293,6 +296,7 @@ mod tests {
             related_video_ids: vec![],
             skill_refs: vec![],
             is_premium: false,
+            story: None,
             created_at: Utc::now(),
         }
     }

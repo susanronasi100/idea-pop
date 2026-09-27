@@ -16,6 +16,7 @@ pub mod help;
 pub mod portfolio;
 pub mod ports;
 pub mod progress;
+pub mod story;
 
 pub use account::{Account, RefreshSession, Role, TokenClaims, TokenPair};
 pub use auth_service::AuthService;

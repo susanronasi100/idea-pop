@@ -12,6 +12,7 @@ use uuid::Uuid;
 use idea_pop_domain::{
     challenge::{AgeTier, AgeTierVariant, Challenge, ChallengeFilter, ChallengeStep, Tool},
     content::Page,
+    story::MissionStory,
     AgeMode, ChallengeRepo, DomainError,
 };
 
@@ -46,6 +47,14 @@ fn row_to_challenge(row: &sqlx::postgres::PgRow) -> Result<Challenge, DomainErro
     let age_tier_variants: Vec<AgeTierVariant> = serde_json::from_value(atv_val)
         .map_err(|e| DomainError::Internal(format!("age_tier_variants: {e}")))?;
 
+    let story_val: Option<JsonValue> = row
+        .try_get("story")
+        .map_err(|e| DomainError::Internal(e.to_string()))?;
+    let story: Option<MissionStory> = story_val
+        .map(serde_json::from_value)
+        .transpose()
+        .map_err(|e| DomainError::Internal(format!("story: {e}")))?;
+
     Ok(Challenge {
         id: row
             .try_get("id")
@@ -77,6 +86,7 @@ fn row_to_challenge(row: &sqlx::postgres::PgRow) -> Result<Challenge, DomainErro
         is_premium: row
             .try_get("is_premium")
             .map_err(|e| DomainError::Internal(e.to_string()))?,
+        story,
         created_at: row
             .try_get("created_at")
             .map_err(|e| DomainError::Internal(e.to_string()))?,
@@ -103,7 +113,7 @@ impl ChallengeRepo for SqlxChallengeRepo {
         // age_mode is applied in Rust because it requires JSONB introspection.
         let rows = sqlx::query(
             "SELECT id, title, slug, season, week_number, xp_reward, steps, tools, \
-             age_tier_variants, related_video_ids, skill_refs, is_premium, created_at \
+             age_tier_variants, related_video_ids, skill_refs, is_premium, story, created_at \
              FROM challenges \
              WHERE ($1::smallint IS NULL OR season = $1) \
                AND ($2::smallint IS NULL OR week_number = $2) \
@@ -138,7 +148,7 @@ impl ChallengeRepo for SqlxChallengeRepo {
     async fn find_by_id(&self, id: Uuid) -> Result<Option<Challenge>, DomainError> {
         let row = sqlx::query(
             "SELECT id, title, slug, season, week_number, xp_reward, steps, tools, \
-             age_tier_variants, related_video_ids, skill_refs, is_premium, created_at \
+             age_tier_variants, related_video_ids, skill_refs, is_premium, story, created_at \
              FROM challenges WHERE id = $1",
         )
         .bind(id)
@@ -169,4 +179,12 @@ pub fn variants_from_value(v: JsonValue) -> Result<Vec<AgeTierVariant>, serde_js
 /// Deserialize a `Vec<Tool>` from a `serde_json::Value`.
 pub fn tools_from_value(v: JsonValue) -> Result<Vec<Tool>, serde_json::Error> {
     serde_json::from_value(v)
+}
+
+/// Deserialize and validate a `MissionStory` — used by the seed binary before
+/// writing a story file into `challenges.story`.
+pub fn story_from_value(v: JsonValue) -> Result<MissionStory, String> {
+    let story: MissionStory = serde_json::from_value(v).map_err(|e| e.to_string())?;
+    story.validate().map_err(|e| e.to_string())?;
+    Ok(story)
 }

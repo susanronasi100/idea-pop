@@ -796,3 +796,78 @@ async fn app_less_challenge(pool: &PgPool) -> Value {
         .unwrap();
     body_json(res).await
 }
+
+// ── Mission story layer ───────────────────────────────────────────────────────
+
+/// The real Season 1 story file for challenge 1 — the same JSON the seed writes.
+const STORY_MAX: &str = include_str!("../../../content/stories/help-max-cross-the-river.json");
+
+#[tokio::test]
+async fn challenge_detail_includes_the_story_layer() {
+    let (pool, _pg) = start_postgres().await;
+    let id = insert_challenge(
+        &pool,
+        "help-max-cross-the-river",
+        "Help Max Cross the River",
+        1,
+        1,
+        STEPS_MAX,
+        TOOLS_JSON,
+        VARIANTS_JSON,
+    )
+    .await;
+    let story: Value = serde_json::from_str(STORY_MAX).unwrap();
+    sqlx::query("UPDATE challenges SET story = $1 WHERE id = $2")
+        .bind(sqlx::types::Json(&story))
+        .bind(id)
+        .execute(&pool)
+        .await
+        .unwrap();
+
+    let app = router(challenge_state(pool), None);
+    let token = register_and_token(&app, "story@test.com").await;
+    let res = app
+        .oneshot(authed_get(&format!("/challenges/{id}"), &token))
+        .await
+        .unwrap();
+    assert_eq!(res.status(), StatusCode::OK);
+    let body = body_json(res).await;
+
+    let s = &body["story"];
+    assert_eq!(s["hero"]["name"], "Max");
+    assert_eq!(s["opening"].as_array().unwrap().len(), 3);
+    assert_eq!(s["chapters"].as_array().unwrap().len(), 9);
+    assert_eq!(s["chapters"][5]["step"], "tool");
+    assert_eq!(s["tool"]["kind"], "scamper");
+    assert_eq!(s["tool"]["parts"].as_array().unwrap().len(), 3);
+    assert_eq!(s["sticker"]["name"], "River Crosser");
+    // The header emoji comes from the story's hero.
+    assert_eq!(body["emoji"], "🎒");
+}
+
+#[tokio::test]
+async fn challenge_without_a_story_returns_null_story() {
+    let (pool, _pg) = start_postgres().await;
+    let id = insert_challenge(
+        &pool,
+        "forest-picnic",
+        "Forest Picnic",
+        1,
+        2,
+        STEPS_PICNIC,
+        TOOLS_JSON,
+        VARIANTS_JSON,
+    )
+    .await;
+
+    let app = router(challenge_state(pool), None);
+    let token = register_and_token(&app, "nostory@test.com").await;
+    let res = app
+        .oneshot(authed_get(&format!("/challenges/{id}"), &token))
+        .await
+        .unwrap();
+    assert_eq!(res.status(), StatusCode::OK);
+    let body = body_json(res).await;
+    assert!(body["story"].is_null());
+    assert_eq!(body["emoji"], "🚀");
+}

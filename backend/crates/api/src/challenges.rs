@@ -101,6 +101,10 @@ pub struct ChallengeResponse {
     /// True when `is_premium` and the caller's family has no active subscription.
     /// The kid UI shows an "ask a grown-up to upgrade" card for locked missions.
     pub locked: bool,
+    /// The mission's story layer (Story Spine chapters, Popi's lines, the
+    /// per-step games, the sticker). Null for missions without a story.
+    #[schema(value_type = Option<Object>)]
+    pub story: Option<serde_json::Value>,
     pub created_at: DateTime<Utc>,
 }
 
@@ -230,6 +234,13 @@ fn challenge_to_dto(c: Challenge, has_premium: bool) -> ChallengeResponse {
         })
         .collect();
 
+    let emoji = c
+        .story
+        .as_ref()
+        .map(|s| s.hero.emoji.clone())
+        .unwrap_or_else(|| "🚀".to_owned());
+    let story = c.story.as_ref().and_then(|s| serde_json::to_value(s).ok());
+
     ChallengeResponse {
         id: c.id,
         title: c.title,
@@ -241,7 +252,7 @@ fn challenge_to_dto(c: Challenge, has_premium: bool) -> ChallengeResponse {
         skill_hints,
         build_hints,
         brief,
-        emoji: "🚀".to_owned(),
+        emoji,
         completion_xp: c.xp_reward,
         design_secret,
         design_secret_story,
@@ -256,6 +267,7 @@ fn challenge_to_dto(c: Challenge, has_premium: bool) -> ChallengeResponse {
         related_video_ids: c.related_video_ids,
         is_premium: c.is_premium,
         locked: c.is_premium && !has_premium,
+        story,
         created_at: c.created_at,
     }
 }

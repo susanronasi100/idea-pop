@@ -1,0 +1,104 @@
+{
+  "hero": { "name": "Max", "role": "a student", "image": "/landing/hero/measure-boy.webp", "emoji": "🎒" },
+  "scene_image": "/landing/try-mission-river.webp",
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏡", "text": "There was a boy called Max who lived in a small village at the edge of a thick jungle." },
+    { "beat": "Every day…", "emoji": "🥾", "text": "Max walked 3 hours to school, because a huge river cut right across his path and the only way was the long way round." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Max stopped on the riverbank and thought: \"What if I could cross right here? School would be minutes away, not hours!\"" }
+  ],
+  "card": {
+    "hero": "Max, a student",
+    "place": "A huge river in the jungle",
+    "problem": "A 3-hour walk to school",
+    "goal": "Cross the river safely",
+    "rules": "Light things Max can carry",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "A big idea on the riverbank", "line": "Max stops at the water and wonders: what if I could cross right here?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Max asks for help", "line": "Max has lots of questions, and he needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Max go down to the water to meet animals and plants that never sink." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of floating", "line": "The heroes share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the clay lab", "line": "Every hero needs training. Max hands you a lump of clay." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The idea storm", "line": "Ideas start swirling like leaves on the wind!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great crossing starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "The first try wobbles. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Max crosses the river", "line": "Max crosses in minutes and walks into school on time." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Max has started thinking about what he could do. What about you? Can you help him? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this millions of years ago. Tap each card to meet four nature heroes who never sink!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which boat shape will hold the most coins?",
+    "sketch": "Time to draw your crossing like a real engineer!",
+    "build_and_test": "Build your model and let's see how many coins Max's crossing can carry!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, Max crosses the river on YOUR crossing. He gets to school in minutes, and his whole village wants one too!"
+  },
+  "quick_check": {
+    "question": "Crossing the river takes 10 minutes. How much time does Max save each morning?",
+    "options": ["50 min", "2 h 50 min", "3 h 10 min"],
+    "answer": 1,
+    "right": "Right! That's almost 6 hours a day there and back: time for football, reading or sleep!",
+    "wrong": "Not quite. Try 3 hours take away 10 minutes."
+  },
+  "clue_cards": [
+    { "name": "Water strider", "emoji": "🦟", "image": null, "tagline": "Pond skater", "trick": "Long legs covered in tiny waxy hairs.", "does": "Spreads its weight so it stands on the water's skin without breaking it.", "group": "weight" },
+    { "name": "Fire ants", "emoji": "🐜", "image": null, "tagline": "Flood survivors", "trick": "They link their bodies into a living raft.", "does": "Air trapped between them keeps the colony afloat for days.", "group": "air" },
+    { "name": "Giant water lily", "emoji": "🪷", "image": null, "tagline": "Amazon river", "trick": "A huge leaf with a rim and air-filled ribs underneath.", "does": "It floats even with a small child sitting on it.", "group": "rim" },
+    { "name": "Coconut", "emoji": "🥥", "image": null, "tagline": "Ocean traveller", "trick": "A thick, hairy husk full of air.", "does": "Floats across oceans for months and keeps the seed dry.", "group": "air" }
+  ],
+  "match_groups": [
+    { "key": "weight", "label": "🦶 Spreads the weight" },
+    { "key": "air", "label": "🫧 Traps air" },
+    { "key": "rim", "label": "🛶 Wide shape with a rim" }
+  ],
+  "predict": {
+    "prompt": "Sink or float? Predict first!",
+    "choices": ["Sink", "Float"],
+    "items": [
+      { "emoji": "⚙️", "label": "Steel ball", "answer": 0 },
+      { "emoji": "🚢", "label": "Steel ship", "answer": 1 },
+      { "emoji": "🟤", "label": "Ball of clay", "answer": 0 }
+    ],
+    "explain": "Same steel, different shape. The ship is wide and hollow, so it pushes aside lots of water."
+  },
+  "lab": {
+    "title": "The clay boat lab",
+    "predict": "Which boat shape will hold the most coins?",
+    "options": ["Wide and flat", "Deep and narrow", "With a rim"],
+    "measure": "coins before it sinks",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "SCAMPER is a set of magic question words. Each letter is a different way to change an idea. Today you'll learn the first 3 letters.",
+    "example_object": "an umbrella",
+    "parts": [
+      { "key": "S", "name": "Substitute", "what": "Swap one thing for another.", "example": "☂️ Swap the cloth for a giant leaf.", "starter": "Instead of heavy wood, Max could use…" },
+      { "key": "C", "name": "Combine", "what": "Join two things into one.", "example": "☂️ Umbrella + torch = a walk home in the dark.", "starter": "What if the crossing was a bridge AND a…" },
+      { "key": "A", "name": "Adapt", "what": "Borrow an idea from somewhere else.", "example": "☂️ Copy the lotus leaf so rain rolls off.", "starter": "Max could copy the fire ants' trick by…" }
+    ],
+    "locked": ["M", "P", "E", "R"],
+    "badge": "SCAMPER Starter"
+  },
+  "sketch_checklist": [
+    "I labelled the materials.",
+    "I showed where air or a wide surface keeps it up.",
+    "I added measurements."
+  ],
+  "test": {
+    "measure": "coins before it sinks",
+    "higher_is_better": true,
+    "check_question": "Wave test: does it stay stable when you make small waves?",
+    "check_options": ["Steady", "Wobbly", "Tipped over"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick kept your crossing afloat?",
+    "options": ["🦟 Water strider", "🐜 Fire ants", "🪷 Water lily", "🥥 Coconut"]
+  },
+  "sticker": { "name": "River Crosser", "emoji": "🌉" }
+}

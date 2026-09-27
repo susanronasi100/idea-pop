@@ -11,6 +11,9 @@
 
 use sqlx::PgPool;
 
+#[path = "../seed_stories.rs"]
+mod seed_stories;
+
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
     dotenvy::dotenv().ok();
@@ -27,6 +30,7 @@ async fn main() -> anyhow::Result<()> {
     seed_explore_videos(&pool).await?;
     seed_quick_makes(&pool).await?;
     seed_challenges(&pool).await?;
+    seed_stories::seed_stories(&pool).await?;
     seed_badges(&pool).await?;
 
     println!("seed complete");
