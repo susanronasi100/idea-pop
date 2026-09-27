@@ -18,6 +18,15 @@ import StepBuild from '@/components/challenge/StepBuild';
 import StepCelebrate from '@/components/challenge/StepCelebrate';
 import IdeasWallTab from '@/components/challenge/IdeasWallTab';
 import XpBurst from '@/components/explore/XpBurst';
+import StoryBrief from '@/components/challenge/story/StoryBrief';
+import StoryClues from '@/components/challenge/story/StoryClues';
+import StorySecret from '@/components/challenge/story/StorySecret';
+import StoryLab from '@/components/challenge/story/StoryLab';
+import ToolLesson from '@/components/challenge/story/ToolLesson';
+import StoryEnding from '@/components/challenge/story/StoryEnding';
+import { StoryFairTest, StorySketchTop } from '@/components/challenge/story/StorySketchBuild';
+import { ChapterBanner, Popi } from '@/components/challenge/story/StoryBits';
+import { useMissionGame } from '@/components/challenge/story/useMissionGame';
 import type { components } from '@/lib/api/schema';
 
 type ChallengeDetail = components['schemas']['ChallengeDetail'];
@@ -55,6 +64,9 @@ export default function ChallengePage() {
   const [ideaPath, setIdeaPath] = useState<'yes' | 'no' | null>(null);
   const [sketchProjectId, setSketchProjectId] = useState<string | null>(null);
   const [wallUnlocked, setWallUnlocked] = useState(false);
+  // Story missions split step 5 into the lab and the creativity-tool power-up.
+  const [skillPhase, setSkillPhase] = useState<'lab' | 'tool'>('lab');
+  const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
 
   // Load challenge data
   useEffect(() => {
@@ -104,6 +116,7 @@ export default function ChallengePage() {
       }
 
       setCurrentStep(step);
+      if (step === 5) setSkillPhase('lab');
       setReachedSteps((prev) => {
         const next = new Set(prev);
         next.add(step);
@@ -160,6 +173,9 @@ export default function ChallengePage() {
   }
 
   const sharedProps = { challenge, ageMode };
+  // The storytelling + Popi instructor layer; null → the classic mission.
+  const story = challenge.story ?? null;
+  const gameProps = { game, update: updateGame };
 
   return (
     <div data-testid="challenge-page" className="min-h-screen bg-tint-blue">
@@ -169,6 +185,7 @@ export default function ChallengePage() {
         reachedSteps={reachedSteps}
         onJumpTo={goToStep}
         ideaPath={ideaPath}
+        starTrail={story !== null}
       />
 
       {/* Mission / Ideas Wall tabs */}
@@ -206,8 +223,18 @@ export default function ChallengePage() {
       {/* Mission tab content */}
       {activeTab === 'mission' && (
         <div className="max-w-2xl mx-auto px-4 pb-24">
-          {currentStep === 1 && (
-            <StepBrief {...sharedProps} onNext={() => goToStep(2)} />
+          {currentStep === 1 &&
+            (story ? (
+              <StoryBrief challenge={challenge} story={story} {...gameProps} onNext={() => goToStep(2)} />
+            ) : (
+              <StepBrief {...sharedProps} onNext={() => goToStep(2)} />
+            ))}
+
+          {currentStep === 2 && story && (
+            <div className="flex flex-col gap-4 pt-4">
+              <ChapterBanner story={story} step="your_idea" />
+              <Popi text={story.guide.your_idea} />
+            </div>
           )}
 
           {currentStep === 2 && (
@@ -219,44 +246,93 @@ export default function ChallengePage() {
             />
           )}
 
-          {currentStep === 3 && (
-            <StepNatureClues
-              {...sharedProps}
-              onNext={() => goToStep(4)}
-              onBack={() => goToStep(2)}
-            />
-          )}
+          {currentStep === 3 &&
+            (story ? (
+              <StoryClues
+                story={story}
+                {...gameProps}
+                award={awardBadge}
+                onNext={() => goToStep(4)}
+                onBack={() => goToStep(2)}
+              />
+            ) : (
+              <StepNatureClues
+                {...sharedProps}
+                onNext={() => goToStep(4)}
+                onBack={() => goToStep(2)}
+              />
+            ))}
 
-          {currentStep === 4 && (
-            <StepDesignSecret
-              {...sharedProps}
-              onNext={() => goToStep(5)}
-              onBack={() => goToStep(3)}
-            />
-          )}
+          {currentStep === 4 &&
+            (story ? (
+              <StorySecret
+                challenge={challenge}
+                story={story}
+                {...gameProps}
+                onNext={() => goToStep(5)}
+                onBack={() => goToStep(3)}
+              />
+            ) : (
+              <StepDesignSecret
+                {...sharedProps}
+                onNext={() => goToStep(5)}
+                onBack={() => goToStep(3)}
+              />
+            ))}
 
-          {currentStep === 5 && (
-            <StepSkill
-              {...sharedProps}
-              onNext={() => goToStep(6)}
-              onBack={() => goToStep(4)}
-            />
-          )}
+          {currentStep === 5 &&
+            (story ? (
+              skillPhase === 'lab' ? (
+                <StoryLab
+                  challenge={challenge}
+                  story={story}
+                  {...gameProps}
+                  onNext={() => {
+                    setSkillPhase('tool');
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                  onBack={() => goToStep(4)}
+                />
+              ) : (
+                <ToolLesson
+                  story={story}
+                  {...gameProps}
+                  award={awardBadge}
+                  onNext={() => goToStep(6)}
+                  onBack={() => setSkillPhase('lab')}
+                />
+              )
+            ) : (
+              <StepSkill
+                {...sharedProps}
+                onNext={() => goToStep(6)}
+                onBack={() => goToStep(4)}
+              />
+            ))}
+
+          {currentStep === 6 && story && <StorySketchTop story={story} {...gameProps} />}
 
           {currentStep === 6 && (
             <StepSketch
               {...sharedProps}
+              hideTools={story !== null}
               onNext={(projectId) => {
                 if (projectId) setSketchProjectId(projectId);
                 goToStep(7);
               }}
-              onBack={() => goToStep(ideaPath === 'yes' ? 2 : 5)}
+              onBack={() => {
+                if (ideaPath === 'yes') return goToStep(2);
+                void goToStep(5).then(() => story && setSkillPhase('tool'));
+              }}
             />
           )}
+
+          {currentStep === 7 && story && <StoryFairTest story={story} {...gameProps} />}
 
           {currentStep === 7 && (
             <StepBuild
               {...sharedProps}
+              hideTestQuestion={story !== null}
               sketchProjectId={sketchProjectId}
               onNext={() => {
                 show({
@@ -272,6 +348,8 @@ export default function ChallengePage() {
               onBack={() => goToStep(6)}
             />
           )}
+
+          {currentStep === 8 && story && <StoryEnding story={story} {...gameProps} />}
 
           {currentStep === 8 && (
             <StepCelebrate
@@ -306,7 +384,7 @@ export default function ChallengePage() {
       {visible && award && (
         <XpBurst
           award={award}
-          stickerEmoji="⭐"
+          stickerEmoji={story?.sticker.emoji ?? '⭐'}
           onDismiss={dismiss}
         />
       )}

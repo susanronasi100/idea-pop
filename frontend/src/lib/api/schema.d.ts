@@ -944,7 +944,71 @@ export interface components {
       is_premium: boolean;
       /** True when premium and the caller's family has no active subscription. */
       locked: boolean;
+      /** The mission's story layer (Story Spine chapters, Popi's lines, the
+       * per-step games, the sticker). Null for missions without a story. */
+      story?: components["schemas"]["MissionStory"] | null;
       created_at: string;
+    };
+    // Mirrors the backend domain MissionStory (crates/domain/src/story.rs).
+    MissionStory: {
+      /** "How does nature…?" — heads the Nature clues step. */
+      function_question: string;
+      hero: { name: string; role: string; image: string | null; emoji: string };
+      scene_image: string | null;
+      /** Exactly 3: Once upon a time / Every day / Until one day. */
+      opening: { beat: string; emoji: string; text: string }[];
+      card: { hero: string; place: string; problem: string; goal: string; rules: string; helpers: string };
+      /** One per step in play order: brief, your_idea, nature_clues,
+       * design_secret, skill, tool, sketch, build_and_test, celebrate_and_share. */
+      chapters: { step: string; label: string; beat: string; title: string; line: string }[];
+      guide: {
+        brief: string;
+        your_idea: string;
+        nature_clues: string;
+        design_secret: string;
+        skill: string;
+        sketch: string;
+        build_and_test: string;
+        retry_tip: string;
+        ending: string;
+      };
+      quick_check: { question: string; options: string[]; answer: number; right: string; wrong: string };
+      clue_cards: {
+        name: string;
+        emoji: string;
+        image: string | null;
+        tagline: string;
+        trick: string;
+        does: string;
+        group: string;
+      }[];
+      match_groups: { key: string; label: string }[];
+      predict: {
+        prompt: string;
+        choices: string[];
+        items: { emoji: string; label: string; answer: number }[];
+        explain: string;
+      };
+      lab: { title: string; predict: string; options: string[]; measure: string; higher_is_better: boolean };
+      tool: {
+        kind: "scamper" | "mind_map" | "five_whys" | "brainstorm";
+        name: string;
+        intro: string;
+        example_object: string;
+        parts: { key: string; name: string; what: string; example: string; starter: string }[];
+        locked: string[];
+        badge: string;
+      };
+      sketch_checklist: string[];
+      test: {
+        measure: string;
+        higher_is_better: boolean;
+        check_question: string;
+        check_options: string[];
+        change_prompt: string;
+      };
+      reflection: { question: string; options: string[] };
+      sticker: { name: string; emoji: string };
     };
     IdeaWallEntry: {
       id: string;

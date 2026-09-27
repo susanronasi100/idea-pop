@@ -14,9 +14,11 @@ interface StepSketchProps {
   ageMode: 'young' | 'older';
   onNext: (projectId: string | null) => void;
   onBack: () => void;
+  /** Story missions teach their tool in the chapter-5½ power-up instead. */
+  hideTools?: boolean;
 }
 
-export default function StepSketch({ challenge, ageMode, onNext, onBack }: StepSketchProps) {
+export default function StepSketch({ challenge, ageMode, onNext, onBack, hideTools = false }: StepSketchProps) {
   const t = useTranslations('mission');
   const game = GAME_BY_SLUG[challenge.slug];
   // The hook must run unconditionally; the namespace is only read when a game exists.
@@ -102,7 +104,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack }: StepS
       </div>
 
       {/* Creativity tools accordion — only when challenge includes tools */}
-      {toolKinds.length > 0 && (
+      {!hideTools && toolKinds.length > 0 && (
         <ToolSelector
           tools={toolKinds}
           topic={challenge.title}

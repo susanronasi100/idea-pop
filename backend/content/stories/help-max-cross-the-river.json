@@ -1,4 +1,5 @@
 {
+  "function_question": "How does nature stay on top of water?",
   "hero": { "name": "Max", "role": "a student", "image": "/landing/hero/measure-boy.webp", "emoji": "🎒" },
   "scene_image": "/landing/try-mission-river.webp",
   "opening": [

@@ -11,6 +11,8 @@ interface MissionHUDProps {
   reachedSteps: Set<number>;
   onJumpTo: (step: number) => void;
   ideaPath?: 'yes' | 'no' | null;
+  /** Story missions: finished chapters show as gold stars (one per step). */
+  starTrail?: boolean;
 }
 
 export default function MissionHUD({
@@ -18,6 +20,7 @@ export default function MissionHUD({
   currentStep,
   reachedSteps,
   onJumpTo,
+  starTrail = false,
 }: MissionHUDProps) {
   const t = useTranslations('challenge');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -61,6 +64,23 @@ export default function MissionHUD({
           const isCompleted = step < currentStep;
           const isCurrent = step === currentStep;
           const isFuture = step > currentStep;
+
+          if (starTrail && (isCompleted || isCurrent)) {
+            return (
+              <span
+                key={step}
+                data-testid={`progress-dot-${step}`}
+                role="img"
+                aria-label={t('hud_step_aria', { step, state: isCurrent ? 'current' : 'done' })}
+                className={[
+                  'flex h-5 w-5 items-center justify-center rounded-full text-[13px] leading-none transition-all duration-300',
+                  isCompleted ? 'story-pop bg-[#fff5d1] text-[#f2b705]' : 'bg-challenge/10 text-challenge ring-2 ring-challenge ring-offset-1',
+                ].join(' ')}
+              >
+                {isCompleted ? '★' : step}
+              </span>
+            );
+          }
 
           return (
             <span

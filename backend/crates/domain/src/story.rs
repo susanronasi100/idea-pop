@@ -198,6 +198,9 @@ pub struct Sticker {
 
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct MissionStory {
+    /// The Biomimicry function question ("How does nature…?") that heads the
+    /// Nature clues step.
+    pub function_question: String,
     pub hero: StoryCharacter,
     pub scene_image: Option<String>,
     /// Exactly 3: Once upon a time / Every day / Until one day.
@@ -312,6 +315,7 @@ mod tests {
             line: "L".into(),
         };
         MissionStory {
+            function_question: "How does nature stay on top of water?".into(),
             hero: StoryCharacter {
                 name: "Max".into(),
                 role: "student".into(),

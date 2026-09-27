@@ -22,6 +22,8 @@ interface StepBuildProps {
   sketchProjectId: string | null;
   onNext: () => void;
   onBack: () => void;
+  /** Story missions run their own two-round fair test above this step. */
+  hideTestQuestion?: boolean;
 }
 
 const CHECKLIST_KEYS = ['build_check_1', 'build_check_2', 'build_check_3'] as const;
@@ -34,6 +36,7 @@ export default function StepBuild({
   sketchProjectId,
   onNext,
   onBack,
+  hideTestQuestion = false,
 }: StepBuildProps) {
   const t = useTranslations('mission');
   const game = GAME_BY_SLUG[challenge.slug];
@@ -155,43 +158,45 @@ export default function StepBuild({
       </div>
 
       {/* Test question card */}
-      <div className="bg-tint-blue rounded-card p-4 text-center mb-4">
-        <p className="font-display text-base text-ink mb-3">{t('test_question')}</p>
-        <div className="flex gap-3 justify-center">
-          <button
-            data-testid="test-worked"
-            type="button"
-            onClick={() => setTestResult('worked')}
-            className={`font-body text-sm px-4 py-2 rounded-card border-2 transition-all ${
-              testResult === 'worked'
-                ? 'bg-explore text-white border-explore'
-                : 'bg-white text-ink border-explore/40'
-            }`}
-          >
-            {t('test_worked')}
-          </button>
-          <button
-            data-testid="test-needs-fix"
-            type="button"
-            onClick={() => setTestResult('needs_fix')}
-            className={`font-body text-sm px-4 py-2 rounded-card border-2 transition-all ${
-              testResult === 'needs_fix'
-                ? 'bg-amber-400 text-white border-amber-400'
-                : 'bg-white text-ink border-amber-300'
-            }`}
-          >
-            {t('test_needs_fix')}
-          </button>
+      {!hideTestQuestion && (
+        <div className="bg-tint-blue rounded-card p-4 text-center mb-4">
+          <p className="font-display text-base text-ink mb-3">{t('test_question')}</p>
+          <div className="flex gap-3 justify-center">
+            <button
+              data-testid="test-worked"
+              type="button"
+              onClick={() => setTestResult('worked')}
+              className={`font-body text-sm px-4 py-2 rounded-card border-2 transition-all ${
+                testResult === 'worked'
+                  ? 'bg-explore text-white border-explore'
+                  : 'bg-white text-ink border-explore/40'
+              }`}
+            >
+              {t('test_worked')}
+            </button>
+            <button
+              data-testid="test-needs-fix"
+              type="button"
+              onClick={() => setTestResult('needs_fix')}
+              className={`font-body text-sm px-4 py-2 rounded-card border-2 transition-all ${
+                testResult === 'needs_fix'
+                  ? 'bg-amber-400 text-white border-amber-400'
+                  : 'bg-white text-ink border-amber-300'
+              }`}
+            >
+              {t('test_needs_fix')}
+            </button>
+          </div>
+          {testResult === 'worked' && (
+            <p className="font-body text-sm text-ink/70 mt-3">{t('test_worked_note')}</p>
+          )}
+          {testResult === 'needs_fix' && (
+            <p className="font-body text-sm text-ink/70 mt-3">
+              {t('test_needs_fix_note')}
+            </p>
+          )}
         </div>
-        {testResult === 'worked' && (
-          <p className="font-body text-sm text-ink/70 mt-3">{t('test_worked_note')}</p>
-        )}
-        {testResult === 'needs_fix' && (
-          <p className="font-body text-sm text-ink/70 mt-3">
-            {t('test_needs_fix_note')}
-          </p>
-        )}
-      </div>
+      )}
 
       {/* Capture card — game missions share their GAME STATE, not a photo:
           completing saves the game's text snapshot as the project instead. */}
@@ -199,7 +204,7 @@ export default function StepBuild({
         <button
           type="button"
           data-testid={`${game.testIdPrefix}-mission-complete`}
-          disabled={testResult === null || submitting}
+          disabled={(!hideTestQuestion && testResult === null) || submitting}
           onClick={() => void handleGameComplete()}
           className="bg-challenge text-white font-display text-lg px-6 py-3 rounded-card w-full disabled:opacity-40"
         >
