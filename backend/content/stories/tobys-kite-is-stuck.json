@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature grip smooth surfaces?",
+  "hero": { "name": "Toby", "role": "a kite flyer", "image": "/landing/hero/bucket-hat-kid.webp", "emoji": "🪁" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏡", "text": "There was a boy called Toby who had a bright red kite and a long, windy garden." },
+    { "beat": "Every day…", "emoji": "🪁", "text": "After school, Toby raced across the grass and let his kite climb higher and higher into the sky." },
+    { "beat": "Until one day…", "emoji": "💨", "text": "The wind dropped, and the kite slid under the garden shed: 60 cm back, in a gap only 5 cm high. Every stick Toby tried just pushed it further in!" }
+  ],
+  "card": {
+    "hero": "Toby, a kite flyer",
+    "place": "A tiny gap under the garden shed",
+    "problem": "The kite is stuck 60 cm back",
+    "goal": "Grab it, pull it out, let it go",
+    "rules": "Fit a gap only 5 cm high",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The kite under the shed", "line": "Toby lies flat on the grass and peers into the dark gap. His kite is right there, just out of reach." },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Toby asks for help", "line": "Sticks push, but they can't pull. Toby needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The masters of grip", "line": "You and Toby meet animals that can hold on to almost anything." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of a good grip", "line": "The grip heroes share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the grip lab", "line": "Toby puts a playing card on the table and lines up five tips to test." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The grip map", "line": "One word in the middle, and ideas branch out like a tree!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great grabber starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "The first try slips. You fix the tip, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "The kite flies again", "line": "Out comes the kite, and up it goes into the wind." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Toby's kite is stuck under the shed, and sticks only push it further in. Can you help him get it back? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this millions of years ago. Tap each card to meet four nature heroes with a super grip!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which tip will grip the card best?",
+    "sketch": "Time to draw your grabber like a real engineer!",
+    "build_and_test": "Build your grabber and let's see how many times out of 10 it rescues the card!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, Toby keeps YOUR grabber by the shed door. Whenever something slides into the gap, he has it back in seconds!"
+  },
+  "quick_check": {
+    "question": "Toby's ruler is 30 cm long. How many rulers end to end would reach the kite, 60 cm back?",
+    "options": ["2", "3", "6"],
+    "answer": 0,
+    "right": "Right! 2 × 30 cm = 60 cm. Now the grabber needs a tip that can grip the kite and let it go.",
+    "wrong": "Not quite. How many 30s make 60?"
+  },
+  "clue_cards": [
+    { "name": "Gecko", "emoji": "🦎", "image": "/landing/hero/lizard.webp", "tagline": "Wall walker", "trick": "Millions of tiny toe hairs that split into even tinier tips.", "does": "They touch so closely that tiny pulls add up, so it can hang from glass by one toe.", "group": "touch" },
+    { "name": "Tree frog", "emoji": "🐸", "image": "/explore/amphibians-icon.png", "tagline": "Leaf climber", "trick": "Soft toe pads with a thin layer of mucus.", "does": "Grips wet leaves the way a damp finger picks up paper.", "group": "sticky" },
+    { "name": "Chameleon", "emoji": "🦎", "image": "/kid/avatars/chameleon.png", "tagline": "Tongue sniper", "trick": "A sticky, cup-shaped tip on its tongue.", "does": "Grabs an insect in a fraction of a second.", "group": "sticky" },
+    { "name": "Elephant", "emoji": "🐘", "image": null, "tagline": "Gentle giant", "trick": "Finger-like parts at the tip of its trunk.", "does": "Pinches something as small as a peanut.", "group": "pinch" }
+  ],
+  "match_groups": [
+    { "key": "touch", "label": "🦶 Touches with millions of tiny tips" },
+    { "key": "sticky", "label": "🍯 Soft and sticky" },
+    { "key": "pinch", "label": "🤏 Pinches and squeezes" }
+  ],
+  "predict": {
+    "prompt": "Grip or slip? Can each tip lift a smooth card? Predict first!",
+    "choices": ["Slips", "Grips"],
+    "items": [
+      { "emoji": "✏️", "label": "Hard pencil tip", "answer": 0 },
+      { "emoji": "🧤", "label": "Soft rubber fingertip", "answer": 1 },
+      { "emoji": "🟢", "label": "Soft putty, pressed on", "answer": 1 }
+    ],
+    "explain": "A hard tip only touches the card in a few tiny spots. Soft tips squish into the tiny bumps, so they touch much more of the surface and hold on."
+  },
+  "lab": {
+    "title": "The grip lab",
+    "predict": "Which tip will lift a playing card best?",
+    "options": ["Pencil tip", "Sticky tape", "Reusable putty", "Rubber fingertip"],
+    "measure": "grip score from 1 to 5",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "mind_map",
+    "name": "Mind map",
+    "intro": "A mind map is an idea tree on paper. One big word goes in the middle, and ideas grow out from it. Today you'll use all 5 pieces.",
+    "example_object": "a lunchbox",
+    "parts": [
+      { "key": "C", "name": "Centre", "what": "Write the big question in the middle.", "example": "🍱 \"A better lunchbox\" goes in the middle.", "starter": "In the middle I write \"grip\", because Toby needs to…" },
+      { "key": "B", "name": "Branches", "what": "Draw lines out to the main topics.", "example": "🍱 Branches: keep it cold, keep it shut, easy to carry.", "starter": "My four branches are sticky, suction, squeeze and…" },
+      { "key": "T", "name": "Twigs", "what": "Add smaller ideas to each branch.", "example": "🍱 On \"keep it cold\": an ice pack, a shiny lining.", "starter": "On the \"sticky\" branch I add the tree frog and…" },
+      { "key": "P", "name": "Pictures", "what": "Add quick doodles so ideas pop out.", "example": "🍱 A tiny snowflake next to \"keep it cold\".", "starter": "Next to \"squeeze\" I doodle…" },
+      { "key": "L", "name": "Links", "what": "Join ideas on different branches with a line.", "example": "🍱 Link \"shiny lining\" to \"easy to carry\": a light, cool bag!", "starter": "I link two branches together, like the gecko's hairs and…" }
+    ],
+    "locked": [],
+    "badge": "Mind Map Master"
+  },
+  "sketch_checklist": [
+    "I labelled the handle, the reach and the gripping tip.",
+    "I showed how I trigger the release.",
+    "I added measurements."
+  ],
+  "test": {
+    "measure": "cards pulled out in 10 tries",
+    "higher_is_better": true,
+    "check_question": "Try a card, a coin and a leaf. How many can it pick up?",
+    "check_options": ["All three", "Two of them", "Just one"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your grabber grip?",
+    "options": ["🦎 Gecko", "🐸 Tree frog", "👅 Chameleon", "🐘 Elephant"]
+  },
+  "sticker": { "name": "Kite Rescuer", "emoji": "🪁" }
+}

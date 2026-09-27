@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature filter water?",
+  "hero": { "name": "Theo", "role": "the frog-pond helper", "image": "/landing/hero/tools-boy.webp", "emoji": "🐸" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🐸", "text": "There was a boy called Theo who looked after the frog pond at his school." },
+    { "beat": "Every day…", "emoji": "🪷", "text": "Theo counted the frogs, cleared fallen leaves and listened to them croak in the clear water." },
+    { "beat": "Until one day…", "emoji": "⛈️", "text": "After a big storm, the pond turned brown with mud and bits of leaves. \"The frogs need clean water,\" said Theo, \"and there's no money for a pump!\"" }
+  ],
+  "card": {
+    "hero": "Theo, the frog-pond helper",
+    "place": "The school frog pond",
+    "problem": "Muddy brown water after a storm",
+    "goal": "Make the water clear again",
+    "rules": "Natural and recycled materials",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The muddy pond", "line": "Theo wonders: how can we make the pond clear without a pump?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Theo needs a teammate", "line": "The frogs are counting on you both. Will you join Theo?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Theo meet heroes that clean water every single day." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of layers", "line": "The heroes share how to trap dirt without getting clogged." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the mud lab", "line": "Theo stirs up a jar of muddy water." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The why hunt", "line": "You ask why five times, all the way to the root of the problem." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great filter starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big clear test", "line": "The first water comes out cloudy. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "The frogs croak again", "line": "The pond is clear, and the frogs are croaking happily." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. A storm has turned Theo's frog pond brown, and there's no money for a pump. Can you help him make the water clear again? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for cleaning dirty water. Do you?",
+    "nature_clues": "Nature has been filtering water for millions of years. Tap each card to meet four heroes who make water clean!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which material will make the muddy water clearest?",
+    "sketch": "Time to draw your filter cut in half, like a real engineer!",
+    "build_and_test": "Build your filter and pour 250 ml of muddy water through it. This water is for frogs and plants only, never for drinking!",
+    "retry_tip": "Engineers never stop at round 1. Change the order of your layers and test again!",
+    "ending": "And ever since then, YOUR filter keeps Theo's pond clear, and the frogs croak happily all summer long!"
+  },
+  "quick_check": {
+    "question": "One oyster can filter up to 50 litres of water a day. How much could 2 oysters filter?",
+    "options": ["25 litres", "52 litres", "100 litres"],
+    "answer": 2,
+    "right": "Right! 50 + 50 = 100 litres a day. A whole oyster reef can clean a huge bay!",
+    "wrong": "Not quite. Try 50 litres plus another 50 litres."
+  },
+  "clue_cards": [
+    { "name": "Oyster", "emoji": "🦪", "image": null, "tagline": "Sea cleaner", "trick": "It pulls water over its gills, where sticky mucus traps tiny bits.", "does": "One oyster can filter up to 50 litres of water a day.", "group": "trap" },
+    { "name": "Baleen whale", "emoji": "🐋", "image": null, "tagline": "Ocean giant", "trick": "It pushes seawater out through bristly plates called baleen.", "does": "The water flows out, and the krill stay trapped inside.", "group": "trap" },
+    { "name": "Mangroves", "emoji": "🌳", "image": null, "tagline": "Muddy shores", "trick": "Their tangled roots, like marsh plants, slow river water down.", "does": "Mud and dirt sink to the bottom before the water reaches the sea.", "group": "slow" },
+    { "name": "Soil and sand", "emoji": "🏜️", "image": null, "tagline": "Underground filter", "trick": "Rainwater trickles slowly down through their layers.", "does": "It comes out clean in underground rivers.", "group": "layers" }
+  ],
+  "match_groups": [
+    { "key": "trap", "label": "🕸️ Traps the bits" },
+    { "key": "slow", "label": "🐢 Slows water so mud sinks" },
+    { "key": "layers", "label": "🥞 Trickles through layers" }
+  ],
+  "predict": {
+    "prompt": "Gets clearer or clogs up? Predict first!",
+    "choices": ["Clogs up", "Gets clearer"],
+    "items": [
+      { "emoji": "🪨", "label": "Gravel, then sand, then cloth", "answer": 1 },
+      { "emoji": "☕", "label": "A paper filter on top, taking all the mud", "answer": 0 },
+      { "emoji": "🫙", "label": "Muddy water left to stand still", "answer": 1 }
+    ],
+    "explain": "Coarse gaps first catch the big bits, then finer ones catch the small bits. If the fine layer comes first, it clogs straight away. Still water lets heavy mud settle on its own."
+  },
+  "lab": {
+    "title": "The mud lab",
+    "predict": "Pour equal amounts of muddy water through each one. Which will come out clearest?",
+    "options": ["Cotton", "Sand", "Gravel", "Coffee filter"],
+    "measure": "clearness score (1 to 5)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "You already know the first 3 whys. Today you'll learn all 5 and dig right down to the root cause of a problem.",
+    "example_object": "a squeaky door",
+    "parts": [
+      { "key": "1", "name": "Why #1", "what": "Ask why the problem happens.", "example": "🚪 Why does it squeak? The hinge rubs.", "starter": "Why is the pond murky? Because…" },
+      { "key": "2", "name": "Why #2", "what": "Ask why about that answer.", "example": "🚪 Why does it rub? The hinge is dry.", "starter": "Why is there so much mud in the water? Because…" },
+      { "key": "3", "name": "Why #3", "what": "Dig one level deeper.", "example": "🚪 Why is it dry? The oil wore off.", "starter": "Why did the storm wash mud in? Because…" },
+      { "key": "4", "name": "Why #4", "what": "Keep digging, you're getting close.", "example": "🚪 Why? Nobody oiled it for years.", "starter": "Why is the ground near the pond so muddy? Because…" },
+      { "key": "5", "name": "Why #5", "what": "Find the root cause, then fix that.", "example": "🚪 Why? No one knew. Fix: an oiling reminder!", "starter": "Why does nothing stop the mud getting in? Because…" }
+    ],
+    "locked": [],
+    "badge": "Root Finder"
+  },
+  "sketch_checklist": [
+    "I drew my filter as a cross-section.",
+    "I labelled every layer from top to bottom.",
+    "I explained what each layer catches."
+  ],
+  "test": {
+    "measure": "clearness score (1 to 5)",
+    "higher_is_better": true,
+    "check_question": "Timer check: how long did it take to filter 250 ml?",
+    "check_options": ["Under 1 minute", "1 to 5 minutes", "Over 5 minutes"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which layer did the most cleaning in your filter?",
+    "options": ["🪨 Gravel", "🏖️ Sand", "☁️ Cotton", "🧣 Cloth"]
+  },
+  "sticker": { "name": "Pond Protector", "emoji": "💧" }
+}

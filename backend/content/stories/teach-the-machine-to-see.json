@@ -1,0 +1,106 @@
+{
+  "function_question": "How does a computer learn from examples?",
+  "hero": { "name": "Pixel", "role": "a robot", "image": "/landing/robot.png", "emoji": "🤖" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🤖", "text": "There was a helpful robot called Pixel who got a new job in the school kitchen." },
+    { "beat": "Every day…", "emoji": "🍊", "text": "Pixel tried to sort the fruit, but it just guessed at random and got almost everything wrong." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Pixel thought: \"Nobody can write a rule for every fruit. What if I could LEARN from examples instead?\"" }
+  ],
+  "card": {
+    "hero": "Pixel, a robot",
+    "place": "The school kitchen",
+    "problem": "Pixel sorts fruit at random",
+    "goal": "Above 80% on new pictures",
+    "rules": "Photos of objects only",
+    "helpers": "You and real-world clues"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Chaos in the kitchen", "line": "Pixel mixes up almost every fruit. This time, nobody writes the rules." },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Pixel asks for help", "line": "How would you teach a friend who has never seen an orange? Pixel needs a teammate." },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Learning is everywhere", "line": "You and Pixel spot machine learning all around you." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of features", "line": "The clues share one secret: learn from examples, not rules." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The feature-card lab", "line": "No magic, just a checklist! Pixel hands you 10 fruit pictures." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The feature map", "line": "Every feature that tells two things apart gets a branch." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The data plan", "line": "Great training starts with a plan for varied pictures." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The new-picture test", "line": "Train, test on 10 new pictures, add variety, and test again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Pixel can see", "line": "Pixel sorts the kitchen fruit correctly, even fruit it has never seen." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Pixel keeps mixing up the fruit, and it needs to learn from examples. Can you help Pixel get above 80% correct on pictures it has never seen? Let's start!",
+    "your_idea": "Some trainers already have a plan for teaching. Do you?",
+    "nature_clues": "Machine learning is everywhere. Tap each card to meet four real-world learners!",
+    "design_secret": "Here's the secret all four learners share…",
+    "skill": "Unplugged first! Which feature card sorts the most fruit right? Predict, then score 10 pictures. In the Machine Trainer, use photos of objects only, never faces.",
+    "sketch": "Time to plan your data like a real AI trainer!",
+    "build_and_test": "Train the Machine Trainer, then test it on the 10 pictures you set aside. How many does it get right?",
+    "retry_tip": "Add more VARIED examples, retrain, and test again on the same 10 pictures!",
+    "ending": "And ever since then, Pixel sorts the school kitchen's fruit like a pro, because YOU taught it with great examples!"
+  },
+  "quick_check": {
+    "question": "Pixel gets 7 out of 10 new pictures right. What is its accuracy?",
+    "options": ["7%", "70%", "17%"],
+    "answer": 1,
+    "right": "Right! 7 ÷ 10 = 70%. Pixel needs 9 out of 10 to get above the 80% goal.",
+    "wrong": "Not quite. Correct ÷ total: 7 out of 10 is like 70 out of 100."
+  },
+  "clue_cards": [
+    { "name": "Spotting your best friend", "emoji": "👋", "image": null, "tagline": "In a busy crowd", "trick": "You've seen your friend thousands of times, from every angle.", "does": "You spot them in a split second, even far away.", "group": "brain" },
+    { "name": "Phone cameras", "emoji": "📱", "image": null, "tagline": "In your pocket", "trick": "They train on millions of example photos.", "does": "They find pets and objects in the pictures you take.", "group": "computer" },
+    { "name": "X-ray helpers", "emoji": "🩻", "image": null, "tagline": "At the hospital", "trick": "Doctors are testing AI that sees thousands of labelled X-rays.", "does": "It learns to help spot diseases in new X-rays.", "group": "computer" },
+    { "name": "Plant-ID apps", "emoji": "🌼", "image": null, "tagline": "On a nature walk", "trick": "They learn petal shape, colour and leaf edges from labelled photos.", "does": "They name a flower from one new picture.", "group": "computer" }
+  ],
+  "match_groups": [
+    { "key": "brain", "label": "🧠 A brain learns" },
+    { "key": "computer", "label": "💻 A computer learns" }
+  ],
+  "predict": {
+    "prompt": "Good plan or bad plan for training Pixel? Predict first!",
+    "choices": ["Good plan", "Bad plan"],
+    "items": [
+      { "emoji": "🍊", "label": "20 oranges in different light and angles", "answer": 0 },
+      { "emoji": "📋", "label": "The same orange photo 20 times", "answer": 1 },
+      { "emoji": "📝", "label": "Testing on its training pictures", "answer": 1 }
+    ],
+    "explain": "Varied examples teach the features that really matter. And testing on training pictures is like marking your own homework, so always test on new pictures!"
+  },
+  "lab": {
+    "title": "The feature-card lab",
+    "predict": "Which feature card will sort the most of your 10 fruit pictures correctly?",
+    "options": ["Colour only", "Colour + shape", "All 4 features"],
+    "measure": "fruit right out of 10",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "mind_map",
+    "name": "Mind map",
+    "intro": "A mind map grows ideas like a tree, from one big idea in the middle. Today you'll use all 5 pieces to find the features that tell your two classes apart.",
+    "example_object": "a bicycle",
+    "parts": [
+      { "key": "C", "name": "Centre", "what": "Put the big question in the middle.", "example": "🚲 In the middle: How can I make my bike safer?", "starter": "In my centre I'll write my two classes: oranges vs…" },
+      { "key": "B", "name": "Branches", "what": "Draw the main topics coming out.", "example": "🚲 Branches: lights, brakes, helmet.", "starter": "My four branches are colour, shape, texture and…" },
+      { "key": "T", "name": "Twigs", "what": "Add smaller ideas to each branch.", "example": "🚲 On \"lights\": front lamp, back reflector, flashing mode.", "starter": "On my texture branch, the twigs are…" },
+      { "key": "P", "name": "Pictures", "what": "Add quick doodles or icons.", "example": "🚲 A tiny bell doodle next to \"noise\".", "starter": "A quick doodle for \"bumpy skin\" could be…" },
+      { "key": "L", "name": "Links", "what": "Join ideas on different branches with a line.", "example": "🚲 Link \"reflector\" to \"helmet\": both help drivers see you.", "starter": "The features a camera can actually see are…" }
+    ],
+    "locked": [],
+    "badge": "Mind Map Master"
+  },
+  "sketch_checklist": [
+    "I chose my two classes and aimed for 20 training pictures of each.",
+    "I planned different lighting, angles, sizes and backgrounds.",
+    "I set aside 10 new pictures for testing."
+  ],
+  "test": {
+    "measure": "accuracy % on the 10 test pictures",
+    "higher_is_better": true,
+    "check_question": "Find one picture the machine got wrong. Which feature fooled it?",
+    "check_options": ["Colour or lighting", "Shape, angle or size", "The background"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "AI check: your classifier learned from your pictures. Would it still work on someone else's photos?",
+    "options": ["✅ Yes, if my examples were varied", "🤔 Maybe, if their light is similar", "❌ Not if their photos look very different", "🧪 Let's test it and see"]
+  },
+  "sticker": { "name": "Machine Teacher", "emoji": "👁️" }
+}

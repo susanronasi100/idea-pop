@@ -1441,7 +1441,7 @@
     "its_trick": "Its trick",
     "what_it_does": "What it does",
     "match_title": "Game · Match the trick",
-    "match_how": "Tap a nature hero, then tap what its trick does.",
+    "match_how": "Tap a clue card, then tap the group its trick belongs to.",
     "match_hint": "Some heroes share the same trick. Can you spot them?",
     "match_miss": "Not that one. What does its trick do?",
     "match_done_perfect": "Perfect! Every match on the first try.",

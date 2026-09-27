@@ -1,0 +1,104 @@
+{
+  "function_question": "How does nature collect water from the air?",
+  "hero": { "name": "Omar", "role": "a school-garden helper", "image": "/landing/hero/overalls-boy.webp", "emoji": "🌱" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "⛰️", "text": "There was a boy called Omar who looked after his school garden on a dry hillside where it hardly ever rains." },
+    { "beat": "Every day…", "emoji": "🌫️", "text": "Thick fog rolled in every morning and wrapped the garden in mist, but the plants stayed thirsty and droopy." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Omar looked at the fog and wondered: \"There's water all around us. What if we could catch it for the garden?\"" }
+  ],
+  "card": {
+    "hero": "Omar, a school-garden helper",
+    "place": "A garden on a dry hillside",
+    "problem": "No rain, and thirsty plants",
+    "goal": "Turn morning fog into water",
+    "rules": "Mesh, string, plastic, straws, a cup",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Water in the fog", "line": "Omar wonders: what if we could catch the fog for the garden?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Omar needs a teammate", "line": "Catching fog is a two-person job. Will you join Omar?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Omar meet desert heroes who drink from thin air." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the fog", "line": "The heroes share how tiny droplets become a drink." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the steam lab", "line": "With an adult's help, Omar hangs three materials over the steam." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The why hunt", "line": "You keep asking why, until you reach the real problem." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great fog catcher starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big mist test", "line": "The drops miss the cup. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "The garden turns green", "line": "Every morning the fog waters the garden, drop by drop." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Omar's garden gets fog every morning but almost no rain. Can you help him turn the mist into water? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for catching water from the air. Do you?",
+    "nature_clues": "Nature has been drinking fog for millions of years. Tap each card to meet four heroes who catch water from the air!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which material will catch the most water from the steam? Ask an adult to help with the hot water.",
+    "sketch": "Time to draw your fog catcher like a real engineer!",
+    "build_and_test": "Build your fog catcher, then mist it with a spray bottle from 1 metre away. How much water reaches the cup?",
+    "retry_tip": "Engineers never stop at round 1. Change the mesh or the angle, and test again!",
+    "ending": "And ever since then, YOUR fog catcher waters Omar's school garden every morning, and the whole hillside is green!"
+  },
+  "quick_check": {
+    "question": "Omar's catcher collects 20 millilitres every 10 minutes. How much does it collect in 30 minutes?",
+    "options": ["30 ml", "60 ml", "200 ml"],
+    "answer": 1,
+    "right": "Right! 20 + 20 + 20 = 60 millilitres. Imagine how much a whole morning of fog could give!",
+    "wrong": "Not quite. 30 minutes is three lots of 10 minutes."
+  },
+  "clue_cards": [
+    { "name": "Namib desert beetle", "emoji": "🪲", "image": "/kid/avatars/beetle.png", "tagline": "Fog drinker", "trick": "It does a headstand into the fog, with water-loving bumps on its back.", "does": "The bumps catch droplets, which grow and roll down waxy grooves into its mouth.", "group": "catch" },
+    { "name": "Thorny devil", "emoji": "🦎", "image": null, "tagline": "Desert lizard", "trick": "Tiny channels run between its scales.", "does": "They pull water from damp sand across its skin to its mouth.", "group": "channel" },
+    { "name": "Spider silk", "emoji": "🕸️", "image": null, "tagline": "Sparkly web", "trick": "Each thread has little knots along it.", "does": "Fog droplets collect on the knots and grow into big, sparkly drops.", "group": "catch" },
+    { "name": "Cactus", "emoji": "🌵", "image": null, "tagline": "Desert plant", "trick": "Its spines are cone-shaped with tiny grooves.", "does": "Fog collects on the tips and slides down to the plant's base.", "group": "channel" }
+  ],
+  "match_groups": [
+    { "key": "catch", "label": "💧 Catches droplets" },
+    { "key": "channel", "label": "🛝 Channels water along" }
+  ],
+  "predict": {
+    "prompt": "Floats in the air or falls down? Predict first!",
+    "choices": ["Floats in the air", "Falls or rolls down"],
+    "items": [
+      { "emoji": "🌫️", "label": "One tiny fog droplet", "answer": 0 },
+      { "emoji": "🕸️", "label": "Lots of droplets joined on a net", "answer": 1 },
+      { "emoji": "🌧️", "label": "A raindrop", "answer": 1 }
+    ],
+    "explain": "Fog droplets are too tiny to fall. When they hit something and join up, they get heavy enough to roll away down a smooth path."
+  },
+  "lab": {
+    "title": "The steam lab",
+    "predict": "Hang each material in the steam for 5 minutes. Which one will drip the most water into its cup?",
+    "options": ["Mesh bag", "Cotton cloth", "Plastic sheet"],
+    "measure": "millilitres dripped in 5 minutes",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "5 Whys is like being a detective. You ask \"why?\" again and again, each time digging one level deeper, until you find the real cause of a problem. Today you'll learn the first 3 whys.",
+    "example_object": "a late school bus",
+    "parts": [
+      { "key": "1", "name": "Why #1", "what": "Ask why the problem happens.", "example": "🚌 Why was the bus late? It got stuck in traffic.", "starter": "Why is the garden dying? Because…" },
+      { "key": "2", "name": "Why #2", "what": "Take that answer and ask why again.", "example": "🚌 Why was there traffic? A road was closed.", "starter": "Why are the plants so thirsty? Because…" },
+      { "key": "3", "name": "Why #3", "what": "Dig one level deeper still.", "example": "🚌 Why was the road closed? Workers were fixing a pipe.", "starter": "Why doesn't the fog's water reach the roots? Because…" }
+    ],
+    "locked": ["4", "5"],
+    "badge": "Why Detective"
+  },
+  "sketch_checklist": [
+    "I drew my fog catcher from the front and the side.",
+    "I showed where the droplets stick and which way they run.",
+    "I showed how the water gets into the cup."
+  ],
+  "test": {
+    "measure": "millilitres collected in 10 minutes",
+    "higher_is_better": true,
+    "check_question": "Does the water reach the cup, or drip off somewhere else?",
+    "check_options": ["All in the cup", "Some drips elsewhere", "Misses the cup"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature hero did your fog catcher copy?",
+    "options": ["🪲 Desert beetle", "🦎 Thorny devil", "🕸️ Spider silk", "🌵 Cactus"]
+  },
+  "sticker": { "name": "Fog Catcher", "emoji": "🌫️" }
+}

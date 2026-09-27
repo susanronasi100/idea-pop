@@ -1,0 +1,106 @@
+{
+  "function_question": "How does a computer make a decision?",
+  "hero": { "name": "Pixel", "role": "a robot", "image": "/landing/robot.png", "emoji": "🤖" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🤖", "text": "There was a friendly robot called Pixel who loved playing guessing games." },
+    { "beat": "Every day…", "emoji": "❓", "text": "Pixel played \"guess the animal\", but it asked questions like \"Is it a zebra?\" and \"Is it a frog?\" and needed ages to win." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Pixel wondered: \"What if I could guess ANY animal with only a few yes/no questions? Which question should I ask first?\"" }
+  ],
+  "card": {
+    "hero": "Pixel, a robot",
+    "place": "A guessing game with 8 animals",
+    "problem": "Bad questions waste turns",
+    "goal": "Guess any animal in 3 questions",
+    "rules": "Only yes/no questions",
+    "helpers": "You and real-world clues"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The guessing game", "line": "Pixel wants to win in as few questions as possible. A bad first question wastes a turn!" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Pixel asks for help", "line": "What is the smartest first question? Pixel needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Real-world question askers", "line": "You and Pixel find out who else wins by asking yes/no questions." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the tree", "line": "Every clue uses the same secret: a decision tree." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The card-sorting lab", "line": "No magic, just cards! Pixel hands you 8 animal cards." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The question storm", "line": "Twenty questions in five minutes. Ready, steady, go!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "Drawing the tree", "line": "Your best question goes at the top, and the branches grow down." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Pixel plays for real", "line": "Five rounds, one better question, then five more rounds." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Pixel wins in three", "line": "Pixel guesses any of the 8 animals in a flash." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Pixel wants to guess any animal with the fewest yes/no questions. Can you help Pixel build a question tree that finds any of 8 animals in 3 questions or fewer? Let's start!",
+    "your_idea": "Some players already know their best first question. Do you?",
+    "nature_clues": "Computers can't \"just know\" an answer. They follow steps. Tap each card to meet four real-world question askers!",
+    "design_secret": "Here's the secret all four clues share…",
+    "skill": "Unplugged first! Which question splits your 8 animal cards most evenly? Predict, then count the piles.",
+    "sketch": "Time to draw your question tree like a real AI designer!",
+    "build_and_test": "Build your tree in the Question Tree game, press Play, and count the questions it needs!",
+    "retry_tip": "Swap your top question for a more even one, and play 5 more rounds!",
+    "ending": "And ever since then, Pixel wins every guessing game with YOUR tree, the same idea that helps spam filters and game AI decide!"
+  },
+  "quick_check": {
+    "question": "Each perfect question splits the animals in half. How many questions to find 1 animal out of 8?",
+    "options": ["2", "3", "8"],
+    "answer": 1,
+    "right": "Right! 8 → 4 → 2 → 1. With perfect half-splits, 10 questions could even find 1 out of 1,024!",
+    "wrong": "Not quite. Try halving: 8, then 4, then…"
+  },
+  "clue_cards": [
+    { "name": "Doctor's questions", "emoji": "🩺", "image": null, "tagline": "At the doctor's", "trick": "The doctor asks questions one by one: \"Fever? Cough?\"", "does": "Each answer rules out lots of illnesses, so the doctor narrows down what's wrong.", "group": "person" },
+    { "name": "Leaf key", "emoji": "🍃", "image": null, "tagline": "Science field trip", "trick": "Scientists ask yes/no questions like \"Is the edge smooth?\"", "does": "Each answer cuts the choices down until the mystery leaf is named.", "group": "person" },
+    { "name": "Spam filter", "emoji": "📧", "image": null, "tagline": "In your inbox", "trick": "A decision tree asks: strange link? Unknown sender?", "does": "It decides spam or not spam for every email, all by itself.", "group": "computer" },
+    { "name": "Guess Who players", "emoji": "🎲", "image": null, "tagline": "Games night", "trick": "The best players never guess one face first.", "does": "They ask questions that knock out half the board at once.", "group": "person" }
+  ],
+  "match_groups": [
+    { "key": "person", "label": "🧑 A person asks the questions" },
+    { "key": "computer", "label": "💻 A computer asks the questions" }
+  ],
+  "predict": {
+    "prompt": "8 animals: 4 can fly and 4 can't. Good or bad first question? Predict first!",
+    "choices": ["Good question", "Bad question"],
+    "items": [
+      { "emoji": "🐦", "label": "Can it fly?", "answer": 0 },
+      { "emoji": "🐧", "label": "Is it a penguin?", "answer": 1 },
+      { "emoji": "🐾", "label": "Is it an animal?", "answer": 1 }
+    ],
+    "explain": "\"Can it fly?\" splits the 8 animals in half, so it throws away 4 wrong answers at once. \"Is it a penguin?\" usually rules out just 1, and \"Is it an animal?\" rules out none!"
+  },
+  "lab": {
+    "title": "The card-sorting lab",
+    "predict": "Which first question splits your 8 animal cards most evenly?",
+    "options": ["Can it fly?", "Does it live in water?", "Is it bigger than a dog?", "Does it have stripes?"],
+    "measure": "animals in the smaller pile",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "Brainstorming is how teams find lots of ideas fast, then pick the best ones. Today you'll use all 5 rules to find Pixel's best questions.",
+    "example_object": "a lunchbox",
+    "parts": [
+      { "key": "Q", "name": "Quantity", "what": "Go for lots of ideas, fast.", "example": "🍱 20 lunchbox ideas in 5 minutes: colder, bigger, foldable…", "starter": "In 5 minutes, my yes/no questions are: Does it have fur? Can it…" },
+      { "key": "J", "name": "No Judging", "what": "Every idea is allowed for now.", "example": "🍱 A lunchbox that sings? Write it down anyway!", "starter": "A funny question I'll still write down is…" },
+      { "key": "W", "name": "Wild ideas", "what": "Be brave and try something unusual.", "example": "🍱 A lunchbox that grows its own snacks!", "starter": "My wildest question for Pixel is…" },
+      { "key": "B", "name": "Build on ideas", "what": "Take an idea and add to it.", "example": "🍱 A cold lunchbox → a cold lunchbox with an ice-pack lid.", "starter": "\"Does it have legs?\" could become…" },
+      { "key": "P", "name": "Pick the best", "what": "Test your ideas and keep the winners.", "example": "🍱 Keep the 3 lunchbox ideas that fix the most problems.", "starter": "After testing on my 8 cards, my 3 most even questions are…" }
+    ],
+    "locked": [],
+    "badge": "Brainstorm Champion"
+  },
+  "sketch_checklist": [
+    "I put my best first question at the top.",
+    "I added a follow-up on each branch until every animal sits alone.",
+    "I marked the longest path, my worst case."
+  ],
+  "test": {
+    "measure": "average questions over 5 rounds",
+    "higher_is_better": false,
+    "check_question": "Can your tree guess any of the 8 animals in 3 questions or fewer?",
+    "check_options": ["Yes, every time", "Sometimes", "Not yet"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "AI check: what could go wrong if a tree like yours decided something important, and someone's answer didn't fit any branch?",
+    "options": ["❌ They'd get the wrong answer", "🚧 The tree would get stuck", "🧑‍🏫 A person should double-check", "🌱 Add a new branch for them"]
+  },
+  "sticker": { "name": "Question Master", "emoji": "🌳" }
+}

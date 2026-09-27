@@ -1,0 +1,108 @@
+{
+  "function_question": "How can a computer learn from rewards?",
+  "hero": { "name": "Pixel", "role": "a robot", "image": "/landing/robot.png", "emoji": "🤖" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🤖", "text": "There was a robot called Pixel who got a new pet: a little robot mouse." },
+    { "beat": "Every day…", "emoji": "🐭", "text": "The mouse wandered around its maze, bumping into walls and falling into traps, and it never found the cheese quickly." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Pixel wondered: \"Nobody gave my mouse a map. What if it could learn the way just by earning rewards?\"" }
+  ],
+  "card": {
+    "hero": "Pixel and its robot mouse",
+    "place": "A maze with cheese and traps",
+    "problem": "The mouse wanders and gets lost",
+    "goal": "Learn the shortest safe path",
+    "rules": "No map, only rewards",
+    "helpers": "You and real-world clues"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The lost mouse", "line": "Pixel's pet mouse has no map and no examples. It just tries moves." },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Pixel asks for help", "line": "How do you train a puppy? Pixel needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Learning by rewards", "line": "You and Pixel meet learners who get better by trial and error." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of rewards", "line": "The rewards you choose decide what gets learned." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The number-grid lab", "line": "No magic, just numbers! Pixel hands you a paper mouse and a 5×5 grid." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Remix the maze", "line": "Seven magic words, seven ways to change the maze." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "Designing the maze", "line": "Start, cheese, a wall and a trap, plus a reward for each." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Try after try", "line": "The mouse wanders at first, then starts to learn." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Straight to the cheese", "line": "The mouse runs the shortest path and skips the trap." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Pixel's pet mouse has no map, only the rewards you give it. Can you help design a reward system that teaches it the shortest path to the cheese and keeps it out of the traps? Let's start!",
+    "your_idea": "Some trainers already know a trick or two. Do you?",
+    "nature_clues": "Some AI learns by trial and error, collecting rewards. Tap each card to meet four real-world learners!",
+    "design_secret": "Here's the secret all four learners share…",
+    "skill": "Unplugged first! Which number grid gets your paper mouse to the cheese in the fewest steps? Predict, then move it.",
+    "sketch": "Time to design your maze like a real AI trainer!",
+    "build_and_test": "Run 5 tries in the Reward Maze and count the steps each try takes!",
+    "retry_tip": "Change ONE reward, predict what will happen, then run 5 more tries!",
+    "ending": "And ever since then, Pixel's mouse zooms straight to the cheese, because YOU chose the rewards that taught it!"
+  },
+  "quick_check": {
+    "question": "Try 1 takes 20 steps. Try 5 takes 8 steps. How many steps did the mouse save?",
+    "options": ["8", "12", "28"],
+    "answer": 1,
+    "right": "Right! 20 take away 8 is 12. Fewer steps means the rewards are teaching it well.",
+    "wrong": "Not quite. Try 20 take away 8."
+  },
+  "clue_cards": [
+    { "name": "Puppy training", "emoji": "🐶", "image": null, "tagline": "In the park", "trick": "Every time the puppy sits, it earns a treat.", "does": "Rewarded behaviour happens more often, so it learns \"sit\".", "group": "along" },
+    { "name": "Chess and Go AIs", "emoji": "♟️", "image": null, "tagline": "Board game champions", "trick": "They played millions of games against themselves.", "does": "Earning a reward only for winning, they learned to play brilliantly.", "group": "end" },
+    { "name": "Walking robots", "emoji": "🦿", "image": null, "tagline": "In computer simulations", "trick": "They're rewarded for every step they stay upright.", "does": "By trial and error, they learn to walk.", "group": "along" },
+    { "name": "Video game characters", "emoji": "🎮", "image": null, "tagline": "On your screen", "trick": "They earn points and lose lives as they play.", "does": "They learn which moves pay off and which don't.", "group": "along" }
+  ],
+  "match_groups": [
+    { "key": "along", "label": "⭐ Rewards along the way" },
+    { "key": "end", "label": "🏆 A reward only at the end" }
+  ],
+  "predict": {
+    "prompt": "Will this reward teach the mouse the right lesson? Predict first!",
+    "choices": ["Right lesson", "Wrong lesson"],
+    "items": [
+      { "emoji": "🧀", "label": "+10 for reaching the cheese", "answer": 0 },
+      { "emoji": "👣", "label": "+1 for every step it takes", "answer": 1 },
+      { "emoji": "⚠️", "label": "-5 for stepping on the trap", "answer": 0 }
+    ],
+    "explain": "The mouse learns whatever earns rewards. Paying it for every step teaches it to wander about taking extra steps, not to find the cheese fast!"
+  },
+  "lab": {
+    "title": "The number-grid lab",
+    "predict": "Which reward grid gets your paper mouse to the cheese in the fewest steps?",
+    "options": ["Numbers rise towards the cheese", "Random numbers", "Every square the same"],
+    "measure": "steps to reach the cheese",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "SCAMPER is 7 magic question words for changing an idea. Today you'll use all 7 on your maze, and predict what each change teaches the mouse.",
+    "example_object": "a toothbrush",
+    "parts": [
+      { "key": "S", "name": "Substitute", "what": "Swap one thing for another.", "example": "🪥 Swap plastic for bamboo.", "starter": "I'll swap the cheese reward for…" },
+      { "key": "C", "name": "Combine", "what": "Join two things into one.", "example": "🪥 Brush + timer = no rushing.", "starter": "If I combine two traps…" },
+      { "key": "A", "name": "Adapt", "what": "Borrow an idea from elsewhere.", "example": "🪥 Soft like a sponge.", "starter": "Like a puppy's treat, the mouse gets…" },
+      { "key": "M", "name": "Modify", "what": "Make it bigger or smaller.", "example": "🪥 A fatter handle for small hands.", "starter": "If the trap penalty gets bigger…" },
+      { "key": "P", "name": "Put to another use", "what": "Use it for something new.", "example": "🪥 An old one cleans bike chains.", "starter": "My maze could also teach…" },
+      { "key": "E", "name": "Eliminate", "what": "Take something away.", "example": "🪥 No cap: use a stand.", "starter": "If I remove a wall, the mouse…" },
+      { "key": "R", "name": "Reverse", "what": "Flip it or turn it around.", "example": "🪥 Stand it head-down to dry.", "starter": "If the start and cheese swap places…" }
+    ],
+    "locked": [],
+    "badge": "SCAMPER Master"
+  },
+  "sketch_checklist": [
+    "I placed the start, the cheese, a wall and a trap.",
+    "I chose my rewards, like cheese +10, wasted step -1, trap -5.",
+    "I predicted the path the mouse should learn."
+  ],
+  "test": {
+    "measure": "steps on try 5",
+    "higher_is_better": false,
+    "check_question": "Does the mouse learn to avoid the trap?",
+    "check_options": ["Always avoids it", "Sometimes", "Still falls in"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "AI check: what could go wrong if you rewarded the wrong thing, like rewarding speed but not safety?",
+    "options": ["💥 It rushes into traps", "🏃 It takes risky shortcuts", "🛡️ Reward safety too!", "🔍 Watch what it really learns"]
+  },
+  "sticker": { "name": "Pet Trainer", "emoji": "🐭" }
+}

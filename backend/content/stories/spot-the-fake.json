@@ -1,0 +1,107 @@
+{
+  "function_question": "Why can AI be unfair, and how do we fix it?",
+  "hero": { "name": "Pixel", "role": "a robot", "image": "/landing/robot.png", "emoji": "🤖" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🤖", "text": "There was a proud robot called Pixel whose new fruit sorter had just passed its test." },
+    { "beat": "Every day…", "emoji": "🍏", "text": "Pixel sorted fruit in the school kitchen, but it kept calling green apples \"not apples\"." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Pixel wondered: \"I'm not broken. So what did I secretly learn from my examples?\"" }
+  ],
+  "card": {
+    "hero": "Pixel, a robot",
+    "place": "The school kitchen",
+    "problem": "Green apples fool Pixel",
+    "goal": "Find the bias and fix it",
+    "rules": "Prove it with data",
+    "helpers": "You and real-world clues"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The green apple mystery", "line": "Pixel passed its test, so why does it keep saying green apples aren't apples?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Pixel asks for help", "line": "Pixel needs a detective on the team. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Real-world blind spots", "line": "You and Pixel find out how other AIs learned something unfair." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of fair data", "line": "An AI is only as fair as its examples." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The red-apple lab", "line": "No magic, just cards! Build a sorter that has only ever seen red apples." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Digging for the root", "line": "Why? And why again? Keep digging until you hit the real cause." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The fair test plan", "line": "One row for every group, so nobody gets missed." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Group by group", "line": "Test each group, add the missing examples, and test again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Fair for every apple", "line": "Pixel knows a green apple is still an apple." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Pixel isn't broken, but it learned something unfair from its examples. Can you help Pixel find its blind spot, prove it with data, and fix it? Let's start!",
+    "your_idea": "Some detectives already have a hunch. Do you?",
+    "nature_clues": "Bias happens when an AI learns from one-sided examples. Tap each card to see it in the real world!",
+    "design_secret": "Here's the secret behind every blind spot…",
+    "skill": "Unplugged first! Your card sorter has only seen red apples. Which group will it sort best? Predict, then test.",
+    "sketch": "Time to plan a fair test like a real AI fairness team!",
+    "build_and_test": "Test Pixel on each group separately. Which group does worst?",
+    "retry_tip": "Add the MISSING examples, not just more of the same, then test every group again!",
+    "ending": "And ever since then, Pixel sorts every apple fairly, red or green, because YOU found its blind spot and fixed the data!"
+  },
+  "quick_check": {
+    "question": "Pixel gets 9 of 10 red apples right, but only 2 of 10 green apples. Which group does worst?",
+    "options": ["Red apples", "Green apples", "Both the same"],
+    "answer": 1,
+    "right": "Yes! 20% against 90%. Testing each group separately is how you catch a blind spot.",
+    "wrong": "Not quite. Which group got fewer right out of 10?"
+  },
+  "clue_cards": [
+    { "name": "Early face detectors", "emoji": "📷", "image": null, "tagline": "Inside cameras", "trick": "They were trained mostly on lighter-skinned faces.", "does": "They worked worse for people with darker skin.", "group": "missing" },
+    { "name": "Voice assistants", "emoji": "🗣️", "image": null, "tagline": "Talking speakers", "trick": "They heard fewer examples of some accents while learning.", "does": "They often struggled to understand those accents.", "group": "missing" },
+    { "name": "Husky-or-wolf sorter", "emoji": "🐺", "image": null, "tagline": "The snow cheat", "trick": "Its wolf photos nearly always had snow in the background.", "does": "It learned \"snow means wolf\" instead of looking at the animal.", "group": "wrong_clue" },
+    { "name": "Fair AI teams", "emoji": "⚖️", "image": null, "tagline": "The fixers", "trick": "They test their systems on every group of users.", "does": "When one group gets worse results, they fix the data.", "group": "fix" }
+  ],
+  "match_groups": [
+    { "key": "missing", "label": "📉 Missing examples" },
+    { "key": "wrong_clue", "label": "❄️ Learned the wrong clue" },
+    { "key": "fix", "label": "🛠️ Fixing the bias" }
+  ],
+  "predict": {
+    "prompt": "Fair or unfair training data for an apple sorter? Predict first!",
+    "choices": ["Fair", "Unfair"],
+    "items": [
+      { "emoji": "🍎", "label": "Red apples only", "answer": 1 },
+      { "emoji": "🍏", "label": "Red, green and yellow apples", "answer": 0 },
+      { "emoji": "🍽️", "label": "Apples always on a white plate", "answer": 1 }
+    ],
+    "explain": "One-sided data teaches a secret shortcut: red apples only teaches \"apple = red\", and a white plate every time teaches \"plate = apple\", just like the husky-or-wolf snow cheat."
+  },
+  "lab": {
+    "title": "The red-apple lab",
+    "predict": "Your card sorter only learned from red apples. Which group will it sort best?",
+    "options": ["Red apples", "Green apples", "Red balls"],
+    "measure": "sorted right out of 5",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "5 Whys is a detective tool: ask why, then ask why about the answer, again and again. Today you'll use all 5 whys to reach the root cause.",
+    "example_object": "a houseplant",
+    "parts": [
+      { "key": "1", "name": "Why #1", "what": "Ask why the problem happens.", "example": "🪴 Why is my plant drooping? It's thirsty.", "starter": "Why does Pixel call a green apple \"not an apple\"? Because…" },
+      { "key": "2", "name": "Why #2", "what": "Ask why again, one level deeper.", "example": "🪴 Why is it thirsty? The soil is dry.", "starter": "Why does Pixel think an apple must be red? Because…" },
+      { "key": "3", "name": "Why #3", "what": "Keep digging under that answer.", "example": "🪴 Why is the soil dry? Nobody watered it.", "starter": "Why did Pixel learn \"apple = red\"? Because…" },
+      { "key": "4", "name": "Why #4", "what": "Don't stop at the first easy answer.", "example": "🪴 Why did nobody water it? We forgot it was there.", "starter": "Why did Pixel only see red apples? Because…" },
+      { "key": "5", "name": "Why #5", "what": "Reach the root cause you can fix.", "example": "🪴 Why did we forget? It hides behind the curtain. Move it!", "starter": "Why was the training data one-sided? Because…" }
+    ],
+    "locked": [],
+    "badge": "Root Cause Detective"
+  },
+  "sketch_checklist": [
+    "I made a table with a row for each group.",
+    "I predicted the accuracy for each group.",
+    "I planned a balanced training set to fix it."
+  ],
+  "test": {
+    "measure": "accuracy % for the worst group",
+    "higher_is_better": true,
+    "check_question": "With the biased data, which group did worst?",
+    "check_options": ["Red apples", "Green apples", "Red balls"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "AI check: can you think of a real AI where unfair data could hurt someone?",
+    "options": ["🗣️ A voice helper that misses accents", "🩺 A health checker", "📷 A camera that works worse for some people", "💭 I have another idea"]
+  },
+  "sticker": { "name": "Fairness Detective", "emoji": "⚖️" }
+}

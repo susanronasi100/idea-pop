@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature stay cool without any power?",
+  "hero": { "name": "Elena", "role": "Grandma Rosa's granddaughter", "image": "/kid/pointing-girl.png", "emoji": "🏡" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏡", "text": "There was a girl called Elena whose Grandma Rosa lived in a small house with a sunny garden." },
+    { "beat": "Every day…", "emoji": "🍋", "text": "Every afternoon, Elena visited Grandma Rosa after school, and they made lemonade and read stories together." },
+    { "beat": "Until one day…", "emoji": "🥵", "text": "Summer came, and by the afternoon it was 35 °C inside! \"An air conditioner is too noisy and costs too much to run,\" said Grandma. \"Could my house cool itself?\"" }
+  ],
+  "card": {
+    "hero": "Elena, Grandma Rosa's granddaughter",
+    "place": "Grandma Rosa's small house",
+    "problem": "35 °C inside in summer",
+    "goal": "A house that cools itself",
+    "rules": "Only air, shade and shape",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The hottest afternoon", "line": "Elena fans Grandma and wonders: could the house cool itself, with no machine at all?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Elena asks for help", "line": "Elena has lots of questions, and she needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Elena go exploring to meet animals that stay cool without any power." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of rising air", "line": "The heroes share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the air lab", "line": "Every hero needs training. Elena shows you a mug of hot water and a tissue strip." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The why detective", "line": "Elena asks: why is Grandma's house so hot? Then she asks why again…" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every cool house starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "The first house is still too warm. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "A breezy, quiet house", "line": "Grandma's house is breezy, quiet and cool." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Grandma Rosa's house gets far too hot, and she doesn't want a noisy air conditioner. Can you help Elena cool it down? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this long ago. Tap each card to meet four nature heroes who stay cool with no power at all!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Where will the air be warmer? Ask an adult to help with the hot water.",
+    "sketch": "Time to draw Grandma's house cut in half like a dollhouse, like a real architect!",
+    "build_and_test": "Build your two shoebox houses and let's see how much cooler yours stays in the sun!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, Grandma Rosa's house cools itself with YOUR design. She sips lemonade in the breeze, and it's quiet enough to hear the birds!"
+  },
+  "quick_check": {
+    "question": "It's 35 °C inside Grandma's house. Your design cools it by 7 °C. What's the new temperature?",
+    "options": ["28 °C", "42 °C", "32 °C"],
+    "answer": 0,
+    "right": "Right! 35 − 7 = 28 °C. That's a big difference on a hot afternoon!",
+    "wrong": "Not quite. Cooler means take away: try 35 − 7."
+  },
+  "clue_cards": [
+    { "name": "Termites", "emoji": "🐜", "image": null, "tagline": "Mound builders", "trick": "Mounds with a tall chimney and tunnels.", "does": "Warm air rises out of the top and pulls cooler air in lower down.", "group": "air" },
+    { "name": "Prairie dogs", "emoji": "🐿️", "image": null, "tagline": "Grassland diggers", "trick": "Burrows with one raised entrance and one flat one.", "does": "Wind over the raised one pulls fresh air through the tunnel.", "group": "air" },
+    { "name": "Elephant", "emoji": "🐘", "image": null, "tagline": "Big ears", "trick": "Huge, thin ears full of blood vessels.", "does": "Flapping them sheds heat into the air.", "group": "shed" },
+    { "name": "Desert snail", "emoji": "🐌", "image": null, "tagline": "Desert dweller", "trick": "A bright white shell.", "does": "Reflects most of the sunlight, keeping the snail much cooler inside.", "group": "reflect" }
+  ],
+  "match_groups": [
+    { "key": "air", "label": "🌬️ Moves air through" },
+    { "key": "shed", "label": "🌡️ Sheds body heat" },
+    { "key": "reflect", "label": "☀️ Bounces sunlight away" }
+  ],
+  "predict": {
+    "prompt": "Rises or sinks? Predict first!",
+    "choices": ["Sinks", "Rises"],
+    "items": [
+      { "emoji": "☕", "label": "Warm air above hot tea", "answer": 1 },
+      { "emoji": "🧊", "label": "Cold air from an open freezer", "answer": 0 },
+      { "emoji": "🎈", "label": "Hot-air balloon", "answer": 1 }
+    ],
+    "explain": "Warm air is lighter than cool air, so it rises and cool air sinks. A low opening and a high one let this flow cool a house: the stack effect."
+  },
+  "lab": {
+    "title": "The rising air lab",
+    "predict": "Where will the air be warmer?",
+    "options": ["Just above the mug", "30 cm to the side"],
+    "measure": "temperature in °C",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "5 Whys is a detective tool. You ask \"why?\" again and again until you find the root cause. Sometimes there's more than one! Today you'll use all 5 whys.",
+    "example_object": "a torch",
+    "parts": [
+      { "key": "1", "name": "Why #1", "what": "Ask why the problem happens.", "example": "🔦 Why won't the torch turn on? The battery is flat.", "starter": "Why is Grandma's house so hot? Because…" },
+      { "key": "2", "name": "Why #2", "what": "Ask why about that answer.", "example": "🔦 Why is it flat? It was left on all night.", "starter": "Why does the roof get so hot? Because…" },
+      { "key": "3", "name": "Why #3", "what": "Dig one level deeper.", "example": "🔦 Why was it left on? The switch got knocked in a bag.", "starter": "Why does the hot air stay inside? Because…" },
+      { "key": "4", "name": "Why #4", "what": "Keep digging: don't stop at the easy answer.", "example": "🔦 Why did it get knocked? The switch sticks out.", "starter": "Why can't the hot air escape? Because…" },
+      { "key": "5", "name": "Why #5", "what": "Reach the root cause, then fix that.", "example": "🔦 Root cause: the switch sticks out. Fix: a sunken switch!", "starter": "Why is there no high vent? Because…" }
+    ],
+    "locked": [],
+    "badge": "Root Cause Finder"
+  },
+  "sketch_checklist": [
+    "I drew the house cut in half like a dollhouse.",
+    "I added arrows for cool air coming in and warm air leaving.",
+    "I showed the shade or reflective surfaces."
+  ],
+  "test": {
+    "measure": "°C cooler than the closed house",
+    "higher_is_better": true,
+    "check_question": "Would rain still stay out? Show where the vents are covered.",
+    "check_options": ["Stays dry", "A few drips", "Rain gets in"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which change cooled your house the most?",
+    "options": ["🌬️ The high vent", "🪟 The low windows", "✨ The white or foil roof", "🤝 All of them together"]
+  },
+  "sticker": { "name": "Cool Architect", "emoji": "🌬️" }
+}

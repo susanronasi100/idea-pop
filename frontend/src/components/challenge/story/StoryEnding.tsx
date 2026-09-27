@@ -1,8 +1,7 @@
 'use client';
 
-import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Character3D, Confetti, Popi, optionClass } from './StoryBits';
+import { ChapterBanner, SceneStage, Confetti, Popi, optionClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame } from './useMissionGame';
 
@@ -24,18 +23,7 @@ export default function StoryEnding({ story, game, update }: Props) {
       <Confetti />
       <ChapterBanner story={story} step="celebrate_and_share" />
 
-      <div className="relative flex min-h-[220px] items-end justify-end overflow-hidden rounded-card bg-white">
-        {story.scene_image && (
-          <Image src={story.scene_image} alt="" fill sizes="(max-width: 768px) 100vw, 640px" className="object-cover" />
-        )}
-        <Character3D
-          src={story.hero.image}
-          emoji={story.hero.emoji}
-          alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })}
-          size={170}
-          className="relative z-10 m-3"
-        />
-      </div>
+      <SceneStage story={story} alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })} align="end" />
 
       <Popi label={t('popi_ending')} text={story.guide.ending} />
 

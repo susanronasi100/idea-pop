@@ -1,9 +1,8 @@
 'use client';
 
-import Image from 'next/image';
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Character3D, Popi, ctaClass, optionClass } from './StoryBits';
+import { ChapterBanner, SceneStage, Popi, ctaClass, optionClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame } from './useMissionGame';
 
@@ -52,25 +51,7 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
       </div>
 
       {/* The scene: the story's backdrop with the 3D hero standing in it */}
-      <div className="relative flex min-h-[220px] items-end justify-start overflow-hidden rounded-card bg-white">
-        {story.scene_image && (
-          <Image
-            src={story.scene_image}
-            alt=""
-            fill
-            sizes="(max-width: 768px) 100vw, 640px"
-            className="object-cover"
-            priority
-          />
-        )}
-        <Character3D
-          src={story.hero.image}
-          emoji={story.hero.emoji}
-          alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })}
-          size={170}
-          className="relative z-10 m-3"
-        />
-      </div>
+      <SceneStage story={story} alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })} priority />
 
       <Popi text={story.guide.brief} />
 

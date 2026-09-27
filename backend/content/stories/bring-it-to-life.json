@@ -1,0 +1,106 @@
+{
+  "function_question": "How does AI make new pictures and videos?",
+  "hero": { "name": "Doodle", "role": "a little sketch", "image": null, "emoji": "✏️" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "✏️", "text": "There was a little sketch called Doodle who lived on a page in a drawing book." },
+    { "beat": "Every day…", "emoji": "💃", "text": "Doodle dreamed of dancing, but stuck on the page, it couldn't move a single line." },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Doodle wondered: \"Animators draw lots of pictures to make things move. What if someone could fill in the pictures between my poses?\"" }
+  ],
+  "card": {
+    "hero": "Doodle, a little sketch",
+    "place": "A page in a drawing book",
+    "problem": "Doodle can't move",
+    "goal": "Make Doodle dance smoothly",
+    "rules": "Objects and drawings, no faces",
+    "helpers": "You and real-world clues"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Stuck on the page", "line": "Doodle dreams of dancing. Today, YOU get to be the AI that brings it to life." },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Doodle asks for help", "line": "Where is a bouncing ball between its start and its landing? Doodle needs a teammate." },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Predicting what comes next", "line": "You and Doodle find out how generative AI makes new things." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of prediction", "line": "Generative AI doesn't copy. It predicts." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The sticky-note lab", "line": "No magic, just sticky notes! Draw a ball at the top and at the bottom." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The idea storm", "line": "What else can AI generate? List as many as you can!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The storyboard", "line": "Three keyframes and a plan for the pictures in between." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Play it back", "line": "Find the jerky moment, predict more frames there, and play again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Doodle is dancing", "line": "Doodle bounces and twirls right across the page." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Doodle is stuck on the page, and in-between pictures take ages to draw. Can you be the AI and bring Doodle to life by predicting the frames in between? Let's start!",
+    "your_idea": "Some animators already have a plan for the in-betweens. Do you?",
+    "nature_clues": "Generative AI makes new content by predicting what comes next. Tap each card to meet four real-world examples!",
+    "design_secret": "Here's the secret all four examples share…",
+    "skill": "Unplugged first! How many in-betweens make the smoothest drop? Predict, then flip your sticky notes.",
+    "sketch": "Time to storyboard like a real animator!",
+    "build_and_test": "Add your keyframes and predicted in-betweens in the Animation Studio, then play it. Use drawings or photos of objects only, never faces.",
+    "retry_tip": "Find the jerkiest moment, predict 2 more frames there, and play it again!",
+    "ending": "And ever since then, Doodle dances across the page, and every frame YOU predicted is proudly labelled, just like AI-made content should be!"
+  },
+  "quick_check": {
+    "question": "Doodle has 2 keyframes, and you predict 3 in-betweens. How many frames is that altogether?",
+    "options": ["3", "5", "6"],
+    "answer": 1,
+    "right": "Right! 2 + 3 = 5 frames. Shown fast, your brain blends them into motion.",
+    "wrong": "Not quite. Add the keyframes and the in-betweens together."
+  },
+  "clue_cards": [
+    { "name": "Cartoon frames", "emoji": "🎞️", "image": null, "tagline": "At the cinema", "trick": "Films are lots of still pictures, called frames.", "does": "Shown very fast, your brain blends them into motion.", "group": "motion" },
+    { "name": "Smooth slow motion", "emoji": "🐢", "image": null, "tagline": "In video apps", "trick": "AI creates extra frames in between the real ones.", "does": "A jerky video becomes smooth slow motion.", "group": "motion" },
+    { "name": "Next-word predictors", "emoji": "📝", "image": null, "tagline": "Text AI", "trick": "It learned patterns from huge amounts of text.", "does": "It predicts the next word, one word at a time.", "group": "words_pictures" },
+    { "name": "Picture makers", "emoji": "🖼️", "image": null, "tagline": "Image AI", "trick": "It learned patterns from millions of example pictures.", "does": "It creates new pictures, but can make mistakes, like extra fingers!", "group": "words_pictures" }
+  ],
+  "match_groups": [
+    { "key": "motion", "label": "🎬 Frames and motion" },
+    { "key": "words_pictures", "label": "✨ New words and pictures" }
+  ],
+  "predict": {
+    "prompt": "Should it be labelled as AI-generated? Predict first!",
+    "choices": ["Label it", "No label needed"],
+    "items": [
+      { "emoji": "🐢", "label": "A slow-motion video with AI-made frames", "answer": 0 },
+      { "emoji": "📸", "label": "A photo you took of your model", "answer": 1 },
+      { "emoji": "🖼️", "label": "A picture an image AI created", "answer": 0 }
+    ],
+    "explain": "AI predicts new frames and pictures, so it can make mistakes and make fake things look real. Anything AI made gets a label. Idea Pop does this too!"
+  },
+  "lab": {
+    "title": "The sticky-note lab",
+    "predict": "How many in-between frames make the smoothest ball drop?",
+    "options": ["1 in-between", "3 in-betweens", "5 in-betweens"],
+    "measure": "smoothness stars (1 to 5)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "Brainstorming is how teams find lots of ideas fast, then pick the best ones. Today you'll use all 5 rules to explore what AI can generate.",
+    "example_object": "a paper cup",
+    "parts": [
+      { "key": "Q", "name": "Quantity", "what": "Go for lots of ideas, fast.", "example": "🥤 20 uses for a cup in 5 minutes: seed pot, phone speaker…", "starter": "Things AI can generate or predict: words, music, pictures, weather…" },
+      { "key": "J", "name": "No Judging", "what": "Every idea is allowed for now.", "example": "🥤 A cup hat? Write it down anyway!", "starter": "An odd idea I'll still write down is AI that makes…" },
+      { "key": "W", "name": "Wild ideas", "what": "Be brave and try something unusual.", "example": "🥤 A tower of 1,000 cups that plays music!", "starter": "My wildest idea is an AI that predicts…" },
+      { "key": "B", "name": "Build on ideas", "what": "Take an idea and add to it.", "example": "🥤 A seed pot → a seed pot with a drip hole.", "starter": "AI that makes pictures could become AI that…" },
+      { "key": "P", "name": "Pick the best", "what": "Choose the ideas that matter most.", "example": "🥤 Keep the idea that's cheapest and most useful.", "starter": "I'll star the ones where a mistake could fool people, and label them by…" }
+    ],
+    "locked": [],
+    "badge": "Brainstorm Champion"
+  },
+  "sketch_checklist": [
+    "I drew 3 keyframes for one simple action.",
+    "I marked how many in-betweens go between each pair.",
+    "I wrote the pattern I'll follow, like \"slower at the top\"."
+  ],
+  "test": {
+    "measure": "jerky jumps you can spot",
+    "higher_is_better": false,
+    "check_question": "Could a friend tell which frames were keyframes and which were predicted?",
+    "check_options": ["They couldn't tell!", "They guessed some", "They spotted them all"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "AI check: why is it important to label pictures and videos made by AI?",
+    "options": ["🕵️ So fakes don't fool people", "⚠️ Because AI can make mistakes", "🤝 To be honest about who made it", "🏷️ So people can check before they trust it"]
+  },
+  "sticker": { "name": "Frame Predictor", "emoji": "🎬" }
+}

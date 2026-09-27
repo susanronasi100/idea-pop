@@ -1,0 +1,104 @@
+{
+  "function_question": "How does nature fall slowly and ride the wind?",
+  "hero": { "name": "Priya", "role": "a secret-note sender", "image": "/kid/pointing-girl.png", "emoji": "📨" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🌳", "text": "There was a girl called Priya whose best friend Sam had a treehouse high above Priya's garden." },
+    { "beat": "Every day…", "emoji": "✉️", "text": "Sam and Priya sent notes up and down between the treehouse and the garden, full of jokes, plans and secret codes." },
+    { "beat": "Until one day…", "emoji": "💨", "text": "Sam's paper note blew right over the fence, and the next one, weighed down, dropped straight into the flowerbed. Priya called up: \"We need a better way!\"" }
+  ],
+  "card": {
+    "hero": "Priya, a secret-note sender",
+    "place": "Sam's treehouse and Priya's garden",
+    "problem": "Notes blow away or crash down",
+    "goal": "A slow flyer that lands on target",
+    "rules": "Carry a paper-clip message",
+    "helpers": "You, Sam and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The lost messages", "line": "One note flies away, one drops like a stone. Priya looks up at the treehouse and thinks." },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Priya asks for help", "line": "Priya needs a teammate on the ground. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The sky riders", "line": "You and Priya meet seeds and animals that drift, spin and glide." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of falling slowly", "line": "The sky riders share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the drop lab", "line": "Priya grabs three sheets of paper and a stopwatch." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The idea storm", "line": "Twenty ideas in five minutes, and then you pick a winner!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great flyer starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "The first flyer drops too fast. You change one thing, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Special delivery!", "line": "The message spins down slowly and lands right by Priya's feet." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Priya and Sam's notes keep blowing away or crashing down. Can you help them send messages safely? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this millions of years ago. Tap each card to meet four nature heroes who ride the wind!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which paper shape will take the longest to fall?",
+    "sketch": "Time to draw your flyer like a real engineer!",
+    "build_and_test": "Build your flyer and let's see how slowly it carries Priya's message down!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, notes spin gently down from the treehouse on YOUR flyer, and Priya catches every one!"
+  },
+  "quick_check": {
+    "question": "The message must land within 1 m of the target. Priya's lands 80 cm away. Is it a hit?",
+    "options": ["Yes, a hit", "No, a miss", "Can't tell"],
+    "answer": 0,
+    "right": "Yes! 1 m is 100 cm, and 80 cm is less than that. A hit means Priya can catch it without chasing it!",
+    "wrong": "Not quite. Remember 1 m = 100 cm. Is 80 cm more or less than that?"
+  },
+  "clue_cards": [
+    { "name": "Maple seed", "emoji": "🍁", "image": null, "tagline": "Helicopter seed", "trick": "One heavy seed with a single thin wing.", "does": "It spins like a helicopter blade as it falls, which can more than double its fall time.", "group": "spin" },
+    { "name": "Dandelion seed", "emoji": "🌼", "image": null, "tagline": "Tiny parachute", "trick": "A crown of about 100 fine hairs.", "does": "Air flows through the gaps and swirls above it, so it can drift for kilometres.", "group": "parachute" },
+    { "name": "Flying squirrel", "emoji": "🐿️", "image": null, "tagline": "Tree-to-tree glider", "trick": "A flap of skin stretched between its front and back legs.", "does": "It glides more than 50 m from one tree to the next.", "group": "glide" },
+    { "name": "Javan cucumber seed", "emoji": "🪽", "image": null, "tagline": "Rainforest glider", "trick": "A wide, paper-thin wing.", "does": "It glides like a tiny aircraft, and it inspired early glider designs.", "group": "glide" }
+  ],
+  "match_groups": [
+    { "key": "spin", "label": "🌀 Spins like a helicopter" },
+    { "key": "parachute", "label": "🪂 Parachute" },
+    { "key": "glide", "label": "🛩️ Glides on a wide wing" }
+  ],
+  "predict": {
+    "prompt": "Fast or slow? Predict how each one falls from the same height!",
+    "choices": ["Falls fast", "Falls slowly"],
+    "items": [
+      { "emoji": "📎", "label": "Paper clip on its own", "answer": 0 },
+      { "emoji": "🌀", "label": "Paper spinner", "answer": 1 },
+      { "emoji": "⚪", "label": "Crumpled paper ball", "answer": 0 }
+    ],
+    "explain": "A clip or a tight ball pushes very little air out of the way, so it drops fast. A spinning wing keeps meeting new air, so drag slows it down."
+  },
+  "lab": {
+    "title": "The paper drop lab",
+    "predict": "Which paper shape will take the longest to fall?",
+    "options": ["Flat sheet", "Crumpled sheet", "Paper spinner"],
+    "measure": "seconds to fall (average of 3 drops)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "A brainstorm is a storm of ideas: first you make lots, then you choose. You already know the first 3 rules. Today you'll learn the last 2.",
+    "example_object": "a water bottle",
+    "parts": [
+      { "key": "B", "name": "Build on ideas", "what": "Take an idea and add to it to make it better.", "example": "💧 \"A bottle with a strap\" + \"a clip\" = it hooks onto your bag.", "starter": "Sam's idea was a parachute. I can build on it by…" },
+      { "key": "P", "name": "Pick the best", "what": "Choose the idea that fits the goal best.", "example": "💧 Out of 20 bottle ideas, pick the one that never spills.", "starter": "I sort my ideas into fast, slow and floating. The best slow one is…" }
+    ],
+    "locked": [],
+    "badge": "Brainstorm Pro"
+  },
+  "sketch_checklist": [
+    "I added measurements.",
+    "I showed where the message goes.",
+    "I showed which way it spins or floats."
+  ],
+  "test": {
+    "measure": "seconds to fall (average of 3 drops)",
+    "higher_is_better": true,
+    "check_question": "Target test: how many of 5 drops land within 1 m of the target?",
+    "check_options": ["4 or 5", "2 or 3", "0 or 1"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick slowed your flyer down?",
+    "options": ["🍁 Maple seed", "🌼 Dandelion seed", "🐿️ Flying squirrel", "🪽 Javan cucumber seed"]
+  },
+  "sticker": { "name": "Sky Messenger", "emoji": "📬" }
+}

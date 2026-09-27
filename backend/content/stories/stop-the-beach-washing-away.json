@@ -1,0 +1,103 @@
+{
+  "function_question": "How does nature hold ground against water?",
+  "hero": { "name": "Lina", "role": "a Seaside Bay student", "image": "/landing/start-free-girl.png", "emoji": "🏖️" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏖️", "text": "There was a girl called Lina who lived in Seaside Bay, a little town with a long sandy beach and tall dunes." },
+    { "beat": "Every day…", "emoji": "🐚", "text": "Lina walked along the beach after school, collecting shells and watching the waves roll in and out." },
+    { "beat": "Until one day…", "emoji": "🌊", "text": "After a stormy winter, Lina saw that the dunes had shrunk again. \"If the waves keep taking our sand, one day there will be no beach at all!\"" }
+  ],
+  "card": {
+    "hero": "Lina, a Seaside Bay student",
+    "place": "Seaside Bay's sandy beach",
+    "problem": "Waves wash the sand away",
+    "goal": "Keep the sand in place",
+    "rules": "No huge concrete wall",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The shrinking dunes", "line": "Lina looks at the dunes and wonders: how can we stop the sea taking our sand?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Lina asks for help", "line": "Lina has a bucket full of questions, and she needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Lina go down to the shore to meet plants and animals that hold their ground." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of slow water", "line": "The heroes share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the sand lab", "line": "Every hero needs training. Lina hands you a tray of sand and a jug of water." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The last two letters", "line": "Lina points at a plain concrete sea wall. Time to SCAMPER it!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great barrier starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "Twenty waves roll in. You fix one thing, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "The beach survives", "line": "The winter storms come and go, and the dunes start growing again." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Lina wants to save her beach, but a giant concrete wall isn't the answer. Can you help her? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this long ago. Tap each card to meet four nature heroes that hold their ground against water!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which barrier will save the most sand?",
+    "sketch": "Time to draw your barrier from above and from the side, like a real engineer!",
+    "build_and_test": "Build your beach and let's see how much sand your barrier saves from 20 waves!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, YOUR barrier has guarded Seaside Bay. The dunes grow a little every year, and Lina still collects shells on the beach she helped save!"
+  },
+  "quick_check": {
+    "question": "A beach with no barrier loses 12 spoonfuls of sand. Lina's beach loses 3. How many spoonfuls did the barrier save?",
+    "options": ["9", "15", "4"],
+    "answer": 0,
+    "right": "Right! 12 take away 3 is 9. Comparing with a no-barrier beach is how you prove your barrier works!",
+    "wrong": "Not quite. Try 12 take away 3."
+  },
+  "clue_cards": [
+    { "name": "Marram grass", "emoji": "🌾", "image": null, "tagline": "Dune builder", "trick": "Long, tangled roots and tough leaves.", "does": "The roots bind the sand together, and the leaves slow the wind so sand piles up.", "group": "hold" },
+    { "name": "Mangrove tree", "emoji": "🌳", "image": null, "tagline": "Sea forest", "trick": "Tangled stilt roots standing in the sea.", "does": "Breaks up waves and traps mud, slowly building new land.", "group": "slow" },
+    { "name": "Oyster reef", "emoji": "🦪", "image": null, "tagline": "Living reef", "trick": "Grows in rough, bumpy mounds.", "does": "Slows the waves down before they reach the shore.", "group": "slow" },
+    { "name": "Beaver", "emoji": "🦫", "image": "/kid/avatars/beaver.png", "tagline": "River builder", "trick": "Builds dams from sticks, mud and stones.", "does": "Slows the river down so mud settles behind the dam.", "group": "slow" }
+  ],
+  "match_groups": [
+    { "key": "hold", "label": "🌱 Holds the sand together" },
+    { "key": "slow", "label": "🌊 Slows the water down" }
+  ],
+  "predict": {
+    "prompt": "Bounce or break? Predict first!",
+    "choices": ["Bounces the wave back", "Breaks up the wave"],
+    "items": [
+      { "emoji": "🧱", "label": "Flat concrete wall", "answer": 0 },
+      { "emoji": "🪨", "label": "Pile of rough rocks", "answer": 1 },
+      { "emoji": "🪵", "label": "Row of sticks with gaps", "answer": 1 }
+    ],
+    "explain": "A flat wall bounces the wave's energy back and stirs up the sand. Rough, gappy barriers break the wave up, so the water slows down and drops its sand."
+  },
+  "lab": {
+    "title": "The sand slope lab",
+    "predict": "Which barrier will save the most sand from 500 ml of water?",
+    "options": ["No barrier", "Flat card wall", "Row of sticks", "Mesh of string"],
+    "measure": "spoonfuls of sand washed away",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "SCAMPER is a set of magic question words. You already know S, C, A, M and P. Today you'll learn the last 2 letters, E and R, and finish the whole set!",
+    "example_object": "a teapot",
+    "parts": [
+      { "key": "E", "name": "Eliminate", "what": "Take something away and see what happens.", "example": "🫖 No teabags: the leaves sit in a strainer built into the pot.", "starter": "What if the sea wall had no concrete at all, just…" },
+      { "key": "R", "name": "Reverse", "what": "Flip it, turn it around or do it backwards.", "example": "🫖 Upside down: a pot that pours from a tap at the bottom.", "starter": "Instead of bouncing the waves back, the barrier could…" }
+    ],
+    "locked": [],
+    "badge": "SCAMPER Master"
+  },
+  "sketch_checklist": [
+    "I drew my barrier from above and from the side.",
+    "I showed where the waves hit and how my barrier slows them.",
+    "I showed what holds the sand in place."
+  ],
+  "test": {
+    "measure": "spoonfuls of sand washed away",
+    "higher_is_better": false,
+    "check_question": "Does your barrier stay in place after 20 waves?",
+    "check_options": ["Stayed put", "Moved a bit", "Washed away"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your barrier most?",
+    "options": ["🌾 Marram grass", "🌳 Mangrove tree", "🦪 Oyster reef", "🦫 Beaver"]
+  },
+  "sticker": { "name": "Beach Guardian", "emoji": "🏖️" }
+}

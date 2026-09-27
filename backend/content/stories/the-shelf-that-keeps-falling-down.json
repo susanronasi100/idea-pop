@@ -1,0 +1,109 @@
+{
+  "function_question": "How does nature build strong things from very little material?",
+  "hero": { "name": "Ravi", "role": "a Room 3 pupil", "image": "/landing/hero/tools-boy.webp", "emoji": "📚" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏫", "text": "There was a boy called Ravi in Room 3 who loved the little class library in the corner." },
+    { "beat": "Every day…", "emoji": "📖", "text": "At reading time, Ravi picked a new book from the shelf and curled up with a story." },
+    { "beat": "Until one day…", "emoji": "💥", "text": "The shelf sagged in the middle and tipped every book onto the floor, again! There was no money for a new one, just a big pile of scrap paper and cardboard." }
+  ],
+  "card": {
+    "hero": "Ravi, a Room 3 pupil",
+    "place": "The class library in Room 3",
+    "problem": "The shelf sags and drops books",
+    "goal": "Hold lots of books",
+    "rules": "Scrap paper, card, little paper",
+    "helpers": "You, Room 3 and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Books on the floor", "line": "Ravi picks up the books and looks at the pile of scrap paper. Could paper really hold them?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Ravi asks for help", "line": "Room 3 needs a shelf, and Ravi needs a teammate. What about you?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The master builders", "line": "You and Ravi meet builders that make strong things from almost nothing." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of strong shapes", "line": "The master builders share the secret they all use." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the column lab", "line": "Ravi hands you four sheets of paper and a stack of books." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The SCAMPER review", "line": "All seven magic letters, one after another!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great shelf starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big test", "line": "The first shelf sags. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "A shelf full of honeycomb", "line": "Room 3 has a brand-new library shelf, and not one book falls." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Room 3's shelf keeps dumping books on the floor, and all Ravi has is scrap paper. Can you help him build a new one? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea. Do you?",
+    "nature_clues": "Nature solved this millions of years ago. Tap each card to meet four nature heroes who build strong and light!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which paper column will hold the most books?",
+    "sketch": "Time to draw your shelf like a real engineer!",
+    "build_and_test": "Build your shelf and let's see how many books it holds for each sheet of paper!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and test again!",
+    "ending": "And ever since then, Room 3's books sit safely on YOUR paper shelf, and other classes keep asking how to build one too!"
+  },
+  "quick_check": {
+    "question": "Ravi's shelf holds 12 books and uses 4 sheets of paper. How many books per sheet is that?",
+    "options": ["3", "8", "16"],
+    "answer": 0,
+    "right": "Right! 12 ÷ 4 = 3 books per sheet. A higher score means a stronger shelf from less paper.",
+    "wrong": "Not quite. Share 12 books equally between 4 sheets."
+  },
+  "clue_cards": [
+    { "name": "Honeybees", "emoji": "🐝", "image": "/kid/avatars/bee.png", "tagline": "Wax builders", "trick": "Six-sided wax cells that fit together with no gaps.", "does": "They hold the most honey for the least wax, and each wall supports its neighbours.", "group": "cells" },
+    { "name": "Bird bones", "emoji": "🦴", "image": null, "tagline": "Built to fly", "trick": "Hollow inside, with thin cross-braces like tiny trusses.", "does": "Light enough to fly, but strong enough to land.", "group": "tube" },
+    { "name": "Bamboo", "emoji": "🎋", "image": null, "tagline": "Giant grass", "trick": "A hollow tube divided by solid walls called nodes.", "does": "The nodes stop it buckling, so bamboo can grow 30 m tall.", "group": "tube" },
+    { "name": "Giant water lily", "emoji": "🪷", "image": null, "tagline": "Amazon river", "trick": "A huge leaf braced underneath by a web of ribs.", "does": "It can hold a small child, and it inspired the roof of the Crystal Palace in London.", "group": "ribs" }
+  ],
+  "match_groups": [
+    { "key": "cells", "label": "⬢ Six-sided cells" },
+    { "key": "tube", "label": "🎋 Hollow tube with braces" },
+    { "key": "ribs", "label": "🕸️ Web of ribs underneath" }
+  ],
+  "predict": {
+    "prompt": "Bends or holds? Put a book on each sheet of paper. Predict first!",
+    "choices": ["Bends", "Holds"],
+    "items": [
+      { "emoji": "📄", "label": "Flat sheet", "answer": 0 },
+      { "emoji": "🧻", "label": "Sheet rolled into a tube", "answer": 1 },
+      { "emoji": "🐝", "label": "Sheet folded into hexagons", "answer": 1 }
+    ],
+    "explain": "Same paper, different shape. Tubes and hexagons spread the load across many walls, so they hold much more than a flat sheet."
+  },
+  "lab": {
+    "title": "The paper column lab",
+    "predict": "Which paper column will hold the most books?",
+    "options": ["Round", "Square", "Triangle", "Hexagon"],
+    "measure": "books before it buckles",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "SCAMPER is a set of magic question words. Each letter is a different way to change an idea. Today you'll use all 7 letters in one go!",
+    "example_object": "a chair",
+    "parts": [
+      { "key": "S", "name": "Substitute", "what": "Swap one thing for another.", "example": "🪑 Swap wooden legs for card tubes.", "starter": "Instead of a wooden plank, the shelf could be…" },
+      { "key": "C", "name": "Combine", "what": "Join two things into one.", "example": "🪑 Chair + box = a seat with storage.", "starter": "I could combine tubes and hexagons by…" },
+      { "key": "A", "name": "Adapt", "what": "Borrow an idea from somewhere else.", "example": "🪑 Hollow legs, like a bird bone.", "starter": "I could adapt bamboo's nodes by…" },
+      { "key": "M", "name": "Modify", "what": "Change its size or shape.", "example": "🪑 Make the legs wider at the bottom.", "starter": "To make it stronger, I could change the shape of…" },
+      { "key": "P", "name": "Put to another use", "what": "Use it for something new.", "example": "🪑 Use it as a little table.", "starter": "The leftover cardboard could become…" },
+      { "key": "E", "name": "Eliminate", "what": "Take something away.", "example": "🪑 No back: now it's a stool.", "starter": "I could save paper by leaving out…" },
+      { "key": "R", "name": "Reverse", "what": "Flip it or turn it around.", "example": "🪑 Upside down, it's a doll's playpen.", "starter": "What if the ribs went on top instead of…" }
+    ],
+    "locked": [],
+    "badge": "SCAMPER Builder"
+  },
+  "sketch_checklist": [
+    "I drew my shelf from the front and from above.",
+    "I showed the hidden structure inside.",
+    "I wrote how many sheets it uses."
+  ],
+  "test": {
+    "measure": "books held per sheet of paper",
+    "higher_is_better": true,
+    "check_question": "Sag check: how much does the middle sag with the books on?",
+    "check_options": ["Less than 1 cm", "About 1 cm", "More than 1 cm"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick made your shelf strong?",
+    "options": ["🐝 Honeycomb", "🦴 Bird bones", "🎋 Bamboo", "🪷 Water lily"]
+  },
+  "sticker": { "name": "Honeycomb Engineer", "emoji": "🍯" }
+}

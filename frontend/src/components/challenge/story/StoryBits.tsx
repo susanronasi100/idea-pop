@@ -109,6 +109,49 @@ export function Character3D({
   );
 }
 
+/**
+ * The story's stage: the scene backdrop when the mission has one, otherwise a
+ * soft pastel sky with drifting bubbles, with the 3D hero standing in front.
+ */
+export function SceneStage({
+  story,
+  alt,
+  align = 'start',
+  priority = false,
+}: {
+  story: MissionStory;
+  alt: string;
+  align?: 'start' | 'end';
+  priority?: boolean;
+}) {
+  return (
+    <div
+      data-testid="story-scene"
+      className={`relative flex min-h-[220px] items-end overflow-hidden rounded-card ${
+        align === 'end' ? 'justify-end' : 'justify-start'
+      } ${story.scene_image ? 'bg-white' : 'bg-gradient-to-b from-tint-blue via-tint-cream to-tint-lime'}`}
+    >
+      {story.scene_image ? (
+        <Image src={story.scene_image} alt="" fill sizes="(max-width: 768px) 100vw, 640px" className="object-cover" priority={priority} />
+      ) : (
+        <span aria-hidden="true" className="pointer-events-none absolute inset-0">
+          <span className="story-float absolute left-[12%] top-6 block h-16 w-16 rounded-full bg-white/60" />
+          <span className="story-float absolute right-[18%] top-10 block h-10 w-10 rounded-full bg-white/50 [animation-delay:1.2s]" />
+          <span className="story-float absolute bottom-8 right-[8%] block h-24 w-24 rounded-full bg-white/40 [animation-delay:0.6s]" />
+          <span className="absolute bottom-0 left-0 right-0 block h-10 bg-white/40" />
+        </span>
+      )}
+      <Character3D
+        src={story.hero.image}
+        emoji={story.hero.emoji}
+        alt={alt}
+        size={170}
+        className="relative z-10 m-3"
+      />
+    </div>
+  );
+}
+
 /** A burst of confetti over the content card, for the big reward moments. */
 export function Confetti({ pieces = 70 }: { pieces?: number }) {
   const [bits, setBits] = useState<{ left: number; delay: number; dur: number; color: string }[]>([]);
