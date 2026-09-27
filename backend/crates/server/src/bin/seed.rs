@@ -645,6 +645,230 @@ async fn seed_challenges(pool: &PgPool) -> anyhow::Result<()> {
 ]"#,
             false, // free — class-joined kids have no family subscription
         ),
+        (
+            "keep-the-ice-pop-frozen",
+            "Keep the Ice Pop Frozen",
+            1,
+            8,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Sports Day Meltdown!","story":"Leo's team runs the sports day stall, and the ice pops melt before the last race starts. There's no freezer on the field and no power. Can YOU design a reusable pouch that keeps an ice pop frozen for at least 45 minutes in the sun?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for keeping something frozen without a freezer?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature keep heat out? Animals in the coldest and hottest places on Earth have solved this without any machines. Let's look at their tricks!","clues":[{"text":"Polar bears have hollow guard hairs over thick underfur. The fur traps still air, so body heat barely leaks out.","image_url":null,"habitat":"arctic"},{"text":"Emperor penguins huddle in groups of thousands. Each bird has less of its body touching the icy wind, which can halve the heat it loses.","image_url":null,"habitat":"arctic"},{"text":"Camels keep thick fur on their backs in the desert. It blocks the sun's heat, so they sweat less than camels whose fur has been shaved.","image_url":null,"habitat":"desert"},{"text":"Arctic foxes curl up and wrap their bushy tail over their face, so less of their body touches the cold air.","image_url":null,"habitat":"arctic"}]},
+  {"step":"design_secret","secret":"Heat travels from hot to cold in three ways: by touching (conduction), by moving air (convection) and by sunlight (radiation). Still, trapped air is a poor conductor, and a shiny surface bounces sunlight away. The best insulators stack layers that each block a different path.","reveal_hint":"Which of the three heat paths can each layer of your pouch block?"},
+  {"step":"skill","instructions":"Run a fair test. Wrap three identical ice cubes: one in paper, one in bubble wrap and one in foil with cotton inside. Keep everything else the same and time how long each takes to melt. Record your results in a table: Material | Start time | Fully melted | Minutes.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw a cross-section of your pouch, as if you cut it in half.","guidance":"Label each layer and write which heat path it blocks: conduction, convection or radiation."},
+  {"step":"build_and_test","instructions":"Build your pouch from fabric scraps, bubble wrap, foil, felt or cotton. Put one ice cube inside and a control cube on a plate beside it, both in the same sunny spot. Time both.","test_criteria":["Does your ice cube last at least three times longer than the control?","Change one thing, like adding a layer, and test again. How many extra minutes did it add?","Does the pouch close with no gaps and still fit in a school bag?"]},
+  {"step":"celebrate_and_share","celebration_text":"The last runner crossed the finish line and the ice pops were still frozen! Your pouch saved sports day.","share_prompt":"Share your cross-section and your melting table on the Ideas Wall. Which heat path was hardest to block?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"mind_map","age_mode":"young"},
+  {"kind":"mind_map","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Fair-test three insulating materials, then build a layered pouch that beats a control ice cube by at least 3x."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Designing a Layered Insulator","summary":"Relate conduction, convection and radiation to polar bear fur and penguin huddles; plot melt time against layer count and explain the diminishing returns."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "the-backpack-that-wont-stay-shut",
+            "The Backpack That Won't Stay Shut",
+            1,
+            9,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Crayons Everywhere!","story":"Mia's backpack zip broke on the first day of term. Buttons pop open when she runs, and magnets are too weak once the bag is full. Can YOU invent a closer that holds a full bag shut, opens with one hand and still works after 20 uses?","image_url":null},
+  {"step":"your_idea","prompt":"Got an idea for a fastener that grips hard but opens easily?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature hold on tight and still let go? Plants and animals grab, cling and release all the time. Let's see how!","clues":[{"text":"Burdock burrs are covered in hundreds of hooked spines that snag on fur. The seed rides away on a passing animal and drops off somewhere new.","image_url":null,"habitat":"forest"},{"text":"A bird's feather is held together by tiny hooks called barbules. When a feather splits, the bird zips it back together by running it through its beak.","image_url":null,"habitat":"sky"},{"text":"Each sucker on an octopus arm seals and grips on its own, and the octopus can release them one at a time.","image_url":null,"habitat":"ocean"},{"text":"Pea plants grab supports with curly tendrils. The coil works like a spring and holds on even in strong wind.","image_url":null,"habitat":"forest"}]},
+  {"step":"design_secret","secret":"Lots of small holds add up to a strong grip, but each one lets go on its own. So a hook-and-loop fastener is strong when you pull straight, but easy to peel open one hook at a time. Georges de Mestral noticed burrs stuck to his dog in the 1940s and invented Velcro.","reveal_hint":"How could you make your closer strong when pulled, but easy to peel?"},
+  {"step":"skill","instructions":"Test grip. Tape a burr, or a pipe cleaner bent into a hook, to a paper cup and hang it on felt, wool and cotton. Add coins to the cup until it falls. Record the number of coins for each fabric, then try peeling it off instead of pulling.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your closer at normal size, plus a zoomed-in view of the hooks and what they catch on.","guidance":"Show how it closes, how it opens with one hand, and which materials you'll use."},
+  {"step":"build_and_test","instructions":"Make your closer from pipe cleaners, felt, paper clips, string or card, and fit it to a paper bag or pencil case. Fill the bag with coins or crayons.","test_criteria":["How many coins can the closed bag hold before it opens?","Can you open it with one hand in under 3 seconds?","After 20 open-and-close cycles, does it still hold?"]},
+  {"step":"celebrate_and_share","celebration_text":"Mia sprinted across the playground and nothing fell out! Your closer is now part of her adventure.","share_prompt":"Share your closer and your coin results on the Ideas Wall. How many hooks did your design use?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"brainstorm","age_mode":"young"},
+  {"kind":"brainstorm","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Measure how well hooks grip different fabrics, then build a one-hand fastener and test it over 20 cycles."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Hook-and-Loop Fasteners","summary":"Compare shear strength with peel strength, graph grip loss over repeated cycles, and explain why many weak hooks beat one strong clasp."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "the-train-that-went-boom",
+            "The Train That Went BOOM",
+            1,
+            10,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"BOOM Goes the Tunnel!","story":"Sunny Hills' new high-speed train makes a loud BOOM every time it leaves a tunnel, and people living nearby are complaining. The engineers think the shape of the train's nose is to blame. Can YOU redesign the nose to cut the boom, and still leave room for the driver?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already know what nose shape you'd try?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature move through air and water quietly? Some animals dive, swim and fly almost silently. Let's find out how!","clues":[{"text":"A kingfisher's long, wedge-shaped beak lets it dive from air into water with almost no splash, even though water is much denser than air.","image_url":null,"habitat":"jungle"},{"text":"Dolphins have smooth, rounded heads and bodies, so water flows past them with little resistance.","image_url":null,"habitat":"ocean"},{"text":"Owls have comb-like fringes on the front edge of their wings. They break up swirls of air, so owls fly almost silently.","image_url":null,"habitat":"sky"},{"text":"Shark skin is covered in tiny tooth-shaped scales that reduce drag as the shark swims.","image_url":null,"habitat":"ocean"}]},
+  {"step":"design_secret","secret":"A train speeding into a tunnel squeezes the air ahead of it into a pressure wave, which bursts out of the far end as a boom. A long nose that slowly gets wider pushes the air aside a little at a time instead of all at once. In the 1990s, engineer Eiji Nakatsu reshaped Japan's Shinkansen bullet train like a kingfisher's beak. It became quieter, used about 15% less electricity and went 10% faster.","reveal_hint":"What would happen if your train pushed the air aside gradually instead of all at once?"},
+  {"step":"skill","instructions":"Drop clay shapes of the same weight into a tall glass of water from the same height: a ball, a short cone and a long cone. Film each drop next to a ruler and measure how high the splash goes. Repeat three times and take the average.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your train nose from the side and from above.","guidance":"Add arrows showing how the air flows around it, and mark where the driver's cab goes."},
+  {"step":"build_and_test","instructions":"Make three noses from clay or rolled paper, all the same weight. Test each one with the splash drop from the Skill step and record the average splash height.","test_criteria":["Which nose makes the lowest splash? Is it the longest one or the pointiest one?","Make your best nose 2 cm longer and test again. Did the splash get lower?","Is there still room for the driver's cab?"]},
+  {"step":"celebrate_and_share","celebration_text":"The new train glides out of the tunnel with just a whoosh! The neighbours can finally sleep.","share_prompt":"Share your nose design and your splash table on the Ideas Wall. Which animal inspired your shape?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"five_whys","age_mode":"young"},
+  {"kind":"five_whys","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Measure splash height for three nose shapes, find the root cause of the boom with 5 Whys, and improve your best design."},
+  {"age_tier":"12-18","title_override":"Biomimicry: The Kingfisher Bullet Train","summary":"Explain tunnel pressure waves, compare splash height against nose length-to-width ratio, and discuss the trade-off between a long nose and cab space."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "a-cool-house-for-grandma",
+            "A Cool House for Grandma",
+            1,
+            11,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Grandma's House Is Too Hot!","story":"Grandma Rosa's small house reaches 35 °C inside on summer afternoons. She doesn't want an air conditioner because it's noisy and expensive to run. Can YOU design changes that help the house cool itself, using only air, shade and shape?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for cooling a house without a machine?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature stay cool without any power? Animals build homes and grow bodies that stay cool in scorching places. Let's investigate!","clues":[{"text":"Termite mounds have a tall chimney and tunnels. Warm air rises out of the top and pulls cooler air in lower down, so the nest stays close to the same temperature all day.","image_url":null,"habitat":"desert"},{"text":"Prairie dog burrows have one raised entrance and one flat one. Wind blowing over the raised one pulls fresh air through the tunnels.","image_url":null,"habitat":"grassland"},{"text":"Elephants' huge, thin ears are full of blood vessels. Flapping them lets heat escape into the air.","image_url":null,"habitat":"grassland"},{"text":"Desert snails have white shells that reflect most of the sunlight, keeping the snail inside much cooler.","image_url":null,"habitat":"desert"}]},
+  {"step":"design_secret","secret":"Warm air is lighter than cool air, so it rises. If a building has a low opening and a high one, warm air escapes at the top and pulls cooler air in at the bottom. This is called the stack effect. Architect Mick Pearce used it for the Eastgate Centre in Harare, Zimbabwe, which uses about 90% less energy for cooling than similar buildings.","reveal_hint":"Where would you put openings so hot air can escape and cool air can come in?"},
+  {"step":"skill","instructions":"Ask an adult to help you hold a thin tissue strip above a mug of hot water. Watch which way it moves. Then use a thermometer to compare the temperature just above the mug with the temperature 30 cm to the side.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw Grandma's house cut in half, like a dollhouse.","guidance":"Add arrows showing where cool air comes in and where warm air leaves. Show any shade or reflective surfaces too."},
+  {"step":"build_and_test","instructions":"Turn two identical shoeboxes into houses. Give one low windows, a high vent and a white or foil roof, and leave the other closed. Put both in the sun with a thermometer inside, and read them every 5 minutes for 30 minutes.","test_criteria":["After 30 minutes, how many degrees cooler is your house than the closed one?","Which change matters most? Test the vent on its own, then the roof on its own.","Would rain still stay out? Show how the vents are covered."]},
+  {"step":"celebrate_and_share","celebration_text":"Grandma's house is breezy, quiet and cool, and her cat is napping on the windowsill again!","share_prompt":"Share your house and your temperature chart on the Ideas Wall. Which change made the biggest difference?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"five_whys","age_mode":"young"},
+  {"kind":"five_whys","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Log temperatures in two model houses every 5 minutes and test which change, the vent or the roof, cools the most."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Passive Cooling and the Stack Effect","summary":"Graph temperature over time for each design, isolate variables one at a time, and compare your results to the Eastgate Centre's termite-inspired design."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "tobys-kite-is-stuck",
+            "Toby's Kite Is Stuck",
+            1,
+            12,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Lost Under the Shed!","story":"Toby's kite slid under the garden shed, 60 cm back, into a gap only 5 cm high. Sticks just push it further in. Can YOU design a grabber that reaches into a narrow gap, picks up something flat and smooth, and lets it go again?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for a grabber?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature grip smooth surfaces? Some animals can walk up glass or catch prey in a flash. Let's find out how they hold on!","clues":[{"text":"A gecko's toes have millions of tiny hairs that split into even tinier tips. They touch the surface so closely that tiny forces between molecules add up, so a gecko can hang from glass by one toe.","image_url":null,"habitat":"jungle"},{"text":"Tree frogs have soft toe pads with a thin layer of mucus. They grip wet leaves the way a damp finger picks up paper.","image_url":null,"habitat":"jungle"},{"text":"A chameleon's tongue has a sticky, cup-shaped tip that grabs insects in a fraction of a second.","image_url":null,"habitat":"jungle"},{"text":"The tip of an elephant's trunk has finger-like parts that can pinch something as small as a peanut.","image_url":null,"habitat":"grassland"}]},
+  {"step":"design_secret","secret":"The more of a surface you touch, the stronger your hold. Soft, bendy tips fill in the tiny bumps that a hard tip misses. A gecko's grip is also easy to release: when it tilts its hairs, the grip lets go. Engineers have used this to build climbing robots and grippers for space.","reveal_hint":"What soft material could touch as much of a smooth surface as possible?"},
+  {"step":"skill","instructions":"Try to lift a playing card with a pencil tip, sticky tape, a damp sponge, reusable putty and a rubber glove fingertip. Rate each one from 1 to 5 for grip and for easy release, and record the scores in a table.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your grabber with its measurements.","guidance":"Label the handle, the reach and the gripping tip. Show how you make it let go."},
+  {"step":"build_and_test","instructions":"Build a grabber from a ruler, cardboard tubes, string, straws and your best tip material. Put a card under a sofa or chair at least 40 cm back, then try to pull it out.","test_criteria":["How many times out of 10 can you pull the card out?","Does it work on three different flat things, like a card, a coin and a leaf?","Can you drop the object exactly where you choose?"]},
+  {"step":"celebrate_and_share","celebration_text":"The kite is out from under the shed and flying high again! Toby says you're a genius.","share_prompt":"Share your grabber and your 10-try score on the Ideas Wall. What was your gecko-toe material?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"mind_map","age_mode":"young"},
+  {"kind":"mind_map","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Score five tip materials for grip and release, then build a long-reach grabber and record its success rate out of 10."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Gecko-Inspired Grippers","summary":"Explain van der Waals forces and contact area, compare grip against release for each material, and design a gripper that switches between the two."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "special-delivery-from-the-treehouse",
+            "Special Delivery from the Treehouse",
+            1,
+            13,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Messages Keep Crashing!","story":"Sam and Priya send messages between Sam's treehouse and Priya's garden below. Paper notes blow away, and anything heavier crashes down. Can YOU design a flyer that carries a paper-clip \"message\" down slowly and lands within 1 metre of a target?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for floating a message down gently?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature fall slowly and ride the wind? Plants can't walk, so many send their seeds flying. Let's look at how!","clues":[{"text":"A maple seed has one thin wing. As it falls, it spins like a helicopter blade, which can more than double its fall time.","image_url":null,"habitat":"forest"},{"text":"A dandelion seed has a crown of about 100 fine hairs. Air flows through the gaps and forms a steady swirl above it, so the seed can drift for kilometres.","image_url":null,"habitat":"grassland"},{"text":"Flying squirrels stretch a flap of skin between their front and back legs and glide more than 50 metres between trees.","image_url":null,"habitat":"forest"},{"text":"The Javan cucumber seed has a wide, paper-thin wing and glides like a tiny aircraft. It inspired some early glider designs.","image_url":null,"habitat":"jungle"}]},
+  {"step":"design_secret","secret":"A falling object pushes air out of its way, and the air pushes back. That push is called drag. A spinning wing keeps meeting new air, so it keeps making drag and slows the fall. Engineers are testing maple-shaped drones and seed-sized sensors that drift down over forests.","reveal_hint":"How could your flyer keep pushing against the air all the way down?"},
+  {"step":"skill","instructions":"Drop a flat sheet of paper, a crumpled sheet and a folded paper spinner from the same height. Time each one three times and work out the average. Which shape falls slowest, and why?","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your flyer with its measurements.","guidance":"Show where the message goes and which way the flyer spins or floats."},
+  {"step":"build_and_test","instructions":"Build a spinner or parachute from paper, tissue or thread, and attach a paper clip as the message. Stand on the floor and drop it from your raised hand, from the same height every time.","test_criteria":["What is its average fall time over 3 drops, compared with a paper clip on its own?","Change one thing, like the wing length or where the clip goes, and test again. What changed?","How many of 5 drops land within 1 metre of a target?"]},
+  {"step":"celebrate_and_share","celebration_text":"Priya caught the message and sent one back up! The treehouse post office is open for business.","share_prompt":"Share your flyer and your best fall time on the Ideas Wall. Which seed did you copy?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"brainstorm","age_mode":"young"},
+  {"kind":"brainstorm","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Time three falling shapes, then build a seed-inspired flyer and improve its fall time by changing one thing at a time."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Seed Flight and Drag","summary":"Compare autorotation (maple) with parachuting (dandelion), plot fall time against wing length, and discuss how seed-inspired sensors could be spread over forests."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "the-shelf-that-keeps-falling-down",
+            "The Shelf That Keeps Falling Down",
+            1,
+            14,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Books on the Floor Again!","story":"The class library shelf in Room 3 sags in the middle and dumps books on the floor. There's no money for a new one, but there's a big pile of scrap paper and cardboard. Can YOU design a shelf that holds as many books as possible, using as little paper as possible?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for a strong paper shelf?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature build strong things from very little material? Living things can't waste energy on heavy structures. Let's see how they stay strong and light!","clues":[{"text":"Honeybees build six-sided wax cells that fit together with no gaps. They hold the most honey with the least wax, and each wall supports its neighbours.","image_url":null,"habitat":"forest"},{"text":"Bird bones are hollow, with thin cross-braces inside like tiny bridges. They're light enough for flying and strong enough for landing.","image_url":null,"habitat":"sky"},{"text":"Bamboo is a hollow tube divided by solid walls called nodes. The nodes stop the tube from buckling, so bamboo can grow 30 metres tall.","image_url":null,"habitat":"jungle"},{"text":"The giant water lily's leaf is braced underneath by a web of ribs and can hold the weight of a small child. It inspired the roof of the Crystal Palace in London.","image_url":null,"habitat":"jungle"}]},
+  {"step":"design_secret","secret":"Shape matters more than the amount of material. A flat sheet bends easily, but the same paper rolled into a tube or folded into hexagons spreads the load across many walls. Engineers call this the strength-to-weight ratio: how much a structure holds compared to how much it weighs. Aircraft floors and doors use honeycomb panels for this reason.","reveal_hint":"How could you turn flat paper into a shape where every wall helps hold the load?"},
+  {"step":"skill","instructions":"Make four columns, each from one sheet of paper: round, square, triangle and hexagon. Stack books on each until it buckles, and record the number of books each shape held.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your shelf from the front and from above.","guidance":"Show the hidden structure inside and write how many sheets of paper it uses."},
+  {"step":"build_and_test","instructions":"Build a shelf about 30 cm wide from paper, cardboard and tape. Add books one at a time until it sags 1 cm.","test_criteria":["How many books does it hold?","What's your score in books held per sheet of paper used?","Improve one thing and test again. Did your score go up?"]},
+  {"step":"celebrate_and_share","celebration_text":"Room 3 has a brand-new library shelf, and it's full of honeycomb! The books stay put.","share_prompt":"Share your shelf and your books-per-sheet score on the Ideas Wall. Which shape made it strong?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"scamper","age_mode":"young"},
+  {"kind":"scamper","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Test four column shapes, then build a paper shelf and improve its books-per-sheet score."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Strength-to-Weight Structures","summary":"Compare buckling loads across column shapes, calculate strength-to-weight for your shelf, and explain why honeycomb panels are used in aircraft."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "will-it-rain-today",
+            "Will It Rain Today?",
+            1,
+            15,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Raincoat or No Raincoat?","story":"Every morning Noor's little brother asks, \"Do I need my raincoat?\" Noor wants a weather helper that works with no batteries, no screen and no phone. Can YOU design an object that changes shape when the air gets damp, and changes back when it dries?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already know a material that reacts to damp air?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature sense when the air gets damp? Some plants move without any muscles, just by reacting to water in the air. Let's discover how!","clues":[{"text":"Each pine cone scale has two layers of fibres that swell differently when they absorb moisture. In damp air the scales close to protect the seeds, and in dry air they open. This works even on cones that fell off the tree years ago.","image_url":null,"habitat":"forest"},{"text":"Wild wheat seeds have two long bristles that bend back and forth as the air gets damp and dry. Day after day, this rowing motion drills the seed into the soil.","image_url":null,"habitat":"grassland"},{"text":"The ice plant's seed capsule opens only when it gets wet, so its seeds are released when rain can wash them away and water them.","image_url":null,"habitat":"desert"},{"text":"Frogs' thin skin loses water fast in dry air, so many frogs are most active and loudest when the air is humid, often just before rain.","image_url":null,"habitat":"jungle"}]},
+  {"step":"design_secret","secret":"A material that soaks up water from the air is called hygroscopic. If you glue a layer that swells onto a layer that doesn't, the pair has to bend to fit, just like a pine cone scale. Researchers use this two-layer trick to build panels that open and close building vents without any motors.","reveal_hint":"What if one side of your petal swelled in damp air and the other side didn't?"},
+  {"step":"skill","instructions":"Put one pine cone in a cup of water and another on a sunny windowsill. Photograph both every 15 minutes for an hour, then swap them and repeat. Measure how wide each cone is in each photo.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your weather flower twice: once in dry air and once in damp air.","guidance":"Label the layer that swells and the layer that stays the same."},
+  {"step":"build_and_test","instructions":"Make petals by gluing tissue or thin paper onto one side of a strip of baking paper or plastic. Or build a pointer that a pine cone scale moves along a scale you draw. Put it in a steamy bathroom after a shower, then on a dry windowsill.","test_criteria":["How far does the petal tip move, in millimetres?","Can someone else tell \"damp\" from \"dry\" just by looking at it?","Does it still work after 3 damp-and-dry cycles?"]},
+  {"step":"celebrate_and_share","celebration_text":"Noor's brother checks the weather flower every morning, and he hasn't been soaked once!","share_prompt":"Share your weather flower and a before-and-after photo on the Ideas Wall. Which plant did you copy?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"brainstorm","age_mode":"young"},
+  {"kind":"brainstorm","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Measure how pine cones respond to damp and dry air, then build a two-layer petal and record how far it moves."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Hygroscopic Actuators","summary":"Explain hygroscopic bilayers and differential swelling, measure petal movement across repeated cycles, and compare with motor-free responsive building facades."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
     ];
 
     for (slug, title, season, week, steps_json, tools_json, variants_json, is_premium) in challenges
