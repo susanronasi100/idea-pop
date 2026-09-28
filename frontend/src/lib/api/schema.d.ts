@@ -932,7 +932,7 @@ export interface components {
       skill_instructions?: string | null;
       related_explore_ids: string[];
       tools: {
-        kind: "five_whys" | "scamper" | "mind_map" | "brainstorm";
+        kind: "five_whys" | "scamper" | "mind_map" | "brainstorm" | "empathy_map" | "how_might_we" | "like_wish_what_if" | "nature_translator" | "design_spiral";
         age_mode: "young" | "older";
       }[];
       age_tier_variants: {
@@ -992,7 +992,7 @@ export interface components {
       };
       lab: { title: string; predict: string; options: string[]; measure: string; higher_is_better: boolean };
       tool: {
-        kind: "scamper" | "mind_map" | "five_whys" | "brainstorm";
+        kind: "scamper" | "mind_map" | "five_whys" | "brainstorm" | "empathy_map" | "how_might_we" | "like_wish_what_if" | "nature_translator" | "design_spiral";
         name: string;
         intro: string;
         example_object: string;

@@ -82,6 +82,17 @@ pub enum ToolKind {
     Scamper,
     MindMap,
     Brainstorm,
+    /// Says / Thinks / Does / Feels about the person you design for (K12 Lab).
+    EmpathyMap,
+    /// User + Need + Insight turned into a "How might we…?" question (K12 Lab).
+    HowMightWe,
+    /// "I like / I wish / What if" feedback on a prototype (K12 Lab).
+    LikeWishWhatIf,
+    /// Function → nature question → strategy → design principle (Biomimicry
+    /// Toolbox "Biologize", Asteria's challenge-to-biology translation).
+    NatureTranslator,
+    /// The six-step Biomimicry Design Spiral (13+ track).
+    DesignSpiral,
 }
 
 impl ToolKind {
@@ -91,6 +102,11 @@ impl ToolKind {
             ToolKind::Scamper => "scamper",
             ToolKind::MindMap => "mind_map",
             ToolKind::Brainstorm => "brainstorm",
+            ToolKind::EmpathyMap => "empathy_map",
+            ToolKind::HowMightWe => "how_might_we",
+            ToolKind::LikeWishWhatIf => "like_wish_what_if",
+            ToolKind::NatureTranslator => "nature_translator",
+            ToolKind::DesignSpiral => "design_spiral",
         }
     }
 }

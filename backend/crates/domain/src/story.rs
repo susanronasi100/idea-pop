@@ -26,6 +26,20 @@ pub const CHAPTER_STEPS: [&str; 9] = [
     "celebrate_and_share",
 ];
 
+/// Every creativity tool a mission can teach. Season 1 taught the first four;
+/// Season 2 adds the K12 Lab design-thinking tools and the biomimicry ones.
+pub const TOOL_KINDS: [&str; 9] = [
+    "scamper",
+    "mind_map",
+    "five_whys",
+    "brainstorm",
+    "empathy_map",
+    "how_might_we",
+    "like_wish_what_if",
+    "nature_translator",
+    "design_spiral",
+];
+
 /// A character drawn as one of the app's 3D renders (`image` is a path under
 /// the frontend's public folder, e.g. `/landing/hero/measure-boy.webp`).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
@@ -161,7 +175,7 @@ pub struct ToolPart {
 /// (Popi's example on an everyday object), Try it (sentence starters).
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct ToolLesson {
-    /// `scamper` | `mind_map` | `five_whys` | `brainstorm`.
+    /// One of [`TOOL_KINDS`].
     pub kind: String,
     pub name: String,
     pub intro: String,
@@ -283,10 +297,7 @@ impl MissionStory {
         if !(1..=7).contains(&self.tool.parts.len()) {
             return Err(invalid("tool lesson teaches 1 to 7 parts"));
         }
-        if !matches!(
-            self.tool.kind.as_str(),
-            "scamper" | "mind_map" | "five_whys" | "brainstorm"
-        ) {
+        if !TOOL_KINDS.contains(&self.tool.kind.as_str()) {
             return Err(invalid(format!("unknown tool kind '{}'", self.tool.kind)));
         }
         if self.sketch_checklist.is_empty() {
@@ -510,6 +521,25 @@ mod tests {
             .unwrap_err()
             .to_string()
             .contains("unknown tool"));
+    }
+
+    #[test]
+    fn season_two_tool_kinds_are_accepted() {
+        for kind in TOOL_KINDS {
+            let mut s = sample();
+            s.tool.kind = kind.into();
+            assert!(s.validate().is_ok(), "{kind}");
+        }
+    }
+
+    #[test]
+    fn tool_kinds_match_the_challenge_tool_enum() {
+        for kind in TOOL_KINDS {
+            let parsed: crate::challenge::ToolKind =
+                serde_json::from_value(serde_json::Value::String(kind.into()))
+                    .unwrap_or_else(|e| panic!("{kind}: {e}"));
+            assert_eq!(parsed.as_str(), kind);
+        }
     }
 
     #[test]

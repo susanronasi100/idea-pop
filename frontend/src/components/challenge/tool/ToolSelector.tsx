@@ -5,10 +5,20 @@ import { useTranslations } from 'next-intl'
 import ToolFiveWhys from './ToolFiveWhys'
 import ToolScamper from './ToolScamper'
 import ToolMindMap from './ToolMindMap'
+import ToolPrompts, { PROMPT_TOOLS, type PromptToolKey } from './ToolPrompts'
 
-export type ToolKey = 'five_whys' | 'scamper' | 'mind_map'
+export type ToolKey = 'five_whys' | 'scamper' | 'mind_map' | PromptToolKey
 
-export const SUPPORTED_TOOLS: readonly string[] = ['five_whys', 'scamper', 'mind_map']
+export const SUPPORTED_TOOLS: readonly string[] = [
+  'five_whys',
+  'scamper',
+  'mind_map',
+  ...Object.keys(PROMPT_TOOLS),
+]
+
+function isPromptTool(kind: ToolKey): kind is PromptToolKey {
+  return kind in PROMPT_TOOLS
+}
 
 export function isToolKey(kind: string): kind is ToolKey {
   return SUPPORTED_TOOLS.includes(kind)
@@ -24,6 +34,12 @@ const TOOL_LABEL_KEYS = {
   five_whys: 'tab_five_whys',
   scamper: 'tab_scamper',
   mind_map: 'tab_mind_map',
+  brainstorm: 'tab_brainstorm',
+  empathy_map: 'tab_empathy_map',
+  how_might_we: 'tab_how_might_we',
+  like_wish_what_if: 'tab_like_wish_what_if',
+  nature_translator: 'tab_nature_translator',
+  design_spiral: 'tab_design_spiral',
 } as const satisfies Record<ToolKey, string>
 
 export default function ToolSelector({ tools, topic, ageMode }: ToolSelectorProps) {
@@ -85,6 +101,9 @@ export default function ToolSelector({ tools, topic, ageMode }: ToolSelectorProp
           )}
           {activeTool === 'mind_map' && (
             <ToolMindMap ageMode={ageMode} topic={topic} />
+          )}
+          {activeTool && isPromptTool(activeTool) && (
+            <ToolPrompts key={activeTool} kind={activeTool} ageMode={ageMode} topic={topic} />
           )}
         </div>
       )}
