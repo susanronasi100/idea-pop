@@ -1,0 +1,104 @@
+{
+  "function_question": "How does nature make surfaces slippery?",
+  "hero": { "name": "Zane", "role": "the family's chief burger tester", "image": "/landing/hero/measure-boy.webp", "emoji": "🍔" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏠", "text": "There was a boy called Zane who loved Friday nights, because Friday was family burger night." },
+    { "beat": "Every day…", "emoji": "🍅", "text": "Zane counted down to Friday and made sure the table was ready: buns, plates and the big red ketchup bottle." },
+    { "beat": "Until one day…", "emoji": "🍾", "text": "The bottle was nearly empty. Zane shook it and squeezed it, but the last bit clung to the sides. \"There's loads left in there,\" he said. \"Why won't it come out?\"" }
+  ],
+  "card": {
+    "hero": "Zane, chief burger tester",
+    "place": "A family burger night",
+    "problem": "The last ketchup stays stuck in the bottle",
+    "goal": "A surface that sticky stuff slides right off",
+    "rules": "Test with a teaspoon of ketchup over 20 cm",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The stubborn bottle", "line": "Zane wonders: what if ketchup could slide out like water?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Zane needs a sidekick", "line": "Burger night needs two problem-solvers. Will you join Zane?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Zane meet heroes that nothing can stick to." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the slippery layer", "line": "The heroes reveal the thin layer that makes everything slide." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The drop-race ramp", "line": "Zane props a tray on two books and grabs a stopwatch." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Kind, useful feedback", "line": "You learn three magic sentence starters for making any idea better." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great surface starts as a close-up drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big slide", "line": "The first blob creeps slowly. You get feedback, fix it, and it races down." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Not a drop wasted", "line": "The ketchup slides out, and burger night is saved." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. At Zane's burger night, the last bit of ketchup always stays stuck in the bottle. Can you help him make it slide right out? Let's start!",
+    "your_idea": "Some designers already have a slippery idea up their sleeve. Do you?",
+    "nature_clues": "Nature was making slippery surfaces long before ketchup was invented. Tap each card to meet four heroes nothing can stick to!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which surface will make the ketchup win the race? Don't eat the test ketchup!",
+    "sketch": "Time to draw your surface up close, like a real materials scientist!",
+    "build_and_test": "Build your slippery ramp and race a teaspoon of ketchup 20 cm. How many seconds does it take?",
+    "retry_tip": "Ask for an I like, an I wish and a What if. Then change just ONE thing and race again!",
+    "ending": "And ever since then, Zane's family never wastes a drop, and every Friday the ketchup slides out as smooth as a snail."
+  },
+  "quick_check": {
+    "question": "Zane's ketchup slides 20 cm in 4 seconds. How many centimetres does it slide each second?",
+    "options": ["4 cm", "5 cm", "80 cm"],
+    "answer": 1,
+    "right": "Right! 20 ÷ 4 = 5 cm every second. That's a speedy blob!",
+    "wrong": "Not quite. Share the 20 cm equally between the 4 seconds: 20 ÷ 4."
+  },
+  "clue_cards": [
+    { "name": "Pitcher plant", "emoji": "🌿", "image": null, "tagline": "Slippery trap", "trick": "Tiny ridges on its rim hold a thin film of water.", "does": "Insects slip on the wet rim like cars on a wet road.", "group": "liquid" },
+    { "name": "Snail", "emoji": "🐌", "image": null, "tagline": "Slime glider", "trick": "It makes a thin, wet layer of slime under its foot.", "does": "The slime lets it slide over rough stones and sharp edges.", "group": "liquid" },
+    { "name": "Rice leaf", "emoji": "🌾", "image": null, "tagline": "Drop slide", "trick": "Tiny waxy bumps arranged in grooves.", "does": "Water can't soak in, so drops roll along the grooves and off.", "group": "wax" },
+    { "name": "Eel", "emoji": "🐟", "image": null, "tagline": "Wriggly escaper", "trick": "Skin coated in slippery mucus.", "does": "It slides through water and out of tight spots, and is very hard to grab.", "group": "liquid" }
+  ],
+  "match_groups": [
+    { "key": "liquid", "label": "💧 A thin wet or slimy layer" },
+    { "key": "wax", "label": "🕯️ Waxy bumps that won't get wet" }
+  ],
+  "predict": {
+    "prompt": "Slides or sticks? Predict first!",
+    "choices": ["Slides", "Sticks"],
+    "items": [
+      { "emoji": "🍽️", "label": "Ketchup on a dry plastic plate", "answer": 1 },
+      { "emoji": "🫒", "label": "Ketchup on a plate with a thin film of oil", "answer": 0 },
+      { "emoji": "🌧️", "label": "A raindrop on a waxy leaf", "answer": 0 }
+    ],
+    "explain": "Sticky things cling when they touch a surface directly. A thin layer of oil or wax in between keeps them apart, so they slide."
+  },
+  "lab": {
+    "title": "The drop-race lab",
+    "predict": "Race a teaspoon of ketchup 20 cm down each ramp. Which surface will be fastest?",
+    "options": ["Plain plastic", "Baking paper", "Plastic rubbed with an unlit candle", "Plastic with a thin film of oil"],
+    "measure": "seconds to slide 20 cm",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "like_wish_what_if",
+    "name": "I Like, I Wish, What If",
+    "intro": "I Like, I Wish, What If is a way to give kind, useful feedback on a prototype, to a friend or to yourself. Today you'll learn all 3 parts.",
+    "example_object": "a paper plane",
+    "parts": [
+      { "key": "L", "name": "I like…", "what": "Say one thing that works well.", "example": "✈️ I like how far it glides.", "starter": "I like how the ketchup on Zane's ramp…" },
+      { "key": "W", "name": "I wish…", "what": "Say one thing you'd like to be better.", "example": "✈️ I wish it didn't nose-dive at the end.", "starter": "I wish the slippery layer…" },
+      { "key": "?", "name": "What if…?", "what": "Offer a new idea to try.", "example": "✈️ What if we folded the wing tips up a little?", "starter": "What if we added a texture that…" }
+    ],
+    "locked": [],
+    "badge": "Feedback Friend"
+  },
+  "sketch_checklist": [
+    "I drew my surface as a close-up.",
+    "I labelled the surface, the slippery layer and the ketchup.",
+    "I showed what holds the slippery layer in place."
+  ],
+  "test": {
+    "measure": "seconds for a drop of ketchup to slide 20 cm",
+    "higher_is_better": false,
+    "check_question": "Clean check: how much ketchup is left on the ramp?",
+    "check_options": ["Almost none", "A thin smear", "A big blob"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick made your ketchup slide?",
+    "options": ["🌿 Pitcher plant's wet rim", "🐌 Snail slime", "🌾 Rice leaf grooves", "🐟 Eel's slimy skin"]
+  },
+  "sticker": { "name": "Slide Master", "emoji": "🛝" }
+}

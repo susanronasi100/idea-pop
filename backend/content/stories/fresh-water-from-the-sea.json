@@ -1,0 +1,285 @@
+{
+  "function_question": "How does nature separate salt from water?",
+  "hero": {
+    "name": "Maya",
+    "role": "a 15-year-old island volunteer",
+    "image": "/kid/pointing-girl.png",
+    "emoji": "🏝️"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🏝️",
+      "text": "There was a girl called Maya who lived in a small island village, where everyone's water came from a few old wells."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🪣",
+      "text": "Maya helped her neighbours carry water home and checked the wells with the village water team."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🧂",
+      "text": "The water team's meter showed that the biggest well was turning salty, and it was getting worse every week. \"If the wells turn to seawater,\" Maya said, \"what will we drink?\""
+    }
+  ],
+  "card": {
+    "hero": "Maya, 15, island volunteer",
+    "place": "A small island village",
+    "problem": "The island's wells are turning salty",
+    "goal": "Make fresh water from salt water using only the sun (a demo, not for drinking)",
+    "rules": "Sun power only. Measure in ml. Never drink or taste the results.",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "Salt in the wells",
+      "line": "Maya wonders: why are the wells turning salty, and what can the village do?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Maya needs a teammate",
+      "line": "A water crisis needs a sharp scientist. Will you join Maya?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The salt separators",
+      "line": "You and Maya meet living things that pull salt out of seawater."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of leaving salt behind",
+      "line": "The heroes reveal two ways to split salt from water."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The evaporation lab",
+      "line": "Two dishes, one variable and a data table."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "Digging for the root cause",
+      "line": "Five whys lead you to the real reason the wells are salty."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The still on paper",
+      "line": "Every solar still starts as a cross-section full of arrows."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The 2-hour sun test",
+      "line": "The first still drips down the sides. You fix it, and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "Fresh water, clear plan",
+      "line": "Fresh drops gather in the cup, and the village has a plan."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Maya's island wells are turning salty, and the village needs a backup plan fast. Can you help her make fresh water with only the sun? Let's start!",
+    "your_idea": "Some scientists already have a hunch about how to split salt from water. Do you?",
+    "nature_clues": "Nature takes salt out of water every day, no factory needed. Tap each card to meet four salt separators!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Predict first: will the dish on black paper or on white paper lose more water in 2 hours? Change only one variable.",
+    "sketch": "Draw your still cut in half, with arrows for sunlight, vapour and drops, like a real engineer!",
+    "build_and_test": "Build your still and a shade control, then measure the ml after 2 hours. Remember: science water only, never for drinking!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing, like a darker base or a wider bowl, and compare your ml.",
+    "ending": "And ever since then, Maya's village has kept a sun-powered backup still, a rainwater plan to refill the wells, and a data table that started with your experiment."
+  },
+  "quick_check": {
+    "question": "Seawater has about 35 g of salt in every litre. How much salt is in 200 ml of seawater?",
+    "options": [
+      "3.5 g",
+      "7 g",
+      "35 g"
+    ],
+    "answer": 1,
+    "right": "Right! 200 ml is one fifth of a litre, and 35 ÷ 5 = 7 g. That's more than a teaspoon of salt in one glass!",
+    "wrong": "Not quite. 1 litre is 1,000 ml, so 200 ml is one fifth of a litre."
+  },
+  "clue_cards": [
+    {
+      "name": "Red mangrove",
+      "emoji": "🌳",
+      "image": null,
+      "tagline": "Salt-water tree",
+      "trick": "Ultra-fine filters in the outer layers of its roots.",
+      "does": "They let water in but block more than 90% of the salt.",
+      "group": "filter"
+    },
+    {
+      "name": "Albatross",
+      "emoji": "🐦",
+      "image": null,
+      "tagline": "Sea drinker",
+      "trick": "Salt glands above its eyes.",
+      "does": "They pull extra salt from its blood and drip it out of its beak.",
+      "group": "pump"
+    },
+    {
+      "name": "Sea ice",
+      "emoji": "🧊",
+      "image": null,
+      "tagline": "Frozen salt remover",
+      "trick": "Growing ice crystals have no room for salt.",
+      "does": "Salty brine is squeezed out, so old ice is nearly fresh.",
+      "group": "state"
+    },
+    {
+      "name": "Leaf",
+      "emoji": "🍃",
+      "image": null,
+      "tagline": "Solar pump",
+      "trick": "Sunlight evaporates water from tiny pores.",
+      "does": "Only pure water leaves as vapour; the minerals stay behind.",
+      "group": "state"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "filter",
+      "label": "🧻 A filter that blocks salt"
+    },
+    {
+      "key": "pump",
+      "label": "🫀 A salt pump inside the body"
+    },
+    {
+      "key": "state",
+      "label": "☀️ Change the water's state (evaporate or freeze)"
+    }
+  ],
+  "predict": {
+    "prompt": "Does the salt stay behind or travel with the water? Predict first!",
+    "choices": [
+      "Salt stays behind",
+      "Salt travels too"
+    ],
+    "items": [
+      {
+        "emoji": "🌊",
+        "label": "A puddle of seawater drying in the sun",
+        "answer": 0
+      },
+      {
+        "emoji": "🧻",
+        "label": "Salt water poured through a paper towel",
+        "answer": 1
+      },
+      {
+        "emoji": "🧊",
+        "label": "Seawater slowly freezing into ice",
+        "answer": 0
+      }
+    ],
+    "explain": "When water evaporates or freezes, the water molecules leave and the salt is left behind. A paper towel can't stop salt: dissolved salt particles are smaller than a millionth of a millimetre, far smaller than the towel's holes."
+  },
+  "lab": {
+    "title": "The evaporation lab",
+    "predict": "Leave 50 ml of salt water in the sun for 2 hours. Which dish will lose the most water?",
+    "options": [
+      "White dish (control)",
+      "Black paper underneath",
+      "Dish covered with cling film",
+      "Dish in the shade"
+    ],
+    "measure": "ml of water evaporated in 2 hours",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "You already know the 5 Whys detective tool. Today you'll use all 5 whys on a real crisis, because a still is only a backup until you find the root cause.",
+    "example_object": "a phone that dies by lunchtime",
+    "parts": [
+      {
+        "key": "1",
+        "name": "Why #1",
+        "what": "Ask why the problem happens.",
+        "example": "📱 Why does it die by lunch? The battery drains fast.",
+        "starter": "Why are the wells turning salty? Because seawater is…"
+      },
+      {
+        "key": "2",
+        "name": "Why #2",
+        "what": "Ask why about that answer.",
+        "example": "📱 Why does it drain fast? The screen is always at full brightness.",
+        "starter": "Why is seawater getting in underground? Because the fresh water layer…"
+      },
+      {
+        "key": "3",
+        "name": "Why #3",
+        "what": "Dig one level deeper.",
+        "example": "📱 Why full brightness? Auto-brightness is switched off.",
+        "starter": "Why is the fresh water layer shrinking? Because people pump…"
+      },
+      {
+        "key": "4",
+        "name": "Why #4",
+        "what": "Keep digging: don't stop at the easy answer.",
+        "example": "📱 Why is it off? It got switched off during a game last week.",
+        "starter": "Why do people pump more than the rain puts back? Because…"
+      },
+      {
+        "key": "5",
+        "name": "Why #5",
+        "what": "Reach the root cause, then fix that.",
+        "example": "📱 Root cause: one setting. Switch auto-brightness back on, no new battery needed!",
+        "starter": "So the root cause is… and the village could fix it by…"
+      }
+    ],
+    "locked": [],
+    "badge": "Systems Detective"
+  },
+  "sketch_checklist": [
+    "I drew my still as a cross-section with arrows for sunlight, vapour and drops.",
+    "I labelled the dark base, the cover, the drip point and the clean cup.",
+    "I wrote my prediction in ml for 2 hours, and what my control is."
+  ],
+  "test": {
+    "measure": "ml of fresh water in 2 hours",
+    "higher_is_better": true,
+    "check_question": "Salt check: what did a dried drop of your collected water leave behind?",
+    "check_options": [
+      "No crust at all",
+      "A tiny bit of crust",
+      "As much crust as salt water"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature strategy powered your still?",
+    "options": [
+      "🍃 Leaf: sun evaporation",
+      "🧊 Sea ice: salt left behind",
+      "🌳 Mangrove: salt filter",
+      "🐦 Albatross: salt pump"
+    ]
+  },
+  "sticker": {
+    "name": "Water Maker",
+    "emoji": "💧"
+  }
+}

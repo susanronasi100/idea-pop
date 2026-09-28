@@ -1,0 +1,104 @@
+{
+  "title": "The New Kid Can't Find the Way",
+  "season": 2,
+  "week": 33,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Lost Between Classrooms!",
+      "story": "Kian has just started at a big new school. The corridors all look the same, and he keeps getting lost on the way to art, music and the lunch hall. Every time, he arrives late and a bit worried. Can YOU design a way-finding system that any new kid could follow, first time?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for helping someone find their way in a new place?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature find the way home? Some animals travel huge distances and still find the exact spot they started from. Let's follow them!",
+      "clues": [
+        {
+          "text": "A desert ant walks far from its nest on the hot, flat sand, where there are almost no landmarks. It counts its steps and uses the sun as a compass, then walks in a straight line home.",
+          "image_url": null,
+          "habitat": "desert"
+        },
+        {
+          "text": "A honeybee remembers landmarks, like a tall tree, a pond or a red flower bed, and uses them to fly back to the hive and to flowers it visited before.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "A sea turtle can feel Earth's magnetism, like having a compass inside. Years later, females swim thousands of kilometres back to lay eggs near the beach where they hatched.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A salmon remembers the smell of the stream where it hatched. After years at sea, it follows that smell upstream to find its home stream again.",
+          "image_url": null,
+          "habitat": "ocean"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Use more than one clue! The heroes use landmarks, counting, direction and smell, and the clues back each other up. If one fails, like the sun going behind a cloud, another one still works. Good way-finding systems for people do the same: signs, colours, maps, arrows and landmarks all tell the same story, so nobody gets lost if they miss one.",
+      "reveal_hint": "Which 2 or 3 different kinds of clues could your system use, so a new kid still finds the way if they miss one?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Pick a route at home with at least 3 turns, like from the front door to your bed via the kitchen. Guide a family member along it 4 different ways: spoken words only, a drawn map, coloured paper arrows, and landmarks ('turn left at the plant'). Count their wrong turns each time. Which way worked best?",
+      "skill_refs": [],
+      "hints": [
+        "Use the same route and the same helper each time, so only the clue type changes. Swap the order you try them in, or they'll learn the route!",
+        "Landmarks work best when they are big and different, like 'the blue door' or 'the tall plant', not 'the third door'. Doors often look the same."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw a map of your route and your way-finding system.",
+      "guidance": "Mark each decision point, where someone could go the wrong way. Show which clues you'll put there, like a colour line, an arrow, a landmark or a step count."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build your way-finding system along a route at home, or at school with a teacher's OK. Use paper arrows, coloured tape or string lines, landmark signs and a pocket map. Then ask someone who has never done the route to follow it without your help. Count their wrong turns. Take photos of your signs only, not of people.",
+      "test_criteria": [
+        "How many wrong turns did your tester make?",
+        "At which decision point did they hesitate or go wrong?",
+        "Improve one thing and test again with a new tester. Add a second clue at the tricky spot. Were there fewer wrong turns?"
+      ],
+      "hints": [
+        "Watch where your tester slows down or stops. That's the exact spot that needs a better clue.",
+        "Use the desert ant and honeybee trick together: one colour line to follow all the way, plus a big landmark sign at every turn. Two clues at each turn beat one."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Kian walks from class to class without getting lost, and now he helps the next new kid find the way! Your system works like a bee's landmarks and an ant's compass.",
+      "share_prompt": "Share a photo of your map or signs and your tester's wrong turns on the Ideas Wall. Which clue helped most?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "nature_translator",
+      "age_mode": "young"
+    },
+    {
+      "kind": "nature_translator",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Test which clues help people follow a route, then design a way-finding system with more than one kind of clue and test it with a new tester."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Redundant Navigation Systems",
+      "summary": "Explain path integration and landmark navigation, design a system with redundant cues, measure wrong turns and hesitation points, and compare with signage in airports and hospitals."
+    }
+  ]
+}

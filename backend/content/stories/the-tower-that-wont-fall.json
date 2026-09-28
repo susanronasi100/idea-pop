@@ -1,0 +1,299 @@
+{
+  "function_question": "How does nature stand tall in strong wind?",
+  "hero": {
+    "name": "Dara",
+    "role": "Ravi's cousin",
+    "image": "/landing/hero/measure-boy.webp",
+    "emoji": "🚩"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "📏",
+      "text": "There was a boy called Dara who loved measuring things, and his cousin Ravi said he could measure a cloud if it stood still."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🎪",
+      "text": "Every year, Dara helped set up the school fair, with its stalls, bunting and a tall tower full of flags."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "💨",
+      "text": "Last year, a big gust knocked the flag tower over. \"This year,\" said Dara, \"we build one that won't fall!\""
+    }
+  ],
+  "card": {
+    "hero": "Dara, Ravi's cousin",
+    "place": "A windy school fair",
+    "problem": "The flag tower blew over last year",
+    "goal": "The tallest tower that survives a fan's wind",
+    "rules": "Only paper and tape, not taped to the table",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The tower that fell",
+      "line": "Dara wonders: how can a tall tower stand up to the wind?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Dara needs a builder",
+      "line": "A tall tower needs two steady builders. Will you join Dara?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The nature heroes",
+      "line": "You and Dara meet heroes that stand tall in wild winds."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of bend, don't break",
+      "line": "The heroes share why bending beats breaking."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "Training in the column lab",
+      "line": "Dara hands you paper, tape and a pile of books."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The full SCAMPER storm",
+      "line": "All 7 magic letters are ready. Time to use them together!"
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The plan",
+      "line": "Every great tower starts as a drawing."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The boss levels",
+      "line": "The first tower wobbles at speed 2. You fix it, and try again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "The flags fly high",
+      "line": "The tower stands tall all day at the windy fair."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Last year the wind knocked over the school fair's flag tower. Can you help Dara build one that won't fall? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for a tower that stays up. Do you?",
+    "nature_clues": "Nature has been standing up to storms for millions of years. Tap each card to meet four heroes who never blow over!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which paper column will hold the most books?",
+    "sketch": "Time to draw your tower from the side, like a real engineer!",
+    "build_and_test": "Build your tower and face the boss levels: fan speed 1, 2 and 3. How tall can it be and still stand?",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing and take on the boss level again!",
+    "ending": "And ever since then, the school fair's flag tower stands tall in every wind, built the way YOU showed them."
+  },
+  "quick_check": {
+    "question": "Dara's tower is 80 cm tall. At fan speed 3, the top 15 cm bends over, but the rest stands. How tall is the part still standing?",
+    "options": [
+      "55 cm",
+      "65 cm",
+      "95 cm"
+    ],
+    "answer": 1,
+    "right": "Right! 80 take away 15 is 65 cm. Now can you make that top part stronger?",
+    "wrong": "Not quite. Try 80 take away 15."
+  },
+  "clue_cards": [
+    {
+      "name": "Bamboo",
+      "emoji": "🎋",
+      "image": null,
+      "tagline": "Speedy giant",
+      "trick": "A hollow tube with solid rings called nodes.",
+      "does": "The rings stop it buckling, so it grows over 20 metres tall.",
+      "group": "tube"
+    },
+    {
+      "name": "Grass stem",
+      "emoji": "🌾",
+      "image": null,
+      "tagline": "Field bender",
+      "trick": "A thin, hollow, springy stem.",
+      "does": "It bends right over in the wind, then springs back up.",
+      "group": "bend"
+    },
+    {
+      "name": "Palm tree",
+      "emoji": "🌴",
+      "image": null,
+      "tagline": "Storm dancer",
+      "trick": "A bendy trunk and leaves that fold back.",
+      "does": "It sways in storms and lets the wind rush past.",
+      "group": "bend"
+    },
+    {
+      "name": "Termite mound",
+      "emoji": "🐜",
+      "image": null,
+      "tagline": "Tower builders",
+      "trick": "A wide, heavy base and a narrow top.",
+      "does": "Its shape makes it almost impossible to tip over.",
+      "group": "base"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "tube",
+      "label": "🎋 Hollow tube with rings"
+    },
+    {
+      "key": "bend",
+      "label": "🌬️ Bends and lets wind pass"
+    },
+    {
+      "key": "base",
+      "label": "🔺 Wide, heavy base"
+    }
+  ],
+  "predict": {
+    "prompt": "Tips over or stays up in the wind? Predict first!",
+    "choices": [
+      "Tips over",
+      "Stays up"
+    ],
+    "items": [
+      {
+        "emoji": "🥢",
+        "label": "A tall stick on a tiny base",
+        "answer": 0
+      },
+      {
+        "emoji": "🔺",
+        "label": "A cone with a wide base",
+        "answer": 1
+      },
+      {
+        "emoji": "🎋",
+        "label": "A tube with rings and wide legs",
+        "answer": 1
+      }
+    ],
+    "explain": "Wind pushes the top of a tower sideways. A wide base makes it much harder to tip, and a stiff, ringed tube stops the middle from folding."
+  },
+  "lab": {
+    "title": "The paper column lab",
+    "predict": "Which paper column will hold the most books before it buckles?",
+    "options": [
+      "Flat sheet",
+      "Rolled tube",
+      "Triangle tube",
+      "Tube with paper rings"
+    ],
+    "measure": "books before it buckles",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "You already know all 7 SCAMPER letters. Today you'll use every one of them together to tame the wind!",
+    "example_object": "a drinking straw",
+    "parts": [
+      {
+        "key": "S",
+        "name": "Substitute",
+        "what": "Swap one thing for another.",
+        "example": "🥤 Swap plastic for a paper straw.",
+        "starter": "Instead of flat paper, Dara could use…"
+      },
+      {
+        "key": "C",
+        "name": "Combine",
+        "what": "Join two things into one.",
+        "example": "🥤 Straw + spoon = a spoon-straw for milkshakes.",
+        "starter": "What if the tower was a tower AND a…"
+      },
+      {
+        "key": "A",
+        "name": "Adapt",
+        "what": "Borrow an idea from somewhere else.",
+        "example": "🥤 Copy a bendy elbow, so the straw can bend.",
+        "starter": "Dara could copy the bamboo's rings by…"
+      },
+      {
+        "key": "M",
+        "name": "Modify",
+        "what": "Make it bigger, smaller or a different shape.",
+        "example": "🥤 Make it extra wide for thick smoothies.",
+        "starter": "What if the base was wider, like…"
+      },
+      {
+        "key": "P",
+        "name": "Put to another use",
+        "what": "Use it for something new.",
+        "example": "🥤 Use it as a tiny flagpole on a sandcastle.",
+        "starter": "A leftover paper tube could be used as…"
+      },
+      {
+        "key": "E",
+        "name": "Eliminate",
+        "what": "Take a part away.",
+        "example": "🥤 Take away the straw and sip from the cup.",
+        "starter": "Dara could take away… so the wind passes through"
+      },
+      {
+        "key": "R",
+        "name": "Reverse",
+        "what": "Flip it, turn it round or do it backwards.",
+        "example": "🥤 Blow through it to make bubbles.",
+        "starter": "What if the tower was upside down, with…"
+      }
+    ],
+    "locked": [],
+    "badge": "SCAMPER Champion"
+  },
+  "sketch_checklist": [
+    "I drew my tower from the side and marked its height in cm.",
+    "I labelled the tubes, rings, base and gaps.",
+    "I marked where I think it might bend or break."
+  ],
+  "test": {
+    "measure": "height in cm that survives fan speed 3",
+    "higher_is_better": true,
+    "check_question": "Material check: how many sheets of paper did you use?",
+    "check_options": [
+      "Under 5 sheets",
+      "5 to 10 sheets",
+      "More than 10 sheets"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick kept your tower standing?",
+    "options": [
+      "🎋 Bamboo rings",
+      "🌾 Bendy grass stem",
+      "🌴 Palm tree sway",
+      "🐜 Termite mound base"
+    ]
+  },
+  "sticker": {
+    "name": "Wind Tamer",
+    "emoji": "🌬️"
+  }
+}

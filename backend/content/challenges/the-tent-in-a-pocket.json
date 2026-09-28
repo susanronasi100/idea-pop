@@ -1,0 +1,26 @@
+{
+  "title": "The Tent in a Pocket",
+  "season": 2,
+  "week": 36,
+  "is_premium": false,
+  "steps": [
+    {"step": "brief", "title": "Too Big to Carry!", "story": "The scouts are camping on top of a hill, but their tent is so big and heavy that nobody can carry it up the steep path. Ines has an idea: what if a shelter could fold tiny, like a map in a pocket, and then open big in one move? Can YOU design a model shelter that folds at least 10 times smaller than it opens?", "image_url": null},
+    {"step": "your_idea", "prompt": "Do you already have an idea for making something big fold up small?", "fork_to_step": 6},
+    {"step": "nature_clues", "intro": "How does nature fold big things into small spaces? Leaves, wings and petals start life packed tighter than a suitcase. Let's see how they fit!", "clues": [
+      {"text": "A hornbeam leaf grows inside a tiny bud, folded into neat zigzag pleats like a paper fan. When spring comes, the pleats open and the leaf spreads out flat.", "image_url": null, "habitat": "forest"},
+      {"text": "A ladybird's flying wings are much bigger than its body. It folds them several times along special creases and tucks them under its hard red wing cases. They unfold in a split second when it takes off.", "image_url": null, "habitat": "grassland"},
+      {"text": "Poppy petals are squashed and crumpled inside the bud, like a silk scarf in a fist. When the bud opens, the wrinkly petals smooth out into a big flower within a few hours.", "image_url": null, "habitat": "grassland"},
+      {"text": "A bat's wing is thin skin stretched between very long finger bones. When the bat lands, it folds its fingers together and the wing shrinks down like a closed umbrella.", "image_url": null, "habitat": "sky"}
+    ]},
+    {"step": "design_secret", "secret": "Nature doesn't fold at random. It folds on a pattern. Zigzag pleats, like a fan, let a big flat sheet squash into a small bundle and spring open again in one move, because every fold is planned to work with the others. A stiff frame, like a bat's finger bones, can hold the sheet open. Engineers used a zigzag fold called the Miura fold to pack big solar panels into a satellite and open them in space.", "reveal_hint": "Where would you put the folds so your whole shelter opens in one pull?"},
+    {"step": "skill", "instructions": "Take four sheets of A4 paper. Fold the first in half again and again. Roll the second into a tube. Fold the third into zigzag pleats, like a fan. Scrunch the fourth into a ball. Now time how many seconds each one takes to open back out flat. Write your results in a table: Fold | Seconds to open | Is it still flat and neat?", "skill_refs": [], "hints": ["Hold each folded sheet by its two ends and pull gently. Which one opens in one smooth move?", "The zigzag fan wins: pull the two ends apart and every pleat opens at the same time, and it folds back the same way."]},
+    {"step": "sketch", "prompt": "Draw your shelter twice: once folded tiny and once open big.", "guidance": "Mark every fold line: use a solid line for folds that point up (mountain) and a dashed line for folds that point down (valley). Show what holds it open, and write the open and folded sizes in centimetres."},
+    {"step": "build_and_test", "instructions": "Build a model shelter from an A3 sheet of paper or thin card, using zigzag pleats. Add straws or pipe cleaners as a frame if you like. Ask an adult to help with scissors. Measure it open (length × width) and folded (length × width), then work out how many times smaller it gets.", "test_criteria": ["How many times smaller is it folded than open? Divide the open area by the folded area.", "Can it open in one move, and does it stand up on its own once it's open?", "Improve one thing and test again. Did it fold smaller or open faster?"], "hints": ["Start with even, sharp zigzag creases. Run your thumbnail along every fold so it remembers its shape.", "Pleat it in both directions, first long zigzags, then fold the pleated strip into zigzags again. It squashes far smaller and still opens with one pull."]},
+    {"step": "celebrate_and_share", "celebration_text": "The scouts carried their pocket shelter all the way up the hill, and it popped open in one move at the top! Nobody had to drag a heavy tent ever again.", "share_prompt": "Share a photo of your shelter open and folded, plus your 'times smaller' number, on the Ideas Wall. Which nature folder helped you most?"}
+  ],
+  "tools": [{"kind": "scamper", "age_mode": "young"}, {"kind": "scamper", "age_mode": "older"}],
+  "age_tier_variants": [
+    {"age_tier": "10-12", "title_override": null, "summary": "Compare four ways to fold paper, then build a pleated model shelter and find out how many times smaller it folds."},
+    {"age_tier": "12-18", "title_override": "Biomimicry: Deployable Structures and Origami Folding", "summary": "Explore mountain and valley folds and the Miura fold, calculate the fold ratio from open and folded areas, and compare your shelter with leaf buds, beetle wings and satellite solar panels."}
+  ]
+}

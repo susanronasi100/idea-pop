@@ -1,0 +1,98 @@
+{
+  "title": "The Jumping Grasshopper Toy",
+  "season": 2,
+  "week": 27,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Wanted: A Toy That Jumps!",
+      "story": "Leila's favourite toy shop wants a brand-new toy for its window, a little grasshopper that really jumps. The owner has one rule: no batteries and no motors. Can YOU build a toy that stores up energy and jumps as high as possible?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a toy that jumps all by itself?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature store energy to jump? Some tiny animals jump far higher than their muscles alone could push them. Let's find out their secret!",
+      "clues": [
+        {
+          "text": "A flea is only about 2 mm long, but it can jump over 100 times its own length. It squashes a pad of super-springy stuff called resilin, holds it with a catch, then lets it snap.",
+          "image_url": null,
+          "habitat": null
+        },
+        {
+          "text": "A kangaroo's back legs have long, springy tendons. Each time it lands, the tendons stretch and store energy, then spring back to push it into the next hop.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "A click beetle lying on its back bends its body and locks it with a peg. When the peg slips, the body snaps straight with a loud click and flips the beetle into the air.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A frog sits with its long back legs folded up tight. When it jumps, the legs unfold into long levers, and springy tendons help fling it far forward.",
+          "image_url": null,
+          "habitat": "jungle"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Load, lock, release! Muscles push slowly, but a spring can let go all at once. So nature's jumpers slowly squash or stretch something springy, hold it with a catch, then let it go in a flash. All the stored energy comes out in one quick burst. Engineers call this a latch, and it is used in toys, catapults and some tiny jumping robots.",
+      "reveal_hint": "What springy part will your toy load up, and what will hold it until the jump?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Make a jumping card: cut 2 rectangles of card (about 5 cm by 8 cm), cut a small notch at each end, and join them with a rubber band hooked through the notches. Fold them flat together, put them on the table and let go. Measure how high they pop against a ruler or a tape measure stuck to the wall. Try a thin band, a thick band and two thin bands. Point the card away from faces.",
+      "skill_refs": [],
+      "hints": [
+        "Use the same card and the same table for every test, and only change the rubber band. That keeps the test fair.",
+        "A band that is stretched more stores more energy. If your card only wobbles, make the notches further apart so the band is tighter."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your grasshopper toy loaded and ready to jump.",
+      "guidance": "Label the springy part that stores energy, the catch that holds it, and how you release it. Add an arrow for which way it will jump."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a grasshopper toy from card, lolly sticks, rubber bands, paper clips and tape. Give it a springy part, a catch to hold it loaded, and a way to release it without pushing. Stand a tape measure against a wall and jump it 3 times. Ask an adult to help with cutting, and never aim it at anyone's face.",
+      "test_criteria": [
+        "What is the highest jump in cm out of your 3 tries?",
+        "Does your grasshopper land on its feet?",
+        "Improve one thing and test again. Did it jump higher?"
+      ],
+      "hints": [
+        "If your toy jumps sideways, the spring is pulling off-centre. Put the rubber band right in the middle.",
+        "Load it slowly, lock it with a paper tab or a bent paper clip, then pull the tab. A clean, sudden release gives the biggest jump."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Your grasshopper leaps in the shop window, and a crowd of kids is cheering it on! No batteries needed.",
+      "share_prompt": "Share a photo of your jumping toy and your highest jump on the Ideas Wall. Which nature jumper did you copy?"
+    }
+  ],
+  "tools": [
+    { "kind": "how_might_we", "age_mode": "young" },
+    { "kind": "how_might_we", "age_mode": "older" }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Test rubber bands on a jumping card, then build a grasshopper toy that loads, locks and releases energy to jump as high as possible."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Elastic Energy Storage",
+      "summary": "Explain elastic potential energy and power amplification with a latch, measure jump height against band stretch, and compare your toy with flea resilin and kangaroo tendons."
+    }
+  ]
+}

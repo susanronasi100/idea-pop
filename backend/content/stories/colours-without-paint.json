@@ -1,0 +1,281 @@
+{
+  "function_question": "How does nature make colour without pigment?",
+  "hero": {
+    "name": "Finn",
+    "role": "a 14-year-old design intern",
+    "image": "/landing/hero-kid-4.png",
+    "emoji": "🦋"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🧵",
+      "text": "There was a boy called Finn who loved sketching clothes, and he got a week of work experience at a fashion design studio."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🎨",
+      "text": "Finn watched rolls of fabric arrive in hundreds of bright, dyed colours."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🏞️",
+      "text": "The designers showed him a photo of a river near a dye factory, running blue and red. \"What if our colours didn't need dye at all?\" Finn asked."
+    }
+  ],
+  "card": {
+    "hero": "Finn, 14, design intern",
+    "place": "A fashion design studio",
+    "problem": "Clothing dyes pollute rivers",
+    "goal": "Make colour appear without dye, using structure",
+    "rules": "No paint, ink or dye. Clear or colourless materials only.",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The river of dye",
+      "line": "Finn wonders: can colour exist without any dye?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Finn needs a teammate",
+      "line": "A colour mystery needs two sharp eyes. Will you join Finn?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The shimmering heroes",
+      "line": "You and Finn meet living things that shine with no pigment."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret in the shape",
+      "line": "The heroes reveal how tiny layers make colour."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The bubble lab",
+      "line": "A soap film, a black card and a lamp."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The idea storm",
+      "line": "All five brainstorm rules meet one real industry problem."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The zoomed-in plan",
+      "line": "Every new material starts as a drawing of its tiny layers."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The colour count",
+      "line": "The first sample shows no colour at all. You change it, and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "A colour that never fades",
+      "line": "Finn's studio pins your samples to its inspiration wall."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Finn found out that clothing dyes pollute rivers, and his studio wants colour without chemicals. Can you help him make colour from structure? Let's start!",
+    "your_idea": "Some scientists already have a hunch about where colour can hide. Do you?",
+    "nature_clues": "Some of nature's brightest colours contain no pigment at all. Tap each card to meet four shimmering heroes!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Predict first: will the soap film's colours stay still, or move as it drains and gets thinner? Watch the top of the film closely.",
+    "sketch": "Draw your design, then zoom in on its layers, like a materials scientist!",
+    "build_and_test": "Make colours appear with no dye and count every one. How many can you find?",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing, like the number of layers, and count your colours again.",
+    "ending": "And ever since then, Finn's studio has kept a board of dye-free colour samples, and the very first one on it is yours."
+  },
+  "quick_check": {
+    "question": "1 millimetre is 1,000,000 nanometres. A morpho's wing layers are about 200 nanometres apart. How many layers would fit in 1 millimetre?",
+    "options": [
+      "500",
+      "5,000",
+      "50,000"
+    ],
+    "answer": 1,
+    "right": "Right! 1,000,000 ÷ 200 = 5,000. That's how tiny the structures are that make the butterfly blue!",
+    "wrong": "Not quite. Divide 1,000,000 by 200."
+  },
+  "clue_cards": [
+    {
+      "name": "Blue morpho butterfly",
+      "emoji": "🦋",
+      "image": null,
+      "tagline": "Blue flash",
+      "trick": "Christmas-tree ridges on its wing scales.",
+      "does": "Layers about 200 nm apart make blue light bounce back strongest.",
+      "group": "layers"
+    },
+    {
+      "name": "Peacock",
+      "emoji": "🦚",
+      "image": null,
+      "tagline": "Feather show-off",
+      "trick": "Melanin rods arranged in a neat grid.",
+      "does": "Changing the rod spacing makes blue, green or bronze.",
+      "group": "pattern"
+    },
+    {
+      "name": "Jewel beetle",
+      "emoji": "🪲",
+      "image": null,
+      "tagline": "Living metal",
+      "trick": "A stack of ultra-thin layers in its shell.",
+      "does": "It reflects green, gold or copper, and shifts as you tilt it.",
+      "group": "layers"
+    },
+    {
+      "name": "Opal",
+      "emoji": "💎",
+      "image": null,
+      "tagline": "Rainbow stone",
+      "trick": "Tiny silica spheres stacked in neat rows.",
+      "does": "The rows split white light into flashes of colour.",
+      "group": "pattern"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "layers",
+      "label": "🥞 Thin stacked layers"
+    },
+    {
+      "key": "pattern",
+      "label": "🔳 A tiny repeating pattern of rods or spheres"
+    }
+  ],
+  "predict": {
+    "prompt": "Pigment or structure? Predict first!",
+    "choices": [
+      "Pigment (a chemical)",
+      "Structure (a shape)"
+    ],
+    "items": [
+      {
+        "emoji": "🍓",
+        "label": "The red of a strawberry",
+        "answer": 0
+      },
+      {
+        "emoji": "🫧",
+        "label": "The rainbow on a soap bubble",
+        "answer": 1
+      },
+      {
+        "emoji": "🦋",
+        "label": "The blue of a morpho's wing",
+        "answer": 1
+      }
+    ],
+    "explain": "Pigments absorb some colours and reflect the rest, and they can fade. Structural colours come from tiny shapes that make some light waves add up, so they often change as you tilt them."
+  },
+  "lab": {
+    "title": "The mystery colour lab",
+    "predict": "Which clear, colourless material will show the most colours under a lamp?",
+    "options": [
+      "Plain cling film",
+      "A CD or DVD",
+      "Soap film on black card",
+      "Layered tape between polarising lenses"
+    ],
+    "measure": "number of colours you can see",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "You know the brainstorm rules. Today you'll use all five on a real industry problem: how could fashion get colour without dye? Set a 5-minute timer and aim for 20 ideas.",
+    "example_object": "a paper cup",
+    "parts": [
+      {
+        "key": "Q",
+        "name": "Quantity",
+        "what": "Go for lots of ideas, fast.",
+        "example": "🥤 12 uses in 1 minute: plant pot, scoop, phone speaker, drum, stencil…",
+        "starter": "Another way to get colour without dye could be…"
+      },
+      {
+        "key": "J",
+        "name": "No Judging",
+        "what": "Every idea is allowed for now.",
+        "example": "🥤 \"A cup that's also a hat\"? Write it down, no frowns!",
+        "starter": "Even if it sounds strange, I'll write…"
+      },
+      {
+        "key": "W",
+        "name": "Wild ideas",
+        "what": "Silly ideas are welcome: they spark new ones.",
+        "example": "🥤 A cup that changes colour to show how hot the drink is!",
+        "starter": "My wildest dye-free fabric idea is…"
+      },
+      {
+        "key": "B",
+        "name": "Build on ideas",
+        "what": "Take an idea and add \"yes, and…\"",
+        "example": "🥤 A cup speaker? Yes, and fold the rim into a horn to make it louder!",
+        "starter": "Yes, and Finn's layered fabric could also…"
+      },
+      {
+        "key": "P",
+        "name": "Pick the best",
+        "what": "Now judge: pick the idea that is useful AND possible.",
+        "example": "🥤 Best pick: a stencil, because it's cheap and works today.",
+        "starter": "The idea I'd test first is… because…"
+      }
+    ],
+    "locked": [],
+    "badge": "Brainstorm Legend"
+  },
+  "sketch_checklist": [
+    "I drew my design and a zoomed-in cross-section of its structure.",
+    "I labelled the layer thickness or spacing in nanometres.",
+    "I marked which colour shows from which angle."
+  ],
+  "test": {
+    "measure": "colours you can make appear (count)",
+    "higher_is_better": true,
+    "check_question": "Control check: when you laid your samples flat on white paper in normal light, what happened to the colours?",
+    "check_options": [
+      "They disappeared",
+      "Some stayed",
+      "They all stayed"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick made your best colour?",
+    "options": [
+      "🦋 Morpho ridges",
+      "🦚 Peacock rods",
+      "🪲 Jewel beetle layers",
+      "💎 Opal spheres"
+    ]
+  },
+  "sticker": {
+    "name": "Colour Scientist",
+    "emoji": "🌈"
+  }
+}

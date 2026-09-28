@@ -1,0 +1,285 @@
+{
+  "function_question": "How does nature share directions without words?",
+  "hero": {
+    "name": "Kofi",
+    "role": "a treasure-hunt captain",
+    "image": "/landing/hero/tools-boy.webp",
+    "emoji": "🗺️"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🧩",
+      "text": "There was a boy called Kofi who loved maps, puzzles and anything with a secret code."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🌻",
+      "text": "Every term, Kofi and his best friend Sami teamed up for the school's treasure hunt in the nature garden, and every term they came close to winning."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🤐",
+      "text": "On the morning of the hunt, Sami croaked a tiny whisper. He had laryngitis, and the doctor said: \"No talking at all!\""
+    }
+  ],
+  "card": {
+    "hero": "Kofi, a treasure-hunt captain",
+    "place": "The school's nature garden",
+    "problem": "Kofi's teammate has lost his voice",
+    "goal": "A code with no words that leads to the treasure",
+    "rules": "No talking, no writing words",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "A silent teammate",
+      "line": "Kofi wonders: how can Sami and I share directions without words?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Kofi needs a code maker",
+      "line": "A silent hunt needs two clever code makers. Will you join Kofi?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The nature heroes",
+      "line": "You and Kofi meet heroes that send messages without a single word."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of the code",
+      "line": "The heroes share why a code only works when everyone agrees on the rules."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "Silent signal practice",
+      "line": "Kofi hides a toy and puts a finger to his lips."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The code storm",
+      "line": "All 5 brainstorm rules help you invent loads of codes, then pick the best."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The code key",
+      "line": "Every great code starts as a key on paper."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The big hunt",
+      "line": "The first code sends Sami the wrong way. You fix it, and try again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "Treasure found!",
+      "line": "Kofi and Sami find the treasure first, without a word."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Kofi's teammate Sami has lost his voice on treasure-hunt day. Can you help them invent a code with no words? Let's start!",
+    "your_idea": "Some inventors already have a spark of an idea for a silent code. Do you?",
+    "nature_clues": "Nature has been sending secret messages for millions of years. Tap each card to meet four heroes who talk without words!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which silent signal will get your partner closest to the hidden toy?",
+    "sketch": "Time to draw your code key, like a real code maker!",
+    "build_and_test": "Hide the treasure and guide your teammate with your code. How many steps away do they end up?",
+    "retry_tip": "Inventors never stop at round 1. Change ONE rule in your code and test again!",
+    "ending": "And ever since then, Kofi and Sami use YOUR silent code on every treasure hunt, and they've never been beaten."
+  },
+  "quick_check": {
+    "question": "In Kofi's code, 1 clap means 5 steps. Sami claps 4 times. How many steps should Kofi take?",
+    "options": [
+      "9 steps",
+      "20 steps",
+      "45 steps"
+    ],
+    "answer": 1,
+    "right": "Right! 4 claps times 5 steps is 20 steps.",
+    "wrong": "Not quite. Each clap is worth 5 steps, so try 4 times 5."
+  },
+  "clue_cards": [
+    {
+      "name": "Honeybee",
+      "emoji": "🐝",
+      "image": null,
+      "tagline": "Dancing guide",
+      "trick": "A waggle dance in the hive.",
+      "does": "The angle shows which way the flowers are, and the length shows how far.",
+      "group": "dance"
+    },
+    {
+      "name": "Ant",
+      "emoji": "🐜",
+      "image": null,
+      "tagline": "Trail maker",
+      "trick": "A scent trail on the ground.",
+      "does": "Other ants follow the smell straight to the food.",
+      "group": "trail"
+    },
+    {
+      "name": "Firefly",
+      "emoji": "✨",
+      "image": null,
+      "tagline": "Light talker",
+      "trick": "Its own special flash pattern.",
+      "does": "Only fireflies that know the pattern answer it.",
+      "group": "pattern"
+    },
+    {
+      "name": "Humpback whale",
+      "emoji": "🐋",
+      "image": null,
+      "tagline": "Ocean singer",
+      "trick": "Long songs of repeating patterns.",
+      "does": "Whales in one area share the same song across many kilometres.",
+      "group": "pattern"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "dance",
+      "label": "💃 Moves that point the way"
+    },
+    {
+      "key": "trail",
+      "label": "👣 A trail to follow"
+    },
+    {
+      "key": "pattern",
+      "label": "🔁 A repeating pattern code"
+    }
+  ],
+  "predict": {
+    "prompt": "Clear message or confusing? Predict first!",
+    "choices": [
+      "Clear",
+      "Confusing"
+    ],
+    "items": [
+      {
+        "emoji": "👍",
+        "label": "A thumbs-up everyone knows",
+        "answer": 0
+      },
+      {
+        "emoji": "😉",
+        "label": "A secret wink nobody agreed on",
+        "answer": 1
+      },
+      {
+        "emoji": "🐝",
+        "label": "A waggle dance for sister bees",
+        "answer": 0
+      }
+    ],
+    "explain": "A signal is only clear when the sender and the receiver both know what it means. A wink nobody agreed on could mean anything!"
+  },
+  "lab": {
+    "title": "The silent signal lab",
+    "predict": "Which silent signal will get your partner closest to a hidden toy?",
+    "options": [
+      "Pointing only",
+      "Pointing plus claps for steps",
+      "Drawing a map in the air",
+      "An arrow made of sticks"
+    ],
+    "measure": "steps away from the toy",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "You already know all 5 brainstorm rules. Today you'll use every one of them to invent a whole storm of secret codes, then pick the best!",
+    "example_object": "a spoon",
+    "parts": [
+      {
+        "key": "Q",
+        "name": "Quantity",
+        "what": "Say lots of ideas, fast.",
+        "example": "🥄 10 uses in 1 minute: drum stick, catapult, mirror, plant marker…",
+        "starter": "Another silent way to say \"go left\" could be…"
+      },
+      {
+        "key": "J",
+        "name": "No Judging",
+        "what": "Every idea is allowed for now.",
+        "example": "🥄 A spoon as a tiny boat? Write it down, no frowning!",
+        "starter": "Even if it sounds silly, I'll write down…"
+      },
+      {
+        "key": "W",
+        "name": "Wild ideas",
+        "what": "Be brave and try something unusual.",
+        "example": "🥄 A spoon that sings when you stir soup!",
+        "starter": "My wildest code would be…"
+      },
+      {
+        "key": "B",
+        "name": "Build on ideas",
+        "what": "Take an idea and add to it.",
+        "example": "🥄 Spoon catapult → spoon catapult with a target.",
+        "starter": "Pointing could get even better if we added…"
+      },
+      {
+        "key": "P",
+        "name": "Pick the best",
+        "what": "Choose the ideas that work best.",
+        "example": "🥄 Keep the idea that's cheapest and most useful.",
+        "starter": "The best code for Kofi and Sami is… because…"
+      }
+    ],
+    "locked": [],
+    "badge": "Brainstorm Captain"
+  },
+  "sketch_checklist": [
+    "I drew every signal in my code key.",
+    "I showed one signal for direction and one for distance.",
+    "I added a signal for \"stop, you're here\"."
+  ],
+  "test": {
+    "measure": "steps away from the treasure your teammate ends up",
+    "higher_is_better": false,
+    "check_question": "Silent check: did you send the whole message without any words?",
+    "check_options": [
+      "Yes, not a single word",
+      "Almost, one slip",
+      "No, we needed words"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature code helped you find the treasure?",
+    "options": [
+      "🐝 Bee waggle dance",
+      "🐜 Ant scent trail",
+      "✨ Firefly flashes",
+      "🐋 Whale song patterns"
+    ]
+  },
+  "sticker": {
+    "name": "Code Dancer",
+    "emoji": "🐝"
+  }
+}

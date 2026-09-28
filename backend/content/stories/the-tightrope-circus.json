@@ -1,0 +1,105 @@
+{
+  "function_question": "How does nature keep its balance?",
+  "hero": {"name": "Ivy", "role": "the circus's young engineer", "image": "/kid/upgrade-girl.png", "emoji": "🎪"},
+  "scene_image": null,
+  "opening": [
+    {"beat": "Once upon a time…", "emoji": "🎪", "text": "There was a girl called Ivy who was the youngest engineer at the Idea Pop circus. She fixed the swings, the spotlights and the squeaky trapeze."},
+    {"beat": "Every day…", "emoji": "🤸", "text": "Ivy helped get ready for the biggest night of the year: the Season 2 finale show, starring a brave little toy acrobat on a tightrope."},
+    {"beat": "Until one day…", "emoji": "😱", "text": "At the last rehearsal, the acrobat wobbled and toppled off the string, again and again. \"The show is tonight!\" Ivy gasped. \"How can I keep our star from falling?\""}
+  ],
+  "card": {
+    "hero": "Ivy, the circus's young engineer",
+    "place": "The Idea Pop circus show, the Season 2 finale",
+    "problem": "The star toy acrobat keeps falling off the tightrope",
+    "goal": "Make a toy that balances on a string and survives a wobble",
+    "rules": "It must stay on for at least 10 seconds after a gentle tap",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {"step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The falling star", "line": "Ivy wonders: how can a tiny acrobat stay on a wobbly string?"},
+    {"step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Ivy needs a teammate", "line": "The finale needs its best engineers. Will you join Ivy one last time this season?"},
+    {"step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The balance champions", "line": "You and Ivy meet heroes who never lose their footing."},
+    {"step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the low weight", "line": "The heroes share why the lowest point matters most."},
+    {"step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The wobble lab", "line": "Ivy strings a line between two chairs and rolls some clay."},
+    {"step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Translate like a pro", "line": "Use all four Nature Translator steps, from problem to principle."},
+    {"step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "Find the balance point", "line": "Every great act starts with a plan on paper."},
+    {"step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The dress rehearsal", "line": "The first acrobat tips over. You lower the weight and try again."},
+    {"step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "The grand finale", "line": "The acrobat wobbles, swings back and the whole circus cheers for Season 2."}
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide, and welcome to the Season 2 grand finale! The circus star, a toy acrobat, keeps falling off the tightrope, and the show is tonight. Can you help Ivy keep it on the string? Let's start!",
+    "your_idea": "After a whole season of missions, you might already have a spark of an idea. Do you?",
+    "nature_clues": "Nature is full of balance champions. Tap each card to meet four heroes who stay steady on one leg, a thin fence or in mid-air!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Where should the clay go to keep the acrobat on the string the longest?",
+    "sketch": "Time to draw your acrobat and mark its balance point, like a real engineer!",
+    "build_and_test": "Build your acrobat, tap the string and start the clock. How long can your star stay on after a wobble?",
+    "retry_tip": "Engineers never stop at round 1, not even in the finale! Change ONE thing and test again!",
+    "ending": "And ever since then, the Idea Pop circus has a star acrobat that never falls, built like YOURS. What a way to finish Season 2! Take a bow, and get ready for the next adventure!"
+  },
+  "quick_check": {
+    "question": "Ivy's first acrobat stays on the string for 12 seconds after a tap. After she lowers the weight, it stays on for 48 seconds. How many times longer is that?",
+    "options": ["3 times", "4 times", "36 times"],
+    "answer": 1,
+    "right": "Right! 48 ÷ 12 = 4. Lowering the weight made it last 4 times longer!",
+    "wrong": "Not quite. Divide the new time by the old time: 48 ÷ 12."
+  },
+  "clue_cards": [
+    {"name": "Cat", "emoji": "🐈", "image": null, "tagline": "Fence walker", "trick": "It swings its tail the opposite way when it starts to tip.", "does": "The tail swing pulls it back into balance, and helps it twist to land on its feet.", "group": "swing"},
+    {"name": "Gecko", "emoji": "🦎", "image": null, "tagline": "Mid-air steerer", "trick": "It swings its tail in mid-air during a leap.", "does": "The tail turns its body back the right way so it lands safely.", "group": "swing"},
+    {"name": "Flamingo", "emoji": "🦩", "image": null, "tagline": "One-leg champion", "trick": "Its body weight sits right above its foot and its joints lock.", "does": "It stands on one leg for hours with almost no effort.", "group": "low"},
+    {"name": "Tightrope walker", "emoji": "🤹", "image": null, "tagline": "Human helper", "trick": "They carry a long pole that droops down at both ends.", "does": "The pole puts weight low and wide, so wobbles are slow and easy to fix.", "group": "low"}
+  ],
+  "match_groups": [
+    {"key": "swing", "label": "🔁 Swings a tail to fix a wobble"},
+    {"key": "low", "label": "⚖️ Keeps weight low and centred"}
+  ],
+  "predict": {
+    "prompt": "Tips over or swings back? Predict first!",
+    "choices": ["Tips over", "Swings back"],
+    "items": [
+      {"emoji": "✏️", "label": "A pencil balanced on its point", "answer": 0},
+      {"emoji": "🕰️", "label": "The pendulum of a clock", "answer": 1},
+      {"emoji": "🐦", "label": "A balancing-bird toy with heavy wing tips below its beak", "answer": 1}
+    ],
+    "explain": "When the balance point is above the support, a wobble makes things tip over. When the balance point is below the support, gravity pulls it back to the middle, so it swings back instead of falling."
+  },
+  "lab": {
+    "title": "The wobble lab",
+    "predict": "Put a small ball of clay on your card acrobat. Where will it help the acrobat stay on the string the longest after a tap?",
+    "options": ["No clay", "Clay on its head", "Clay on its feet", "Clay hanging below on bent arms"],
+    "measure": "seconds it stays on after a tap",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "nature_translator",
+    "name": "Nature Translator",
+    "intro": "The Nature Translator turns a design problem into a question for nature, then turns nature's answer back into a trick you can build. For the finale, you'll use all 4 steps, from start to finish, like a real biomimicry designer!",
+    "example_object": "a bike helmet",
+    "parts": [
+      {"key": "F", "name": "Function", "what": "What must my design DO?", "example": "🪖 It must protect a head in a crash.", "starter": "My acrobat must…"},
+      {"key": "Q", "name": "Nature question", "what": "Turn the function into \"How does nature…?\"", "example": "🪖 How does nature protect against impact?", "starter": "How does nature…"},
+      {"key": "S", "name": "Strategy", "what": "Which living thing does it, and how?", "example": "🪖 A woodpecker's spongy skull bone soaks up the shock.", "starter": "The flamingo stays balanced by…"},
+      {"key": "D", "name": "Design principle", "what": "Say the trick in plain words, without the animal.", "example": "🪖 A spongy layer that squashes slowly makes a softer stop.", "starter": "Put the weight…"}
+    ],
+    "locked": [],
+    "badge": "Nature Translator Master"
+  },
+  "sketch_checklist": [
+    "I drew my acrobat on the tightrope from the front.",
+    "I marked the support point and the centre of mass.",
+    "I showed where I added weight and how low it hangs."
+  ],
+  "test": {
+    "measure": "seconds it stays on the string after a wobble",
+    "higher_is_better": true,
+    "check_question": "Wobble check: what happened after the tap?",
+    "check_options": ["It swung back upright", "It swayed, then slowly tipped", "It fell straight off"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which balance trick was the star of your act?",
+    "options": ["🐈 Cat tail swing", "🦩 Flamingo weight over the foot", "🦎 Gecko mid-air tail", "🤹 Tightrope walker's low pole"]
+  },
+  "sticker": {"name": "Balance Star", "emoji": "⭐"}
+}

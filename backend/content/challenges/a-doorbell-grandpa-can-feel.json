@@ -1,0 +1,26 @@
+{
+  "title": "A Doorbell Grandpa Can Feel",
+  "season": 2,
+  "week": 37,
+  "is_premium": false,
+  "steps": [
+    {"step": "brief", "title": "Nobody Answered the Door!", "story": "Jonah's grandpa is hard of hearing. When visitors ring the doorbell, he often doesn't hear it, especially when he's in the garden or the kitchen. Yesterday he missed a parcel and a visit from his best friend. Can YOU design a signal Grandpa can feel or see in every room of the house?", "image_url": null},
+    {"step": "your_idea", "prompt": "Do you already have an idea for a signal that doesn't need sound?", "fork_to_step": 6},
+    {"step": "nature_clues", "intro": "How does nature sense messages without hearing? Many animals send and receive messages through the ground, through threads or with light. Let's meet them!", "clues": [
+      {"text": "Elephants can pick up low rumbles travelling through the ground. Special touch sensors in their feet and trunk feel the vibrations of other elephants several kilometres away.", "image_url": null, "habitat": "grassland"},
+      {"text": "A spider's web is like a telephone line. Tiny sensors on the spider's legs feel each shake of the silk, so it can tell a trapped fly from the wind, or a visiting spider.", "image_url": null, "habitat": "forest"},
+      {"text": "A sand scorpion hunts at night without seeing or hearing its prey. Sensors on its eight legs feel the tiny ripples a beetle's footsteps make in the sand, even from about 50 cm away.", "image_url": null, "habitat": "desert"},
+      {"text": "Fireflies talk with light. Each kind of firefly flashes its own pattern, like a code, so others of its kind can find it in the dark.", "image_url": null, "habitat": "forest"}
+    ]},
+    {"step": "design_secret", "secret": "When one sense is missing, change the channel. A message doesn't have to be a sound. It can travel as a vibration you feel, a light you see, or a movement you notice. The best signals also carry the message to where the person is, not just to the front door. Real doorbells for Deaf and hard-of-hearing people flash lights in every room or buzz a small pager in a pocket.", "reveal_hint": "Which channel would reach Grandpa in the garden, the kitchen and his armchair?"},
+    {"step": "skill", "instructions": "Play the secret signal game with a partner. Your partner sits with eyes closed and fingers in their ears. Try four signals from across the room: tap on the table they're resting a hand on, stamp on the floor, flash a torch, and gently tug a string tied to their wrist. Try each signal 5 times and record how many times they notice it. Then swap places.", "skill_refs": [], "hints": ["Try each signal the same way every time, so the test is fair. Count only the times your partner notices without peeking.", "Signals that touch the body or light up the whole room get noticed most. A signal only works if it reaches where the person is."]},
+    {"step": "sketch", "prompt": "Draw a map of Grandpa's house from above, with the front door and 4 rooms.", "guidance": "Show how your signal travels from the door to each room. Label the channel it uses (vibration, light or movement) and where Grandpa would notice it."},
+    {"step": "build_and_test", "instructions": "Build your signal from things like string, card flags, cotton reels, a battery torch or a small battery buzzer. Use only low-voltage batteries, with an adult helping, and never touch plugs or mains electricity. Test it in 4 rooms, then test it with the real user: ask Grandpa or another grown-up to try it, and ask them for kind, honest feedback.", "test_criteria": ["In how many rooms out of 4 is the signal noticed?", "Ask your user for one 'I like', one 'I wish' and one 'What if'. What did they say?", "Improve one thing and test again. Is it noticed in more rooms now?"], "hints": ["Put on ear defenders or headphones with no sound and try your signal yourself. Can you notice it while reading or washing up?", "Use two channels at once, like a light that flashes in each room plus something that shakes or taps where Grandpa sits. If one is missed, the other gets through."]},
+    {"step": "celebrate_and_share", "celebration_text": "Ding, flash, wiggle! Grandpa noticed his friend at the door straight away, and they had tea together in the garden. He says your signal is the best present he's had all year!", "share_prompt": "Share a photo of your signal (not of people) and your 'rooms out of 4' score on the Ideas Wall. What feedback did your user give you?"}
+  ],
+  "tools": [{"kind": "like_wish_what_if", "age_mode": "young"}, {"kind": "like_wish_what_if", "age_mode": "older"}],
+  "age_tier_variants": [
+    {"age_tier": "10-12", "title_override": null, "summary": "Test which signals people notice without sound, then build a signal for 4 rooms and improve it with feedback from a real user."},
+    {"age_tier": "12-18", "title_override": "Inclusive Design: Multi-Sensory Alert Systems", "summary": "Compare vibration, light and movement channels, design a redundant alert for a hard-of-hearing user, and run a user test with structured I Like, I Wish, What If feedback."}
+  ]
+}

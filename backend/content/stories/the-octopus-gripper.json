@@ -1,0 +1,285 @@
+{
+  "function_question": "How does nature grip soft or fragile things gently?",
+  "hero": {
+    "name": "Lucas",
+    "role": "a robotics fan, 14",
+    "image": "/landing/hero-kid-2.png",
+    "emoji": "🐙"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🍅",
+      "text": "There was a boy called Lucas, 14, whose uncle ran a fruit farm, and who spent every summer fixing machines in the barn."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🤖",
+      "text": "Lucas watched the farm's new picking robot zip along the rows, grabbing tomato after tomato."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "😟",
+      "text": "His uncle held up a crate of squashed, bruised tomatoes. \"The robot is fast, but it grips like a vice,\" he said. \"We can't sell these. Can you make its hands gentler?\""
+    }
+  ],
+  "card": {
+    "hero": "Lucas, 14",
+    "place": "A fruit farm",
+    "problem": "The robot hand bruises soft fruit",
+    "goal": "Hold a tomato without a single bruise",
+    "rules": "Soft fingers, tested on 5 objects",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The bruised tomatoes",
+      "line": "Lucas wonders: how can a hand be firm AND gentle?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Lucas needs a co-engineer",
+      "line": "A gentle robot needs two clever inventors. Will you join Lucas?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "Masters of the gentle grip",
+      "line": "You and Lucas meet four heroes that grab without crushing."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "Spread the squeeze",
+      "line": "The heroes reveal why a big soft touch beats a hard pinch."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The playdough bruise lab",
+      "line": "Lucas rolls four balls of playdough and grabs some pencils."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The robot mind map",
+      "line": "You map every need of a gentle gripper on one page."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The gripper plan",
+      "line": "Every good robot hand starts as a drawing."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "Level by level",
+      "line": "The grape slips out. You add grippy pads and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "Not a bruise in sight",
+      "line": "The robot picks a perfect crate of tomatoes."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. The farm's picking robot grips so hard that it bruises the tomatoes, and Lucas has to make its hands gentle. Can you help him? Let's start!",
+    "your_idea": "Some inventors already picture a gentle robot hand. Do you?",
+    "nature_clues": "Nature grabs slippery, soft and fragile things every day. Tap each card to meet four gentle grippers!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Same squeeze, different fingers. Which gripper will leave the shallowest dent? Predict first, then measure!",
+    "sketch": "Draw your gripper open and closed, with arrows showing where the force spreads out.",
+    "build_and_test": "Test your gripper on all 5 objects: tennis ball, egg, tomato, grape and crisp. How many does it hold without damage?",
+    "retry_tip": "Don't squeeze harder, spread the force! Change ONE thing and test all 5 objects again.",
+    "ending": "And ever since then, the farm's robot picks tomatoes as gently as an octopus, and Lucas is already building his next soft robot!"
+  },
+  "quick_check": {
+    "question": "A hard robot finger presses with 5 N on 1 cm² of tomato. A soft finger presses with the same 5 N spread over 5 cm². What happens to the pressure?",
+    "options": [
+      "It stays the same",
+      "It is 5 times smaller",
+      "It is 5 times bigger"
+    ],
+    "answer": 1,
+    "right": "Right! Pressure = force ÷ area. 5 ÷ 1 = 5 N per cm², but 5 ÷ 5 = 1 N per cm². Same force, five times gentler!",
+    "wrong": "Not quite. Pressure is force divided by area. What is 5 ÷ 5?"
+  },
+  "clue_cards": [
+    {
+      "name": "Octopus",
+      "emoji": "🐙",
+      "image": null,
+      "tagline": "Eight-armed hugger",
+      "trick": "Boneless arms with around 2,000 suckers in total.",
+      "does": "It wraps around any shape and holds it with gentle suction all along the arm.",
+      "group": "wrap"
+    },
+    {
+      "name": "Fish fin",
+      "emoji": "🐟",
+      "image": null,
+      "tagline": "Fin-ray bender",
+      "trick": "Push on its side and the fin curls towards your push.",
+      "does": "It hugs whatever presses on it, spreading the force.",
+      "group": "fin_ray"
+    },
+    {
+      "name": "Elephant trunk",
+      "emoji": "🐘",
+      "image": null,
+      "tagline": "Boneless lifter",
+      "trick": "Tens of thousands of muscle bundles and no bones.",
+      "does": "It curls around a heavy log or plucks a single blade of grass.",
+      "group": "wrap"
+    },
+    {
+      "name": "Venus flytrap",
+      "emoji": "🌿",
+      "image": null,
+      "tagline": "Snap trap",
+      "trick": "It stores energy in its curved leaf, then flips it inside out.",
+      "does": "It snaps shut in about a tenth of a second, with no muscles at all.",
+      "group": "snap"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "wrap",
+      "label": "🤗 Soft wrap-around"
+    },
+    {
+      "key": "fin_ray",
+      "label": "🐟 Bends towards the push"
+    },
+    {
+      "key": "snap",
+      "label": "⚡ Stored-energy snap"
+    }
+  ],
+  "predict": {
+    "prompt": "Spreads the force, or pinches in one spot? Predict first!",
+    "choices": [
+      "Spreads the force",
+      "Pinches in one spot"
+    ],
+    "items": [
+      {
+        "emoji": "🥢",
+        "label": "Two hard chopsticks squeezing a grape",
+        "answer": 1
+      },
+      {
+        "emoji": "🐙",
+        "label": "An octopus arm wrapped around a shell",
+        "answer": 0
+      },
+      {
+        "emoji": "🧤",
+        "label": "A soft glove cupping an egg",
+        "answer": 0
+      }
+    ],
+    "explain": "A hard, narrow grip puts all the force on tiny spots, so the pressure there is huge. A soft grip that wraps around touches a much bigger area, so each spot feels only a gentle press."
+  },
+  "lab": {
+    "title": "The playdough bruise lab",
+    "predict": "Four grippers squeeze identical playdough balls, each closed by the same rubber band. Which will leave the shallowest dent?",
+    "options": [
+      "Two pencils",
+      "Two flat card strips",
+      "Two fin-ray card fingers",
+      "Two cotton-stuffed glove fingers"
+    ],
+    "measure": "deepest dent (mm)",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "mind_map",
+    "name": "Mind map",
+    "intro": "You already know how a mind map grows out from the centre. Today you'll use all 5 pieces to map every need of a real robot, like a systems engineer.",
+    "example_object": "a bike helmet",
+    "parts": [
+      {
+        "key": "C",
+        "name": "Centre",
+        "what": "Write the big question in the middle.",
+        "example": "⛑️ \"A better bike helmet\" goes in the middle.",
+        "starter": "In the middle I write \"gentle gripper\", because the robot must…"
+      },
+      {
+        "key": "B",
+        "name": "Branches",
+        "what": "Draw lines out to the main topics.",
+        "example": "⛑️ Branches: protect, comfy, light, easy to see.",
+        "starter": "My branches are grip, gentleness, speed and…"
+      },
+      {
+        "key": "T",
+        "name": "Twigs",
+        "what": "Add smaller ideas to each branch.",
+        "example": "⛑️ On \"protect\": a foam liner and a hard shell.",
+        "starter": "On the \"gentleness\" branch I add the fin ray and…"
+      },
+      {
+        "key": "P",
+        "name": "Pictures",
+        "what": "Add quick doodles so ideas pop out.",
+        "example": "⛑️ A tiny feather next to \"light\".",
+        "starter": "Next to \"wrap\" I doodle…"
+      },
+      {
+        "key": "L",
+        "name": "Links",
+        "what": "Join ideas on different branches with a line.",
+        "example": "⛑️ Link \"foam liner\" to \"comfy\": one part does two jobs!",
+        "starter": "I link two branches together, like the octopus suckers and…"
+      }
+    ],
+    "locked": [],
+    "badge": "System Mapper"
+  },
+  "sketch_checklist": [
+    "I drew my gripper open and closed.",
+    "I labelled the soft parts and where they touch the fruit.",
+    "I showed with arrows how the force spreads out."
+  ],
+  "test": {
+    "measure": "objects held without damage out of 5",
+    "higher_is_better": true,
+    "check_question": "Which object was the hardest to hold without damage?",
+    "check_options": [
+      "The grape (small and slippery)",
+      "The crisp (thin and brittle)",
+      "The tomato (soft skin)"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your gripper the most?",
+    "options": [
+      "🐙 Octopus wrap",
+      "🐟 Fin-ray bend",
+      "🐘 Trunk curl",
+      "🌿 Flytrap snap"
+    ]
+  },
+  "sticker": {
+    "name": "Soft Robotics Pro",
+    "emoji": "🦾"
+  }
+}

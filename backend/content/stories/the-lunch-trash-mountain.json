@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature turn waste into food?",
+  "hero": { "name": "Ben", "role": "a lunchtime helper", "image": "/landing/hero/bucket-hat-kid.webp", "emoji": "♻️" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🍎", "text": "There was a boy called Ben who helped out in the school canteen at lunchtime, handing out trays and wiping tables." },
+    { "beat": "Every day…", "emoji": "🗑️", "text": "After lunch, Ben carried the bins out, full of peels, crusts, napkins and shiny wrappers." },
+    { "beat": "Until one day…", "emoji": "⛰️", "text": "The bins overflowed and made a mountain by the door. \"This happens EVERY day,\" Ben groaned. \"Where does it all go, and how can we make less?\"" }
+  ],
+  "card": {
+    "hero": "Ben, a lunchtime helper",
+    "place": "The school canteen",
+    "problem": "A mountain of trash every day",
+    "goal": "Turn a lunch's waste into something useful",
+    "rules": "Every waste needs a next user",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The Trash Mountain", "line": "Ben stares at the pile and wonders: why does nature never have a trash mountain?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Ben needs a detective partner", "line": "Every trash detective needs a partner. Will you join Ben?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Ben kneel on the forest floor to meet nature's clean-up crew." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the loop", "line": "The heroes explain why nature has no trash at all." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The trash detective audit", "line": "Ben hands you gloves and a kitchen scale. Time to weigh the evidence." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The big lunch map", "line": "You map the whole lunch system, branch by branch." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great loop starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The one-lunch test", "line": "The first try still leaves a pile. You find its next user, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "From mountain to garden", "line": "The Trash Mountain shrinks, and the school garden starts to bloom." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Ben's canteen makes a mountain of trash every day, and he wants a system that turns the waste into something useful. Can you help him? Let's start!",
+    "your_idea": "Some designers already have an idea for where lunch waste could go. Do you?",
+    "nature_clues": "Nature has been recycling for millions of years, with no bins at all. Tap each card to meet four clean-up heroes!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Detectives guess before they check. Which pile of lunch waste do you think will be the heaviest? Wear gloves and have an adult nearby.",
+    "sketch": "Time to draw your lunch loop, like a real systems designer!",
+    "build_and_test": "Run one lunch's waste through your system. How many grams are left with no next user?",
+    "retry_tip": "Designers never stop at round 1. Find ONE waste with no next user, give it a job, and test again!",
+    "ending": "And ever since then, Ben's canteen runs like a forest floor. Peels feed the worms, the worms feed the garden, and the Trash Mountain is just a tiny hill."
+  },
+  "quick_check": {
+    "question": "One lunch makes 150 g of waste. The 90 g of food scraps go to the compost bin. How much waste is left?",
+    "options": ["40 g", "60 g", "240 g"],
+    "answer": 1,
+    "right": "Right! 150 − 90 = 60 g. More than half the waste already has a next user!",
+    "wrong": "Not quite. Take the food scraps away from the total: 150 − 90."
+  },
+  "clue_cards": [
+    { "name": "Earthworm", "emoji": "🪱", "image": null, "tagline": "Soil maker", "trick": "It pulls dead leaves underground and eats them.", "does": "Its castings are rich soil that feeds new plants.", "group": "eat" },
+    { "name": "Fungi", "emoji": "🍄", "image": null, "tagline": "Wood melter", "trick": "Tiny threads that spread through dead wood.", "does": "The threads release juices that break wood down into food for the soil.", "group": "rot" },
+    { "name": "Dung beetle", "emoji": "🪲", "image": null, "tagline": "Poo roller", "trick": "It rolls dung into balls and buries them.", "does": "Its young eat the dung, and the rest feeds the soil so grass grows back.", "group": "eat" },
+    { "name": "Forest floor", "emoji": "🍂", "image": null, "tagline": "The great recycler", "trick": "Every fallen leaf is food for someone.", "does": "Insects, worms, fungi and bacteria share it out until it becomes new soil.", "group": "loop" }
+  ],
+  "match_groups": [
+    { "key": "eat", "label": "🍽️ Animals that eat waste" },
+    { "key": "rot", "label": "🧪 Juices that break waste down" },
+    { "key": "loop", "label": "🔄 A whole team that closes the loop" }
+  ],
+  "predict": {
+    "prompt": "Can nature break it down? Predict first!",
+    "choices": ["Nature breaks it down", "Stays around for years"],
+    "items": [
+      { "emoji": "🍌", "label": "A banana peel", "answer": 0 },
+      { "emoji": "🥡", "label": "A shiny crisp packet", "answer": 1 },
+      { "emoji": "🧻", "label": "A paper napkin", "answer": 0 }
+    ],
+    "explain": "Peels and paper were once part of living things, so worms, fungi and bacteria can eat them. Most plastics and shiny wrappers are not food for them, so they last for a very long time."
+  },
+  "lab": {
+    "title": "The trash detective lab",
+    "predict": "Sort one lunch's waste into 4 piles and weigh them. Which pile will be the heaviest?",
+    "options": ["Food scraps", "Paper and card", "Plastic wrappers", "Cans and bottles"],
+    "measure": "grams in the pile",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "mind_map",
+    "name": "Mind Map",
+    "intro": "A mind map grows ideas like a tree, from one big idea in the middle. You've met all its parts before. Today you'll use all 5 together to map the whole lunch system.",
+    "example_object": "a birthday party",
+    "parts": [
+      { "key": "C", "name": "Centre", "what": "Put the big question in the middle.", "example": "🎂 In the middle: the best birthday party ever.", "starter": "In the middle of my map I write: our canteen lunch…" },
+      { "key": "B", "name": "Branches", "what": "Draw lines out to the main topics.", "example": "🎂 Branches: food, games, music, guests.", "starter": "My branches are food scraps, paper, plastic and…" },
+      { "key": "T", "name": "Twigs", "what": "Add smaller ideas to each branch.", "example": "🎂 On games: treasure hunt, musical chairs, relay race.", "starter": "On the food scraps branch, the next user could be…" },
+      { "key": "P", "name": "Pictures", "what": "Add quick doodles or symbols.", "example": "🎂 A tiny balloon drawn next to \"decorations\".", "starter": "Next to the worm bin twig I draw a…" },
+      { "key": "L", "name": "Links", "what": "Draw lines to connect ideas on different branches.", "example": "🎂 Link \"cake\" on the food branch to \"candles\" on the decorations branch.", "starter": "I link the compost twig to the school garden because…" }
+    ],
+    "locked": [],
+    "badge": "Mind Map Pro"
+  },
+  "sketch_checklist": [
+    "I drew the canteen in the middle of my loop map.",
+    "I drew an arrow from each waste to its next user.",
+    "I circled anything that still has no next user."
+  ],
+  "test": {
+    "measure": "grams of trash left after one lunch",
+    "higher_is_better": false,
+    "check_question": "Loop check: how many kinds of waste now have a next user?",
+    "check_options": ["1 or 2", "3", "4 or more"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature recycler inspired your loop?",
+    "options": ["🪱 Earthworm soil maker", "🍄 Fungi wood melter", "🪲 Dung beetle roller", "🍂 Forest floor team"]
+  },
+  "sticker": { "name": "Loop Closer", "emoji": "♻️" }
+}

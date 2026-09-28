@@ -1,0 +1,96 @@
+{
+  "title": "Cool the City Block",
+  "season": 2,
+  "week": 41,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Street That Bakes",
+      "story": "Every summer, Sara's street is about 5 °C hotter than the park two blocks away. Dark asphalt and concrete soak up sunlight all day and give the heat back all night, so older neighbours struggle to sleep. As a youth council member, Sara must bring the council a real plan. Can YOU design a street model that stays measurably cooler in the sun, using no electricity at all?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for cooling a street without air conditioning?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature cool a place without energy? Living things survive scorching heat with free, local tricks. Let's investigate four of them like real biomimicry researchers!",
+      "clues": [
+        {
+          "text": "A big street tree shades the ground and pulls water up from its roots. It releases that water from its leaves as vapour, and the evaporation carries heat away. On a hot afternoon, the ground under a tree can be 10 to 20 °C cooler than sunny asphalt nearby.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Termite mounds on the African savanna are full of tunnels. Daily warming and cooling push air in and out, so fresh air moves through the nest with no fan. Architect Mick Pearce borrowed this idea for the Eastgate Centre in Harare, Zimbabwe, which uses about 90% less energy for cooling and fresh air than a normal building its size.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "The Saharan silver ant hunts on sand hotter than 60 °C. Tiny triangular hairs on its body reflect sunlight and help it radiate heat away, keeping it 5 to 10 °C cooler than it would be without them.",
+          "image_url": null,
+          "habitat": "desert"
+        },
+        {
+          "text": "The Kalahari ground squirrel flips its bushy tail over its back like a parasol. Carrying its own shade lets it keep feeding in the midday sun for longer before it has to cool off in its burrow.",
+          "image_url": null,
+          "habitat": "desert"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "No single trick is enough, so nature stacks them. Shade blocks sunlight before it lands. Reflective surfaces bounce back what does land. Evaporating water carries heat away. Airflow flushes out warm air. Biomimicry's Life's Principles say the same thing: use free, local energy, and use many small solutions instead of one big machine. Real cities do this with street trees, cool white roofs, green walls and shaded walkways.",
+      "reveal_hint": "Which two or three strategies could you stack in one small street?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Run a fair heat test. Make 4 card squares of the same size: black, white, kitchen foil, and black card with a damp cloth on top. Put a digital thermometer under each one, all in the same sunny spot, and read them every 10 minutes for 30 minutes. Record your results in a table with one column per surface.",
+      "skill_refs": [],
+      "hints": [
+        "Change only ONE thing per square. The black square is your control, so compare every other square to it.",
+        "White, foil and wet should all end up cooler than black. If they don't, check that every thermometer started at the same reading and sits fully under its square, out of direct sun."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch your cool street as a cross-section, from the tree tops down to the road.",
+      "guidance": "Label every cooling strategy (shade, reflect, evaporate or ventilate) and name the living thing that inspired it. Mark where your thermometer goes, and write which strategy you expect to cool the most."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build two identical shoebox street models, same size and same black card road. Leave one plain: that's your control. Add your cooling strategies to the other, such as a leafy paper canopy, white or foil rooftops, a damp sponge park, and vent gaps for airflow. Put a digital thermometer at street level in each, place both side by side in full sun, and record both temperatures every 10 minutes for 30 minutes. Ask an adult to help with any cutting.",
+      "test_criteria": [
+        "After 30 minutes, how many °C cooler is your street than the plain control?",
+        "Make a data table: time, control °C, your model °C, difference. When was the difference biggest?",
+        "Which strategy uses the most material or water? Name one trade-off a real city would face.",
+        "Improve one thing and test again. Change or remove ONE strategy, retest against the control, and work out how many degrees that strategy was worth."
+      ],
+      "hints": [
+        "If both models read almost the same, check the sun hits both equally and the thermometers are not touching the card.",
+        "Stack strategies: the biggest drops usually come from shade PLUS a wet or reflective surface, not from one trick alone."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Sara showed your data to the youth council, and the city voted to plant street trees and paint cool roofs on her block!",
+      "share_prompt": "Share a photo of your street model (no people in the picture) and your data table on the Ideas Wall. Which strategy cooled the most for the least material?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "design_spiral",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Beat the Urban Heat Island",
+      "summary": "Define a real civic problem, biologize it, and run a controlled 30-minute test comparing shade, reflection, evaporation and ventilation against a plain model."
+    }
+  ]
+}

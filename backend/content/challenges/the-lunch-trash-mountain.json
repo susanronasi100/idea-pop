@@ -1,0 +1,98 @@
+{
+  "title": "The Lunch Trash Mountain",
+  "season": 2,
+  "week": 28,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Bin Is Overflowing!",
+      "story": "Every day after lunch, the school canteen's bins are piled high with peels, crusts, napkins and wrappers. Ben calls it the Trash Mountain, and it grows every single day. Can YOU design a system that gives a lunch's waste a new job, so almost nothing is left as trash?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for turning lunch waste into something useful?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature turn waste into food? A forest drops tonnes of leaves every autumn, yet it never fills up with trash. Let's meet the clean-up crew!",
+      "clues": [
+        {
+          "text": "Earthworms pull dead leaves into the soil and eat them. What comes out the other end, called worm castings, is rich soil that feeds new plants.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Fungi spread tiny threads through dead wood and leaves. The threads release juices that break the wood down into food, for the fungi and for the soil.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Dung beetles roll animal dung into balls and bury it. Their young eat it, and the buried dung feeds the soil and helps grass grow back.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "On the forest floor, every fallen leaf is food for someone. Insects, worms, fungi and bacteria share it out until it becomes new soil for the trees.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "In nature there is no trash! Every output is someone else's input. A leaf feeds a worm, the worm's castings feed the soil, and the soil feeds the tree that grows new leaves. This is called a closed loop. To shrink the Trash Mountain, give every kind of waste a next user: peels to a compost bin, paper to recycling, and wrappers swapped for boxes you can use again.",
+      "reveal_hint": "For each kind of lunch waste, who or what could be its next user?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Be a trash detective! With an adult, collect the waste from one lunch at home. Wear gloves. Sort it into 4 piles: food scraps, paper and card, plastic, and cans or bottles. Weigh each pile on a kitchen scale and write the grams in a table. Wash your hands when you're done.",
+      "skill_refs": [],
+      "hints": [
+        "Put a bowl on the scale and press zero (tare) first, so you only weigh the waste and not the bowl.",
+        "Not sure where something goes? Ask: was it once alive, like a peel or paper? Then nature can probably break it down."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your lunch loop as a map, with the canteen in the middle.",
+      "guidance": "Draw an arrow from each kind of waste to its next user, like a worm bin, a recycling box or the school garden. Circle anything that still has no next user."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a model of your system: labelled sorting bins made from boxes, plus a compost jar with layers of soil, dry leaves and fruit or vegetable peels. Run one lunch's waste through your sorting station with gloves on, then weigh what is left with no next user. Keep the compost jar in a shady spot, never eat anything from it, and wash your hands after.",
+      "test_criteria": [
+        "How many grams of trash are left with no next user after one lunch?",
+        "How many kinds of waste now have a next user?",
+        "Improve one thing and test again. Is the trash pile smaller?"
+      ],
+      "hints": [
+        "Look at your heaviest pile first. Giving that one a next user shrinks the mountain the most.",
+        "Some trash can't be looped yet, like crisp packets. Then change the input: swap wrappers for a lunch box, and the waste never appears at all."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The Trash Mountain has shrunk to a tiny hill! Peels feed the worms, the worms feed the school garden, and the garden grows food again.",
+      "share_prompt": "Share your loop map and your before-and-after trash weights on the Ideas Wall. Which nature recycler inspired you?"
+    }
+  ],
+  "tools": [
+    { "kind": "mind_map", "age_mode": "young" },
+    { "kind": "mind_map", "age_mode": "older" }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Weigh and sort one lunch's waste, then design a loop that gives each kind of waste a next user and measure the trash that's left."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Closed-Loop Systems",
+      "summary": "Run a waste audit with mass data, map the canteen as a system of inputs and outputs, and compare your loop with decomposer food webs and circular-economy designs."
+    }
+  ]
+}

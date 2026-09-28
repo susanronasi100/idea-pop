@@ -1,0 +1,103 @@
+{
+  "function_question": "How does nature find things in the dark?",
+  "hero": { "name": "Ali", "role": "a big brother", "image": "/landing/hero/tools-boy.webp", "emoji": "🦇" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏠", "text": "There was a boy called Ali who loved fixing things and helping his little sister, Sara." },
+    { "beat": "Every day…", "emoji": "🤖", "text": "Sara played with her toy robot, which beeps back whenever you clap. She never let it out of her sight." },
+    { "beat": "Until one day…", "emoji": "🌑", "text": "The power went out, the torch battery was flat, and the robot was lost somewhere in the dark room. \"I can't see anything!\" Sara cried." }
+  ],
+  "card": {
+    "hero": "Ali, a big brother",
+    "place": "A power cut at home",
+    "problem": "A toy is lost in the dark",
+    "goal": "Find hidden objects using only sound",
+    "rules": "No light allowed, stay seated when blindfolded",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Lights out!", "line": "Ali wonders: how do you find something when you can't see at all?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Ali needs a detective partner", "line": "Two sharp pairs of ears are better than one. Will you join Ali?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The night heroes", "line": "You and Ali meet heroes who hunt and fly in total darkness." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the echo", "line": "The heroes share how a sound can come back with a message." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the echo lab", "line": "Ali grabs a blindfold and a big tray. Time to train your ears!" },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The Nature Translator", "line": "A new tool helps you turn your problem into a question for nature." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great detective kit starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The blindfold game", "line": "The first round is tricky. You change one thing, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Found it!", "line": "Ali claps, the robot beeps back, and Sara hugs her toy." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. The lights are out at Ali's house, and his little sister's toy robot is lost in the dark. Can you help him find it using only sound? Let's start!",
+    "your_idea": "Some detectives already have a spark of an idea for finding things without seeing them. Do you?",
+    "nature_clues": "Nature has been finding things in the dark for millions of years. Tap each card to meet four night heroes!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which sound will help you hear the tray best? Stay seated with your blindfold on.",
+    "sketch": "Time to draw your Echo Finder kit, with arrows for the sound going out and coming back!",
+    "build_and_test": "Build your kit and play the blindfold game. How many of the 5 hidden spots can you find?",
+    "retry_tip": "Detectives never stop at round 1. Change ONE thing, like a sharper click or bigger ear cones, and test again!",
+    "ending": "And ever since then, whenever the lights go out, Ali and Sara play the echo game. Sara's robot has never been lost for long!"
+  },
+  "quick_check": {
+    "question": "A bat's click flies to a moth 2 metres away and bounces back to the bat. How far did the sound travel altogether?",
+    "options": ["1 metre", "2 metres", "4 metres"],
+    "answer": 2,
+    "right": "Right! The sound goes 2 metres there and 2 metres back, so 4 metres. That's why a far-away echo takes longer to come back.",
+    "wrong": "Not quite. Remember, the sound has to go there AND come back."
+  },
+  "clue_cards": [
+    { "name": "Bat", "emoji": "🦇", "image": null, "tagline": "Night hunter", "trick": "It shouts high clicks and listens for the echoes.", "does": "It can catch a tiny moth in total darkness.", "group": "echo" },
+    { "name": "Dolphin", "emoji": "🐬", "image": null, "tagline": "Ocean clicker", "trick": "It sends clicks out through the fatty bump on its forehead.", "does": "The echoes show it fish hiding in murky water.", "group": "echo" },
+    { "name": "Oilbird", "emoji": "🐦", "image": null, "tagline": "Cave flyer", "trick": "It makes clicks we can hear, deep inside dark caves.", "does": "The echoes stop it crashing into the cave walls.", "group": "echo" },
+    { "name": "Barn owl", "emoji": "🦉", "image": null, "tagline": "Silent listener", "trick": "Its two ears sit at different heights on its head.", "does": "It hears which ear a sound reaches first, and pounces in the right spot.", "group": "ears" }
+  ],
+  "match_groups": [
+    { "key": "echo", "label": "📣 Sends a sound, hears the echo" },
+    { "key": "ears", "label": "👂 Two ears find the direction" }
+  ],
+  "predict": {
+    "prompt": "Quick echo or slow echo? Predict first!",
+    "choices": ["Quick echo", "Slow echo"],
+    "items": [
+      { "emoji": "🧱", "label": "Clapping right next to a wall", "answer": 0 },
+      { "emoji": "⛰️", "label": "Shouting across a wide valley", "answer": 1 },
+      { "emoji": "🦋", "label": "A bat clicking at a moth just in front of it", "answer": 0 }
+    ],
+    "explain": "Sound travels about 340 metres every second. The farther away something is, the longer its echo takes to come back."
+  },
+  "lab": {
+    "title": "The Echo or No Echo lab",
+    "predict": "Blindfolded, can you hear if a tray is 30 cm in front of your face? Which sound will work best?",
+    "options": ["Clap", "Tongue click", "Hum", "Ssss sound"],
+    "measure": "right guesses out of 10",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "nature_translator",
+    "name": "Nature Translator",
+    "intro": "The Nature Translator turns your problem into a question nature can answer. Today you'll learn the first 2 steps: F and Q.",
+    "example_object": "an umbrella",
+    "parts": [
+      { "key": "F", "name": "Function", "what": "Say what your design must DO, using an action word.", "example": "☂️ An umbrella must keep rain off you.", "starter": "My design must help Ali find…" },
+      { "key": "Q", "name": "Nature question", "what": "Turn that action into a question starting with 'How does nature…?'", "example": "☂️ How does nature keep rain off?", "starter": "How does nature find…" }
+    ],
+    "locked": ["S", "D"],
+    "badge": "Nature Translator"
+  },
+  "sketch_checklist": [
+    "I drew the sound I send and the echo coming back.",
+    "I labelled my clicker and my ear cones.",
+    "I marked the 5 spots where the object could hide."
+  ],
+  "test": {
+    "measure": "objects found blindfolded out of 5",
+    "higher_is_better": true,
+    "check_question": "Ear check: when did you find the most spots?",
+    "check_options": ["With the ear cones", "Without the ear cones", "About the same"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped you find things in the dark?",
+    "options": ["🦇 Bat clicks", "🐬 Dolphin sonar", "🐦 Oilbird cave clicks", "🦉 Owl ears"]
+  },
+  "sticker": { "name": "Echo Finder", "emoji": "🦇" }
+}

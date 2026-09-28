@@ -1,0 +1,104 @@
+{
+  "title": "The Too-Hot Slide",
+  "season": 2,
+  "week": 23,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Nobody Can Use the Slide!",
+      "story": "On summer afternoons, the metal slide at the playground gets hotter than 60 °C, hot enough to burn your legs. The little kids stand at the top, touch it, and climb back down. There's no electricity at the playground. Can YOU find a way to keep a surface cool in the sun, with no fans and no air conditioning?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for keeping something cool in the sun?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature keep cool under a burning sun? Some animals and plants live where the ground is hot enough to cook an egg. Let's find out how they stay cool!",
+      "clues": [
+        {
+          "text": "The Saharan silver ant runs across sand that can be hotter than 60 °C. Its body is covered in tiny triangle-shaped hairs that bounce sunlight away and help heat escape, so the ant looks shiny silver.",
+          "image_url": null,
+          "habitat": "desert"
+        },
+        {
+          "text": "A desert snail spends the whole summer sealed inside its shell on the hot ground. Its shell is bright white, so it reflects most of the sunlight that hits it.",
+          "image_url": null,
+          "habitat": "desert"
+        },
+        {
+          "text": "An African elephant's huge, thin ears are full of blood vessels. When it flaps them, warm blood cools down as heat escapes from the big surface.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "The umbrella thorn acacia has a wide, flat top like a sunshade. On hot days, animals rest in its shade, where the ground stays much cooler.",
+          "image_url": null,
+          "habitat": "grassland"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Reflect, shade and radiate! Light colours and shiny surfaces bounce sunlight away before it can heat things up. Shade stops sunlight arriving at all. And thin parts with lots of surface, like elephant ears, let heat escape into the air. That's why hot countries paint roofs white and plant shady trees.",
+      "reveal_hint": "Which of the three tricks could stop the slide from getting hot: reflect, shade or radiate?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Hot-or-not thermometer race! Put 4 identical metal jar lids in the same sunny spot: one bare, one covered in black paper, one covered in white paper, and one under a small card sunshade. Measure each lid's temperature with a thermometer at the start and after 20 minutes. Use the thermometer, never your hand, and ask an adult to move anything hot.",
+      "skill_refs": [],
+      "hints": [
+        "Keep it fair: same lids, same spot, same time. Only change the cover.",
+        "The shaded lid and the white lid stay coolest. The black lid heats up most, because dark colours soak up sunlight instead of bouncing it away."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your cool slide design from the side, with the sun in the sky.",
+      "guidance": "Draw arrows to show sunlight being reflected or blocked, and label where heat escapes."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Make a model slide from a metal baking tray propped up on books, plus a second tray as your control with nothing on it. Keep your slide cool using white paper, foil, card, fabric, lolly sticks or straws. Put both in the sun for 20 minutes, then measure both with a thermometer. Ask an adult to move the trays if they get hot.",
+      "test_criteria": [
+        "How many degrees did your slide warm up in 20 minutes, compared with the control?",
+        "Can a toy car still roll down your slide?",
+        "Improve one thing and test again. Did it stay cooler this time?"
+      ],
+      "hints": [
+        "Remember the three tricks: reflect, shade and radiate. Can your design use more than one?",
+        "Build a card sunshade over the slide like an acacia, leave gaps at the sides so warm air can escape, and cover the sunny parts with something white or shiny."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The playground slide stayed cool all afternoon, and the little kids whooshed down it again and again!",
+      "share_prompt": "Share your cool slide design and your temperature results on the Ideas Wall. Which trick kept it coolest: reflect, shade or radiate?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "empathy_map",
+      "age_mode": "young"
+    },
+    {
+      "kind": "empathy_map",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Race four lids in the sun to see which stays coolest, then design a way to keep a model slide cool."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Passive Cooling Surfaces",
+      "summary": "Explain reflection, absorption and radiation of heat, run a fair test with a control, graph temperature over time, and link your design to silver ant hairs and cool white roofs."
+    }
+  ]
+}

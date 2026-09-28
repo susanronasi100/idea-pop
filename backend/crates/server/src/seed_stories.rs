@@ -1,4 +1,4 @@
-//! Mission stories — the Story Spine + Popi instructor layer for Season 1.
+//! Mission stories — the Story Spine + Popi instructor layer for every season.
 //!
 //! One JSON file per challenge slug lives in `backend/content/stories/`. The
 //! seed writes each into `challenges.story` BY SLUG, after the challenge rows
@@ -8,7 +8,8 @@
 use sqlx::PgPool;
 
 /// (slug, story JSON) for every authored mission story, in season order:
-/// weeks 1-15 nature challenges, weeks 16-20 the AI basics track.
+/// weeks 1-15 nature challenges, weeks 16-20 the AI basics track, then
+/// Season 2 (weeks 21-40 for 10+, weeks 41-50 the 13+ track).
 pub const STORIES: &[(&str, &str)] = &[
     (
         "help-max-cross-the-river",
@@ -89,6 +90,126 @@ pub const STORIES: &[(&str, &str)] = &[
     (
         "bring-it-to-life",
         include_str!("../../../content/stories/bring-it-to-life.json"),
+    ),
+    (
+        "light-the-way-home",
+        include_str!("../../../content/stories/light-the-way-home.json"),
+    ),
+    (
+        "the-tower-that-wont-fall",
+        include_str!("../../../content/stories/the-tower-that-wont-fall.json"),
+    ),
+    (
+        "the-too-hot-slide",
+        include_str!("../../../content/stories/the-too-hot-slide.json"),
+    ),
+    (
+        "the-waggle-dance-treasure-hunt",
+        include_str!("../../../content/stories/the-waggle-dance-treasure-hunt.json"),
+    ),
+    (
+        "a-helping-hand-for-grandma",
+        include_str!("../../../content/stories/a-helping-hand-for-grandma.json"),
+    ),
+    (
+        "dive-and-rise",
+        include_str!("../../../content/stories/dive-and-rise.json"),
+    ),
+    (
+        "the-jumping-grasshopper-toy",
+        include_str!("../../../content/stories/the-jumping-grasshopper-toy.json"),
+    ),
+    (
+        "the-lunch-trash-mountain",
+        include_str!("../../../content/stories/the-lunch-trash-mountain.json"),
+    ),
+    (
+        "the-stuck-ketchup-bottle",
+        include_str!("../../../content/stories/the-stuck-ketchup-bottle.json"),
+    ),
+    (
+        "the-holiday-plant-sitter",
+        include_str!("../../../content/stories/the-holiday-plant-sitter.json"),
+    ),
+    (
+        "the-bat-detective",
+        include_str!("../../../content/stories/the-bat-detective.json"),
+    ),
+    (
+        "the-spinning-seed-helicopter",
+        include_str!("../../../content/stories/the-spinning-seed-helicopter.json"),
+    ),
+    (
+        "the-new-kid-cant-find-the-way",
+        include_str!("../../../content/stories/the-new-kid-cant-find-the-way.json"),
+    ),
+    (
+        "the-slippery-floor",
+        include_str!("../../../content/stories/the-slippery-floor.json"),
+    ),
+    (
+        "the-hallway-traffic-jam",
+        include_str!("../../../content/stories/the-hallway-traffic-jam.json"),
+    ),
+    (
+        "the-tent-in-a-pocket",
+        include_str!("../../../content/stories/the-tent-in-a-pocket.json"),
+    ),
+    (
+        "a-doorbell-grandpa-can-feel",
+        include_str!("../../../content/stories/a-doorbell-grandpa-can-feel.json"),
+    ),
+    (
+        "the-sunflower-solar-garden",
+        include_str!("../../../content/stories/the-sunflower-solar-garden.json"),
+    ),
+    (
+        "the-squirrel-proof-bird-feeder",
+        include_str!("../../../content/stories/the-squirrel-proof-bird-feeder.json"),
+    ),
+    (
+        "the-tightrope-circus",
+        include_str!("../../../content/stories/the-tightrope-circus.json"),
+    ),
+    (
+        "cool-the-city-block",
+        include_str!("../../../content/stories/cool-the-city-block.json"),
+    ),
+    (
+        "the-whale-fin-fan",
+        include_str!("../../../content/stories/the-whale-fin-fan.json"),
+    ),
+    (
+        "the-slime-mold-map",
+        include_str!("../../../content/stories/the-slime-mold-map.json"),
+    ),
+    (
+        "the-lightest-strongest-bridge",
+        include_str!("../../../content/stories/the-lightest-strongest-bridge.json"),
+    ),
+    (
+        "the-octopus-gripper",
+        include_str!("../../../content/stories/the-octopus-gripper.json"),
+    ),
+    (
+        "fresh-water-from-the-sea",
+        include_str!("../../../content/stories/fresh-water-from-the-sea.json"),
+    ),
+    (
+        "colours-without-paint",
+        include_str!("../../../content/stories/colours-without-paint.json"),
+    ),
+    (
+        "the-flock-algorithm",
+        include_str!("../../../content/stories/the-flock-algorithm.json"),
+    ),
+    (
+        "the-self-healing-tyre",
+        include_str!("../../../content/stories/the-self-healing-tyre.json"),
+    ),
+    (
+        "the-inventors-fair",
+        include_str!("../../../content/stories/the-inventors-fair.json"),
     ),
 ];
 

@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature slow a fall?",
+  "hero": { "name": "Sofia", "role": "a balcony gardener", "image": "/landing/start-free-girl.png", "emoji": "🌱" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🌻", "text": "There was a girl called Sofia who grew sunflowers and marigolds in pots on her high balcony." },
+    { "beat": "Every day…", "emoji": "🏡", "text": "Sofia watered her flowers and waved to the gardeners working in the community garden far below." },
+    { "beat": "Until one day…", "emoji": "🌰", "text": "The gardeners asked for some of her seeds. But when Sofia's mum tried dropping a few, they fell fast and crashed onto the path. \"There must be a gentler way,\" Sofia said." }
+  ],
+  "card": {
+    "hero": "Sofia, a balcony gardener",
+    "place": "A balcony garden",
+    "problem": "Dropped seeds crash onto the path",
+    "goal": "Make a seed that falls as slowly as possible",
+    "rules": "Paper, tissue, thread and clips only",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "A crash landing", "line": "Sofia wonders: how can a seed float down instead of crashing?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Sofia needs a co-pilot", "line": "Every seed pilot needs a co-pilot. Will you join Sofia?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The flying seeds", "line": "You and Sofia meet seeds and animals that fly without an engine." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the slow fall", "line": "The heroes share three ways to slow down a fall." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training in the drop lab", "line": "Sofia grabs paper, tissue and a stopwatch. Ready, steady, drop!" },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The idea storm", "line": "Time for a storm of seed ideas, then pick the best!" },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great flying seed starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The slow-fall championship", "line": "The first seed tumbles. You fix it, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Seeds from the sky", "line": "Sofia's seeds twirl gently down into the garden." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Sofia wants to send her seeds to the garden below, but they keep crashing. Can you help her make a seed that falls as slowly as possible? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for making things fall slowly. Do you?",
+    "nature_clues": "Plants have been sending seeds flying for millions of years. Tap each card to meet four heroes who fall slowly!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which shape will take the longest to fall 1 metre?",
+    "sketch": "Time to draw 3 seed designs and circle your favourite, like a real engineer!",
+    "build_and_test": "Build your seed, and ask an adult to drop it from 2 metres. How many seconds can it stay in the air?",
+    "retry_tip": "Engineers never stop at round 1. Change ONE thing, like the wing length, and test again!",
+    "ending": "And ever since then, the community garden has a Seed Flying Day every spring, and Sofia's spinning seeds are always the last to land!"
+  },
+  "quick_check": {
+    "question": "Sofia's paper seed falls 2 metres in 4 seconds. How far does it fall each second?",
+    "options": ["Half a metre", "2 metres", "8 metres"],
+    "answer": 0,
+    "right": "Right! 2 metres shared over 4 seconds is half a metre each second. That's nice and slow!",
+    "wrong": "Not quite. Try sharing 2 metres equally between 4 seconds."
+  },
+  "clue_cards": [
+    { "name": "Maple seed", "emoji": "🍁", "image": null, "tagline": "Tiny helicopter", "trick": "It has one long wing that makes it spin as it falls.", "does": "The spinning makes lift, so it drifts down slowly and far.", "group": "spin" },
+    { "name": "Dandelion", "emoji": "🌼", "image": null, "tagline": "Fluffy parachutist", "trick": "Its seed hangs under a parachute of about 100 fluffy bristles.", "does": "The fluff catches so much air it can float for kilometres.", "group": "parachute" },
+    { "name": "Zanonia seed", "emoji": "🍃", "image": null, "tagline": "Paper glider", "trick": "It has thin, wide wings about 13 cm across.", "does": "It glides gently in big circles, like a tiny aeroplane.", "group": "glide" },
+    { "name": "Flying squirrel", "emoji": "🐿️", "image": null, "tagline": "Tree-top glider", "trick": "It has a stretchy skin sail between its legs.", "does": "It spreads out like a kite and glides from tree to tree.", "group": "glide" }
+  ],
+  "match_groups": [
+    { "key": "spin", "label": "🌀 Spins like a helicopter" },
+    { "key": "parachute", "label": "🪂 Catches air like a parachute" },
+    { "key": "glide", "label": "🛩️ Glides on wide wings" }
+  ],
+  "predict": {
+    "prompt": "Fast fall or slow fall? Predict first!",
+    "choices": ["Fast fall", "Slow fall"],
+    "items": [
+      { "emoji": "🪨", "label": "A small pebble", "answer": 0 },
+      { "emoji": "🪶", "label": "A feather", "answer": 1 },
+      { "emoji": "📄", "label": "A sheet of paper crumpled into a tight ball", "answer": 0 }
+    ],
+    "explain": "Things that are light but catch lots of air fall slowly. A tight ball catches very little air, so it falls fast, even though it's made of the same paper as a flat sheet."
+  },
+  "lab": {
+    "title": "The slow-fall lab",
+    "predict": "Drop each one from 1 metre. Which will take the longest to land?",
+    "options": ["Flat sheet of paper", "Crumpled paper ball", "Paper spinner", "Tissue parachute"],
+    "measure": "seconds to fall 1 m",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "brainstorm",
+    "name": "Brainstorm",
+    "intro": "You already know the brainstorm rules. Today you'll use all 5 together like a pro: storm lots of ideas, then pick the best one to build.",
+    "example_object": "a paper cup",
+    "parts": [
+      { "key": "Q", "name": "Quantity", "what": "Go for lots of ideas, fast.", "example": "🥤 10 uses in 1 minute: pencil pot, drum, seed pot, phone speaker…", "starter": "Another way to make a seed fall slowly could be…" },
+      { "key": "J", "name": "No Judging", "what": "Every idea is allowed for now.", "example": "🥤 \"A cup hat for a cat\"? Write it down, no frowns!", "starter": "Even if it sounds odd, I'll write down…" },
+      { "key": "W", "name": "Wild ideas", "what": "Silly ideas are welcome: they spark new ones.", "example": "🥤 A cup that flies to the moon!", "starter": "My wildest flying seed would be…" },
+      { "key": "B", "name": "Build on ideas", "what": "Take an idea and say 'Yes, and…'", "example": "🥤 A cup phone! Yes, and a longer string so it reaches the next room.", "starter": "Yes, and what if the spinner also had…" },
+      { "key": "P", "name": "Pick the best", "what": "Choose the ideas that fit your goal best, and test those first.", "example": "🥤 For a seed pot, the cup with holes in the bottom wins.", "starter": "The 2 seeds I'll test first are… because…" }
+    ],
+    "locked": [],
+    "badge": "Idea Storm Pro"
+  },
+  "sketch_checklist": [
+    "I drew 3 different seed designs.",
+    "I labelled the part that spins, catches air or glides.",
+    "I circled the one I'll build first and marked where the weight goes."
+  ],
+  "test": {
+    "measure": "seconds to fall 2 m",
+    "higher_is_better": true,
+    "check_question": "Flight check: how did your seed fall?",
+    "check_options": ["Spun or glided smoothly", "Wobbled a bit", "Tumbled or dropped straight down"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick slowed your seed down most?",
+    "options": ["🍁 Maple spin", "🌼 Dandelion parachute", "🍃 Zanonia glide", "🐿️ Squirrel sail"]
+  },
+  "sticker": { "name": "Seed Pilot", "emoji": "🍁" }
+}

@@ -1,0 +1,96 @@
+{
+  "title": "The Octopus Gripper",
+  "season": 2,
+  "week": 45,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Bruised Tomato Problem",
+      "story": "On a fruit farm, a new picking robot is fast, but its hard fingers squeeze too hard in one spot and bruise the tomatoes. Bruised fruit can't be sold, so the farmer loses money every day. Lucas, 14, has been asked to help. Can YOU design a soft gripper that picks up a tomato, holds it firmly and puts it down without a single bruise?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a gripper that is firm but gentle?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature grip soft or fragile things gently? Some animals and plants grab, hold and wrap without crushing. Let's investigate four masters of the gentle grip!",
+      "clues": [
+        {
+          "text": "An octopus arm has no bones at all. It is packed with muscles that bend, twist and stretch in any direction, and a common octopus has around 2,000 suckers across its eight arms. It can wrap around a shell of any shape and hold it with gentle suction all along the arm.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A fish fin is made of thin bony rays joined by soft skin. Push on the side of a fin and it curls TOWARDS your push instead of away from it. Engineers at the company Festo copied this fin-ray effect to make gripper fingers that wrap around fruit by themselves.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "An elephant's trunk has no bones but tens of thousands of muscle bundles. It can pluck a single blade of grass or curl around a heavy log, spreading its grip along its whole length.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "A Venus flytrap's leaf snaps shut in about a tenth of a second. It stores energy in its curved leaf, then flips it from bulging out to bulging in, like popping a bendy lid. The fast snap needs no muscles at all.",
+          "image_url": null,
+          "habitat": null
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Soft bodies spread the force. Pressure is force divided by area, so the same squeeze spread over a bigger contact area presses much more gently on each spot. Soft fingers that wrap around a shape touch it everywhere, instead of pinching it hard in two small spots. The fin-ray effect does this automatically: the finger bends towards the object and hugs it. Soft grippers built on these ideas now handle fruit, bread and eggs in real factories. The trade-off: soft fingers are gentle, but they can be slower and less precise than hard ones.",
+      "reveal_hint": "How could your gripper touch the tomato over a bigger area?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Build a bruise detector and compare grips. Roll 4 balls of playdough, all the same size. Grip each ball with a different gripper: two pencils, two flat card strips, two card fin-ray fingers, and two glove fingers stuffed with cotton wool. To make the squeeze fair, close every gripper with the same rubber band wrapped the same number of times. Measure the deepest dent in each ball in mm with a ruler, and record the results in a table.",
+      "skill_refs": [],
+      "hints": [
+        "The rubber band is what keeps the test fair: same band, same number of wraps, so every gripper squeezes with about the same force.",
+        "The pencils should leave the deepest dents, because all the force lands on two tiny spots. The widest, softest contact should leave the shallowest dent."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch your gripper open, and closed around a tomato.",
+      "guidance": "Label the soft parts, where they touch the tomato, and how the gripper closes (string, rubber band or squeeze). Draw arrows to show where the force spreads out, and name the nature hero behind each part."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a soft gripper with two or three fingers. For a fin-ray finger, make a long thin triangle from two strips of card or thin plastic joined at the tip, with 4 or 5 short crossbars taped between them, and hinge the base so it can bend. Test it on 5 objects, from easy to hard: a tennis ball, a raw egg in a zip bag over a tray, a tomato, a grape and a crisp. Lift each one 10 cm, hold it for 10 seconds, then check for dents, splits or crumbs. Ask an adult to cut any plastic, and never eat the test objects.",
+      "test_criteria": [
+        "How many of the 5 objects did your gripper hold for 10 seconds without any damage?",
+        "Make a table: object, held (yes or no), damage (none, dent or split). Which object was hardest, and why?",
+        "Compare with the pencil gripper from the skill step. Which one touched a bigger area, and what happened to the damage?",
+        "Improve one thing and test again. Change ONE thing, such as softer pads or longer fingers, and retest all 5 objects."
+      ],
+      "hints": [
+        "If objects slip, add grip with rubber bands or a strip of foam on the inside of each finger, instead of squeezing harder.",
+        "If the tomato dents, the force is landing on too small an area. Make the fingers wrap further around it, like a fin ray or an octopus arm."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The farmer fitted soft fingers based on your design, and the robot now picks a whole row of tomatoes without a single bruise!",
+      "share_prompt": "Share a photo of your gripper holding its trickiest object (no faces in the picture) and your score out of 5 on the Ideas Wall. Which nature trick made the biggest difference?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "mind_map",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Soft Robotic Grippers",
+      "summary": "Map the requirements of a gentle gripper, use pressure = force ÷ area and the fin-ray effect to design soft fingers, and test them on 5 levels of fragile objects."
+    }
+  ]
+}

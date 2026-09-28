@@ -1,0 +1,98 @@
+{
+  "title": "The Holiday Plant Sitter",
+  "season": 2,
+  "week": 30,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Who Will Water the Plants?",
+      "story": "Hana's class has grown bean plants on the classroom windowsill, and they're getting tall. But the school is closing for a two-week holiday, and nobody will be there to water them. Can YOU design a plant sitter that keeps a plant watered for 2 weeks, with no one around and no electricity?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for watering a plant while nobody is home?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature move and store water without a pump? Plants and animals have clever ways to move water around and save it for later. Let's find out!",
+      "clues": [
+        {
+          "text": "Trees have no pump, yet water climbs from their roots to their top leaves through millions of very thin tubes. Water sticks to the tube walls and creeps up, and water evaporating from the leaves pulls the next water up behind it.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A saguaro cactus has pleats like an accordion. After rain, the pleats spread out as it fills with water, and it slowly uses that store during the long dry months.",
+          "image_url": null,
+          "habitat": "desert"
+        },
+        {
+          "text": "Some mosses work like a sponge. Their tiny leaves and stems are full of spaces that can soak up many times the moss's own dry weight in water and let it go slowly.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A thirsty camel can drink over 100 litres of water in about 15 minutes, then save it carefully. Its nose catches moisture from its breath, and it hardly loses any water at all. (Its hump stores fat, not water!)",
+          "image_url": null,
+          "habitat": "desert"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Thin paths pull water up! Water sticks to narrow tubes and fibres and creeps along them all by itself. This is called capillary action, and it's how a paper towel soaks up a spill. Pair a thin path like a cotton string with a water store like a bottle, and the soil gets a slow, steady drink, bit by bit, just like a tree.",
+      "reveal_hint": "What thin path could carry water from a store into the soil?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Put a glass of water with a drop of food colouring on a tray. Lay a pencil across the top of the glass and hang 4 test wicks from it so their bottom ends just dip in the water: cotton string, wool yarn, a strip of paper towel and a piece of plastic string. After 10 minutes, measure how far up the colour has climbed on each one in cm. Don't drink the coloured water.",
+      "skill_refs": [],
+      "hints": [
+        "Cut every wick to the same length and start the timer for all of them at once. That keeps the test fair.",
+        "Wet the wick first before you start. A dry wick can take a while to get going."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your plant sitter from the side.",
+      "guidance": "Label the water store, the thin path, and where the water goes into the soil. Write how much water your store holds in millilitres."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a plant sitter for a potted plant using a plastic bottle or jar as a water store and a wick made from cotton string or strips of cloth. Push one end of the wick deep into the soil and put the other end in the water. Water a second, similar plant normally once and give it no plant sitter, so you can compare. Check the soil each day with your finger.",
+      "test_criteria": [
+        "How many days does the soil stay damp with your plant sitter?",
+        "How many days did the plant with no plant sitter stay damp?",
+        "Improve one thing and test again. Did the soil stay damp for longer?"
+      ],
+      "hints": [
+        "If the soil gets soggy, your wick carries too much water. Try a thinner wick or fewer strands.",
+        "Put the water store a little higher than the pot or level with it, and push the wick right down to the roots. A thick cotton wick and a 1-litre bottle can easily last 2 weeks for a small plant."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The class came back after the holiday, and the bean plants were green, tall and happy! Your plant sitter did the job all by itself.",
+      "share_prompt": "Share a photo of your plant sitter and how many days the soil stayed damp on the Ideas Wall. Which nature trick did you copy?"
+    }
+  ],
+  "tools": [
+    { "kind": "empathy_map", "age_mode": "young" },
+    { "kind": "empathy_map", "age_mode": "older" }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Race coloured water up different wicks, then build a plant sitter that keeps the soil damp for 2 weeks and compare it with a plant that has none."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Capillary Wicking and Water Storage",
+      "summary": "Explain capillary action and transpiration, measure wicking rate for different fibres, work out reservoir size from daily water use, and compare your design with xylem and cactus tissue."
+    }
+  ]
+}

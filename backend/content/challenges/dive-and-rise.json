@@ -1,0 +1,98 @@
+{
+  "title": "Dive and Rise",
+  "season": 2,
+  "week": 26,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Rescue Mission: The Lost Ring",
+      "story": "At the aquarium rescue lab, a tiny ring has fallen to the bottom of the practice tank, and nobody can reach it without scaring the fish. Yuki has a toy submarine, but it just floats on top. Can YOU make a diver that sinks when you tell it to, hooks the ring, and rises back up again?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for making something sink and float whenever you want?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature sink and float on purpose? Lots of sea creatures go up and down without swimming hard at all. Let's find out their trick!",
+      "clues": [
+        {
+          "text": "Many fish have a swim bladder, a small bag of gas inside their body. They add gas to rise and let some out to sink, so they can hover at just the right depth.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A nautilus lives in a spiral shell split into gas-filled rooms called chambers. It moves liquid in and out of the chambers to become heavier or lighter, like a living submarine.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A diving beetle carries a silver bubble of air under its wing cases when it dives into a pond. The bubble makes it float, so it grips a plant to stay down and simply lets go to rise.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A sperm whale's huge head is full of a special oil. Scientists think the oil may get firmer when it cools and softer when it warms, which could help the whale sink and rise on its deep dives.",
+          "image_url": null,
+          "habitat": "ocean"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Change your air, change your float! Things float when they are light for their size and sink when they are heavy for their size. When you squeeze air into a smaller space, the diver takes up less room but weighs the same, so it sinks. When the air grows again, the diver rises. Real submarines do this with ballast tanks: they let water in to dive and blow it out with air to come up.",
+      "reveal_hint": "What happens to the air bubble inside your diver when you squeeze the bottle?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Make a test diver: push a small ball of modelling clay onto the bottom of a pen cap with no hole at the top, or use a plastic pipette with a little water inside. Put it in a glass of water. Add or remove clay (or water) until it floats with just its tip poking out. Try 3 different amounts and write down which one floats just right.",
+      "skill_refs": [],
+      "hints": [
+        "If your diver sinks straight away, it is too heavy for its size. Take away a little clay or a little water.",
+        "The best diver floats with only a tiny tip above the water. Then a gentle squeeze is enough to make it sink."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your diver inside its bottle, before and after you squeeze.",
+      "guidance": "Label the air pocket, the water, the weight and the hook. Draw arrows to show what happens to the air bubble when you squeeze."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Fill a clean 1.5 or 2 litre plastic bottle right to the top with water. Make a ring from a pipe cleaner and drop it in. Add a small hook to your diver from an opened paper clip (ask an adult to bend it), put the diver in and screw the lid on tight. Squeeze to sink, catch the ring, then let go to rise. Do it over a sink or a tray.",
+      "test_criteria": [
+        "How many seconds does your diver take to sink to the bottom and come back up?",
+        "Can you make it hover halfway down by squeezing just a little?",
+        "Improve one thing and test again. Did it dive and rise faster?"
+      ],
+      "hints": [
+        "Fill the bottle to the very top. An air gap under the lid soaks up your squeeze, so less push reaches the diver.",
+        "If the ring keeps slipping off, bend the hook into a small J shape, and add a tiny bit more clay so the diver sinks steadily hook-first."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Your diver sank, caught the ring and rose back up! The rescue lab got its ring back without scaring a single fish.",
+      "share_prompt": "Share a photo of your diver and your best dive-and-rise time on the Ideas Wall. Which sea creature's trick did you copy?"
+    }
+  ],
+  "tools": [
+    { "kind": "five_whys", "age_mode": "young" },
+    { "kind": "five_whys", "age_mode": "older" }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Balance a test diver so it only just floats, then build a bottle diver that sinks, catches a ring and rises on command."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Buoyancy Control",
+      "summary": "Explain density and Archimedes' principle, see how squeezing shrinks the air bubble (Boyle's law), and compare your diver with swim bladders and submarine ballast tanks."
+    }
+  ]
+}

@@ -1,0 +1,96 @@
+{
+  "title": "Colours Without Paint",
+  "season": 2,
+  "week": 47,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The River of Dye",
+      "story": "Finn is spending a week at a fashion design studio, and he has just learned something shocking: dyeing and finishing fabric is one of the biggest sources of industrial water pollution in the world, and dyed colours still fade in sunlight and in the wash. The designers give Finn a challenge: can colour come from the STRUCTURE of a material instead of a chemical? Your mission: make colours appear on clear, colourless materials with no paint, ink or dye, and count how many you can make.",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for making colour appear on something that has no colour of its own?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature make colour without pigment? Some of the brightest colours on Earth contain no blue or green pigment at all. Look closely: the secret is in their shape!",
+      "clues": [
+        {
+          "text": "The blue morpho butterfly has no blue pigment. Its wing scales are covered in tiny ridges shaped like Christmas trees, with layers about 200 nanometres apart. Light bouncing off the layers adds up for blue and cancels out for most other colours.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A peacock's tail feathers contain only brown pigment. The blues and greens come from tiny rods of melanin arranged in a regular grid. Change the spacing between the rods and you get blue, green or bronze.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Jewel beetles shine green, gold and copper. Their hard shell has a stack of very thin layers, each far thinner than a thousandth of a millimetre, that reflect some colours strongly. The colour shifts as you tilt the beetle.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "An opal isn't alive, but nature built it: tiny silica spheres, about 150 to 300 nanometres wide, stacked in neat rows like oranges at a market. The rows split white light into flashes of rainbow colour.",
+          "image_url": null,
+          "habitat": "desert"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Structural colour: when a material has layers or patterns about the size of a light wave (visible light waves are 400 to 700 nanometres long), light reflecting from each layer overlaps. For some colours the reflected waves line up and get stronger; for others they cancel out. Change the spacing and you change the colour. No dye is needed, and because the colour is a shape, not a chemical, it doesn't fade in sunlight. The trade-offs: it is hard and expensive to manufacture at that tiny scale, and the colour changes with viewing angle. In the 2000s, the Japanese company Teijin made Morphotex, a fibre with 61 thin layers of polyester and nylon that shone blue with no dye at all.",
+      "reveal_hint": "A soap bubble is made of clear water and soap. So where do its swirling colours come from?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Investigate thin films, the simplest structural colour. Dip a wire loop or the rim of a plastic cup into bubble mix and hold the film upright in front of black card, with a lamp behind you. As water drains down, the film gets thinner at the top, and bands of colour appear. Record the colours from top to bottom in a table, and time how long until the top turns black: it is then so thin (under about 30 nanometres) that almost no light reflects. Then tilt a CD or DVD under the lamp and record the colours its tiny tracks make.",
+      "skill_refs": [],
+      "hints": [
+        "Each band is a different film thickness, and each thickness makes a different colour bounce back strongest. Watch the bands move down as the film drains.",
+        "Colours are strongest against a black background with one bright light behind you. If your film pops too fast, add a few drops of glycerine or a spoon of sugar to the mix so it lasts longer and drains more slowly."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Design a clothing detail or accessory that gets its colour from structure, then zoom in on how it works.",
+      "guidance": "Draw the item, then a zoomed-in cross-section showing the layers, ridges or stacked spheres. Label roughly how thick the layers are in nanometres, and mark which colour shows from which angle."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Make as many colours as you can appear with no paint, ink or dye. Try these structures: a soap film in front of black card, a CD or DVD, clear sticky tape layered in a staircase (1 to 6 layers) on a clear plastic sheet and viewed between two polarising sunglasses lenses, and crumpled or stretched cling film between the same lenses. Count every distinct colour you can make appear, and record each one with its structure and viewing angle. Photograph your samples only.",
+      "test_criteria": [
+        "How many distinct colours can you make appear? Record each colour, the structure and the angle in a table.",
+        "Control: lay each clear material flat on white paper in normal light. Did the colour disappear? That shows it came from structure and light, not pigment.",
+        "Tilt test: which of your colours change when you change the angle? Real structural colour usually does.",
+        "Improve one thing and test again. Add another tape layer or change the film thickness, and count your colours again."
+      ],
+      "hints": [
+        "Different thicknesses make different colours, so build your samples in steps: 1, 2, 3 and 4 layers side by side.",
+        "Put a staircase of 1 to 6 tape layers on a clear plastic sheet and hold it between two polarising lenses in front of a bright window. Each step shows a different colour, and turning one lens a quarter turn swaps every colour for a new one."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Colour with no dye! You made colours appear from structure alone, the same trick the morpho butterfly and the opal use. Finn's studio now wants a fabric sample that will never fade.",
+      "share_prompt": "Share a photo of your colour samples and your colour count on the Ideas Wall. Which structure made the most colours, and what would make structural colour hard to use in real clothes?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "brainstorm",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Structural Colour and Thin-Film Interference",
+      "summary": "Explain interference in thin films and photonic structures, build a colour-count data table from soap films, discs and layered tape, and weigh structural colour against dyes for fading, pollution, cost and viewing angle."
+    }
+  ]
+}

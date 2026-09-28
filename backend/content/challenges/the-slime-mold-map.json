@@ -1,0 +1,96 @@
+{
+  "title": "The Slime Mold Map",
+  "season": 2,
+  "week": 43,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Six Schools, One Network",
+      "story": "Zara's town is building new bike paths to connect its 6 schools, and every metre of path costs money. But if the network is too thin, one roadworks closure could cut a school off completely. Can YOU design a network that links all 6 schools with the least total path, and still survives a broken link?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a network that is short AND safe?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature build efficient networks? Living things have been linking up places with the least material for millions of years. Let's investigate four expert network builders!",
+      "clues": [
+        {
+          "text": "In 2010, scientists in Japan put oat flakes on a map at the positions of cities around Tokyo, then placed a slime mold called Physarum on the spot for Tokyo. It spread out in every direction, then kept only its busiest tubes. In about a day, its network looked remarkably like the real Tokyo rail network, and was about as efficient and as robust.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Leaf veins are not just a tree of branches. The smallest veins join up into loops. If an insect bites through a vein, water simply flows the other way round the loop, so the rest of the leaf keeps living.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "When ants find food, they lay a scent trail home. Ants on a shorter path get back sooner, so that path is topped up with scent faster, and more ants choose it. Soon the colony uses the shortest route, even though no single ant knows the map.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Under the forest floor, fungi grow huge webs of thin threads called mycelium, joined to tree roots. Threads that carry lots of water and food grow thicker, and unused threads fade away, so the network keeps reshaping itself.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Nature doesn't plan the perfect network in advance. It grows many paths, strengthens the busy ones and cuts the rest, but it also keeps a few loops for backup. That is the key trade-off. A network with no loops (a tree) is the shortest, but one break cuts someone off. Each loop adds length but adds safety. Engineers measure both: total length (cost) and how many links can break before a place is cut off (robustness). One neat geometry trick helps too: when three paths meet at a junction at 120° angles, the total can be shorter than joining the points directly.",
+      "reveal_hint": "Where could one small loop protect the most schools for the least extra path?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Learn to measure a network. Stick 6 pins into a sheet of cardboard for the 6 schools, about 10 to 20 cm apart. Link all 6 with string in three ways: a star (every pin to one centre pin), a chain (one line through all 6) and a ring (a loop through all 6). Measure the string for each with a ruler. Then record the total length and how many single breaks each network survives without cutting a school off. Ask an adult to help push in the pins.",
+      "skill_refs": [],
+      "hints": [
+        "Robustness test: imagine each link breaking, one at a time. Can every school still reach every other school?",
+        "A ring is a chain plus one closing link, so it is always a bit longer, but it survives ANY single break. The star and the chain survive none."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch your network on the 6-school map, the way a slime mold would grow it.",
+      "guidance": "Draw thick lines for main routes and thin lines for backup loops. Mark any junctions where three paths meet at about 120°, and write your predicted total length in cm."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build your best network with string and pins on the cardboard map, or in the puzzle map game. Measure the total length. Then test robustness: remove one link at a time and check whether every school can still reach every other school. Compare your design with the chain and the ring you measured in the skill step.",
+      "test_criteria": [
+        "What is the total length of your network in cm?",
+        "How many single links can break, one at a time, without cutting any school off?",
+        "Make a table of length and robustness for the chain, the ring and your design. Which is the best trade-off, and why?",
+        "Improve one thing and test again. Add a 120° junction or move one loop, then remeasure length and robustness."
+      ],
+      "hints": [
+        "Try adding a junction point between three nearby schools. When the three paths meet at about 120°, the total usually gets shorter.",
+        "A strong answer is often the shortest tree plus ONE loop around the busiest schools: a little longer than the shortest, but it survives a break."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The town planners chose your network, and the new bike paths link all 6 schools with a backup loop, just as a slime mold would do it!",
+      "share_prompt": "Share a photo of your network map and your length-and-robustness table on the Ideas Wall. How much extra length did your backup loop cost?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "nature_translator",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Efficient and Robust Networks",
+      "summary": "Translate a planning problem into biology, measure the total length and fault tolerance of rival networks, and use loops and 120° junctions to find the best trade-off."
+    }
+  ]
+}

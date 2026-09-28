@@ -11,6 +11,8 @@
 
 use sqlx::PgPool;
 
+#[path = "../seed_season2.rs"]
+mod seed_season2;
 #[path = "../seed_stories.rs"]
 mod seed_stories;
 #[path = "../seed_translations.rs"]
@@ -32,6 +34,7 @@ async fn main() -> anyhow::Result<()> {
     seed_explore_videos(&pool).await?;
     seed_quick_makes(&pool).await?;
     seed_challenges(&pool).await?;
+    seed_season2::seed_season_2(&pool).await?;
     seed_stories::seed_stories(&pool).await?;
     seed_translations::seed_translations(&pool).await?;
     seed_badges(&pool).await?;

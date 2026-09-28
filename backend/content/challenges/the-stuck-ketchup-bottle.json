@@ -1,0 +1,98 @@
+{
+  "title": "The Stuck Ketchup Bottle",
+  "season": 2,
+  "week": 29,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Last Drop Won't Budge!",
+      "story": "It's burger night at Zane's house, and the ketchup bottle is almost empty. Everyone shakes it, bangs it and squeezes it, but the last bit stays stuck to the sides. Can YOU design a surface that lets sticky ketchup slide right off, so not a single drop is wasted?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for making sticky stuff slide instead of stick?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature make surfaces slippery? Some plants and animals are so slippery that nothing can hold on to them. Let's find out how!",
+      "clues": [
+        {
+          "text": "A pitcher plant's rim is covered in tiny ridges that hold a thin film of water. Insects that step on the wet rim slip like cars on a wet road and slide into the pitcher.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A snail glides on a layer of slime. The slime makes a thin, wet film between its foot and the ground, so it can slide over rough stones and even sharp edges.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A rice leaf is covered in tiny waxy bumps arranged in grooves. Water drops can't soak in, so they roll along the grooves and slide off the leaf.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "An eel's skin is coated in slippery mucus. It helps the eel slide through water and wriggle out of tight spots, and makes it very hard to grab.",
+          "image_url": null,
+          "habitat": "ocean"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Add a slippery layer! Ketchup sticks when it touches the surface directly. A thin film of liquid or wax in between stops it from touching, so it slides instead. The pitcher plant adds a clever extra: tiny ridges that hold the liquid in place so it doesn't run away. Engineers copied this idea to make real coatings that let ketchup and mayonnaise slide out of bottles.",
+      "reveal_hint": "What thin layer could sit between the ketchup and your surface?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Make a ramp: prop a clean plastic tray or lid on 2 books. Draw a start line and a finish line 20 cm apart. Put a teaspoon of ketchup on the start line and time how long it takes to reach the finish. Test plain plastic, baking paper, plastic rubbed with an unlit candle, and plastic wiped with a thin layer of cooking oil. Stop the timer at 60 seconds if it doesn't move. Don't eat the test ketchup.",
+      "skill_refs": [],
+      "hints": [
+        "Keep the ramp at the same height and use the same amount of ketchup every time, or the test isn't fair.",
+        "Oil works best as a thin, even film. Wipe off the extra with a paper towel so only a shine is left."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your slippery surface as a close-up, as if under a magnifying glass.",
+      "guidance": "Show the surface, the slippery layer and the ketchup on top. Label what holds the slippery layer in place."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Design your own slippery surface on a plastic ramp. You could combine a texture (a few gentle rubs with fine sandpaper, or a layer of cloth) with oil or wax. Prop the ramp on 2 books, put a teaspoon of ketchup on the start line and time it over 20 cm. Then ask a friend for feedback, or give yourself some. Wash up with warm soapy water afterwards.",
+      "test_criteria": [
+        "How many seconds does the ketchup take to slide 20 cm?",
+        "How much ketchup is left behind on the ramp?",
+        "Improve one thing and test again. Did the ketchup slide faster?"
+      ],
+      "hints": [
+        "If the oil runs off, your surface is too smooth to hold it. Tiny scratches or a cloth texture hold the liquid in place, like the pitcher plant's ridges.",
+        "Rub the ramp gently with fine sandpaper, spread a few drops of oil, then wipe off the extra. That's the pitcher plant trick, and ketchup should race down!"
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Every last drop slid out of the bottle, and burger night was saved! No more banging and shaking.",
+      "share_prompt": "Share a photo of your slippery ramp and your best slide time on the Ideas Wall. Which nature trick did you copy?"
+    }
+  ],
+  "tools": [
+    { "kind": "like_wish_what_if", "age_mode": "young" },
+    { "kind": "like_wish_what_if", "age_mode": "older" }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Race ketchup down ramps with different surfaces, then design a slippery surface and use feedback to make it even faster."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Liquid-Infused Slippery Surfaces",
+      "summary": "Explain friction, viscosity and lubricant-infused surfaces (SLIPS), run a fair test against a plain-surface control, and compare with pitcher plants and real non-stick bottle coatings."
+    }
+  ]
+}

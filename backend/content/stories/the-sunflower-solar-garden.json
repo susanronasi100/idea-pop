@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature catch as much sunlight as possible?",
+  "hero": {"name": "Tara", "role": "a young rooftop gardener", "image": "/landing/start-free-girl.png", "emoji": "🌻"},
+  "scene_image": null,
+  "opening": [
+    {"beat": "Once upon a time…", "emoji": "🏙️", "text": "There was a girl called Tara who lived at the top of a building in a busy city, with a little garden on the roof."},
+    {"beat": "Every day…", "emoji": "🪴", "text": "Tara watered her beans and herbs and dreamed of the day they'd grow tall and green."},
+    {"beat": "Until one day…", "emoji": "🌥️", "text": "A new tower went up next door, and its shadow fell across the roof. Tara's plants turned pale and droopy. \"They're hungry for light,\" she said. \"How can I catch more sun?\""}
+  ],
+  "card": {
+    "hero": "Tara, a young rooftop gardener",
+    "place": "A shady rooftop",
+    "problem": "The rooftop garden gets only a little sun and the plants are weak",
+    "goal": "Arrange leaves or panels to catch the most light",
+    "rules": "10 leaves or panels, and no cutting down anything",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {"step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The long shadow", "line": "Tara wonders: how can her plants catch more sun in a shady place?"},
+    {"step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Tara needs a teammate", "line": "A hungry garden needs two bright minds. Will you join Tara?"},
+    {"step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The light catchers", "line": "You and Tara meet heroes that grab every ray of sunshine."},
+    {"step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of sharing", "line": "The heroes share why leaves should never block each other."},
+    {"step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The shadow puzzle", "line": "Tara grabs a torch, some card and a protractor."},
+    {"step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The full mind map", "line": "All five mind map pieces grow together today!"},
+    {"step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The view from above", "line": "Every sunny plan starts with a bird's-eye drawing."},
+    {"step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Count the sunny leaves", "line": "The first model hides half its leaves in shadow. You fix it and try again."},
+    {"step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "A green rooftop", "line": "The garden grows strong and the solar lamp glows every night."}
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. A new tower casts a shadow over Tara's rooftop garden, and her plants are hungry for light. Can you help her catch every ray? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for catching light. Do you?",
+    "nature_clues": "Plants can't walk into the sunshine, but they're experts at catching it. Tap each card to meet four light catchers!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which way of spacing the leaves will leave the fewest in shadow?",
+    "sketch": "Time to draw your leaf plan from above, like a bird looking down!",
+    "build_and_test": "Build your model with 10 leaves, shine the light and count how many are in full sun!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE angle and count again!",
+    "ending": "And ever since then, Tara's rooftop garden has grown green and tall, with every leaf and panel spaced like YOURS to share the sun!"
+  },
+  "quick_check": {
+    "question": "Tara's model has 10 leaves, and 7 of them are in full light. What percentage is that?",
+    "options": ["7%", "70%", "17%"],
+    "answer": 1,
+    "right": "Right! 7 out of 10 is 70 out of 100, so 70%. Can you get it higher?",
+    "wrong": "Not quite. 7 out of 10 is the same as 70 out of 100."
+  },
+  "clue_cards": [
+    {"name": "Sunflower", "emoji": "🌻", "image": null, "tagline": "Sun follower", "trick": "Young plants turn their heads to follow the sun across the sky.", "does": "They face the light all day, then swing back to face east at night.", "group": "turn"},
+    {"name": "Sunflower seeds", "emoji": "🌀", "image": null, "tagline": "Spiral packer", "trick": "Each seed grows about 137.5° around from the one before.", "does": "The spiral packs seeds with no gaps, and leaves spaced this way don't shade each other.", "group": "space"},
+    {"name": "Ivy", "emoji": "🍃", "image": null, "tagline": "Leaf puzzle", "trick": "Its leaf stalks grow to different lengths and angles.", "does": "The leaves fit together like a mosaic and hardly overlap.", "group": "space"},
+    {"name": "Forest", "emoji": "🌳", "image": null, "tagline": "Layer cake", "trick": "It grows in layers, from tall trees down to the floor.", "does": "Each layer catches light, and shady plants use big thin leaves.", "group": "layer"}
+  ],
+  "match_groups": [
+    {"key": "turn", "label": "🔄 Turns toward the light"},
+    {"key": "space", "label": "🧩 Spaces leaves to share light"},
+    {"key": "layer", "label": "🍰 Grows in layers"}
+  ],
+  "predict": {
+    "prompt": "Full sun or in the shade? Predict first!",
+    "choices": ["Full sun", "In the shade"],
+    "items": [
+      {"emoji": "🍂", "label": "A leaf right underneath another leaf", "answer": 1},
+      {"emoji": "🌀", "label": "A leaf turned 137.5° from the one below", "answer": 0},
+      {"emoji": "🌲", "label": "The top leaf of a tall tree", "answer": 0}
+    ],
+    "explain": "A leaf in another leaf's shadow can hardly make food. Turning each leaf by the golden angle means no leaf sits right above another, so they share the light."
+  },
+  "lab": {
+    "title": "The shadow puzzle",
+    "predict": "Build 4 model plants with 6 leaves each. Shine a torch from above. Which one will have the most leaves in full light?",
+    "options": ["Leaves stacked straight up", "Turned 180° each time", "Turned 90° each time", "Turned 137.5° each time"],
+    "measure": "leaves in full light out of 6",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "mind_map",
+    "name": "Mind map",
+    "intro": "A mind map grows your ideas like a tree, from one big question in the middle. You've met all 5 pieces before. Today you'll use every one of them, like a true mind map legend!",
+    "example_object": "a bicycle",
+    "parts": [
+      {"key": "C", "name": "Centre", "what": "Put the big question in the middle.", "example": "🚲 \"A better bike\" goes in the middle.", "starter": "In the centre of my map I write…"},
+      {"key": "B", "name": "Branches", "what": "Draw lines out to the main topics.", "example": "🚲 Branches: faster, safer, easier to carry.", "starter": "My branches are turn to the light, space out and…"},
+      {"key": "T", "name": "Twigs", "what": "Add smaller ideas to each branch.", "example": "🚲 On \"safer\": bright lights, a bell, reflectors.", "starter": "On the \"space out\" branch I add the golden angle and…"},
+      {"key": "P", "name": "Pictures", "what": "Doodle quick icons next to your ideas.", "example": "🚲 A tiny lightning bolt next to \"faster\".", "starter": "Next to \"turn to the light\" I'll doodle…"},
+      {"key": "L", "name": "Links", "what": "Join ideas on different branches with a line.", "example": "🚲 \"Bright lights\" links to \"ride at night\": it helps both!", "starter": "A line joins the ivy mosaic to…"}
+    ],
+    "locked": [],
+    "badge": "Mind Map Legend"
+  },
+  "sketch_checklist": [
+    "I drew my plan from above and numbered every leaf.",
+    "I wrote the angle I turn between leaves.",
+    "I marked where the sun comes from."
+  ],
+  "test": {
+    "measure": "leaves in full light out of 10",
+    "higher_is_better": true,
+    "check_question": "Light check: where did your light come from?",
+    "check_options": ["Real sunshine", "A torch", "A desk lamp, with an adult"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick caught the most light for you?",
+    "options": ["🌻 Sunflower turning", "🌀 Golden angle spiral", "🍃 Ivy leaf mosaic", "🌳 Forest layers"]
+  },
+  "sticker": {"name": "Sun Catcher", "emoji": "☀️"}
+}

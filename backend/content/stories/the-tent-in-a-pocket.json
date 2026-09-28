@@ -1,0 +1,109 @@
+{
+  "function_question": "How does nature fold big things into small spaces?",
+  "hero": {"name": "Ines", "role": "a young scout", "image": "/landing/hero/girl.webp", "emoji": "⛺"},
+  "scene_image": null,
+  "opening": [
+    {"beat": "Once upon a time…", "emoji": "🏕️", "text": "There was a girl called Ines who loved being a scout. She could tie six knots and spot north from the stars."},
+    {"beat": "Every day…", "emoji": "🎒", "text": "Ines and her scout group practised for the big camp on top of Lookout Hill, where you can see the whole valley."},
+    {"beat": "Until one day…", "emoji": "⛺", "text": "They tried to carry the camp tent up the hill, and it was far too big and heavy. \"If only it could fold up small enough to fit in a pocket,\" Ines sighed."}
+  ],
+  "card": {
+    "hero": "Ines, a young scout",
+    "place": "A scout camp",
+    "problem": "The tent is too big and heavy to carry up the hill",
+    "goal": "Make a shelter that folds tiny and opens big",
+    "rules": "It must fold at least 10 times smaller and open in one move",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {"step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The tent that won't climb", "line": "Ines wonders: how can something big fold small enough to carry?"},
+    {"step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Ines needs a teammate", "line": "Every scout needs a buddy. Will you join Ines on the trail?"},
+    {"step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature folders", "line": "You and Ines meet heroes that pack big wings and petals into tiny spaces."},
+    {"step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the pattern", "line": "The heroes share why the best folds follow a plan."},
+    {"step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The unfold speed-run", "line": "Ines grabs four sheets of paper and a stopwatch."},
+    {"step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "All seven letters", "line": "Every SCAMPER letter joins the camp today!"},
+    {"step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The fold plan", "line": "Every clever fold starts with lines on paper."},
+    {"step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Fold it, pop it", "line": "The first shelter jams halfway. You fix the folds and try again."},
+    {"step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Camp on the hilltop", "line": "The shelter pops open on Lookout Hill, and the scouts cheer."}
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Ines's scout tent is too heavy to carry up Lookout Hill. She needs a shelter that folds tiny and opens big. Can you help her? Let's start!",
+    "your_idea": "Some engineers already have a spark of an idea for folding things small. Do you?",
+    "nature_clues": "Nature packs huge wings and petals into tiny buds and bodies. Tap each card to meet four master folders!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which fold will open the fastest? Get your stopwatch ready for the unfold speed-run!",
+    "sketch": "Time to draw your shelter folded and open, with every fold line marked!",
+    "build_and_test": "Build your shelter, measure it open and folded, and find out how many times smaller it gets!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE fold and test again. Did it get smaller?",
+    "ending": "And ever since then, Ines's scouts carry a shelter folded like YOURS in a pocket, and it pops open on every hilltop!"
+  },
+  "quick_check": {
+    "question": "Ines's model shelter is 40 cm × 30 cm open, which is 1,200 cm². Folded, it's 10 cm × 6 cm, which is 60 cm². How many times smaller is it folded?",
+    "options": ["10 times", "20 times", "60 times"],
+    "answer": 1,
+    "right": "Right! 1,200 ÷ 60 = 20. Her shelter folds 20 times smaller, double her goal!",
+    "wrong": "Not quite. Divide the open area by the folded area: 1,200 ÷ 60."
+  },
+  "clue_cards": [
+    {"name": "Hornbeam leaf", "emoji": "🍃", "image": null, "tagline": "Pleated in the bud", "trick": "It grows folded into neat zigzag pleats, like a paper fan.", "does": "The pleats open together, so the leaf spreads out flat in one smooth move.", "group": "zigzag"},
+    {"name": "Ladybird", "emoji": "🐞", "image": null, "tagline": "Wings in a case", "trick": "It folds its big flying wings along special creases.", "does": "The folded wings tuck under its hard wing cases and unfold in a split second.", "group": "case"},
+    {"name": "Poppy", "emoji": "🌺", "image": null, "tagline": "Crumpled silk", "trick": "Its petals are squashed and crumpled inside a snug bud.", "does": "When the bud opens, the wrinkly petals smooth out into a big flower.", "group": "case"},
+    {"name": "Bat", "emoji": "🦇", "image": null, "tagline": "Living umbrella", "trick": "Its wing is thin skin stretched over long finger bones.", "does": "It folds its fingers together and the wing shrinks like a closed umbrella.", "group": "frame"}
+  ],
+  "match_groups": [
+    {"key": "zigzag", "label": "〰️ Zigzag pleats"},
+    {"key": "case", "label": "📦 Packed inside a case"},
+    {"key": "frame", "label": "☂️ Folding frame"}
+  ],
+  "predict": {
+    "prompt": "Folded on a pattern or squashed at random? Predict first!",
+    "choices": ["Folded on a pattern", "Squashed at random"],
+    "items": [
+      {"emoji": "🌂", "label": "A folding umbrella", "answer": 0},
+      {"emoji": "🗺️", "label": "A paper map", "answer": 0},
+      {"emoji": "🧻", "label": "A tissue stuffed in a pocket", "answer": 1}
+    ],
+    "explain": "Things folded on a pattern open in one move and fold back the same way every time. Things squashed at random end up wrinkled and hard to open neatly."
+  },
+  "lab": {
+    "title": "The unfold speed-run",
+    "predict": "Fold four sheets of paper in four ways. Which one will open back out flat the fastest?",
+    "options": ["Folded in half again and again", "Rolled into a tube", "Zigzag pleats", "Scrunched into a ball"],
+    "measure": "seconds to open it flat",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "You already know all 7 SCAMPER letters. Today you'll use every one of them together, like a true SCAMPER legend!",
+    "example_object": "an umbrella",
+    "parts": [
+      {"key": "S", "name": "Substitute", "what": "Swap one part or material for another.", "example": "🌂 Swap the cloth for a see-through plastic, so you can see where you're going.", "starter": "Instead of heavy cloth, Ines's shelter could be made of…"},
+      {"key": "C", "name": "Combine", "what": "Join two things into one.", "example": "🌂 Combine an umbrella and a walking stick.", "starter": "The shelter could also be a…"},
+      {"key": "A", "name": "Adapt", "what": "Borrow an idea from somewhere else, like nature.", "example": "🌂 Adapt the bat's wing: thin skin on bendy ribs.", "starter": "I could borrow the zigzag pleats of a…"},
+      {"key": "M", "name": "Modify", "what": "Make it bigger, smaller or a different shape.", "example": "🌂 Make it tiny, a pocket umbrella that folds three times.", "starter": "What if the pleats were narrower, so…"},
+      {"key": "P", "name": "Put to another use", "what": "Use it for something new.", "example": "🌂 Open it upside down to catch rainwater for plants.", "starter": "When it's not a shelter, it could be a…"},
+      {"key": "E", "name": "Eliminate", "what": "Take a part away and see if it still works.", "example": "🌂 Remove the handle and hang it from a branch.", "starter": "Ines's shelter doesn't really need…"},
+      {"key": "R", "name": "Reverse", "what": "Flip it, turn it inside out or do it backwards.", "example": "🌂 An umbrella that folds inside out, so the wet side stays inside.", "starter": "What if the shelter opened from the top down, so…"}
+    ],
+    "locked": [],
+    "badge": "SCAMPER Legend"
+  },
+  "sketch_checklist": [
+    "I drew my shelter both folded and open.",
+    "I marked mountain folds with solid lines and valley folds with dashed lines.",
+    "I wrote the open and folded sizes in centimetres."
+  ],
+  "test": {
+    "measure": "how many times smaller folded than open",
+    "higher_is_better": true,
+    "check_question": "Unfold check: how did your shelter open?",
+    "check_options": ["In one pull", "In a few moves", "I had to open each fold by hand"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature folder helped your shelter most?",
+    "options": ["🍃 Hornbeam pleats", "🐞 Ladybird wing tuck", "🌺 Poppy crumple", "🦇 Bat wing frame"]
+  },
+  "sticker": {"name": "Fold Master", "emoji": "🪭"}
+}

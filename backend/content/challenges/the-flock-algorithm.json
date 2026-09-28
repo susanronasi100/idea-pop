@@ -1,0 +1,96 @@
+{
+  "title": "The Flock Algorithm",
+  "season": 2,
+  "week": 48,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "100 Drones, No Leader",
+      "story": "Rosa, 14, and her robot friend Pixel help out at a drone light show. The crew wants 100 drones to fly as one shimmering shape, but there's a catch: if one main computer steers every drone and its signal drops, the whole show fails. What if each drone followed a few simple rules about its neighbours instead? Your mission: write 3 rules that make a group move like a flock, test them in a human flock game, and count the collisions.",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for rules that could keep a big group together with nobody in charge?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature coordinate big groups with no leader? No starling or fish is the boss, yet thousands move as one. Find out what each one pays attention to!",
+      "clues": [
+        {
+          "text": "A murmuration can hold tens of thousands of starlings. Scientists filmed flocks in 3D and found that each bird tracks only its 6 or 7 nearest neighbours, however close or far they are. A turn can ripple across the whole flock in about a second.",
+          "image_url": null,
+          "habitat": "sky"
+        },
+        {
+          "text": "In a school of fish, each fish feels its neighbours moving through the water with a row of sensors along its sides, called the lateral line. It keeps a steady gap, turns when they turn, and almost never crashes.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "Ants don't watch each other to find food. They leave scent trails on the ground, and other ants follow the strongest trail, adding more scent as they go. The message is left in the environment, which scientists call stigmergy.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "A few desert locusts wander about alone. But when they get crowded, above roughly 70 per square metre, they suddenly line up and march in the same direction. Same insects, new behaviour, just from crowding.",
+          "image_url": null,
+          "habitat": "desert"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Three local rules make a flock. 1 Separation: steer away if a neighbour is too close. 2 Alignment: turn to match your neighbours' average direction. 3 Cohesion: steer towards the middle of your neighbours. No one sees the whole group, yet the whole group moves as one. This is called emergence: complex behaviour from simple local rules. In 1986 Craig Reynolds used exactly these three rules in his \"boids\" program, and films still use them to animate flocks and crowds. In 2018, researchers in Hungary flew 30 real drones outdoors as a leaderless flock. The trade-off: the rules need tuning. Too much separation and the flock falls apart; too much cohesion and it bunches up and crashes.",
+      "reveal_hint": "In a crowded school corridor, how do you avoid bumping into people with nobody giving orders? What are you watching?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Build a paper simulation. Draw a 10 by 10 grid and place 8 paper drones (small squares with an arrow drawn on each) in a loose group, all pointing different ways. Each round, move every drone one square using your rules in this order: separation (if a neighbour is in the next square, move away), alignment (turn to face the way most of your 3 nearest neighbours face), cohesion (step towards the middle of those neighbours). Run 5 rounds. After each round, record in a table how many drones face the same way and how many collisions (two drones in one square) happened.",
+      "skill_refs": [],
+      "hints": [
+        "Use the rules in the same order every round, and only use what each drone can see: its nearest neighbours, not the whole grid.",
+        "Separation always wins a clash: if two drones want the same square, the one that is too close moves away first. Most arrows should face the same way within 3 to 5 rounds."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your 3 rules as a diagram a drone could follow.",
+      "guidance": "Draw one drone with its nearest neighbours around it. Use arrows to show each rule: away (separation), same way (alignment), towards the middle (cohesion). Write each rule as an IF… THEN… sentence with a number, like \"IF a neighbour is closer than 1 arm's length, THEN step away\"."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Run a human flock game with 8 to 15 players in a big, clear space like a hall or field, with an adult in charge. Everyone walks slowly (no running) with arms folded, and a collision is any bump or touch. Round 1 is your control: everyone walks around for 1 minute with no rules. Rounds 2 and 3 use your 3 rules, with each player watching only their nearest neighbours. Count collisions each round and time how long it takes until everyone moves the same way. Then test one variable, like watching 1 neighbour versus 3. Don't film or photograph faces.",
+      "test_criteria": [
+        "How many collisions happened in 1 minute with no rules (control) and with your 3 rules? Record both in a table.",
+        "How many seconds until everyone was moving in the same direction?",
+        "Variable test: does watching 3 neighbours give fewer collisions than watching 1?",
+        "Improve one thing and test again. Change one number in one rule, like the safe distance, and count collisions again."
+      ],
+      "hints": [
+        "If people bunch up and bump, your separation distance is too small or your cohesion rule is too strong.",
+        "Try this set: keep 1 arm's length from everyone, walk the same way as your 3 nearest people, and step towards them only if they are more than 2 metres away. Watching about 3 neighbours usually beats watching 1."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The drones fly as one! With three simple rules and no leader, your flock moved like a murmuration. Rosa and Pixel's show lights up the whole sky.",
+      "share_prompt": "Share your 3 rules and your collision table on the Ideas Wall (no photos of people, please). Where else could leaderless rules help: rescue robots, traffic, or something else?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "how_might_we",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Swarm Intelligence: Emergent Behaviour",
+      "summary": "Define separation, alignment and cohesion rules, run a paper simulation and a controlled human-flock experiment, and compare leaderless swarms (boids, drone flocks, swarm robots) with centrally controlled systems for robustness and trade-offs."
+    }
+  ]
+}

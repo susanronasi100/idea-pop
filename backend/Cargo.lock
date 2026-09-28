@@ -2067,6 +2067,7 @@ dependencies = [
  "idea-pop-infra",
  "metrics 0.23.1",
  "metrics-exporter-prometheus",
+ "serde",
  "serde_json",
  "sqlx",
  "tokio",

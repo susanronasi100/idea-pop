@@ -1,0 +1,106 @@
+{
+  "function_question": "How does nature let some visitors in and keep others out?",
+  "hero": {"name": "Reza", "role": "a young bird watcher", "image": "/landing/hero/tools-boy.webp", "emoji": "🐦"},
+  "scene_image": null,
+  "opening": [
+    {"beat": "Once upon a time…", "emoji": "🏡", "text": "There was a boy called Reza who loved the birds that visited his back garden. He knew the robin, the sparrows and the bossy blue tit by sight."},
+    {"beat": "Every day…", "emoji": "🌾", "text": "Reza filled his bird feeder with seeds before breakfast and watched from the window as the birds came to eat."},
+    {"beat": "Until one day…", "emoji": "🐿️", "text": "A clever squirrel found the feeder. It climbed the pole, hung upside down and gobbled every seed. \"I don't want to hurt it,\" Reza said. \"But the birds are hungry too!\""}
+  ],
+  "card": {
+    "hero": "Reza, a young bird watcher",
+    "place": "Reza's back garden",
+    "problem": "A clever squirrel eats all the bird seed every day",
+    "goal": "Design a feeder birds can use but a squirrel can't",
+    "rules": "No hurting anyone: no grease, spikes, glue or spicy powder",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {"step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The seed thief", "line": "Reza wonders: how can he let the birds in and keep the squirrel out, kindly?"},
+    {"step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Reza needs a teammate", "line": "Outsmarting a squirrel takes two clever minds. Will you join Reza?"},
+    {"step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "Nature's door keepers", "line": "You and Reza meet heroes that choose who gets in."},
+    {"step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the filter", "line": "The heroes share how to welcome one visitor and gently stop another."},
+    {"step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The slippery slope", "line": "Reza tapes four surfaces to a board and grabs an eraser."},
+    {"step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Think like a squirrel", "line": "An empathy map helps you see the garden through two pairs of eyes."},
+    {"step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The feeder plan", "line": "Every clever feeder starts as a drawing."},
+    {"step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The squirrel test", "line": "The pretend squirrel gets in the first time. You fix it and try again."},
+    {"step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Breakfast for everyone", "line": "The birds eat in peace, and the squirrel gets its own snack."}
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. A clever squirrel eats all the seed in Reza's bird feeder every day. Reza wants to keep it out without hurting it. Can you help him? Let's start!",
+    "your_idea": "Some designers already have a spark of an idea for outsmarting a squirrel. Do you?",
+    "nature_clues": "Nature is full of clever doors that only let the right visitor in. Tap each card to meet four door keepers!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which surface will make the eraser slide at the lowest angle?",
+    "sketch": "Time to draw your feeder from the side, and show how a squirrel would try to get in!",
+    "build_and_test": "Build your feeder and run the squirrel test. How many minutes can you keep the pretend squirrel out?",
+    "retry_tip": "Engineers never stop at round 1. Find where the squirrel got in, change ONE thing and test again!",
+    "ending": "And ever since then, Reza's garden is full of happy birds eating from a feeder like YOURS, and the squirrel has a nut corner of its own!"
+  },
+  "quick_check": {
+    "question": "A small bird weighs about 20 g. A squirrel weighs about 500 g. How many times heavier is the squirrel?",
+    "options": ["5 times", "25 times", "480 times"],
+    "answer": 1,
+    "right": "Right! 500 ÷ 20 = 25. That's why a perch that sinks under a heavy weight can stop a squirrel but not a bird!",
+    "wrong": "Not quite. Divide the squirrel's weight by the bird's weight: 500 ÷ 20."
+  },
+  "clue_cards": [
+    {"name": "Pitcher plant", "emoji": "🏺", "image": null, "tagline": "Slippery trap", "trick": "Its rim gets super slippery when it's damp.", "does": "Insects skid on it and can't get a grip, like a car on a wet road.", "group": "slippery"},
+    {"name": "Acacia", "emoji": "🌳", "image": null, "tagline": "Guarded tree", "trick": "It has thorns, and some kinds give ants a home inside them.", "does": "The thorns and ant guards keep leaf-eaters away.", "group": "guard"},
+    {"name": "Hummingbird flower", "emoji": "🌺", "image": null, "tagline": "Secret tube", "trick": "It hides its nectar at the bottom of a long, thin tube.", "does": "Only a hummingbird's long beak can reach it.", "group": "shape"},
+    {"name": "Weaver bird", "emoji": "🪺", "image": null, "tagline": "Upside-down door", "trick": "Its nest hangs from a thin branch with the entrance at the bottom.", "does": "The bird flies straight in, but snakes struggle to get inside.", "group": "shape"}
+  ],
+  "match_groups": [
+    {"key": "slippery", "label": "🧊 Too slippery to grip"},
+    {"key": "guard", "label": "🛡️ Guards on duty"},
+    {"key": "shape", "label": "🔑 A door only the right visitor fits"}
+  ],
+  "predict": {
+    "prompt": "Easy for a squirrel or hard for a squirrel? Predict first!",
+    "choices": ["Easy for a squirrel", "Hard for a squirrel"],
+    "items": [
+      {"emoji": "🌳", "label": "A feeder hanging from a tree branch", "answer": 0},
+      {"emoji": "🥣", "label": "A wobbly, smooth dome above the feeder", "answer": 1},
+      {"emoji": "🔺", "label": "A wide, smooth cone around the pole", "answer": 1}
+    ],
+    "explain": "Squirrels are brilliant climbers and jumpers, but they need something to grip. Smooth, round shapes that wobble or spin give their paws nothing to hold, while birds just fly around them."
+  },
+  "lab": {
+    "title": "The slippery slope",
+    "predict": "Put an eraser on a board and slowly lift one end. On which surface will it start to slide at the lowest angle?",
+    "options": ["Cardboard", "Sandpaper", "Plastic folder", "Kitchen foil"],
+    "measure": "angle when it starts to slide (degrees)",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "empathy_map",
+    "name": "Empathy Map",
+    "intro": "An Empathy Map helps you understand the one you're designing for: what they say, think, do and feel. Today you have two users, the birds and the squirrel! Try one map for each.",
+    "example_object": "a school backpack",
+    "parts": [
+      {"key": "S", "name": "Says", "what": "What does your user say out loud?", "example": "🎒 A student says: \"My backpack hurts my shoulders.\"", "starter": "If the squirrel could talk, it would say…"},
+      {"key": "T", "name": "Thinks", "what": "What might they be thinking but not saying?", "example": "🎒 They think: \"I wish I didn't have to carry every book.\"", "starter": "The little birds might be thinking…"},
+      {"key": "D", "name": "Does", "what": "What do you see them do?", "example": "🎒 They drag the backpack on one shoulder.", "starter": "Every morning, the squirrel climbs up and…"},
+      {"key": "F", "name": "Feels", "what": "How do they feel?", "example": "🎒 They feel tired and a bit grumpy by lunchtime.", "starter": "When the feeder is empty, the birds feel…"}
+    ],
+    "locked": [],
+    "badge": "Empathy Master"
+  },
+  "sketch_checklist": [
+    "I drew my feeder from the side with its pole or string.",
+    "I labelled the squirrel stopper and the bird door.",
+    "I showed that nothing on it can hurt a bird or a squirrel."
+  ],
+  "test": {
+    "measure": "minutes the 'squirrel test' fails to reach the seed",
+    "higher_is_better": true,
+    "check_question": "Bird check: can a pretend beak still reach the seed?",
+    "check_options": ["Yes, easily", "Yes, but it's tricky", "Not yet"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your feeder most?",
+    "options": ["🏺 Pitcher plant slippery rim", "🌳 Acacia guards", "🌺 Hummingbird flower tube", "🪺 Weaver bird door"]
+  },
+  "sticker": {"name": "Fair Feeder", "emoji": "🐿️"}
+}

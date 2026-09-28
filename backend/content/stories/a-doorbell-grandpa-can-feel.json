@@ -1,0 +1,105 @@
+{
+  "function_question": "How does nature sense messages without hearing?",
+  "hero": {"name": "Jonah", "role": "a thoughtful grandson", "image": "/landing/hero/measure-boy.webp", "emoji": "🔔"},
+  "scene_image": null,
+  "opening": [
+    {"beat": "Once upon a time…", "emoji": "👴", "text": "There was a boy called Jonah whose grandpa told the best stories and grew the biggest tomatoes on the street."},
+    {"beat": "Every day…", "emoji": "🍅", "text": "After school, Jonah visited Grandpa, and they worked in the garden together. Grandpa's ears weren't as sharp as they used to be, but his jokes were."},
+    {"beat": "Until one day…", "emoji": "🚪", "text": "Grandpa's best friend came to visit and rang and rang the bell. Grandpa was in the garden and never heard it. \"I missed him,\" Grandpa said sadly. \"I wish I could feel the doorbell.\""}
+  ],
+  "card": {
+    "hero": "Jonah, a thoughtful grandson",
+    "place": "Grandpa's house",
+    "problem": "Grandpa is hard of hearing and misses visitors at the door",
+    "goal": "Design a signal he can feel or see anywhere in the house",
+    "rules": "It must work in 4 rooms, with safe low-voltage parts only",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {"step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The missed visitor", "line": "Jonah wonders: how can Grandpa know someone is at the door without hearing the bell?"},
+    {"step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Jonah needs a teammate", "line": "Grandpa deserves two kind inventors. Will you join Jonah?"},
+    {"step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The silent messengers", "line": "You and Jonah meet heroes that send messages with shakes, ripples and light."},
+    {"step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the channel", "line": "The heroes share how to send a message a different way."},
+    {"step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The secret signal game", "line": "Jonah closes his eyes, plugs his ears and waits for a signal."},
+    {"step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "Kind, useful feedback", "line": "Three magic sentence starters help you make your design better."},
+    {"step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The signal map", "line": "Every good signal starts with a map of where it needs to go."},
+    {"step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "Grandpa tries it", "line": "The first signal misses the garden. You listen to Grandpa's feedback and try again."},
+    {"step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Tea with a friend", "line": "Grandpa feels the signal and opens the door with a big smile."}
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Jonah's grandpa is hard of hearing and keeps missing visitors at the door. He needs a signal he can feel or see in every room. Can you help Jonah? Let's start!",
+    "your_idea": "Some inventors already have a spark of an idea for a signal without sound. Do you?",
+    "nature_clues": "Lots of animals send messages without any sound at all. Tap each card to meet four silent messengers!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which signal will your partner notice most with their eyes closed and ears covered?",
+    "sketch": "Time to draw a map of Grandpa's house and show where your signal travels!",
+    "build_and_test": "Build your signal, test it in 4 rooms, then let Grandpa try it. The real user is the best tester!",
+    "retry_tip": "Engineers never stop at round 1. Pick ONE thing from your user's feedback, change it and test again!",
+    "ending": "And ever since then, Grandpa never misses a visitor. When someone rings, your signal finds him in every room, even among the tomatoes!"
+  },
+  "quick_check": {
+    "question": "Jonah tests his signal in Grandpa's 4 rooms. Grandpa notices it in 3 of them. What fraction of the rooms does it work in?",
+    "options": ["1/4", "3/4", "4/3"],
+    "answer": 1,
+    "right": "Right! 3 out of 4 rooms is 3/4, which is 75%. One more room to go!",
+    "wrong": "Not quite. Put the rooms it works in on top and all the rooms underneath."
+  },
+  "clue_cards": [
+    {"name": "Elephant", "emoji": "🐘", "image": null, "tagline": "Ground listener", "trick": "Touch sensors in its feet and trunk feel rumbles in the ground.", "does": "It picks up messages from other elephants several kilometres away.", "group": "ground"},
+    {"name": "Sand scorpion", "emoji": "🦂", "image": null, "tagline": "Night hunter", "trick": "Sensors on its eight legs feel tiny ripples in the sand.", "does": "It finds a beetle's footsteps from about 50 cm away, in the dark.", "group": "ground"},
+    {"name": "Spider", "emoji": "🕷️", "image": null, "tagline": "Web telephone", "trick": "Its legs feel every shake that travels along the silk.", "does": "It can tell a trapped fly from the wind or a visiting spider.", "group": "thread"},
+    {"name": "Firefly", "emoji": "✨", "image": null, "tagline": "Light talker", "trick": "It flashes its own light pattern, like a secret code.", "does": "Others of its kind see the code and find it in the dark.", "group": "light"}
+  ],
+  "match_groups": [
+    {"key": "ground", "label": "🌍 Feels shakes in the ground"},
+    {"key": "thread", "label": "🧵 Feels shakes along a line"},
+    {"key": "light", "label": "💡 Sends light signals"}
+  ],
+  "predict": {
+    "prompt": "Do you feel it or see it? Predict first!",
+    "choices": ["You feel it", "You see it"],
+    "items": [
+      {"emoji": "📳", "label": "A phone buzzing in your pocket", "answer": 0},
+      {"emoji": "🚦", "label": "A traffic light turning green", "answer": 1},
+      {"emoji": "⌚", "label": "A watch tapping your wrist", "answer": 0}
+    ],
+    "explain": "The same message can travel through different channels. Deaf and hard-of-hearing people often use doorbells that flash lights and alarms that shake the bed: same message, new channel."
+  },
+  "lab": {
+    "title": "The secret signal game",
+    "predict": "Your partner closes their eyes and covers their ears. Which signal will they notice most often out of 5 tries?",
+    "options": ["Tap on the table", "Stamp on the floor", "Flash a torch", "Tug a string on the wrist"],
+    "measure": "signals noticed out of 5",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "like_wish_what_if",
+    "name": "I Like, I Wish, What If",
+    "intro": "I Like, I Wish, What If is a way to give kind, useful feedback on a prototype. You can ask a friend, your user, or yourself. Today you'll learn all 3 parts.",
+    "example_object": "a paper aeroplane",
+    "parts": [
+      {"key": "L", "name": "I like…", "what": "Say one thing that works well.", "example": "✈️ I like how straight it flies.", "starter": "I like how Jonah's signal…"},
+      {"key": "W", "name": "I wish…", "what": "Say one thing that could be better, kindly.", "example": "✈️ I wish it didn't dive down at the end.", "starter": "I wish Grandpa could notice it when he's…"},
+      {"key": "?", "name": "What if…?", "what": "Share a new idea to try.", "example": "✈️ What if we folded the wing tips up a little?", "starter": "What if the signal also…"}
+    ],
+    "locked": [],
+    "badge": "Feedback Pro"
+  },
+  "sketch_checklist": [
+    "I drew a map of the house with the front door and 4 rooms.",
+    "I showed how my signal travels to each room.",
+    "I labelled the channel: vibration, light or movement."
+  ],
+  "test": {
+    "measure": "rooms where the signal is noticed (out of 4)",
+    "higher_is_better": true,
+    "check_question": "User check: who tested your signal?",
+    "check_options": ["Grandpa or another grown-up", "A friend or family member", "Only me, with ear defenders on"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your signal most?",
+    "options": ["🐘 Elephant ground rumbles", "🕷️ Spider web shakes", "🦂 Scorpion sand ripples", "✨ Firefly flashes"]
+  },
+  "sticker": {"name": "Signal Maker", "emoji": "📳"}
+}

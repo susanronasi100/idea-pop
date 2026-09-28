@@ -1,0 +1,104 @@
+{
+  "title": "A Helping Hand for Grandma",
+  "season": 2,
+  "week": 25,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Grandma Rosa Can't Reach the Floor",
+      "story": "Grandma Rosa has sore knees, and bending down hurts. When she drops a spoon, a sock or her glasses case, she has to wait for someone to pick it up. Mateo wants her to manage on her own. Can YOU build a grabber that picks up 5 different objects from the floor, without Grandma having to bend down?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for picking things up without bending down?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature grab and hold things of different shapes? Animals grab food, branches and prey of every size. Let's see how their grippers work!",
+      "clues": [
+        {
+          "text": "An elephant's trunk has no bones but tens of thousands of muscle bundles. It can curl around a log to lift it, or pinch a single peanut with the finger-like tip at its end.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Each octopus arm has hundreds of suckers. The arm wraps around shells and rocks of any shape, and the suckers hold on tight.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A chameleon shoots out its tongue in a fraction of a second, up to twice its body length. The sticky tip grabs an insect and pulls it back.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A parrot grips with a strong hooked beak and feet with two toes at the front and two at the back. It can pinch a small seed or wrap around a branch.",
+          "image_url": null,
+          "habitat": "jungle"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Wrap, pinch or stick! Soft parts that wrap around an object fit any shape, like an octopus arm. A pinch holds small things, like a trunk tip or a parrot's beak. And grippy or sticky pads stop things slipping out. Engineers copy these tricks to build soft robot grippers that can pick up an egg without breaking it.",
+      "reveal_hint": "Which objects would you wrap, which would you pinch, and which need grip pads?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Grip lab! Tape two rulers together at one end to make simple tongs. Try to pick up 5 objects from the floor: a sock, a pencil, a spoon, a small ball and an empty plastic bottle. Count how many you pick up. Then try again with rubber bands wrapped round the tips, then with sponge pads taped on, then with loops of sticky tape. Record which tip picks up the most.",
+      "skill_refs": [],
+      "hints": [
+        "Test all four tips on the same 5 objects, so the test is fair.",
+        "Rubber bands and sponge pads usually win. Rubber grips so things don't slip, and sponge squashes to wrap around round things like the ball."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your grabber from the side, from the handle to the gripping end.",
+      "guidance": "Label how it opens and closes, and what the tips are made of. Write how long it is, so Grandma can reach the floor while standing."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a grabber at least 60 cm long from card tubes, rulers, wooden spoons, string, rubber bands, sponge, clothes pegs and tape. Ask an adult to help with any cutting or making holes. Put 5 objects on the floor: a sock, a pencil, a spoon, a small ball and an empty plastic bottle. Stand up and time 1 minute. How many can you pick up and drop into a box?",
+      "test_criteria": [
+        "How many of the 5 objects can you pick up in 1 minute?",
+        "Can you use it while standing up straight, without bending?",
+        "Improve one thing and test again. Did you pick up more this time?"
+      ],
+      "hints": [
+        "Look at the object you can't pick up. Does it need a pinch, a wrap or more grip?",
+        "Put soft, grippy pads on the tips (sponge wrapped in rubber bands) so they wrap around round things, and make the tips narrow enough to pinch a pencil. A string pull that closes the jaws gives you a strong squeeze."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Grandma Rosa dropped her glasses case, picked it straight up with your grabber, and laughed: \"I don't need to wait for anyone now!\"",
+      "share_prompt": "Share your grabber and how many objects it picked up on the Ideas Wall. Did you use a wrap, a pinch or grip pads?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "how_might_we",
+      "age_mode": "young"
+    },
+    {
+      "kind": "how_might_we",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Test which grabber tips grip best, then build a grabber that picks up 5 different objects in 1 minute."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Soft Robotic Grippers",
+      "summary": "Compare pinch, wrap and friction grips, explain why soft materials grip odd shapes, and relate your design to octopus-inspired and fin-ray robot grippers."
+    }
+  ]
+}

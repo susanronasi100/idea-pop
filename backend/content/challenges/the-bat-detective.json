@@ -1,0 +1,104 @@
+{
+  "title": "The Bat Detective",
+  "season": 2,
+  "week": 31,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Lost in the Dark!",
+      "story": "The power is out at Ali's house, the torch battery is flat, and his little sister's favourite toy robot is lost somewhere in the dark room. Bats hunt tiny moths in total darkness, just by listening. Can YOU become a sound detective and find hidden objects using only sound?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for finding something without seeing it?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature find things in the dark? Some animals find food, walls and even tiny insects without seeing a thing. Let's listen in!",
+      "clues": [
+        {
+          "text": "A bat shouts short, high clicks, too high for us to hear, and listens for the echoes. From the echoes it can tell where a moth is, even in total darkness.",
+          "image_url": null,
+          "habitat": "sky"
+        },
+        {
+          "text": "A dolphin makes clicks and sends them out through the round, fatty bump on its forehead, called the melon. The echoes help it find fish hiding in murky water.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "Oilbirds live in pitch-dark caves in South America. They make clicking sounds we CAN hear, and use the echoes to fly without crashing into the cave walls.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A barn owl's ears are at different heights on its head. A mouse's rustle reaches one ear a tiny bit sooner or louder than the other, so the owl knows exactly where to pounce.",
+          "image_url": null,
+          "habitat": "grassland"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Send a sound, then listen for the echo. Sound bounces off things and comes back. A quick echo means something is close, and a slow echo means it is far away. Having two ears helps too: the ear that hears a sound first, or louder, is the one pointing towards it. Engineers copy this in sonar for ships and in parking sensors that beep when a car gets close to a wall.",
+      "reveal_hint": "How could you send a sound, catch the echo, and use BOTH ears to tell where something is?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Play Echo or No Echo. Sit on a chair with a blindfold on and a partner beside you. Your partner quietly holds a big tray or a large hardback book about 30 cm in front of your face, or holds nothing. Click your tongue or say 'ssss' and guess: is something there? Do 10 rounds and count your right guesses. Then try again with a clap and with a hum, and compare.",
+      "skill_refs": [],
+      "hints": [
+        "Keep your head still and make the SAME short sound every time, so the only thing that changes is the echo.",
+        "Sharp, short sounds like a tongue click work best. With the tray there, the sound seems louder and 'fuller', a bit like talking into a box."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your Echo Finder kit and how you will use it.",
+      "guidance": "Show the sound you send, the path it takes to the object and back, and your ear cones. Draw arrows for the sound going out and the echo coming back."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build an Echo Finder kit: a clicker (two spoons, a bottle-cap clicker or your tongue) and two big paper-cone ears you can hold behind your ears. Sit on a chair with a blindfold. Your partner silently holds a tray or big book at one of 5 spots around your head: in front, left, right, above or low down. Click, listen and point. Always stay seated, and keep the floor around you clear.",
+      "test_criteria": [
+        "How many of the 5 hidden spots did you find?",
+        "Does it work better with the paper cones or without them?",
+        "Improve one thing and test again. Try a sharper click or bigger cones. Did you find more?"
+      ],
+      "hints": [
+        "Turn your head slowly from side to side while you click. The echo gets stronger when you face the object.",
+        "Make the cones big and open, and cup them just behind your ears facing forward, like a bat's big ears. They catch more echo from the front."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Ali clapped, listened and found the toy robot under the sofa before the lights came back on! You found things in the dark, just like a bat.",
+      "share_prompt": "Share a photo of your Echo Finder kit and your score out of 5 on the Ideas Wall. Which nature trick helped you most?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "nature_translator",
+      "age_mode": "young"
+    },
+    {
+      "kind": "nature_translator",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Play Echo or No Echo, build a clicker and paper-cone ears, and find hidden objects blindfolded using only sound."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Echolocation and Sonar",
+      "summary": "Use the speed of sound (about 340 m/s) to work out echo times, compare how well different sounds work, and relate your kit to bat echolocation, sonar and car parking sensors."
+    }
+  ]
+}

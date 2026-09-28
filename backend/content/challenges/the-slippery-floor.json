@@ -1,0 +1,104 @@
+{
+  "title": "The Slippery Floor",
+  "season": 2,
+  "week": 34,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Grandma's Slippery Step!",
+      "story": "Every time it rains, the doorstep at Grandma's house turns slippery, and last week Grandma nearly fell. She loves going out to her garden, but now she worries about that step. Can YOU design a sole or a mat that grips on a wet slope, inspired by animals that never slip?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for stopping a foot slipping on a wet surface?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature grip on wet, slippery surfaces? Some animals climb wet leaves, cling to wet rocks and land on slippery branches without sliding. Let's find out how!",
+      "clues": [
+        {
+          "text": "A tree frog's toe pads are covered in tiny six-sided tiles with little channels between them. The channels drain water away, so the soft pad can touch the leaf and grip, even in the rain.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A gecko's toes are covered in millions of tiny hairs. They reach into every little bump of a surface and touch it so closely that the gecko can walk up glass.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "An octopus has hundreds of suckers on its arms. Each sucker seals against a wet rock and grips tight, even with waves crashing over it.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "A cat has soft, squishy paw pads. They squash into the tiny bumps of a surface, which helps the cat grip when it lands and climbs.",
+          "image_url": null,
+          "habitat": null
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Drain and grip! On a wet surface, a thin layer of water sits between your foot and the floor, like a slide. Channels and grooves push that water out of the way, so the sole can touch the floor again. Then soft, squishy materials hug the tiny bumps of the surface and grip. Engineers use the same trick in car tyres and in the grooves on walking boots and anti-slip mats.",
+      "reveal_hint": "Where will the water go when your sole presses down, and what soft material will touch the floor?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Make a test ramp from a plastic tray or chopping board. Tape 4 materials, one at a time, to the bottom of a small box with something heavy inside, like a 200 g bag of rice: smooth plastic, felt, craft foam and a piece of rubber glove. Spray the ramp with water, put the box at the top, and slowly lift one end. Measure the angle where it starts to slide, using a protractor or an angle app on an adult's phone.",
+      "skill_refs": [],
+      "hints": [
+        "Keep everything the same except the material: same box, same weight, same amount of water. Test each material 3 times and use the middle result.",
+        "Lift the ramp very slowly and stop the moment the box moves. If you lift fast, it'll slide early and you'll get a smaller angle than the real one."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your sole or mat from underneath, and a side view.",
+      "guidance": "Show the pattern of your channels or grooves, and draw arrows to show where the water will go. Label the soft material that grips."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a sole or mat sample from craft foam, rubber, felt or an old bath mat. Cut channels or a pattern into it with scissors (ask an adult if you need a craft knife). Tape it under your test box, spray the ramp with water, and lift slowly until it slides. Measure the angle.",
+      "test_criteria": [
+        "At what angle (°) does your sample start to slide on the wet ramp?",
+        "How does it compare with plain smooth plastic?",
+        "Improve one thing and test again. Try deeper channels or a softer material. Did it grip at a steeper angle?"
+      ],
+      "hints": [
+        "Channels only work if the water has somewhere to escape. Make sure they run all the way to the edge of your sample.",
+        "Copy the tree frog: cut a grid of small squares or hexagons into soft craft foam, with thin channels between them. Soft pads plus open channels grip best."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Grandma's new frog-foot mat stays grippy even in the rain, and she's back out in her garden every day! You beat the slippery step, just like a tree frog.",
+      "share_prompt": "Share a photo of your sole or mat and your best wet-ramp angle on the Ideas Wall. Which nature trick made it grip?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "five_whys",
+      "age_mode": "young"
+    },
+    {
+      "kind": "five_whys",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Find the real reason people slip, test materials on a wet ramp, then design a grippy sole or mat with channels like a tree frog's toes."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Wet Friction and Drainage",
+      "summary": "Explain how a water film lowers friction, measure the slip angle for different materials and groove patterns, and relate your design to tree frog toe pads and tyre treads."
+    }
+  ]
+}

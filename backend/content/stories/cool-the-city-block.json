@@ -1,0 +1,275 @@
+{
+  "function_question": "How does nature cool a place without energy?",
+  "hero": {
+    "name": "Sara",
+    "role": "a youth council member, 14",
+    "image": "/landing/hero-kid-5.png",
+    "emoji": "🌳"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🏙️",
+      "text": "There was a girl called Sara, 14, who sat on her city's youth council and loved her busy street."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "☀️",
+      "text": "Sara walked through the shady park, then onto her own block, where by noon the pavement felt like an oven."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🌡️",
+      "text": "A heat wave hit. The street was 5 °C hotter than the park, and her elderly neighbour couldn't sleep. \"The council wants a plan by Friday,\" Sara said. \"But we can't give everyone air conditioning.\""
+    }
+  ],
+  "card": {
+    "hero": "Sara, 14, youth council member",
+    "place": "A hot concrete city street",
+    "problem": "The street is 5 °C hotter than the park",
+    "goal": "A street model that stays cooler in the sun",
+    "rules": "No electricity, and prove it with thermometers",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The street that bakes",
+      "line": "Sara wonders: how can a whole street cool down without a single machine?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Sara needs a co-designer",
+      "line": "A council plan needs data and fresh eyes. Will you join Sara?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "Nature's heat beaters",
+      "line": "You and Sara meet four living things that stay cool in brutal heat."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of stacking",
+      "line": "The heroes reveal why many small tricks beat one big one."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The surface lab",
+      "line": "Sara lines up four card squares in the sun and opens her notebook."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The Design Spiral",
+      "line": "You learn the first three steps that real biomimicry designers use."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The street plan",
+      "line": "Every good council plan starts as a labelled drawing."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "Model against model",
+      "line": "The first readings are close. You change one thing and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "A greener block",
+      "line": "The council says yes, and the first street trees go in."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Sara's street is 5 °C hotter than the park, and the council wants a plan that uses no electricity. Can you help her? Let's start!",
+    "your_idea": "Some designers already have a hunch about cooling a street. Do you?",
+    "nature_clues": "Nature has no air conditioners, yet life thrives in deserts and savannas. Tap each card to see how four heroes beat the heat!",
+    "design_secret": "Here's what all four heroes have in common…",
+    "skill": "Scientists test one variable at a time. Which surface will be hottest after 30 minutes? Predict first, then read the thermometers.",
+    "sketch": "Draw your street as a cross-section and label every strategy with the hero that inspired it.",
+    "build_and_test": "Put your model and the plain control side by side in full sun. Read both thermometers every 10 minutes for 30 minutes. How many degrees cooler is yours?",
+    "retry_tip": "Real engineers find out what each part is worth. Take ONE strategy out, test again, and see how much the temperature changes.",
+    "ending": "And ever since then, Sara's block has shady trees and cool white roofs, and her neighbour sleeps well even on the hottest nights!"
+  },
+  "quick_check": {
+    "question": "After 30 minutes in the sun, the plain model reads 41 °C and Sara's model reads 36.5 °C. How much cooler is Sara's model?",
+    "options": [
+      "3.5 °C",
+      "4.5 °C",
+      "5.5 °C"
+    ],
+    "answer": 1,
+    "right": "Right! 41 minus 36.5 is 4.5 °C. That's almost the whole gap between the street and the park!",
+    "wrong": "Not quite. Subtract Sara's reading from the control: 41 minus 36.5."
+  },
+  "clue_cards": [
+    {
+      "name": "Tree canopy",
+      "emoji": "🌳",
+      "image": null,
+      "tagline": "Living air conditioner",
+      "trick": "Its leaves shade the ground and release water vapour through tiny pores.",
+      "does": "Shade plus evaporation can keep the ground 10 to 20 °C cooler than sunny asphalt.",
+      "group": "shade"
+    },
+    {
+      "name": "Termite mound",
+      "emoji": "🏰",
+      "image": null,
+      "tagline": "Breathing tower",
+      "trick": "A tall mound full of tunnels and chimneys.",
+      "does": "Daily warming and cooling push air through the nest, so it gets fresh air with no fan.",
+      "group": "airflow"
+    },
+    {
+      "name": "Saharan silver ant",
+      "emoji": "🐜",
+      "image": null,
+      "tagline": "Desert sprinter",
+      "trick": "Triangular silver hairs cover its body.",
+      "does": "They reflect sunlight and shed heat, keeping it 5 to 10 °C cooler on sand hotter than 60 °C.",
+      "group": "reflect"
+    },
+    {
+      "name": "Kalahari ground squirrel",
+      "emoji": "🐿️",
+      "image": null,
+      "tagline": "Parasol carrier",
+      "trick": "It flips its bushy tail over its back like a sunshade.",
+      "does": "Carrying its own shade lets it keep feeding in the midday sun for longer.",
+      "group": "shade"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "shade",
+      "label": "⛱️ Block the sun (shade)"
+    },
+    {
+      "key": "reflect",
+      "label": "🪞 Bounce the sun back (reflect)"
+    },
+    {
+      "key": "airflow",
+      "label": "🌬️ Move the hot air out (ventilate)"
+    }
+  ],
+  "predict": {
+    "prompt": "Traps heat or keeps it cool? Predict first!",
+    "choices": [
+      "Traps heat",
+      "Keeps it cool"
+    ],
+    "items": [
+      {
+        "emoji": "🛣️",
+        "label": "A black asphalt road in full sun",
+        "answer": 0
+      },
+      {
+        "emoji": "🏠",
+        "label": "A white-painted roof",
+        "answer": 1
+      },
+      {
+        "emoji": "🌳",
+        "label": "A row of leafy street trees",
+        "answer": 1
+      }
+    ],
+    "explain": "Dark surfaces absorb most of the sunlight that hits them and turn it into heat. White surfaces reflect much more of it, and trees add shade plus cooling from evaporating water."
+  },
+  "lab": {
+    "title": "The surface heat lab",
+    "predict": "Four card squares sit in the sun for 30 minutes, each over its own thermometer. Which one will stay coolest?",
+    "options": [
+      "Black card",
+      "White card",
+      "Kitchen foil",
+      "Black card with a damp cloth"
+    ],
+    "measure": "temperature after 30 min (°C)",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "design_spiral",
+    "name": "Biomimicry Design Spiral",
+    "intro": "The Biomimicry Design Spiral is the process real biomimicry designers use. It has 6 steps, and you loop round it again and again. Today you'll learn the first 3: Define, Biologize and Discover.",
+    "example_object": "an umbrella",
+    "parts": [
+      {
+        "key": "1",
+        "name": "Define",
+        "what": "Say exactly what your design must do, for whom, and where.",
+        "example": "☂️ Keep one person dry in heavy rain and strong wind, without flipping inside out.",
+        "starter": "Sara's street must stay cooler for the people who…"
+      },
+      {
+        "key": "2",
+        "name": "Biologize",
+        "what": "Turn that job into a nature question: How does nature…?",
+        "example": "☂️ How does nature shed water and survive strong gusts?",
+        "starter": "How does nature keep a place cool without…"
+      },
+      {
+        "key": "3",
+        "name": "Discover",
+        "what": "Find living things that are experts at it, and how they do it.",
+        "example": "☂️ A lotus leaf beads rain off with tiny waxy bumps, and a palm leaf bends in the wind instead of snapping.",
+        "starter": "One expert at staying cool is… and it does it by…"
+      }
+    ],
+    "locked": [
+      "4",
+      "5",
+      "6"
+    ],
+    "badge": "Spiral Starter"
+  },
+  "sketch_checklist": [
+    "I drew my street as a labelled cross-section.",
+    "I named the living thing behind every cooling strategy.",
+    "I marked where the thermometer goes and predicted my result."
+  ],
+  "test": {
+    "measure": "°C cooler than the plain model after 30 min in sun",
+    "higher_is_better": true,
+    "check_question": "Fair test check: what was different between your two models?",
+    "check_options": [
+      "Only my cooling strategies",
+      "My strategies AND the spot or the time",
+      "I'm not sure yet"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick cooled your street the most?",
+    "options": [
+      "🌳 Tree canopy shade",
+      "🏰 Termite mound airflow",
+      "🐜 Silver ant reflection",
+      "🐿️ Squirrel's tail parasol"
+    ]
+  },
+  "sticker": {
+    "name": "City Cooler",
+    "emoji": "🏙️"
+  }
+}

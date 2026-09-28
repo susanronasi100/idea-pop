@@ -1,0 +1,96 @@
+{
+  "title": "Fresh Water from the Sea",
+  "season": 2,
+  "week": 46,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Salt in the Wells",
+      "story": "On Maya's small island, the village wells are turning salty. When people pump out more fresh water than the rain puts back, seawater creeps in underground. While the village works on a long-term plan, Maya wants a backup: a still that turns salt water into fresh water using only sunshine. Your mission: design a solar still, measure how many millilitres of fresh water it makes in 2 hours, and prove the salt stayed behind. This is a science demo, so never drink or taste your experiment water.",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for getting fresh water out of salt water with no electricity?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature separate salt from water? Living things in and around the sea do it every day, powered by the sun or by their own cells. Investigate their strategies!",
+      "clues": [
+        {
+          "text": "Red mangrove trees stand in seawater, yet their roots block more than 90% of the salt. Ultra-fine filters in the outer layers of the roots let water molecules pass but hold most of the salt back, a natural membrane filter.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "An albatross can drink seawater. Salt glands above its eyes pull extra salt out of its blood and push it out as a very salty liquid that drips from its beak. The drips are even saltier than the sea.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "When seawater freezes, the growing ice crystals have no room for salt, so salty brine is squeezed out and drains away. Old sea ice that has survived a summer is almost fresh: polar explorers melted it for drinking water.",
+          "image_url": null,
+          "habitat": "arctic"
+        },
+        {
+          "text": "A big tree can lift hundreds of litres of water in one day, powered by the sun. Water evaporates from tiny pores in its leaves as pure vapour, and the minerals it carried stay behind in the plant.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Nature separates salt from water in two main ways. 1) Change the water's state: sun energy evaporates the water (or cold freezes it), and the salt can't come along, so it is left behind. 2) Use a filter with holes so small that water molecules squeeze through but salt doesn't, like mangrove roots. Engineers copy both. A solar still uses evaporation. Reverse-osmosis plants push seawater through membranes at about 60 times normal air pressure, and the company Aquaporin makes membranes with the same water-channel proteins found in living cells. The trade-off: evaporation is simple and free but slow, while membranes are fast but need pumps and energy.",
+      "reveal_hint": "What is left behind when the sun dries up a puddle of seawater? How could the sun help Maya?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Run a fair test of evaporation before you build. Make salt water like the sea: 35 g of salt in 1 litre of tap water. Pour exactly 50 ml into each of two identical shallow dishes. Put black paper under one dish (your variable) and white paper under the other (your control). Leave both in the same sunny spot for 2 hours, then measure what is left with a syringe or measuring jug. Record start volume, end volume and water lost for each dish in a table. Finally, let one drop of your salt water dry on a small mirror: the white crust is the salt that stayed behind. Never drink or taste experiment water.",
+      "skill_refs": [],
+      "hints": [
+        "Change only ONE thing between your two dishes. Same amount of water, same dish, same spot, same time: only the colour underneath is different.",
+        "Dark surfaces absorb more sunlight and get hotter, so the dish on black paper should lose more water. If the two results are almost the same, test for longer or find a sunnier spot."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your solar still as a cross-section, as if you cut it in half.",
+      "guidance": "Label the salt water, the dark base, the clear cover, the drip point and the clean cup. Add arrows for sunlight, water vapour, drops and the salt that stays behind. Write your prediction: how many ml in 2 hours?"
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a still: a wide bowl with 500 ml of salt water, a clean cup standing in the middle (higher than the water), cling film stretched tight over the top, and a small pebble on the film just above the cup so drops run to that point and fall in. Put it in full sun for 2 hours, then measure the fresh water in the cup with a syringe. Build a second identical still in the shade as your control. Then do the salt check: let a drop of your collected water and a drop of salt water dry side by side on a mirror. This water is for science only, never for drinking.",
+      "test_criteria": [
+        "How many ml of fresh water did your still make in 2 hours? A bowl-sized still usually makes somewhere between 5 and 30 ml.",
+        "Compare with your shade control. How many times more water did the sunny still make?",
+        "Salt check: does a dried drop of your collected water leave less white crust than the salt water drop?",
+        "Improve one thing and test again. Try a dark base or a wider bowl, and add the new ml to your data table."
+      ],
+      "hints": [
+        "Drops need a low point to fall from. If water runs down the inside of the bowl instead, pull the film tighter and move the pebble right above the cup.",
+        "Output depends on sunlight, heat and surface area. A wide, shallow bowl with a black base and a cover sealed all round the edge will beat a deep bowl, because more water is warmed and no vapour escapes."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Drip, drip, fresh! Your still made fresh water with nothing but sunshine, just like a leaf and the sea ice do. Maya's village now has a backup still, and a plan to fix the root cause too.",
+      "share_prompt": "Share a photo of your still and your data table on the Ideas Wall: ml in 2 hours in the sun and in the shade. Which nature strategy did you copy, and how big would a still need to be to make 1 litre a day?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "five_whys",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Solar Desalination",
+      "summary": "Trace the root cause of saltwater intrusion with 5 Whys, run a controlled evaporation test, build a solar still, and compare evaporation with membrane desalination (reverse osmosis, aquaporins) for energy, speed and cost."
+    }
+  ]
+}

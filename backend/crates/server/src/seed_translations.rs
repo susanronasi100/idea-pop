@@ -1,4 +1,4 @@
-//! Persian (fa) translations of the Season 1 missions.
+//! Persian (fa) translations of the Season 1 and Season 2 missions.
 //!
 //! Each slug has two files under `backend/content/fa/`: `challenges/<slug>.json`
 //! (title, the 8 steps, the age-tier variants) and `stories/<slug>.json` (the
@@ -40,6 +40,36 @@ pub const FA: &[(&str, &str, &str)] = &[
     fa!("spot-the-fake"),
     fa!("train-your-pet-algorithm"),
     fa!("bring-it-to-life"),
+    fa!("light-the-way-home"),
+    fa!("the-tower-that-wont-fall"),
+    fa!("the-too-hot-slide"),
+    fa!("the-waggle-dance-treasure-hunt"),
+    fa!("a-helping-hand-for-grandma"),
+    fa!("dive-and-rise"),
+    fa!("the-jumping-grasshopper-toy"),
+    fa!("the-lunch-trash-mountain"),
+    fa!("the-stuck-ketchup-bottle"),
+    fa!("the-holiday-plant-sitter"),
+    fa!("the-bat-detective"),
+    fa!("the-spinning-seed-helicopter"),
+    fa!("the-new-kid-cant-find-the-way"),
+    fa!("the-slippery-floor"),
+    fa!("the-hallway-traffic-jam"),
+    fa!("the-tent-in-a-pocket"),
+    fa!("a-doorbell-grandpa-can-feel"),
+    fa!("the-sunflower-solar-garden"),
+    fa!("the-squirrel-proof-bird-feeder"),
+    fa!("the-tightrope-circus"),
+    fa!("cool-the-city-block"),
+    fa!("the-whale-fin-fan"),
+    fa!("the-slime-mold-map"),
+    fa!("the-lightest-strongest-bridge"),
+    fa!("the-octopus-gripper"),
+    fa!("fresh-water-from-the-sea"),
+    fa!("colours-without-paint"),
+    fa!("the-flock-algorithm"),
+    fa!("the-self-healing-tyre"),
+    fa!("the-inventors-fair"),
 ];
 
 /// Merge one mission's challenge + story files into the stored translation.

@@ -1,0 +1,104 @@
+{
+  "title": "The Waggle Dance Treasure Hunt",
+  "season": 2,
+  "week": 24,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "A Treasure Hunt with No Words",
+      "story": "It's the big treasure hunt in the school nature garden, and Kofi's teammate Sami has lost his voice. The doctor says Sami must rest it and not talk at all. One of them spots where the treasure is hidden and has to tell the other, fast and silently. Can YOU invent a code with no words that leads a teammate to the treasure?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for sharing directions without talking?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature share directions without words? Animals send messages with dances, smells, flashes and songs. Let's crack their codes!",
+      "clues": [
+        {
+          "text": "A honeybee that finds flowers does a waggle dance in the hive. The angle of her waggle shows the direction of the flowers compared with the Sun, and the longer she waggles, the farther away they are.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "When an ant finds food, it leaves a scent trail on the ground all the way home. Other ants follow the smell straight to the food.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "Each kind of firefly has its own flash pattern, like a secret Morse code. A firefly only answers flashes that match its own kind's pattern.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Male humpback whales sing long songs made of repeating patterns. All the whales in one ocean area sing the same song, and it can be heard many kilometres away.",
+          "image_url": null,
+          "habitat": "ocean"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Code the message! A signal only works when the sender and the receiver agree on simple rules first. For the honeybee, angle means direction and length means distance. Keep your rules few and clear, split the message into parts (which way, and how far), and your teammate can decode it every time.",
+      "reveal_hint": "What two things does your teammate need to know to find the treasure?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Silent signal practice. With a partner, hide a small toy somewhere in a room or the garden. Agree on a code first, for example: your arm points the way, and each clap means 5 big steps. Send the message without words, and see how close your partner gets. Then swap roles and try a different code.",
+      "skill_refs": [],
+      "hints": [
+        "Agree on your rules BEFORE the hunt starts. A code nobody has agreed on is just a mystery.",
+        "Split the message into direction and distance, like a bee: one signal for which way (pointing, or an arrow of sticks) and one for how far (claps, stomps or taps, each worth 5 steps)."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Design your code key: a card that explains every signal in your code.",
+      "guidance": "Draw each signal and write what it means. Show one for direction and one for distance, and add a signal for \"stop, you're here\"."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Hide the treasure (a small toy) in a safe, open space, like a garden or a hall, with an adult nearby. Your teammate waits with their eyes closed. Then use only your code, no words, to guide them to it. Count how many steps away from the treasure they end up.",
+      "test_criteria": [
+        "How many steps away from the treasure did your teammate end up?",
+        "Could your teammate decode the message using only your code key?",
+        "Improve one thing and test again. Did your teammate get closer?"
+      ],
+      "hints": [
+        "Test your code on someone who didn't help invent it. If they can use your code key, it's clear.",
+        "Give each signal ONE meaning only: point for direction, one clap per 5 steps for distance, and both hands up for \"stop, it's here\". Send the message twice so your teammate can check it."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Kofi and Sami found the treasure first, and Sami didn't say a single word! Your code worked like a honeybee's dance.",
+      "share_prompt": "Share your code key on the Ideas Wall. Which animal's code gave you your idea?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "brainstorm",
+      "age_mode": "young"
+    },
+    {
+      "kind": "brainstorm",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Invent a silent code for direction and distance, then use it to guide a teammate to hidden treasure."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Signals and Codes: Encoding Direction and Distance",
+      "summary": "Encode direction and distance like the honeybee waggle dance, measure your error in steps, and explore how repeating a message makes a code more reliable."
+    }
+  ]
+}

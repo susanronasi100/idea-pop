@@ -1,0 +1,104 @@
+{
+  "title": "The Spinning Seed Helicopter",
+  "season": 2,
+  "week": 32,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Seeds Need a Soft Landing!",
+      "story": "Sofia grows flowers in her balcony garden, and the community garden below has asked for some of her seeds. But when seeds are just dropped, they fall fast and crash onto the path. Can YOU design a paper 'seed' that falls as slowly as possible, so it floats gently down instead of crashing?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for making something fall slowly?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature slow a fall? Plants can't walk, so many of them send their seeds flying on the wind. Let's see how they do it!",
+      "clues": [
+        {
+          "text": "A maple seed has one long wing. As it falls, it spins like a tiny helicopter. The spinning makes lift, so it drifts down slowly and the wind can carry it far from the tree.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A dandelion seed hangs under a parachute of about 100 fluffy bristles. The fluff catches so much air that the seed can float for kilometres on a breeze.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "The Javan cucumber vine, called Zanonia, drops a paper-thin seed with wings about 13 cm wide. It glides gently in wide circles, and its shape inspired some of the very first aeroplanes.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A flying squirrel has a stretchy skin sail between its front and back legs. It spreads out like a kite and glides from tree to tree, sometimes more than 50 metres.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Spin, drag or glide! Spinning wings push air down and make lift, like a helicopter. Big, light, fluffy parachutes catch lots of air, which slows the fall (this is called drag). And wide, flat wings turn falling into gliding forwards. The lighter the seed and the more air it catches, the slower it falls. Engineers use the same ideas in parachutes and in tiny sensors designed to spin down like maple seeds.",
+      "reveal_hint": "Will your seed spin, catch air like a parachute, or glide?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Hold 4 things at the same height, about 1 metre: a flat sheet of paper, the same sheet crumpled into a ball, a paper spinner (a strip with two folded-out wings and a paper clip at the bottom) and a small tissue parachute with a paper clip hanging below. Drop each one 3 times and time the fall with a stopwatch. Write down the average for each.",
+      "skill_refs": [],
+      "hints": [
+        "Timing a short fall is tricky! Drop each one 3 times and use the middle time, so one slow button press doesn't spoil your results.",
+        "Crumpling the paper doesn't change its weight, only its shape. So if the ball falls faster, the shape must be what slows the flat sheet down."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw 3 different seed designs, then circle the one you'll build first.",
+      "guidance": "Label the part that makes each one spin, catch air or glide. Write where the weight (like a paper clip) goes."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build your seed from paper, tissue, card, thread and paper clips. Ask an adult to hold it up at 2 metres (standing on the floor with arms raised, or on a sturdy step). Drop it indoors, away from fans and open windows, and time the fall. Never lean over a balcony or out of a window to test.",
+      "test_criteria": [
+        "How many seconds does your seed take to fall 2 m? Take the middle of 3 drops.",
+        "Does it fall the same way every time, or does it tumble?",
+        "Improve one thing and test again. Try longer wings or a lighter clip. Did it fall more slowly?"
+      ],
+      "hints": [
+        "If your seed tumbles instead of spinning, move the weight lower down. A little weight at the bottom keeps it pointing the right way.",
+        "For a spinner, make the wings long and thin, and fold them out in opposite directions. Longer wings usually spin more slowly and fall more slowly."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Sofia's paper seeds twirl gently down into the community garden, and the gardeners cheer! You slowed a fall just like a maple seed.",
+      "share_prompt": "Share a photo of your seed and your best time for a 2 m fall on the Ideas Wall. Did it spin, parachute or glide?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "brainstorm",
+      "age_mode": "young"
+    },
+    {
+      "kind": "brainstorm",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Time falling shapes, brainstorm lots of seed designs, then build the slowest-falling seed you can."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Drag, Lift and Autorotation",
+      "summary": "Compare drag, lift from autorotation and gliding, change one variable at a time (wing length, mass, area), graph fall time, and relate your design to maple seeds and parachutes."
+    }
+  ]
+}

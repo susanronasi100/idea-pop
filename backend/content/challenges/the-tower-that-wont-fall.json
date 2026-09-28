@@ -1,0 +1,104 @@
+{
+  "title": "The Tower That Won't Fall",
+  "season": 2,
+  "week": 22,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Flag Tower Blew Over!",
+      "story": "Last year, a gust of wind knocked over the tall flag tower at the school fair, and the flags ended up in the lemonade. This year, Dara's class has to build a new one that stays standing. Can YOU build the tallest paper tower that survives a fan's strongest wind, without taping it to the table?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a tall tower that won't blow over?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature stand tall in strong wind? Some plants grow taller than houses and never blow down. Let's find out how!",
+      "clues": [
+        {
+          "text": "Bamboo can grow over 20 metres tall. Its stem is a hollow tube, and solid rings called nodes every few centimetres stop it from buckling or squashing flat.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A grass stem is a thin hollow tube too. In a strong wind it bends right over, then springs back up instead of snapping.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "In a storm, a palm tree's trunk bends like a fishing rod, and its big leaves fold back into a narrow shape so the wind rushes past them.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "Some termite mounds are taller than a grown-up. They are wide and heavy at the bottom and narrow at the top, so they never tip over.",
+          "image_url": null,
+          "habitat": "grassland"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Bend, don't break! A hollow tube is stiff for its weight, and rings along it stop it from buckling. A wide base makes a tower hard to tip over. A flexible top that bends, or has gaps, lets the wind pass instead of pushing the whole tower down. Engineers in Hong Kong still use bamboo tubes to build scaffolding around skyscrapers.",
+      "reveal_hint": "Where would you put tubes, rings, a wide base and gaps in your tower?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Make 4 paper columns, all the same height: a flat sheet standing up, a rolled tube, a folded triangle tube, and a rolled tube with 3 paper rings taped around it. Stand each one on the table and gently stack books on top, one at a time. Record how many books each holds before it buckles.",
+      "skill_refs": [],
+      "hints": [
+        "Use the same size of paper and the same books every time, so the test is fair.",
+        "The ringed tube should win. A tube spreads the weight all the way around, and the rings stop its walls bulging and folding, just like bamboo nodes."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your tower from the side, with its height marked in centimetres.",
+      "guidance": "Label the tubes, the rings, the base and any gaps for the wind. Mark where you think it might bend or break."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a tower from 10 sheets of paper and 1 metre of tape. Don't tape it to the table. Ask an adult to set up a fan 1 metre away and switch it on at speed 1, then 2, then 3. Keep fingers and paper away from the fan blades. Measure the tallest height that's still standing at speed 3.",
+      "test_criteria": [
+        "What height in centimetres survives fan speed 3?",
+        "Which part failed first: the base, the middle or the top?",
+        "Improve one thing and test again. How many centimetres taller could you go?"
+      ],
+      "hints": [
+        "Test in rounds, like boss levels: beat speed 1, fix the weak spot, then take on speed 2.",
+        "Roll the paper into tubes for the legs, tape rings around them every 10 cm, spread the legs into a wide triangle base, and make the top thin and bendy so the wind slips past."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The wind blew all day at the school fair, and the new flag tower stood tall. Not a single flag landed in the lemonade!",
+      "share_prompt": "Share your tower and its height at fan speed 3 on the Ideas Wall. Which SCAMPER letter gave you your best idea?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "scamper",
+      "age_mode": "young"
+    },
+    {
+      "kind": "scamper",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Test which paper column shape is strongest, then build the tallest tower that survives a fan at speed 3."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Wind-Resistant Structures",
+      "summary": "Explain buckling, stiffness for weight and wind drag, graph height against fan speed, and compare your tower with bamboo scaffolding and flexible palm trunks."
+    }
+  ]
+}

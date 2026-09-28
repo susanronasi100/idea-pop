@@ -1,0 +1,263 @@
+{
+  "function_question": "How does nature make things easy to see in the dark?",
+  "hero": {
+    "name": "Nika",
+    "role": "Grandpa Sam's granddaughter",
+    "image": "/landing/hero/girl.webp",
+    "emoji": "🔦"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🏡",
+      "text": "There was a girl called Nika who loved staying at Grandpa Sam's house, with its big wild garden full of vegetables and birds."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🍅",
+      "text": "After dinner, Grandpa walked down the dark garden path to check on his tomatoes, and Nika watched from the window."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🌑",
+      "text": "Grandpa tripped on the path and nearly fell. \"I won't put up a big lamp,\" he said. \"It would wake the birds in the hedge.\""
+    }
+  ],
+  "card": {
+    "hero": "Nika, Grandpa Sam's granddaughter",
+    "place": "Grandpa Sam's garden",
+    "problem": "Grandpa trips on the dark path at night",
+    "goal": "Mark the path so it can be seen at night",
+    "rules": "No electricity and no bright lamps",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "A trip in the dark",
+      "line": "Nika wonders: how can Grandpa see his path without waking the birds?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Nika needs a night partner",
+      "line": "A dark garden needs two sharp-eyed designers. Will you join Nika?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The nature heroes",
+      "line": "You and Nika meet heroes that glow and shine in the dark."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of reflect and glow",
+      "line": "The heroes share how to shine without making much light."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The torch hunt",
+      "line": "Nika switches off the lights and hands you a small torch."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "Grandpa's empathy map",
+      "line": "To help Grandpa, first you have to really understand him."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The plan",
+      "line": "Every great path starts as a drawing."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The night test",
+      "line": "Some markers vanish in the dark. You fix them, and try again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "A safe walk home",
+      "line": "Grandpa walks the whole path, and the birds keep sleeping."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Grandpa Sam keeps tripping on his garden path at night, but a bright lamp would wake the birds. Can you help Nika light his way? Let's start!",
+    "your_idea": "Some designers already have a spark of an idea for seeing in the dark. Do you?",
+    "nature_clues": "Nature has been shining in the dark for millions of years. Tap each card to meet four heroes of the night!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which card will shine back brightest in your torch beam? Clear the floor before you turn off the lights.",
+    "sketch": "Time to draw Grandpa's path from above, like a real designer!",
+    "build_and_test": "Build 5 markers and line them up in a dark room. How many can you see from 3 metres away?",
+    "retry_tip": "Designers never stop at round 1. Change ONE thing, like the angle or the material, and test again!",
+    "ending": "And ever since then, Grandpa Sam walks his garden path every night with YOUR markers showing the way, and the birds sleep soundly in the hedge."
+  },
+  "quick_check": {
+    "question": "Grandpa's path is 6 metres long. Nika puts a marker every 1 metre, starting 1 metre from the back door. How many markers does she need?",
+    "options": [
+      "5",
+      "6",
+      "7"
+    ],
+    "answer": 1,
+    "right": "Right! Markers at 1, 2, 3, 4, 5 and 6 metres make 6 markers.",
+    "wrong": "Not quite. Try counting: 1 metre, 2 metres, 3 metres… all the way to 6."
+  },
+  "clue_cards": [
+    {
+      "name": "Firefly",
+      "emoji": "✨",
+      "image": null,
+      "tagline": "Summer night flasher",
+      "trick": "It makes light inside its body.",
+      "does": "Almost no energy is lost as heat, so its glow is cool to touch.",
+      "group": "glow"
+    },
+    {
+      "name": "Glow-worm",
+      "emoji": "🐛",
+      "image": null,
+      "tagline": "Cave star",
+      "trick": "It shines a blue-green light on a cave ceiling.",
+      "does": "Insects fly to the glow and get stuck on its sticky silk threads.",
+      "group": "glow"
+    },
+    {
+      "name": "Cat",
+      "emoji": "🐱",
+      "image": null,
+      "tagline": "Night hunter",
+      "trick": "A mirror layer at the back of each eye.",
+      "does": "It bounces light back, so its eyes shine in a torch beam.",
+      "group": "reflect"
+    },
+    {
+      "name": "Herring",
+      "emoji": "🐟",
+      "image": null,
+      "tagline": "Silver flasher",
+      "trick": "Scales full of tiny flat crystals, like mirrors.",
+      "does": "They flash brightly when even a little light hits them.",
+      "group": "reflect"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "glow",
+      "label": "✨ Makes its own glow"
+    },
+    {
+      "key": "reflect",
+      "label": "🪞 Bounces light back"
+    }
+  ],
+  "predict": {
+    "prompt": "Makes its own light, or bounces light back? Predict first!",
+    "choices": [
+      "Makes its own light",
+      "Bounces light back"
+    ],
+    "items": [
+      {
+        "emoji": "✨",
+        "label": "A firefly",
+        "answer": 0
+      },
+      {
+        "emoji": "🚲",
+        "label": "A bike reflector",
+        "answer": 1
+      },
+      {
+        "emoji": "🌕",
+        "label": "The Moon",
+        "answer": 1
+      }
+    ],
+    "explain": "Fireflies make their own light. A bike reflector and the Moon make none at all: they bounce back light from a torch or from the Sun."
+  },
+  "lab": {
+    "title": "The torch hunt lab",
+    "predict": "In a dark room, with a torch next to your eyes, which card will shine back brightest from 3 metres?",
+    "options": [
+      "Black card",
+      "White paper",
+      "Crumpled foil",
+      "Bike reflector tape"
+    ],
+    "measure": "brightness score (0 = can't see it, 5 = dazzling)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "empathy_map",
+    "name": "Empathy Map",
+    "intro": "An Empathy Map helps you understand the person you are designing for. It has 4 boxes: Says, Thinks, Does and Feels. Today you'll learn the first 2: Says and Does.",
+    "example_object": "a bike",
+    "parts": [
+      {
+        "key": "S",
+        "name": "Says",
+        "what": "Write down the exact words the person says.",
+        "example": "🚲 A rider says: \"My chain keeps slipping off!\"",
+        "starter": "When Nika asks about the path, Grandpa says: \"…\""
+      },
+      {
+        "key": "D",
+        "name": "Does",
+        "what": "Watch what the person actually does.",
+        "example": "🚲 The rider checks the chain every morning before riding.",
+        "starter": "At night on the path, Grandpa…"
+      }
+    ],
+    "locked": [
+      "T",
+      "F"
+    ],
+    "badge": "Empathy Starter"
+  },
+  "sketch_checklist": [
+    "I drew the path from above with all my markers.",
+    "I labelled which markers reflect and which ones glow.",
+    "I wrote how far apart and how high my markers are."
+  ],
+  "test": {
+    "measure": "markers seen from 3 m in a dark room (out of 5)",
+    "higher_is_better": true,
+    "check_question": "Bird check: do your markers stay gentle enough not to wake the birds?",
+    "check_options": [
+      "Yes, they only reflect or glow softly",
+      "Mostly",
+      "No, they're too bright"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick lit Grandpa's way home?",
+    "options": [
+      "✨ Firefly glow",
+      "🐛 Glow-worm light",
+      "🐱 Cat's eye mirror",
+      "🐟 Silver fish scales"
+    ]
+  },
+  "sticker": {
+    "name": "Night Guide",
+    "emoji": "🌙"
+  }
+}

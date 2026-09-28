@@ -1,0 +1,107 @@
+{
+  "function_question": "How does nature sink and float on purpose?",
+  "hero": { "name": "Yuki", "role": "Lina's friend and a young aquarium helper", "image": "/landing/start-free-girl.png", "emoji": "🤿" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🐠", "text": "There was a girl called Yuki who helped her friend Lina at an aquarium rescue lab, where sick fish were cared for until they were strong again." },
+    { "beat": "Every day…", "emoji": "🫧", "text": "Yuki fed the fish, checked the water and watched them glide up and down the tanks without even trying." },
+    { "beat": "Until one day…", "emoji": "💍", "text": "A tiny ring fell to the bottom of the practice tank. \"A hand in the water will scare the fish,\" Yuki said. \"We need a little diver that can go down and come back up!\"" }
+  ],
+  "card": {
+    "hero": "Yuki, Lina's friend",
+    "place": "An aquarium rescue lab",
+    "problem": "A ring is stuck at the bottom of the tank",
+    "goal": "A diver that sinks and rises on command",
+    "rules": "No batteries, no hands in the water",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "The lost ring", "line": "Yuki peers into the tank and wonders: how can a toy dive down and come back up?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Yuki needs a co-pilot", "line": "Every submarine needs a co-pilot. Will you dive in with Yuki?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Yuki meet heroes that sink and float whenever they like." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the bubble", "line": "The heroes show how a little air changes everything." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training at the test glass", "line": "Yuki fills a glass with water and hands you a pen cap and some clay." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The why detective", "line": "When the diver won't dive, you ask \"why?\" five times to find the real reason." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great submarine starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The big dive", "line": "The first diver just bobs on top. You find out why, fix it, and dive again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Ring rescued", "line": "The diver rises with the ring on its hook, and the fish never even noticed." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. A ring is stuck at the bottom of the rescue lab's tank, and Yuki needs a diver that sinks and rises on command. Can you help her? Let's start!",
+    "your_idea": "Some engineers already have a bubbly idea for making things sink and float. Do you?",
+    "nature_clues": "Sea creatures have been diving and rising for millions of years. Tap each card to meet four heroes who control their float!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which diver will float just right, with only its tip showing? Do this over a sink or a tray.",
+    "sketch": "Time to draw your diver before and after the squeeze, like a real submarine designer!",
+    "build_and_test": "Build your bottle diver, squeeze to sink, catch the ring and let go to rise. How many seconds does one full rescue take?",
+    "retry_tip": "Diver not diving? Ask \"why?\" until you find the real reason. Change just ONE thing and test again!",
+    "ending": "And ever since then, whenever something falls into a tank, the rescue lab sends down a diver like YOURS, and the fish swim on without a worry."
+  },
+  "quick_check": {
+    "question": "The tank is 30 cm deep. Yuki's diver sinks 10 cm every second. How many seconds does it take to reach the ring?",
+    "options": ["3 seconds", "10 seconds", "30 seconds"],
+    "answer": 0,
+    "right": "Right! 10 cm, 20 cm, 30 cm: that's 3 seconds to reach the bottom.",
+    "wrong": "Not quite. Count up in tens: after 1 second it's 10 cm down, after 2 seconds it's 20 cm…"
+  },
+  "clue_cards": [
+    { "name": "Fish", "emoji": "🐟", "image": null, "tagline": "Hover champion", "trick": "A swim bladder: a little bag of gas inside its body.", "does": "Adding gas makes it rise, letting some out makes it sink, so it can hover at any depth.", "group": "inside" },
+    { "name": "Nautilus", "emoji": "🐚", "image": null, "tagline": "Living submarine", "trick": "A spiral shell with gas-filled rooms called chambers.", "does": "It moves liquid in and out of the chambers to become heavier or lighter.", "group": "inside" },
+    { "name": "Diving beetle", "emoji": "🪲", "image": null, "tagline": "Bubble backpacker", "trick": "A silver bubble of air tucked under its wing cases.", "does": "The bubble pulls it up, so it holds a plant to stay down and lets go to rise.", "group": "bubble" },
+    { "name": "Sperm whale", "emoji": "🐋", "image": null, "tagline": "Deep-sea diver", "trick": "A giant head full of a special oil.", "does": "Scientists think the oil may firm up when cool and soften when warm, helping it sink and rise.", "group": "oil" }
+  ],
+  "match_groups": [
+    { "key": "inside", "label": "🎈 Gas space inside the body" },
+    { "key": "bubble", "label": "🫧 Carries an air bubble" },
+    { "key": "oil", "label": "🛢️ Changes a special oil" }
+  ],
+  "predict": {
+    "prompt": "Sinks or rises? Predict first!",
+    "choices": ["Sinks", "Rises"],
+    "items": [
+      { "emoji": "🤏", "label": "A diver whose air bubble is squeezed smaller", "answer": 0 },
+      { "emoji": "🐟", "label": "A fish that adds gas to its swim bladder", "answer": 1 },
+      { "emoji": "🚢", "label": "A submarine that lets water into its tanks", "answer": 0 }
+    ],
+    "explain": "Less air for the same weight means heavier for its size, so it sinks. More air means lighter for its size, so it rises."
+  },
+  "lab": {
+    "title": "The float-just-right lab",
+    "predict": "Put each pen-cap diver in a full bottle of water. Which one will sink with the gentlest squeeze and still float back up?",
+    "options": ["No clay", "A pea-sized ball of clay", "Two pea-sized balls of clay", "A marble-sized ball of clay"],
+    "measure": "squeeze needed to sink it (1 = gentle, 5 = won't sink)",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "five_whys",
+    "name": "5 Whys",
+    "intro": "5 Whys is a detective tool. You keep asking \"why?\" until you reach the root of a problem, not just the first answer. Today you'll use all 5 whys.",
+    "example_object": "a slice of toast",
+    "parts": [
+      { "key": "1", "name": "Why 1", "what": "Ask why the problem happens.", "example": "🍞 Why is the toast burnt? It stayed in the toaster too long.", "starter": "Why does the diver stay on top? Because…" },
+      { "key": "2", "name": "Why 2", "what": "Ask why about that answer.", "example": "🍞 Why did it stay in too long? The toaster didn't pop up.", "starter": "Why is it too light for its size? Because…" },
+      { "key": "3", "name": "Why 3", "what": "Go one layer deeper.", "example": "🍞 Why didn't it pop? The dial was turned right up.", "starter": "Why doesn't the squeeze shrink the bubble enough? Because…" },
+      { "key": "4", "name": "Why 4", "what": "Keep digging: don't stop at the easy answer.", "example": "🍞 Why was the dial up? Someone made crumpets before.", "starter": "Why is my squeeze getting lost? Because…" },
+      { "key": "5", "name": "Why 5", "what": "Reach the root cause and fix THAT.", "example": "🍞 Root cause: nobody checks the dial. Fix: check it every time!", "starter": "The root cause is… so I will fix it by…" }
+    ],
+    "locked": [],
+    "badge": "Why Master"
+  },
+  "sketch_checklist": [
+    "I drew my diver in the bottle before and after the squeeze.",
+    "I labelled the air pocket, the water, the weight and the hook.",
+    "I drew arrows to show how the air bubble changes."
+  ],
+  "test": {
+    "measure": "seconds to sink and come back up",
+    "higher_is_better": false,
+    "check_question": "Hover check: can your diver stop halfway down?",
+    "check_options": ["Yes, it hovers", "Only for a moment", "Not yet"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick helped your diver?",
+    "options": ["🐟 Fish swim bladder", "🐚 Nautilus chambers", "🪲 Diving beetle bubble", "🐋 Sperm whale oil"]
+  },
+  "sticker": { "name": "Deep Diver", "emoji": "🤿" }
+}

@@ -1,0 +1,299 @@
+{
+  "function_question": "How does nature build strong structures from little material?",
+  "hero": {
+    "name": "Nia",
+    "role": "Kofi's big sister, 15",
+    "image": "/landing/hero-kid-5.png",
+    "emoji": "🌉"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🛠️",
+      "text": "There was a girl called Nia, 15, who ran her school's engineering club and kept the glue far away from her little brother Kofi."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "📐",
+      "text": "Nia sketched bridges on everything: napkins, notebooks, even the back of Kofi's homework."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "🏆",
+      "text": "An engineering competition was announced. \"The prize goes to the bridge that holds the most per gram,\" Nia read. Kofi held up a bridge wrapped in a whole roll of tape. \"Strong!\" he said. \"And heavy,\" Nia sighed."
+    }
+  ],
+  "card": {
+    "hero": "Nia, 15, Kofi's big sister",
+    "place": "An engineering competition",
+    "problem": "The prize is for most weight held per gram",
+    "goal": "The best strength-to-weight bridge",
+    "rules": "Span 30 cm with paper, card and sticks",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The per-gram prize",
+      "line": "Nia wonders: how can a bridge be strong without being heavy?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Nia needs a teammate",
+      "line": "Kofi means well, but Nia needs a sharp engineer. Will you join her?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "Nature's lightweights",
+      "line": "You and Nia meet four structures that are mostly air, yet super strong."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "Material where the forces flow",
+      "line": "The heroes reveal why empty space can be strong."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The paper beam lab",
+      "line": "Nia lays a sheet of paper over two stacks of books and grabs a pile of coins."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "SCAMPER",
+      "line": "All 7 SCAMPER letters line up to make your bridge lighter."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "The force map",
+      "line": "Every great bridge starts with arrows on a drawing."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The load test",
+      "line": "Your bridge buckles at the top. You add triangles and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "Top of the leaderboard",
+      "line": "Your bridge wins on grams per gram."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Nia's competition bridge must hold the most weight for every gram it weighs, and Kofi's tape-covered version is far too heavy. Can you help her? Let's start!",
+    "your_idea": "Some engineers already picture a light, strong shape. Do you?",
+    "nature_clues": "Nature builds strong things out of almost nothing. Tap each card to meet four lightweight champions!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Same sheet, different shape. Which paper beam will hold the most coins? Predict first, then test!",
+    "sketch": "Draw your bridge with arrows: which parts get squashed, and which get pulled?",
+    "build_and_test": "Weigh your bridge, load it until it fails, then divide. What's your efficiency score?",
+    "retry_tip": "Find where it broke first. Strengthen that spot, remove material where nothing broke, and test again!",
+    "ending": "And ever since then, Nia's club builds everything the nature way, and Kofi proudly uses just a little tape!"
+  },
+  "quick_check": {
+    "question": "Bridge A weighs 25 g and holds 1,500 g. Bridge B weighs 40 g and holds 2,000 g. Which has the better efficiency score?",
+    "options": [
+      "Bridge A (60 per gram)",
+      "Bridge B (50 per gram)",
+      "They're equal"
+    ],
+    "answer": 0,
+    "right": "Right! 1,500 ÷ 25 = 60 and 2,000 ÷ 40 = 50. Bridge B holds more, but Bridge A wins per gram!",
+    "wrong": "Not quite. Divide each load by the bridge's own weight, then compare."
+  },
+  "clue_cards": [
+    {
+      "name": "Bird bone",
+      "emoji": "🦅",
+      "image": null,
+      "tagline": "Hollow flyer",
+      "trick": "Its hollow wing bones have thin criss-cross struts inside.",
+      "does": "The struts form triangles, so the bones are strong but light enough for flight.",
+      "group": "truss"
+    },
+    {
+      "name": "Bone trabeculae",
+      "emoji": "🦴",
+      "image": null,
+      "tagline": "Smart sponge",
+      "trick": "Tiny bone struts line up along the paths the forces take.",
+      "does": "Bone adds material where it is loaded and removes it where it isn't.",
+      "group": "truss"
+    },
+    {
+      "name": "Giant water lily",
+      "emoji": "🪷",
+      "image": null,
+      "tagline": "Floating platform",
+      "trick": "A web of thick ribs spreads out under its thin leaf.",
+      "does": "The ribs stiffen a leaf up to 3 metres wide, strong enough for a small child on a board.",
+      "group": "ribs"
+    },
+    {
+      "name": "Spider web",
+      "emoji": "🕸️",
+      "image": null,
+      "tagline": "Tension master",
+      "trick": "Every thread is pulled tight, never squashed.",
+      "does": "Gram for gram, its silk is stronger than steel, so a web needs very little material.",
+      "group": "tension"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "truss",
+      "label": "🔺 Struts and triangles (truss)"
+    },
+    {
+      "key": "ribs",
+      "label": "🪷 Stiffening ribs"
+    },
+    {
+      "key": "tension",
+      "label": "🧵 Pulled threads (tension)"
+    }
+  ],
+  "predict": {
+    "prompt": "Pulled or squashed? Predict first!",
+    "choices": [
+      "Pulled (tension)",
+      "Squashed (compression)"
+    ],
+    "items": [
+      {
+        "emoji": "⬆️",
+        "label": "The top edge of a loaded bridge beam",
+        "answer": 1
+      },
+      {
+        "emoji": "⬇️",
+        "label": "The bottom edge of a loaded bridge beam",
+        "answer": 0
+      },
+      {
+        "emoji": "🕸️",
+        "label": "A thread in a spider web",
+        "answer": 0
+      }
+    ],
+    "explain": "When a load pushes down on the middle of a beam, the beam bends. Its top edge gets squashed together and its bottom edge gets stretched. Webs and cables only ever work in tension."
+  },
+  "lab": {
+    "title": "The paper beam lab",
+    "predict": "One sheet of A4 paper spans a 20 cm gap, folded into four different shapes. Which will hold the most coins?",
+    "options": [
+      "Flat sheet",
+      "Zigzag folds",
+      "Rolled tube",
+      "Triangle tube"
+    ],
+    "measure": "grams of coins held",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "scamper",
+    "name": "SCAMPER",
+    "intro": "You already know all 7 SCAMPER letters. Today you'll use them like a pro engineer, one letter at a time, to cut weight without losing strength.",
+    "example_object": "a paper cup",
+    "parts": [
+      {
+        "key": "S",
+        "name": "Substitute",
+        "what": "Swap one thing for another.",
+        "example": "🥤 Swap the plastic lid for a folded paper one.",
+        "starter": "Instead of a solid card deck, Nia could use…"
+      },
+      {
+        "key": "C",
+        "name": "Combine",
+        "what": "Join two things into one.",
+        "example": "🥤 Cup + sleeve = one double-walled cup that isn't too hot to hold.",
+        "starter": "I could combine the deck and the truss by…"
+      },
+      {
+        "key": "A",
+        "name": "Adapt",
+        "what": "Borrow an idea from somewhere else.",
+        "example": "🥤 Add ribs down the side, like a water lily leaf, so a thinner cup stays stiff.",
+        "starter": "I could adapt the bird bone's struts by…"
+      },
+      {
+        "key": "M",
+        "name": "Modify",
+        "what": "Change its size or shape.",
+        "example": "🥤 Roll the rim tighter so the cup doesn't crumple when you grip it.",
+        "starter": "To make the top of my bridge stiffer, I could change its shape to…"
+      },
+      {
+        "key": "P",
+        "name": "Put to another use",
+        "what": "Use it for something new.",
+        "example": "🥤 Use it as a pot for growing seedlings.",
+        "starter": "My leftover paper tubes could also work as…"
+      },
+      {
+        "key": "E",
+        "name": "Eliminate",
+        "what": "Take something away.",
+        "example": "🥤 Cut it down to half height: a mini cup that uses half the paper.",
+        "starter": "Nothing broke here, so I could remove…"
+      },
+      {
+        "key": "R",
+        "name": "Reverse",
+        "what": "Flip it or turn it around.",
+        "example": "🥤 Upside down, it's a stand for a small plant.",
+        "starter": "What if the truss went under the deck instead of…"
+      }
+    ],
+    "locked": [],
+    "badge": "SCAMPER Engineer"
+  },
+  "sketch_checklist": [
+    "I drew my bridge from the side with force arrows.",
+    "I marked the parts in compression and in tension.",
+    "I predicted my bridge's weight in grams."
+  ],
+  "test": {
+    "measure": "grams held per gram of bridge",
+    "higher_is_better": true,
+    "check_question": "Where did your bridge fail first?",
+    "check_options": [
+      "The top (squashed)",
+      "The bottom (pulled)",
+      "A joint or the glue"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick made your bridge strongest per gram?",
+    "options": [
+      "🦅 Bird bone struts",
+      "🦴 Bone along stress lines",
+      "🪷 Water lily ribs",
+      "🕸️ Spider web tension"
+    ]
+  },
+  "sticker": {
+    "name": "Load Master",
+    "emoji": "🏋️"
+  }
+}

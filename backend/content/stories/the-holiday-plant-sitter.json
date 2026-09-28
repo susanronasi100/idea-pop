@@ -1,0 +1,106 @@
+{
+  "function_question": "How does nature move and store water without a pump?",
+  "hero": { "name": "Hana", "role": "the class plant monitor", "image": "/landing/hero/girl.webp", "emoji": "🌱" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🏫", "text": "There was a girl called Hana whose class grew a row of bean plants on the sunny classroom windowsill." },
+    { "beat": "Every day…", "emoji": "💧", "text": "Hana was the plant monitor. She watered the beans each morning and measured how much taller they had grown." },
+    { "beat": "Until one day…", "emoji": "🗓️", "text": "Their teacher sighed. \"The school closes for two weeks of holiday, and I can't come in to water them.\" Hana looked at the plants. \"Then we'll build them a plant sitter!\"" }
+  ],
+  "card": {
+    "hero": "Hana, the class plant monitor",
+    "place": "Hana's classroom",
+    "problem": "The plants will be alone for two weeks",
+    "goal": "Keep a plant watered for 2 weeks",
+    "rules": "No people, no pumps, no electricity",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "Two weeks alone", "line": "Hana wonders: how can a plant get a drink when nobody is there?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Hana needs a helper", "line": "A whole windowsill of plants needs two caring designers. Will you join Hana?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Hana meet heroes that move and save water with no pump at all." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the thin path", "line": "The heroes show how water can climb all by itself." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "The wick race", "line": "Hana adds a drop of colour to a glass of water and lines up four wicks." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "In the teacher's shoes", "line": "You imagine what the teacher says, thinks, does and feels." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great plant sitter starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The two-week test", "line": "The first soil dries out too soon. You fix the wick, and try again." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Welcome back, beans", "line": "The class returns to find every bean plant green and growing." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Hana's class plants will be alone for two weeks of holiday, with nobody to water them. Can you help her? Let's start!",
+    "your_idea": "Some designers already have an idea for a plant that waters itself. Do you?",
+    "nature_clues": "Nature has been moving water without pumps for millions of years. Tap each card to meet four water-wise heroes!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which wick will pull the coloured water up the highest? Don't drink the test water.",
+    "sketch": "Time to draw your plant sitter from the side, like a real garden engineer!",
+    "build_and_test": "Build your plant sitter and check the soil every day. How many days does it stay damp?",
+    "retry_tip": "Designers never stop at round 1. Change just ONE thing, like the wick or the water store, and test again!",
+    "ending": "And ever since then, Hana's class plant sitters look after the windowsill every holiday, and the teacher can relax."
+  },
+  "quick_check": {
+    "question": "A small plant drinks about 40 ml of water a day. How much water does it need for 14 days?",
+    "options": ["54 ml", "400 ml", "560 ml"],
+    "answer": 2,
+    "right": "Right! 40 × 14 = 560 ml. So a 1-litre bottle is a good size for your water store.",
+    "wrong": "Not quite. Multiply: 40 ml × 14 days. Try 40 × 10, then add 40 × 4."
+  },
+  "clue_cards": [
+    { "name": "Tree", "emoji": "🌳", "image": null, "tagline": "Silent water lifter", "trick": "Millions of very thin tubes from roots to leaves.", "does": "Water creeps up the tubes, pulled along as it evaporates from the leaves.", "group": "path" },
+    { "name": "Cactus", "emoji": "🌵", "image": null, "tagline": "Accordion water tank", "trick": "Pleats that spread out as it fills with water.", "does": "It stores rainwater and uses it slowly through the dry months.", "group": "store" },
+    { "name": "Moss", "emoji": "🌿", "image": null, "tagline": "Living sponge", "trick": "Tiny leaves and stems full of spaces.", "does": "It soaks up many times its own weight in water and lets it go slowly.", "group": "sponge" },
+    { "name": "Camel", "emoji": "🐪", "image": null, "tagline": "Desert water saver", "trick": "It drinks a huge amount at once, then loses very little.", "does": "Its nose catches moisture from its breath, so the water lasts.", "group": "store" }
+  ],
+  "match_groups": [
+    { "key": "path", "label": "🧵 Thin paths that pull water" },
+    { "key": "store", "label": "🫙 Stores water for later" },
+    { "key": "sponge", "label": "🧽 A sponge that holds and lets go" }
+  ],
+  "predict": {
+    "prompt": "Pulls water up or stays dry? Predict first!",
+    "choices": ["Pulls water up", "Stays dry"],
+    "items": [
+      { "emoji": "🧵", "label": "A cotton string dipped in water", "answer": 0 },
+      { "emoji": "🧻", "label": "The tip of a paper towel in a spill", "answer": 0 },
+      { "emoji": "🥄", "label": "A metal spoon standing in water", "answer": 1 }
+    ],
+    "explain": "Cotton and paper are made of thin fibres with tiny gaps between them. Water sticks to the fibres and creeps along the gaps. A solid metal spoon has no tiny gaps, so the water can't climb."
+  },
+  "lab": {
+    "title": "The wick race lab",
+    "predict": "Dip each wick in coloured water for 10 minutes. Which one will pull the water up the highest?",
+    "options": ["Cotton string", "Wool yarn", "Strip of paper towel", "Plastic string"],
+    "measure": "height the water climbs in 10 minutes (cm)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "empathy_map",
+    "name": "Empathy Map",
+    "intro": "An Empathy Map helps you understand the person you're designing for. You fill in 4 boxes: what they Say, Think, Do and Feel. Today you'll learn all 4, and use them for Hana's teacher.",
+    "example_object": "a lunchbox",
+    "parts": [
+      { "key": "S", "name": "Says", "what": "Words the person says out loud.", "example": "🍱 \"My sandwich got squashed again!\"", "starter": "The teacher says: \"Who will…\"" },
+      { "key": "T", "name": "Thinks", "what": "Thoughts they might keep to themselves.", "example": "🍱 \"Maybe I should just skip lunch.\"", "starter": "The teacher might be thinking…" },
+      { "key": "D", "name": "Does", "what": "Things you can see them do.", "example": "🍱 Puts the lunchbox on top of the bag, very carefully.", "starter": "Before every holiday, the teacher…" },
+      { "key": "F", "name": "Feels", "what": "How they feel inside.", "example": "🍱 Hungry, grumpy and a little bit sad.", "starter": "When the teacher thinks about the plants, they feel…" }
+    ],
+    "locked": [],
+    "badge": "Empathy Pro"
+  },
+  "sketch_checklist": [
+    "I drew my plant sitter from the side.",
+    "I labelled the water store, the thin path and the soil.",
+    "I wrote how many millilitres my water store holds."
+  ],
+  "test": {
+    "measure": "days the soil stays damp",
+    "higher_is_better": true,
+    "check_question": "Soil check: how does the soil feel at the end?",
+    "check_options": ["Nicely damp", "Too wet and soggy", "Dry"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick kept your plant watered?",
+    "options": ["🌳 Tree's thin tubes", "🌵 Cactus water store", "🌿 Moss sponge", "🐪 Camel water saver"]
+  },
+  "sticker": { "name": "Plant Sitter", "emoji": "🪴" }
+}

@@ -1,0 +1,278 @@
+{
+  "function_question": "How does nature coordinate big groups with no leader?",
+  "hero": {
+    "name": "Rosa and Pixel",
+    "role": "a 14-year-old coder and her robot friend",
+    "image": "/landing/robot.png",
+    "emoji": "🤖"
+  },
+  "scene_image": null,
+  "opening": [
+    {
+      "beat": "Once upon a time…",
+      "emoji": "🤖",
+      "text": "There was a girl called Rosa, 14, who loved coding, and her best friend was a helpful robot called Pixel."
+    },
+    {
+      "beat": "Every day…",
+      "emoji": "🛸",
+      "text": "After school, Rosa and Pixel helped the crew at a drone light show, charging batteries and testing patterns."
+    },
+    {
+      "beat": "Until one day…",
+      "emoji": "📡",
+      "text": "The crew planned their biggest show yet: 100 drones. \"If the main computer loses its signal,\" Pixel beeped, \"they could all crash!\" Rosa wondered: could the drones fly together with no leader at all?"
+    }
+  ],
+  "card": {
+    "hero": "Rosa, 14, and Pixel the robot",
+    "place": "A drone light show",
+    "problem": "100 drones must fly together without crashing and without a leader",
+    "goal": "Write 3 simple rules that make a group move like a flock",
+    "rules": "No leader. Each drone only sees its nearest neighbours.",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    {
+      "step": "brief",
+      "label": "Chapter 1",
+      "beat": "Until one day…",
+      "title": "The leaderless show",
+      "line": "Rosa wonders: how can 100 drones fly as one with no one in charge?"
+    },
+    {
+      "step": "your_idea",
+      "label": "Chapter 2",
+      "beat": "Because of that…",
+      "title": "Rosa and Pixel need a teammate",
+      "line": "A swarm needs one more clever coder. Will you join them?"
+    },
+    {
+      "step": "nature_clues",
+      "label": "Chapter 3",
+      "beat": "Because of that…",
+      "title": "The swarm heroes",
+      "line": "You meet flocks, schools and swarms that have no boss."
+    },
+    {
+      "step": "design_secret",
+      "label": "Chapter 4",
+      "beat": "Because of that…",
+      "title": "The secret of the three rules",
+      "line": "The heroes reveal how simple rules make a flock."
+    },
+    {
+      "step": "skill",
+      "label": "Chapter 5",
+      "beat": "Because of that…",
+      "title": "The paper swarm",
+      "line": "A grid, eight paper drones and five rounds."
+    },
+    {
+      "step": "tool",
+      "label": "Chapter 5½",
+      "beat": "Because of that…",
+      "title": "The big question",
+      "line": "You turn what you learned into one How Might We question."
+    },
+    {
+      "step": "sketch",
+      "label": "Chapter 6",
+      "beat": "Because of that…",
+      "title": "Rules on paper",
+      "line": "Every algorithm starts as a diagram."
+    },
+    {
+      "step": "build_and_test",
+      "label": "Chapter 7",
+      "beat": "Until finally…",
+      "title": "The human flock",
+      "line": "The first round is a pile-up. You tune one rule, and test again."
+    },
+    {
+      "step": "celebrate_and_share",
+      "label": "Chapter 8",
+      "beat": "And ever since then…",
+      "title": "The sky lights up",
+      "line": "100 drones glide as one shimmering flock."
+    }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Rosa and Pixel need 100 drones to fly together without crashing, and without a leader. Can you help them write the rules? Let's start!",
+    "your_idea": "Some coders already have a hunch about how swarms work. Do you?",
+    "nature_clues": "Nature runs huge groups with no boss. Tap each card to meet four swarm heroes!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Predict first: after 5 rounds of your rules, will your paper drones be scattered or all facing one way?",
+    "sketch": "Draw your rules so clearly that a robot could follow them!",
+    "build_and_test": "Run the human flock: walk slowly with arms folded. First no rules, then your rules. Count every bump!",
+    "retry_tip": "Engineers never stop at round 1. Change ONE number in ONE rule and count the collisions again.",
+    "ending": "And ever since then, Rosa and Pixel's drones have flown by your three rules, and the crowd gasps every time they swoop."
+  },
+  "quick_check": {
+    "question": "100 drones each watch their 7 nearest neighbours. How many neighbour-checks is that in one update?",
+    "options": [
+      "107",
+      "700",
+      "9,900"
+    ],
+    "answer": 1,
+    "right": "Right! 100 × 7 = 700. If every drone watched all 99 others, it would be 9,900 checks. That's why nature keeps it local!",
+    "wrong": "Not quite. Each of the 100 drones checks 7 neighbours, so multiply."
+  },
+  "clue_cards": [
+    {
+      "name": "Starling",
+      "emoji": "🐦",
+      "image": null,
+      "tagline": "Sky dancer",
+      "trick": "Tracks only its 6 or 7 nearest neighbours.",
+      "does": "Tens of thousands turn together, and no bird is in charge.",
+      "group": "watch"
+    },
+    {
+      "name": "Fish school",
+      "emoji": "🐟",
+      "image": null,
+      "tagline": "Ocean team",
+      "trick": "Feels its neighbours through sensors along its sides.",
+      "does": "Keeps a gap, turns when they turn, and almost never crashes.",
+      "group": "watch"
+    },
+    {
+      "name": "Ant",
+      "emoji": "🐜",
+      "image": null,
+      "tagline": "Trail maker",
+      "trick": "Leaves scent trails on the ground.",
+      "does": "Others follow the strongest trail: the message is in the environment.",
+      "group": "trail"
+    },
+    {
+      "name": "Desert locust",
+      "emoji": "🦗",
+      "image": null,
+      "tagline": "Crowd switcher",
+      "trick": "Changes its behaviour when crowded.",
+      "does": "Above about 70 per square metre, they line up and march one way.",
+      "group": "crowd"
+    }
+  ],
+  "match_groups": [
+    {
+      "key": "watch",
+      "label": "👀 Watch the nearest neighbours"
+    },
+    {
+      "key": "trail",
+      "label": "🐾 Leave messages in the world"
+    },
+    {
+      "key": "crowd",
+      "label": "👥 Switch when it gets crowded"
+    }
+  ],
+  "predict": {
+    "prompt": "Leader or local rules? Predict first!",
+    "choices": [
+      "Needs a leader",
+      "Works with local rules"
+    ],
+    "items": [
+      {
+        "emoji": "🎺",
+        "label": "A marching band following its drum major",
+        "answer": 0
+      },
+      {
+        "emoji": "🚗",
+        "label": "Cars keeping a safe gap on a motorway",
+        "answer": 1
+      },
+      {
+        "emoji": "🐦",
+        "label": "A murmuration of starlings turning",
+        "answer": 1
+      }
+    ],
+    "explain": "A leader gives one order to everyone, but if the leader fails, everyone is lost. With local rules, each member reacts to its neighbours, so the group keeps working even if some members drop out."
+  },
+  "lab": {
+    "title": "The paper swarm lab",
+    "predict": "Run 5 rounds on the grid. Which set of rules will get your 8 paper drones moving together with the fewest collisions?",
+    "options": [
+      "No rules (random moves)",
+      "Separation only",
+      "Separation + alignment",
+      "All 3 rules"
+    ],
+    "measure": "collisions in 5 rounds",
+    "higher_is_better": false
+  },
+  "tool": {
+    "kind": "how_might_we",
+    "name": "How Might We",
+    "intro": "How Might We turns what you learn about people into a hopeful question to design for. You find the User, their Need and a surprising Insight, then join them into one \"How might we…?\" question. Today you'll use all 4 parts.",
+    "example_object": "a lunchbox",
+    "parts": [
+      {
+        "key": "U",
+        "name": "User",
+        "what": "Who are you designing for?",
+        "example": "🥪 A kid who eats lunch in a busy canteen.",
+        "starter": "Our users are the show crew and…"
+      },
+      {
+        "key": "N",
+        "name": "Need",
+        "what": "What do they need to do? Use a verb.",
+        "example": "🥪 They need to open it with one hand while holding a tray.",
+        "starter": "They need the drones to…"
+      },
+      {
+        "key": "I",
+        "name": "Insight",
+        "what": "What surprising thing did you learn?",
+        "example": "🥪 Most lunchboxes have two stiff clips, so kids give up and wait for help.",
+        "starter": "The surprise is that a starling only watches…"
+      },
+      {
+        "key": "H",
+        "name": "How might we…?",
+        "what": "Join them into one hopeful question.",
+        "example": "🥪 How might we make a lunchbox that opens with one hand?",
+        "starter": "How might we help 100 drones…?"
+      }
+    ],
+    "locked": [],
+    "badge": "HMW Master"
+  },
+  "sketch_checklist": [
+    "I drew one drone and its nearest neighbours.",
+    "I showed separation, alignment and cohesion with arrows.",
+    "I wrote each rule as IF… THEN… with a number."
+  ],
+  "test": {
+    "measure": "collisions in a 1-minute human flock",
+    "higher_is_better": false,
+    "check_question": "How many neighbours did each player watch in your best round?",
+    "check_options": [
+      "1",
+      "3",
+      "7 or more"
+    ],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature hero inspired your best rule?",
+    "options": [
+      "🐦 Starling: watch 7 neighbours",
+      "🐟 Fish: keep a gap",
+      "🐜 Ant: follow the trail",
+      "🦗 Locust: line up when crowded"
+    ]
+  },
+  "sticker": {
+    "name": "Swarm Coder",
+    "emoji": "🛸"
+  }
+}

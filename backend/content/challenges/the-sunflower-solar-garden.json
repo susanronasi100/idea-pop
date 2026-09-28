@@ -1,0 +1,26 @@
+{
+  "title": "The Sunflower Solar Garden",
+  "season": 2,
+  "week": 38,
+  "is_premium": false,
+  "steps": [
+    {"step": "brief", "title": "The Garden in the Shadows", "story": "Tara's building has a garden on the roof, but tall buildings all around block most of the sun. The plants are pale and weak, and the little solar lamp barely glows at night. Can YOU arrange leaves or panels so that every one of them catches a share of the light?", "image_url": null},
+    {"step": "your_idea", "prompt": "Do you already have an idea for catching more light in a shady place?", "fork_to_step": 6},
+    {"step": "nature_clues", "intro": "How does nature catch as much sunlight as possible? Plants can't walk into the sun, so they've found clever ways to grab every ray. Let's look!", "clues": [
+      {"text": "Young sunflower plants turn their heads to follow the sun across the sky from east to west, then swing back to face east during the night. Grown-up flowers stop and stay facing east.", "image_url": null, "habitat": "grassland"},
+      {"text": "The seeds in a sunflower head sit in spirals. Each new seed grows about 137.5° around from the one before, called the golden angle, so the seeds pack together with no gaps. Many plants space their leaves around the stem at this same angle.", "image_url": null, "habitat": "grassland"},
+      {"text": "Ivy climbing up a wall makes a leaf mosaic. Its leaf stalks grow to different lengths and angles, so the leaves fit together like puzzle pieces and hardly shade each other.", "image_url": null, "habitat": "forest"},
+      {"text": "A forest grows in layers: tall trees at the top, then smaller trees, then shrubs, then plants on the floor. Plants in the shady lower layers often have big, thin leaves to catch the little light that gets through.", "image_url": null, "habitat": "forest"}
+    ]},
+    {"step": "design_secret", "secret": "Don't block each other! A leaf in another leaf's shadow can hardly make food. Plants win light in two ways: they turn toward the light, and they space their leaves so each one gets its own share. Turning each leaf by the golden angle, about 137.5°, means no leaf sits right above another. Engineers copied this: solar panels that track the sun can make about a third more energy than fixed ones, and a solar plant in Spain was laid out in a sunflower spiral to fit more mirrors on less land.", "reveal_hint": "How could you place your leaves so none of them sits in another's shadow?"},
+    {"step": "skill", "instructions": "Make 4 model plants from a straw or pencil stem, each with 6 card leaves stuck on with tape, one above the other. Stack the leaves straight up in a line on the first, turn each leaf 180° on the second, 90° on the third and about 137.5° on the fourth. Shine a torch from above and a little to one side, and count how many leaves are in full light with no shadow on them.", "skill_refs": [], "hints": ["Keep the torch in the same spot for every plant, so the test is fair. Use a protractor to measure the angles.", "Leaves stacked straight up shade each other the most. Turning each leaf about 137.5° means the leaf below is never hidden by the one right above it."]},
+    {"step": "sketch", "prompt": "Draw your leaf or panel plan from above, looking down on it.", "guidance": "Number each leaf from the bottom to the top, show the angle you turn between leaves, and mark where the sun comes from."},
+    {"step": "build_and_test", "instructions": "Build a model plant or panel stand with 10 card leaves on a stem, arranged using your best idea from nature. Put it in a shady spot with light coming from one side, or shine a torch at it, and count the leaves in full light. Ask an adult to help if you use a desk lamp, because lamps can get hot.", "test_criteria": ["How many of your 10 leaves are in full light?", "Tilt or turn your model to face the light. Does the number go up?", "Improve one thing and test again. How many more leaves are in full light?"], "hints": ["Make the leaves near the top smaller and the ones near the bottom bigger or on longer stalks, like ivy, so the low ones can reach out of the shadow.", "Turn every leaf about 137.5° from the one below it and tilt the whole model to face the light. That's the sunflower trick: space out and turn toward the sun."]},
+    {"step": "celebrate_and_share", "celebration_text": "The rooftop garden is green and strong again, and the solar lamp glows bright every evening! Tara's neighbours now call it the Sunflower Garden.", "share_prompt": "Share your leaf plan and your 'leaves in full light' score on the Ideas Wall. Which nature trick won the most light?"}
+  ],
+  "tools": [{"kind": "mind_map", "age_mode": "young"}, {"kind": "mind_map", "age_mode": "older"}],
+  "age_tier_variants": [
+    {"age_tier": "10-12", "title_override": null, "summary": "Compare four ways to space leaves around a stem, then build a model plant that catches light on as many of its 10 leaves as possible."},
+    {"age_tier": "12-18", "title_override": "Biomimicry: Phyllotaxis and Solar Tracking", "summary": "Investigate the golden angle and the Fibonacci spiral, measure how leaf angle affects self-shading, and compare your design with sun-tracking panels and spiral-layout solar plants."}
+  ]
+}

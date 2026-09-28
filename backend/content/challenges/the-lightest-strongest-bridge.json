@@ -1,0 +1,96 @@
+{
+  "title": "The Lightest Strongest Bridge",
+  "season": 2,
+  "week": 44,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Every Gram Counts",
+      "story": "Nia's engineering club has entered a bridge competition with a twist: the prize doesn't go to the strongest bridge, but to the one that holds the most weight for every gram it weighs. Her little brother Kofi has already piled so much tape on her first bridge that it is heavy and clumsy. Can YOU build a bridge across a 30 cm gap with the best strength-to-weight ratio?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a bridge that is light but strong?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature build strong structures from little material? Bones, leaves and webs carry big loads while using as little material as possible. Let's study four of nature's lightweight engineers!",
+      "clues": [
+        {
+          "text": "Many bird bones are hollow, and the wing bones of big soaring birds have thin criss-cross struts inside, like the triangles in a steel bridge truss. The bones are strong enough for flight but light enough to lift.",
+          "image_url": null,
+          "habitat": "sky"
+        },
+        {
+          "text": "The spongy bone inside the top of your thigh bone is a lattice of tiny struts called trabeculae. They line up along the paths the forces take through the bone. Bone even rebuilds itself over time, adding material where it is loaded and removing it where it isn't.",
+          "image_url": null,
+          "habitat": null
+        },
+        {
+          "text": "The Amazon giant water lily grows leaves up to 3 metres wide. Underneath, a web of thick ribs spreads out from the centre and stiffens the thin leaf, so it can hold a small child if the weight is spread out on a board. Its ribs inspired Joseph Paxton's design for the Crystal Palace in London in 1851.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "A spider web is made of threads that are only ever pulled, never squashed. Silk is superb in tension: gram for gram, spider dragline silk is stronger than steel. By using only tension lines, a web can stop a flying insect with a tiny amount of material.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Nature never wastes material. It puts material only where the forces flow and leaves the rest empty. Triangles, trusses and ribs follow those force paths, so a structure can be mostly air and still be strong. When a load pushes down on a bridge, its top is squashed (compression) and its bottom is pulled (tension), so good designs use stiff parts on top and thin pulling parts underneath. Engineers now find these shapes with computers, a method called topology optimization. Airbus used it to design lighter wing ribs for its A380 airliner.",
+      "reveal_hint": "Where do the forces flow in your bridge, and where could you remove material?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Learn to measure strength for the same weight. Lay one sheet of A4 paper across a 20 cm gap between two stacks of books. Test four shapes made from identical sheets: flat, folded into a zigzag, rolled into a tube, and folded into a triangle tube. Place a paper cup on the middle and add coins one at a time until the paper sags 2 cm or collapses. Weigh the coins on a kitchen scale and record grams held for each shape in a table.",
+      "skill_refs": [],
+      "hints": [
+        "Keep the gap, the paper and the cup position the same for every shape. Only the shape changes, so the paper weight is the control.",
+        "Folds and triangles make paper stiff by moving material away from the middle of the sheet. The zigzag and the triangle tube should beat the flat sheet many times over."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch your bridge from the side and from above, with arrows showing where the forces go.",
+      "guidance": "Mark which parts are squashed (compression) and which are pulled (tension). Show your triangles, trusses or ribs, list your materials, and predict your bridge's weight in grams."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a bridge that spans a 30 cm gap using only paper, card, straws or lolly sticks, with white glue or tape. Weigh it on a kitchen scale. Hang a bag or small bucket from the middle and add weights such as coins, washers or bags of rice slowly until the bridge fails. Weigh the load it held, then divide: grams held ÷ grams of bridge = your efficiency score. Keep hands and feet out from under the load, and ask an adult to help with any cutting.",
+      "test_criteria": [
+        "What does your bridge weigh, and how many grams did it hold before it failed?",
+        "What is your efficiency score (grams held ÷ grams of bridge)?",
+        "Where did it fail first? Was that part in compression or in tension?",
+        "Improve one thing and test again. Strengthen the part that failed, or remove material where nothing broke, then work out your new score."
+      ],
+      "hints": [
+        "Look at where it failed first. Add a triangle or a rib there, and take material away from parts that did no work.",
+        "Tape and glue count as weight! A light truss of rolled paper tubes braced with triangles usually beats a heavy solid deck."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Nia's bridge topped the efficiency leaderboard, and even Kofi agreed that less tape was the secret!",
+      "share_prompt": "Share a photo of your bridge and your efficiency score on the Ideas Wall. Where did you remove material without losing strength?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "scamper",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Strength-to-Weight Engineering",
+      "summary": "Map compression and tension, use trusses and ribs that follow stress lines, and improve your bridge using its measured grams held per gram of structure."
+    }
+  ]
+}

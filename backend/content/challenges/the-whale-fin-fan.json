@@ -1,0 +1,96 @@
+{
+  "title": "The Whale Fin Fan",
+  "season": 2,
+  "week": 42,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "The Turbine That Keeps Stalling",
+      "story": "Arman's small wind turbine for the school science fair works fine in a steady breeze, but in gusty wind it suddenly slows and stalls. When the wind hits the blades at too steep an angle, the air peels away from the blade and the push collapses. Can YOU design and fairly test a blade edge that keeps spinning at a steep angle, and prove it with data the judges will trust?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a blade that keeps working in gusty wind?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature keep fins and wings working at steep angles? Some animals and seeds turn, dive and hover where a smooth wing would stall. Let's study four of them like real engineers!",
+      "clues": [
+        {
+          "text": "A humpback whale's flippers can be 5 metres long, and their front edge is lined with big bumps called tubercles. They let the whale make tight turns at steep angles while hunting. In wind-tunnel tests, a model flipper with bumps kept working at angles about 40% steeper before stalling than a smooth one.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "An owl's front wing feathers have a comb-like, jagged edge. The comb breaks the oncoming air into many tiny swirls instead of a few big noisy ones, so the owl flies almost silently. Fan makers and Japan's bullet trains have borrowed this edge to cut noise.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A maple seed spins like a helicopter as it falls. Its wing meets the air at a steep angle, but a small swirl of air stays stuck along the wing's front edge and gives extra lift, so the seed drifts slowly and travels far from its tree.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A dragonfly's thin wings are pleated like a paper fan. The pleats make the wing stiff without extra weight, and small pockets of swirling air sit in the grooves, helping the wing keep its grip on the air at low speeds and steep angles.",
+          "image_url": null,
+          "habitat": "sky"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "A wing or blade stalls when the air can no longer follow its curved top surface and breaks away in one big messy sheet. Bumps on the leading edge split the flow into channels with small swirls between them, and those swirls keep the air stuck to the surface at steeper angles. The design principle: shape the front edge to create small, controlled swirls, and the whole blade stays attached for longer. The company WhalePower turned humpback tubercles into real turbine blades and ceiling fans. But it is a trade-off: at gentle angles, bumps can add a little drag.",
+      "reveal_hint": "How could you shape the front edge of your blade to make small, controlled swirls?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Learn to run a fair test with a control. Make two paper pinwheels from the same card, the same size, with blades bent to the same steep angle (about 45°). Leave one with smooth edges: that's your control. Put a small sticker on one blade of each so you can count turns. Place each pinwheel 50 cm from a desk fan on the same setting and count full turns in 10 seconds. Do 3 trials each and work out the average. An adult should set up the fan, and keep fingers away from its blades.",
+      "skill_refs": [],
+      "hints": [
+        "Keep EVERYTHING the same except the one thing you are testing: same card, size, blade angle, distance and fan setting.",
+        "Take 3 trials and average them. If your 3 counts are very different, the pinwheel is wobbling, so fix the axle before you compare results."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch one blade from above and from the side, showing your leading-edge shape.",
+      "guidance": "Label the leading edge, the blade angle and the size and spacing of your bumps or teeth. Write your hypothesis as \"If I add…, then the turns in 10 s will…, because…\"."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a test rotor with your bio-inspired leading edge: cut rounded bumps, about 1 cm apart, along the front edge of each blade. Keep the card, size and blade angle the same as your smooth control. Test both at a steep blade angle, 50 cm from the fan on the same setting, with 3 trials each. Then test both at a gentle angle too. Record everything in a data table. An adult should handle the fan and any sharp cutting.",
+      "test_criteria": [
+        "At the steep angle, what are the average turns in 10 s for the smooth control and for your bumpy blade?",
+        "Make a data table: blade type, angle, trial 1, trial 2, trial 3, average. Does the bumpy blade win at BOTH angles, or only the steep one?",
+        "Is your difference bigger than the spread between your trials? If not, you cannot claim a real result yet.",
+        "Improve one thing and test again. Change ONE variable, such as bump size or spacing, and retest against the same control."
+      ],
+      "hints": [
+        "Big differences between trials usually come from a wobbly axle or a pinwheel that is not straight in front of the fan.",
+        "Try bumps that are rounded, not sharp, and about 1 cm apart. At pinwheel size, tubercles may help only at steep angles, and that is a real, reportable result."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Arman's judges loved your data table, and the fair turbine now spins through the gusts with whale-inspired blades!",
+      "share_prompt": "Share a photo of your two rotors (no faces) and your data table on the Ideas Wall. At which angle did the whale edge help most, and where did it not help?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "design_spiral",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Tubercles and Stall Delay",
+      "summary": "Abstract the humpback flipper into a design principle, emulate it on a rotor, and evaluate it with a controlled, repeated test at steep and gentle blade angles."
+    }
+  ]
+}

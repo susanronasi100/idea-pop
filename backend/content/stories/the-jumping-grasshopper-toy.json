@@ -1,0 +1,104 @@
+{
+  "function_question": "How does nature store energy to jump?",
+  "hero": { "name": "Leila", "role": "a toy inventor in training", "image": "/kid/upgrade-girl.png", "emoji": "🦗" },
+  "scene_image": null,
+  "opening": [
+    { "beat": "Once upon a time…", "emoji": "🧸", "text": "There was a girl called Leila who lived above a tiny toy shop full of spinning tops, puppets and wind-up cars." },
+    { "beat": "Every day…", "emoji": "🪟", "text": "After school, Leila pressed her nose to the shop window and dreamed up toys of her own." },
+    { "beat": "Until one day…", "emoji": "🔋", "text": "The owner sighed. \"Kids want a toy that jumps, but every jumping toy needs batteries. Leila, can you invent one that doesn't?\"" }
+  ],
+  "card": {
+    "hero": "Leila, a toy inventor in training",
+    "place": "A toy shop that needs a new toy",
+    "problem": "The shop wants a toy that jumps without batteries",
+    "goal": "Jump as high as possible",
+    "rules": "No batteries, no motors",
+    "helpers": "You and nature's heroes"
+  },
+  "chapters": [
+    { "step": "brief", "label": "Chapter 1", "beat": "Until one day…", "title": "A toy with no batteries", "line": "Leila wonders: how can a toy jump with nothing inside to power it?" },
+    { "step": "your_idea", "label": "Chapter 2", "beat": "Because of that…", "title": "Leila needs a partner", "line": "Two inventors jump higher than one. Will you join Leila?" },
+    { "step": "nature_clues", "label": "Chapter 3", "beat": "Because of that…", "title": "The nature heroes", "line": "You and Leila meet the champion jumpers of the animal world." },
+    { "step": "design_secret", "label": "Chapter 4", "beat": "Because of that…", "title": "The secret of the spring", "line": "The heroes share why the best jumps come from a spring, not a push." },
+    { "step": "skill", "label": "Chapter 5", "beat": "Because of that…", "title": "Training at the pop-up table", "line": "Leila hands you card, scissors and a pile of rubber bands." },
+    { "step": "tool", "label": "Chapter 5½", "beat": "Because of that…", "title": "The big question", "line": "You turn what you noticed about kids into one hopeful question." },
+    { "step": "sketch", "label": "Chapter 6", "beat": "Because of that…", "title": "The plan", "line": "Every great toy starts as a drawing." },
+    { "step": "build_and_test", "label": "Chapter 7", "beat": "Until finally…", "title": "The high-jump contest", "line": "The first grasshopper flops over. You fix it, and it leaps." },
+    { "step": "celebrate_and_share", "label": "Chapter 8", "beat": "And ever since then…", "title": "Star of the shop window", "line": "The grasshopper jumps in the window, and kids crowd round to watch." }
+  ],
+  "guide": {
+    "brief": "I'm Popi, your story guide. Leila's toy shop needs a toy that jumps with no batteries at all. Can you help her? Let's start!",
+    "your_idea": "Some inventors already have a springy idea bouncing around. Do you?",
+    "nature_clues": "Nature's jumpers were storing energy long before rubber bands existed. Tap each card to meet four champion jumpers!",
+    "design_secret": "Here's the secret all four heroes share…",
+    "skill": "Scientists predict before they test. Which rubber band will make the card pop the highest? Point it away from faces.",
+    "sketch": "Time to draw your toy loaded and ready, like a real toy designer!",
+    "build_and_test": "Build your grasshopper, load it, lock it and let it go. How many centimetres high can it jump?",
+    "retry_tip": "Inventors never stop at round 1. Change just ONE thing, like the band or the catch, and jump again!",
+    "ending": "And ever since then, Leila's grasshopper is the shop's best-selling toy, and it has never needed a single battery."
+  },
+  "quick_check": {
+    "question": "A flea is 2 mm long and can jump 100 times its own length. How far is that?",
+    "options": ["2 cm", "20 cm", "200 cm"],
+    "answer": 1,
+    "right": "Right! 2 mm × 100 = 200 mm, and 200 mm is 20 cm. That's about the length of a pencil!",
+    "wrong": "Not quite. Work out 2 mm × 100 first, then remember that 10 mm is 1 cm."
+  },
+  "clue_cards": [
+    { "name": "Flea", "emoji": "🐕", "image": null, "tagline": "Tiny high jumper", "trick": "A pad of super-springy resilin, held squashed by a catch.", "does": "When the catch lets go, the pad snaps and flings it over 100 times its length.", "group": "spring" },
+    { "name": "Kangaroo", "emoji": "🦘", "image": null, "tagline": "Bouncing hopper", "trick": "Long, stretchy tendons in its back legs.", "does": "They store energy on every landing and spring back to power the next hop.", "group": "spring" },
+    { "name": "Click beetle", "emoji": "🪲", "image": null, "tagline": "Snapping flipper", "trick": "A peg that locks its bent body like a trigger.", "does": "When the peg slips, the body snaps straight and flips it into the air.", "group": "catch" },
+    { "name": "Frog", "emoji": "🐸", "image": null, "tagline": "Folded-leg leaper", "trick": "Very long back legs folded up tight.", "does": "The legs unfold into long levers that fling it far forward.", "group": "lever" }
+  ],
+  "match_groups": [
+    { "key": "spring", "label": "🌀 Springy stuff that stores energy" },
+    { "key": "catch", "label": "🔒 A catch that locks, then snaps" },
+    { "key": "lever", "label": "📏 Long legs that act like levers" }
+  ],
+  "predict": {
+    "prompt": "Stores energy or not? Predict first!",
+    "choices": ["Stores energy", "Doesn't store energy"],
+    "items": [
+      { "emoji": "🏹", "label": "A bent bow", "answer": 0 },
+      { "emoji": "🟤", "label": "A ball of clay squashed flat", "answer": 1 },
+      { "emoji": "🟡", "label": "A stretched rubber band", "answer": 0 }
+    ],
+    "explain": "Springy things store energy when you bend, squash or stretch them, and give it back when you let go. Clay just stays squashed, so its energy is lost."
+  },
+  "lab": {
+    "title": "The pop-up card lab",
+    "predict": "Fold each jumping card flat and let go. Which band will make it pop the highest?",
+    "options": ["One thin rubber band", "One thick rubber band", "Two thin rubber bands", "A folded paper spring"],
+    "measure": "pop height (cm)",
+    "higher_is_better": true
+  },
+  "tool": {
+    "kind": "how_might_we",
+    "name": "How Might We",
+    "intro": "You already know U (the user) and N (their need). Today you'll learn the last 2 pieces: I for Insight and H for the How Might We question itself.",
+    "example_object": "a school bag",
+    "parts": [
+      { "key": "I", "name": "Insight", "what": "Something surprising you noticed about the user.", "example": "🎒 Kids hang their bag on one shoulder because it's quicker to grab.", "starter": "I noticed that kids in the toy shop love toys that…" },
+      { "key": "H", "name": "How might we…?", "what": "Mix user, need and insight into one hopeful question.", "example": "🎒 How might we make a bag that's quick to grab AND kind to backs?", "starter": "How might we make a toy that jumps high without…" }
+    ],
+    "locked": [],
+    "badge": "How Might We Maker"
+  },
+  "sketch_checklist": [
+    "I drew my toy loaded and ready to jump.",
+    "I labelled the springy part, the catch and the release.",
+    "I drew an arrow to show which way it will jump."
+  ],
+  "test": {
+    "measure": "jump height in cm",
+    "higher_is_better": true,
+    "check_question": "Landing check: does your grasshopper land on its feet?",
+    "check_options": ["Every time", "Sometimes", "Not yet"],
+    "change_prompt": "The ONE thing I changed"
+  },
+  "reflection": {
+    "question": "Which nature trick made your toy jump?",
+    "options": ["🐕 Flea's springy pad", "🦘 Kangaroo tendons", "🪲 Click beetle snap", "🐸 Frog's long legs"]
+  },
+  "sticker": { "name": "Super Jumper", "emoji": "🦗" }
+}

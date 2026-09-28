@@ -1,0 +1,104 @@
+{
+  "title": "The Hallway Traffic Jam",
+  "season": 2,
+  "week": 35,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Stuck at Break Time!",
+      "story": "Every break time, the whole school squeezes through one hallway and one door to the playground. Everyone pushes, nobody moves, and half of break is gone before Omid gets outside. Nobody is in charge of the crowd, and it jams every day. Can YOU redesign how people move so the jam disappears?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for helping a big crowd move without getting stuck?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature move crowds without jams? Some animals move in groups of thousands, or even millions, without a single traffic jam and without a boss. Let's watch them!",
+      "clues": [
+        {
+          "text": "On a busy army ant trail, the ants sort themselves into lanes. Ants heading out walk on the sides, and ants carrying food home walk in the middle. With no head-on crashes, the trail keeps flowing.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "In a school of fish, each fish keeps a small gap from its neighbours and matches their speed and direction. Thousands of fish can turn together without bumping into each other.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "In a huge flock of starlings, each bird watches just its 7 or so nearest neighbours and copies them. That simple rule lets thousands of birds swirl together like one giant cloud.",
+          "image_url": null,
+          "habitat": "sky"
+        },
+        {
+          "text": "Thousands of honeybees fly in and out of a hive every hour. When the doorway gets too busy, beekeepers add a second entrance, and the bees spread out between them so traffic keeps moving.",
+          "image_url": null,
+          "habitat": "grassland"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Simple rules for everyone! Nobody bosses the ants, fish or starlings around. Instead, each one follows a few easy rules: stay in your lane, keep a small gap, match your neighbours' speed, and copy the ones next to you. When everyone follows the same simple rules, a huge crowd flows smoothly. Designers use this in one-way systems, 'keep left' arrows and separate in and out doors at stadiums and stations.",
+      "reveal_hint": "What 2 or 3 simple rules could everyone in the hallway follow, so nobody needs to be in charge?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Be a traffic scientist. At break time, or at a busy door at home or in a shop, watch a crowd for 2 minutes without filming anyone. Tally how many times people stop, bump or squeeze. Where does the jam start? Then make a model: a tray with a door made from two blocks, 3 marbles wide. Put 10 marbles at one end, tilt the tray gently and time how long it takes all 10 to get through.",
+      "skill_refs": [],
+      "hints": [
+        "Look for the exact spot where people slow down. Jams usually start where two streams meet, or where the path gets narrower.",
+        "In your model, tilt the tray the same amount every time, for example by resting one end on the same book. Then only your design changes."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw a bird's-eye plan of your new hallway.",
+      "guidance": "Show lanes, arrows, doors, and where people go in and out. Write the simple rules everyone follows, like 'keep left' or 'out through this door only'."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a model hallway in a tray or a shoebox lid, with a door 3 marbles wide. Use 20 marbles or round beads as your crowd. Time how long it takes all 20 to pass the door with no design. Then add your ideas: straw lanes, arrows, a second door, or a small post just before the door. Keep marbles away from little brothers and sisters.",
+      "test_criteria": [
+        "How many seconds does it take for all 20 counters to pass the door?",
+        "Where do your counters get stuck, and does your design fix that spot?",
+        "Improve one thing and test again. Try a different lane layout or a second door. Did the crowd get through faster?"
+      ],
+      "hints": [
+        "Watch for an arch of marbles that locks across the door. That's a jam! Anything that stops the arch forming helps the flow.",
+        "Try what engineers found: a small post placed just in front of the door, or lanes that guide the crowd in single file, breaks up the arch and lets everyone through faster."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "The school tried Omid's lanes and in-and-out doors, and now everyone gets out to play in seconds! You made the jam disappear, just like an ant trail.",
+      "share_prompt": "Share a photo of your model hallway and your best time for 20 counters on the Ideas Wall. What simple rule made the biggest difference?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "how_might_we",
+      "age_mode": "young"
+    },
+    {
+      "kind": "how_might_we",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Observe where a crowd jams, write a How Might We question, then test lanes and doors in a model hallway with 20 counters."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Crowd Flow and Emergent Behaviour",
+      "summary": "Explain how simple local rules create smooth group movement, measure flow rate (counters per second) for different layouts, and compare with real crowd design at stations and stadiums."
+    }
+  ]
+}

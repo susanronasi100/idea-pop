@@ -1,0 +1,104 @@
+{
+  "title": "Light the Way Home",
+  "season": 2,
+  "week": 21,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Grandpa's Dark Garden Path",
+      "story": "Every night, Grandpa Sam walks down his garden path to check on his vegetables, and every night he trips in the dark. A bright lamp would wake the birds sleeping in the hedge, and there's no electricity out there anyway. Can YOU design path markers that Grandpa can see at night, with no plugs and no batteries?",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for making something easy to see in the dark?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature make things easy to see in the dark? Some animals glow, and some bounce back the tiniest bit of light. Let's meet them!",
+      "clues": [
+        {
+          "text": "Fireflies make their own light inside their bodies. Almost none of the energy turns into heat, so the glow is cool, not hot like an old light bulb.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "In New Zealand caves, glow-worms shine blue-green lights in the dark. Insects fly towards the glow and get caught on sticky silk threads hanging below.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "A cat's eye has a mirror layer behind it, called the tapetum. It bounces light back through the eye, so cats see well in dim light, and their eyes shine in a torch beam.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Silver fish like herring have scales packed with tiny flat crystals that work like mirrors. They flash brightly when even a little light hits them.",
+          "image_url": null,
+          "habitat": "ocean"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "You don't always need to MAKE light. A cat's eye sends the little light there is straight back towards where it came from. This is called retroreflection, and it's how bike reflectors and the \"cat's eyes\" in roads work. The second trick is glow: some materials soak up daylight and give it back slowly after dark, like a firefly's cool glow with no wires at all.",
+      "reveal_hint": "Should Grandpa's markers make their own light, bounce his little torch light back, or both?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Night mission! In a dark room, stand 3 metres from a wall with a small torch held next to your eyes. Tape up five cards: black card, white paper, flat foil, crumpled foil and a piece of bike reflector tape. Shine the torch at each one and score how bright it looks from 0 (can't see it) to 5 (dazzling). Clear the floor first so nobody trips.",
+      "skill_refs": [],
+      "hints": [
+        "Keep the torch right next to your eyes. A reflector sends light back to where it came from, so you need to look from the same spot.",
+        "The reflector tape wins. Its tiny beads or prisms bounce the light straight back to you. Crumpled foil scatters light everywhere, and black card soaks it up."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw Grandpa's path from above, with your markers along it.",
+      "guidance": "Label which markers reflect light and which ones glow. Write how far apart they are and how high off the ground."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Make 5 path markers from card, lolly sticks, reflector tape, foil, white paint or glow-in-the-dark stickers. Line them up on the floor of a dark room like a path. Stand 3 metres away and point a small torch at the floor, the way Grandpa would.",
+      "test_criteria": [
+        "How many of your 5 markers can you see from 3 metres?",
+        "Switch the torch off. After charging your glow markers in bright light for 10 minutes, how many can you still see?",
+        "Improve one thing and test again. Could you see more markers this time?"
+      ],
+      "hints": [
+        "Tilt your markers so they face the way Grandpa walks, towards his torch.",
+        "Use both tricks: reflector tape for when Grandpa's torch is on, and a glow sticker charged in daylight for when it's off. Put markers on both edges of the path, about knee high."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Grandpa Sam walked the whole garden path in the dark without a single trip, and the birds in the hedge slept right through it!",
+      "share_prompt": "Share a drawing or photo of your path markers on the Ideas Wall. Which trick worked better for you: reflect or glow?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "empathy_map",
+      "age_mode": "young"
+    },
+    {
+      "kind": "empathy_map",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "10-12",
+      "title_override": null,
+      "summary": "Score how bright different materials look in a torch beam, then build path markers that reflect and glow."
+    },
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Retroreflection and Afterglow",
+      "summary": "Compare diffuse, mirror and retroreflection, test how viewing angle changes what you see, and relate your markers to the cat's tapetum and road studs."
+    }
+  ]
+}

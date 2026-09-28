@@ -1,0 +1,96 @@
+{
+  "title": "The Self-Healing Tyre",
+  "season": 2,
+  "week": 49,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Stranded by a Thorn",
+      "story": "Ade, 15, helps out at a busy bike repair workshop. Every week, riders push in bikes with flat tyres: one thorn or one bit of glass, and they're stuck far from home. Some mountain bikers already use a liquid sealant inside their tyres that plugs small holes all by itself. How does it work, and can you make one? Your mission: make a balloon that keeps its air after a pin prick, and measure how many minutes it stays up.",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have an idea for a tyre that could fix its own hole?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature repair itself? Living things get cut, pricked and torn all the time, and they don't wait for a mechanic. See how they carry their own repair kit!",
+      "clues": [
+        {
+          "text": "When a rubber tree's bark is cut, milky latex flows into the wound. In the air, the tiny latex particles clump together into a rubbery plug that seals the cut. The natural rubber in many tyres comes from this same latex.",
+          "image_url": null,
+          "habitat": "jungle"
+        },
+        {
+          "text": "When you cut your skin, blood flows into the gap and tiny cells called platelets clump together at the wound. Threads of a protein called fibrin form a mesh, and a small cut usually stops bleeding within a few minutes.",
+          "image_url": null,
+          "habitat": null
+        },
+        {
+          "text": "Mussels anchor to wave-battered rocks with tough threads that stick even underwater. If a thread is stretched too far, special bonds inside it break, then slowly join up again, so the thread heals itself.",
+          "image_url": null,
+          "habitat": "ocean"
+        },
+        {
+          "text": "When a pine tree is wounded, sticky resin oozes out and covers the damage. As it meets the air, part of it evaporates and it hardens into a seal that keeps insects and fungi out.",
+          "image_url": null,
+          "habitat": "forest"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Carry the repair kit inside. Each hero stores a liquid that flows to the damage by itself, then clumps or hardens to plug the gap. Pressure helps: blood, latex and resin are pushed towards the hole. Tubeless bike tyres copy this with a latex sealant full of tiny particles. When a thorn makes a hole, the air pressure pushes sealant into it, the particles jam the gap, and the latex dries into a plug. It can seal holes up to about 6 mm. In 2001, scientists at the University of Illinois made a plastic packed with tiny capsules of healing liquid that burst and glue a crack shut. The trade-off: sealant adds weight and slowly dries out, so riders top it up every few months.",
+      "reveal_hint": "When you get a small cut, where does the fix come from, and what pushes it to the right place?"
+    },
+    {
+      "step": "skill",
+      "instructions": "Find out which liquid seals a hole best. With an adult, make one pin hole in the bottom of each of 4 identical plastic cups. Hold each cup over a tray and pour in 50 ml of a different test liquid: plain water (your control), water with 1 teaspoon of cornflour, water with a pinch of cotton fluff, and runny PVA glue mixed with cotton fluff. Count the drips in 1 minute for each cup and record them in a table.",
+      "skill_refs": [],
+      "hints": [
+        "Change only the liquid. Same cup, same size hole, same amount of liquid, same height above the tray.",
+        "Particles help: cornflour and fibres get pulled into the hole by the flowing liquid and jam it, just like platelets in a cut. Fibres plus a glue that dries usually seal best."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Draw your self-healing balloon as two cross-sections: before and after the prick.",
+      "guidance": "Show where the sealant sits, where the pin goes in, and arrows for how air pressure pushes sealant into the hole. Label what jams the hole and what hardens it."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Make self-healing balloons. Use a funnel to put 2 teaspoons of your best sealant inside a balloon, blow it up, tie it and swirl it so the inside is coated. Stick a small square of clear tape on the outside where it will be pricked: like a scab, it stops the rubber tearing. An adult pricks each balloon through the tape with a pin and pulls the pin out. Time how many minutes the balloon stays up, until it has shrunk to about half its size. Test a balloon with tape but no sealant as your control. Work over a tray and wear safety glasses in case one pops. Skip this test if anyone has a latex allergy.",
+      "test_criteria": [
+        "How many minutes did each balloon stay up after the prick? Record the sealant balloon and the tape-only control in a table.",
+        "Repeat each test 3 times and work out the average: one balloon can be lucky.",
+        "Look at the prick: can you see a little plug or crust where the sealant filled the hole?",
+        "Improve one thing and test again. Change the amount of sealant or the particles, and compare the minutes."
+      ],
+      "hints": [
+        "If the balloon pops straight away, the rubber is tearing, not leaking. Add a second layer of tape, and prick near the knot or the dark spot at the top, where the rubber is thicker and less stretched.",
+        "Make sure the sealant is sitting on the prick spot: hold the balloon so the liquid pools under the tape before the adult pricks it. Glue, water and fibres together usually seal far better than a plain liquid."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "Pssst… then silence! Your balloon healed itself, just like a rubber tree seals its bark. Ade's workshop wants to try your sealant idea in a real inner tube.",
+      "share_prompt": "Share a photo of your balloons and your minutes table on the Ideas Wall. Which nature trick did your sealant copy, and what did your I Like, I Wish, What If feedback say?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "like_wish_what_if",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Biomimicry: Self-Healing Materials",
+      "summary": "Compare sealant recipes in a controlled leak test, build a self-sealing balloon, average repeated trials, and relate latex, blood clotting and microcapsule self-healing plastics to tubeless tyre design and its trade-offs."
+    }
+  ]
+}

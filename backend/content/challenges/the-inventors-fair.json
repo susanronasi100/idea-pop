@@ -1,0 +1,96 @@
+{
+  "title": "The Inventors' Fair",
+  "season": 2,
+  "week": 50,
+  "is_premium": false,
+  "steps": [
+    {
+      "step": "brief",
+      "title": "Your Problem, Nature's Answer",
+      "story": "This is the final mission, and this time YOU choose the problem. Find a real problem at school or at home: something too hot, too noisy, too wasteful, too slippery or too hard to use. Then run the whole Biomimicry Design Spiral, the same process professional designers use: Define, Biologize, Discover, Abstract, Emulate, Evaluate. Ellie will model each step with their own problem, a classroom that gets hot and stuffy every afternoon. At the end, you'll pitch your invention at the Inventors' Fair.",
+      "image_url": null
+    },
+    {
+      "step": "your_idea",
+      "prompt": "Do you already have a problem, and maybe a nature-inspired idea, ready to go?",
+      "fork_to_step": 6
+    },
+    {
+      "step": "nature_clues",
+      "intro": "How does nature solve YOUR problem? Every problem has a function, like \"keep cool\", \"hold on\" or \"move quietly\". Search by the function, and meet the living things behind some famous inventions!",
+      "clues": [
+        {
+          "text": "Your turn to discover: search AskNature (asknature.org) by function, not by animal. Try verbs like \"manage heat\", \"reduce noise\" or \"hold on\". Ellie searched \"move air\" and found the prairie dog: its burrow has openings at different heights, so wind blowing over them pulls fresh air through the tunnels.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Japan's 500 Series bullet train made a loud boom whenever it left a tunnel. Engineer Eiji Nakatsu, a birdwatcher, copied the kingfisher's long, pointed beak, which slips into water with barely a splash. The new nose was quieter, and the train used about 15% less electricity while going 10% faster.",
+          "image_url": null,
+          "habitat": "forest"
+        },
+        {
+          "text": "In 1941, Swiss engineer George de Mestral pulled burdock burrs off his dog after a walk and looked at them under a microscope. Tiny hooks caught on loops in the fur and in his clothes. After years of work, he invented hook-and-loop fastening, known today as Velcro.",
+          "image_url": null,
+          "habitat": "grassland"
+        },
+        {
+          "text": "Some African termites build tall mounds full of tunnels and chimneys that move air and keep the nest from overheating. Architect Mick Pearce used this idea for the Eastgate Centre in Harare, Zimbabwe, opened in 1996. It has no conventional air conditioning and uses about 10% of the energy of a similar building for heating and cooling.",
+          "image_url": null,
+          "habitat": "grassland"
+        }
+      ]
+    },
+    {
+      "step": "design_secret",
+      "secret": "Every problem has a function, and nature has had about 3.8 billion years to test strategies for it. The Biomimicry Design Spiral is how you borrow them. 1 Define what your design must DO, and how you'll measure success. 2 Biologize: ask \"How does nature do this?\" 3 Discover living things that do it well. 4 Abstract their strategy into a design principle, without the animal. 5 Emulate: build it. 6 Evaluate: test it against a control, decide what to change, and spiral round again. The trick is to copy the strategy, not the look: the bullet train doesn't look like a bird, it copies the way the beak's shape parts the water gradually.",
+      "reveal_hint": "Write your problem as a verb: what must your design DO? Then ask which living things have to do that to survive."
+    },
+    {
+      "step": "skill",
+      "instructions": "Define and Biologize your own problem. 1) Write the problem in one sentence, who it affects (no names), and what success looks like with a number, like \"the classroom stays below 26 °C\" or \"the bag strap stays on my shoulder for 10 minutes of walking\". 2) Turn it into a function: a verb plus what, like \"move air\", \"grip a round surface\" or \"reduce echo\". 3) Ask \"How does nature…?\" and find at least 3 living things that do it, using AskNature, library books or nature videos. 4) For each one, write its strategy in one sentence, then a design principle without the animal. Ellie's first row: prairie dog, burrow openings at two heights, \"openings at different heights let wind pull air through\".",
+      "skill_refs": [],
+      "hints": [
+        "If your search finds nothing, your function is too specific. \"Cool a classroom\" finds little, but \"move air\" or \"shed heat\" finds lots. Try 2 or 3 different verbs.",
+        "A good design principle has no animal in it. Not \"be like a termite\", but \"a high opening lets warm air escape at the top, and a low opening pulls cooler air in at the bottom\"."
+      ]
+    },
+    {
+      "step": "sketch",
+      "prompt": "Sketch your invention and show exactly which nature strategy it copies.",
+      "guidance": "Draw your design with labels, and next to it a small sketch of the living thing's strategy. Link the two with an arrow and write your design principle on it. Add your success measure, your control and the one variable you'll test."
+    },
+    {
+      "step": "build_and_test",
+      "instructions": "Build a prototype or a small-scale model from safe materials: card, tape, string, fabric or recycled packaging. Plan a fair test: a control (the problem as it is now, or a version without your nature trick), one variable, and your own success measure with a number and a unit. Test at least 3 times each and record everything in a data table. Ellie built a shoebox classroom with a low vent and a tall black paper chimney, and compared it with a shoebox with no vents, side by side in the same sunny window for 20 minutes. Get feedback, improve one thing, and test again. An adult helps with anything hot, sharp or electrical. Photograph your prototype only, never people.",
+      "test_criteria": [
+        "What is your success measure, with a unit? Record your control and your design in a table, with at least 3 trials each.",
+        "How much better than the control is your design? Work out the difference and the percentage improvement.",
+        "Trade-offs: what does your design cost in money, materials, energy or effort? Is it worth it?",
+        "Improve one thing and test again. Change one variable, run 3 more trials, and add the results to your table."
+      ],
+      "hints": [
+        "If you can't measure it, you can't improve it. Turn a fuzzy goal into a number: degrees, seconds, grams, drips, or how many people out of 10 prefer it.",
+        "Pitch in 60 seconds: the problem (with a number), the living thing and its strategy, your design principle, your result compared with the control, and the next thing you'll improve. That's the winning structure."
+      ]
+    },
+    {
+      "step": "celebrate_and_share",
+      "celebration_text": "You did the whole spiral! You found a real problem, asked nature, abstracted a strategy and tested your own invention against a control. That's exactly how biomimicry designers work. Take your medal, Nature Inventor!",
+      "share_prompt": "Share your 60-second pitch and a photo of your prototype on the Ideas Wall (no faces, names or school details). What was your problem, which living thing helped, and by how much did your design beat the control?"
+    }
+  ],
+  "tools": [
+    {
+      "kind": "design_spiral",
+      "age_mode": "older"
+    }
+  ],
+  "age_tier_variants": [
+    {
+      "age_tier": "12-18",
+      "title_override": "Capstone: The Biomimicry Design Spiral",
+      "summary": "Choose a real problem, run all six stages of the Biomimicry Design Spiral (Define, Biologize, Discover, Abstract, Emulate, Evaluate), test a prototype against a control with repeated trials, analyse trade-offs, and pitch it with evidence."
+    }
+  ]
+}
