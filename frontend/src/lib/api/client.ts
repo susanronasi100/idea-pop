@@ -709,8 +709,10 @@ export async function fetchReports() {
 
 /** `lang` is the UI locale; missions come back translated when they can be. */
 export async function fetchChallenges(lang?: string) {
+  // The API pages at 20 by default; ask for its maximum page so every
+  // mission (50 across two seasons) is listed.
   const { data, error } = await apiClient.GET("/api/challenges", {
-    params: { query: lang ? { lang } : {} },
+    params: { query: { per_page: 100, ...(lang ? { lang } : {}) } },
   });
   if (error) throw new Error("Failed to load challenges");
   // The backend paginates ({items, total, …}); e2e route mocks may still

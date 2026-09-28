@@ -376,7 +376,7 @@ export interface paths {
   };
   "/api/challenges": {
     get: {
-      parameters: { query?: { lang?: string } };
+      parameters: { query?: { lang?: string; per_page?: number; page?: number } };
       responses: {
         200: {
           content: {
