@@ -25,7 +25,8 @@ const EARN_ROWS = [
   { key: 'cycle', xp: 15, emoji: '🔄' },
 ] as const;
 
-/** The small "What is XP?" overlay opened from the mission's XP badge. */
+/** The "What is XP?" panel. It drops down from the mission's top bar, like
+ *  the mission menu, when the kid taps the XP badge. */
 export default function XpInfoDialog({ missionXp, onClose }: XpInfoDialogProps) {
   const t = useTranslations('challenge');
   const [mine, setMine] = useState<MyXp | null | 'loading'>('loading');
@@ -54,103 +55,103 @@ export default function XpInfoDialog({ missionXp, onClose }: XpInfoDialogProps) 
   const lp = mine && mine !== 'loading' ? levelProgress(mine.xp, mine.level) : null;
 
   return (
-    <div
-      className="fixed inset-0 z-[60] flex items-end justify-center bg-ink/50 p-4 sm:items-center"
-      role="dialog"
-      aria-modal="true"
-      aria-labelledby="xp-info-title"
-      data-testid="xp-info"
-      onClick={(e) => {
-        if (e.target === e.currentTarget) onClose();
-      }}
-    >
-      <div className="max-h-[85vh] w-full max-w-sm overflow-y-auto rounded-card bg-white shadow-xl">
-        <div className="flex items-center justify-between px-5 pt-4">
-          <h2 id="xp-info-title" className="font-display text-lg text-challenge">
-            ⭐ {t('xp_info_title')}
-          </h2>
-          <button
-            ref={closeRef}
-            type="button"
-            onClick={onClose}
-            aria-label={t('xp_info_close')}
-            className="rounded-lg p-1 text-ink/50 hover:bg-tint-blue hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
-          >
-            ✕
-          </button>
-        </div>
-
-        <div className="flex flex-col gap-4 px-5 pb-5 pt-2 font-body text-sm text-ink">
-          {/* 1. What XP means */}
-          <p>{t('xp_info_what')}</p>
-
-          {/* 4. This mission */}
-          <div
-            dir="auto"
-            className="flex items-center gap-3 rounded-card bg-challenge/10 p-3"
-            data-testid="xp-info-mission"
-          >
-            <span className="text-2xl" aria-hidden="true">🎯</span>
-            <p className="font-semibold">{t('xp_info_mission', { xp: missionXp })}</p>
+    <>
+      {/* Invisible backdrop: a tap anywhere else closes the panel. */}
+      <div className="fixed inset-0 z-40" aria-hidden="true" onClick={onClose} />
+      <div
+        role="dialog"
+        aria-labelledby="xp-info-title"
+        data-testid="xp-info"
+        className="absolute left-0 right-0 top-full z-50 max-h-[75vh] overflow-y-auto rounded-b-xl border-t border-ink/10 bg-white shadow-xl"
+      >
+        <div className="mx-auto max-w-2xl">
+          <div className="flex items-center justify-between px-5 pt-4">
+            <h2 id="xp-info-title" className="font-display text-lg text-challenge">
+              ⭐ {t('xp_info_title')}
+            </h2>
+            <button
+              ref={closeRef}
+              type="button"
+              onClick={onClose}
+              aria-label={t('xp_info_close')}
+              className="rounded-lg p-1 text-ink/50 hover:bg-tint-blue hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
+            >
+              ✕
+            </button>
           </div>
 
-          {/* 3. The kid's XP right now */}
-          {mine === 'loading' ? (
-            <p className="text-ink/50">{t('xp_info_loading')}</p>
-          ) : mine && lp ? (
-            <div className="flex flex-col gap-2 rounded-card border border-ink/10 p-3" data-testid="xp-info-mine">
-              <p className="font-semibold">
-                {t('xp_info_mine', { xp: mine.xp, level: mine.level, rank: mine.rank })}
-              </p>
-              <div
-                className="h-2.5 w-full overflow-hidden rounded-full bg-ink/10"
-                role="progressbar"
-                aria-valuemin={0}
-                aria-valuemax={100}
-                aria-valuenow={lp.pct}
-              >
-                <div className="h-full rounded-full bg-challenge" style={{ width: `${lp.pct}%` }} />
-              </div>
-              <p className="text-xs text-ink/60">
-                {lp.isMax
-                  ? t('xp_info_max_level')
-                  : t('xp_info_next_level', { xp: lp.remaining, level: lp.nextLevel })}
-              </p>
+          <div className="flex flex-col gap-4 px-5 pb-5 pt-2 font-body text-sm text-ink">
+            {/* 1. What XP means */}
+            <p>{t('xp_info_what')}</p>
+
+            {/* 4. This mission */}
+            <div
+              dir="auto"
+              className="flex items-center gap-3 rounded-card bg-challenge/10 p-3"
+              data-testid="xp-info-mission"
+            >
+              <span className="text-2xl" aria-hidden="true">🎯</span>
+              <p className="font-semibold">{t('xp_info_mission', { xp: missionXp })}</p>
             </div>
-          ) : null}
 
-          {/* 2. How XP is counted */}
-          <div className="flex flex-col gap-1.5">
-            <p className="font-display text-sm text-ink">{t('xp_info_how_title')}</p>
-            <ul className="flex flex-col gap-1.5">
-              {EARN_ROWS.map((row) => (
-                <li key={row.key} className="flex items-center gap-2">
-                  <span aria-hidden="true">{row.emoji}</span>
-                  <span className="flex-1">{t(`xp_info_earn_${row.key}`)}</span>
-                  <span dir="ltr" className="rounded-pill bg-challenge/10 px-2 py-0.5 text-xs font-semibold text-challenge">
-                    +{row.xp} XP
-                  </span>
-                </li>
-              ))}
+            {/* 3. The kid's XP right now */}
+            {mine === 'loading' ? (
+              <p className="text-ink/50">{t('xp_info_loading')}</p>
+            ) : mine && lp ? (
+              <div className="flex flex-col gap-2 rounded-card border border-ink/10 p-3" data-testid="xp-info-mine">
+                <p className="font-semibold">
+                  {t('xp_info_mine', { xp: mine.xp, level: mine.level, rank: mine.rank })}
+                </p>
+                <div
+                  className="h-2.5 w-full overflow-hidden rounded-full bg-ink/10"
+                  role="progressbar"
+                  aria-valuemin={0}
+                  aria-valuemax={100}
+                  aria-valuenow={lp.pct}
+                >
+                  <div className="h-full rounded-full bg-challenge" style={{ width: `${lp.pct}%` }} />
+                </div>
+                <p className="text-xs text-ink/60">
+                  {lp.isMax
+                    ? t('xp_info_max_level')
+                    : t('xp_info_next_level', { xp: lp.remaining, level: lp.nextLevel })}
+                </p>
+              </div>
+            ) : null}
+
+            {/* 2. How XP is counted */}
+            <div className="flex flex-col gap-1.5">
+              <p className="font-display text-sm text-ink">{t('xp_info_how_title')}</p>
+              <ul className="flex flex-col gap-1.5">
+                {EARN_ROWS.map((row) => (
+                  <li key={row.key} className="flex items-center gap-2">
+                    <span aria-hidden="true">{row.emoji}</span>
+                    <span className="flex-1">{t(`xp_info_earn_${row.key}`)}</span>
+                    <span dir="ltr" className="rounded-pill bg-challenge/10 px-2 py-0.5 text-xs font-semibold text-challenge">
+                      +{row.xp} XP
+                    </span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            {/* 5. Other essentials */}
+            <ul className="flex list-disc flex-col gap-1 ps-5 text-xs text-ink/70">
+              <li>{t('xp_info_levels')}</li>
+              <li>{t('xp_info_keep')}</li>
+              <li>{t('xp_info_once')}</li>
             </ul>
+
+            <button
+              type="button"
+              onClick={onClose}
+              className="rounded-pill bg-challenge py-2.5 font-display text-sm text-white hover:bg-challenge/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+            >
+              {t('xp_info_ok')}
+            </button>
           </div>
-
-          {/* 5. Other essentials */}
-          <ul className="flex list-disc flex-col gap-1 ps-5 text-xs text-ink/70">
-            <li>{t('xp_info_levels')}</li>
-            <li>{t('xp_info_keep')}</li>
-            <li>{t('xp_info_once')}</li>
-          </ul>
-
-          <button
-            type="button"
-            onClick={onClose}
-            className="rounded-pill bg-challenge py-2.5 font-display text-sm text-white hover:bg-challenge/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
-          >
-            {t('xp_info_ok')}
-          </button>
         </div>
       </div>
-    </div>
+    </>
   );
 }

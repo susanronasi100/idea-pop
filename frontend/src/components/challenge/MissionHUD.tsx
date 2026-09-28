@@ -55,16 +55,22 @@ export default function MissionHUD({
           data-testid="mission-menu-button"
           aria-label={t('hud_menu_aria')}
           aria-expanded={menuOpen}
-          onClick={() => setMenuOpen((v) => !v)}
+          onClick={() => {
+            setXpOpen(false);
+            setMenuOpen((v) => !v);
+          }}
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-tint-blue transition-colors"
         >
           <span className="text-lg leading-none">☰</span>
         </button>
 
         {/* Center: title */}
-        <p className="min-w-0 flex-1 truncate text-center font-display text-sm text-ink">
+        <h1
+          data-testid="mission-title"
+          className="line-clamp-2 min-w-0 flex-1 text-center font-display text-xl leading-tight text-ink sm:text-2xl md:text-3xl"
+        >
           {challenge.emoji} {challenge.title}
-        </p>
+        </h1>
 
         {/* Right: XP badge — a button that explains XP. dir=ltr so "+N XP"
             doesn't reorder in RTL. */}
@@ -72,9 +78,12 @@ export default function MissionHUD({
           type="button"
           dir="ltr"
           data-testid="hud-xp-button"
-          aria-haspopup="dialog"
-          aria-label={t('hud_xp_aria', { xp: challenge.completion_xp })}
-          onClick={() => setXpOpen(true)}
+                    aria-label={t('hud_xp_aria', { xp: challenge.completion_xp })}
+          aria-expanded={xpOpen}
+          onClick={() => {
+            setMenuOpen(false);
+            setXpOpen((v) => !v);
+          }}
           className="flex shrink-0 items-center gap-1 rounded-pill bg-challenge px-3 py-1.5 font-body text-xs font-semibold text-white shadow-sm transition-transform hover:scale-105 hover:bg-challenge/90 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
         >
           <span aria-hidden="true">⭐</span>
@@ -88,8 +97,9 @@ export default function MissionHUD({
         </button>
       </div>
 
-      {/* Key info: the problem statement and constraints on every step */}
-      {keyInfo ? (
+      {/* Key info: the problem statement and constraints, from step 2 on
+          (step 1, the Brief, already shows the full story card). */}
+      {currentStep < 2 ? null : keyInfo ? (
         <dl
           data-testid="mission-key-info"
           className="grid grid-cols-3 gap-2 border-t border-ink/5 bg-white px-4 py-2"
@@ -145,6 +155,13 @@ export default function MissionHUD({
           );
         })}
       </div>
+      <p
+        data-testid="progress-label"
+        aria-live="polite"
+        className="bg-white px-4 pb-2.5 text-center font-body text-sm font-semibold text-challenge"
+      >
+        {t('hud_step_label', { step: currentStep, name: t(`step_name_${currentStep}`) })}
+      </p>
 
       {xpOpen && (
         <XpInfoDialog missionXp={challenge.completion_xp} onClose={() => setXpOpen(false)} />
@@ -156,7 +173,7 @@ export default function MissionHUD({
           data-testid="mission-menu"
           className="absolute left-0 right-0 top-full z-50 rounded-b-xl border-t border-ink/10 bg-white shadow-xl"
         >
-          <ul role="list" className="py-2">
+          <ul role="list" className="flex flex-col gap-1 p-2">
             {ALL_STEPS.map((step) => {
               const isReached = reachedSteps.has(step);
               const isCurrent = step === currentStep;
@@ -169,7 +186,8 @@ export default function MissionHUD({
                     disabled={!isReached}
                     aria-current={isCurrent ? 'step' : undefined}
                     className={[
-                      'flex w-full items-center gap-3 px-5 py-3 text-left font-body text-sm transition-colors',
+                      'flex w-full items-center gap-3 rounded-xl border-2 px-5 py-3 text-start font-body text-lg transition-colors',
+                      isCurrent ? 'border-[#8FD3F7] bg-tint-blue/60' : 'border-transparent',
                       isReached
                         ? 'cursor-pointer hover:bg-tint-blue text-ink'
                         : 'cursor-not-allowed text-ink/30',
@@ -178,26 +196,20 @@ export default function MissionHUD({
                     {/* Dot indicator */}
                     <span
                       className={[
-                        'h-2.5 w-2.5 shrink-0 rounded-full',
+                        'h-3 w-3 shrink-0 rounded-full',
                         isReached ? 'bg-challenge' : 'bg-ink/20',
                       ].join(' ')}
                       aria-hidden="true"
                     />
 
                     {/* Step number */}
-                    <span className="w-4 shrink-0 font-display text-xs text-ink/50">
+                    <span className="w-5 shrink-0 font-display text-base text-ink/50">
                       {step}
                     </span>
 
                     {/* Step name */}
                     <span className="flex-1">{t(`step_name_${step}`)}</span>
 
-                    {/* Current indicator */}
-                    {isCurrent && (
-                      <span className="text-challenge text-xs" aria-hidden="true">
-                        ←
-                      </span>
-                    )}
                   </button>
                 </li>
               );

@@ -755,7 +755,8 @@
     "xp_info_levels": "New levels give you new ranks: Explorer, Maker, Inventor, Innovator, Master, Mentor. At Level 4 you unlock themes!",
     "xp_info_keep": "Your XP is never taken away.",
     "xp_info_once": "You earn XP for each video, lesson or challenge only the first time.",
-    "xp_info_ok": "Got it!"
+    "xp_info_ok": "Got it!",
+    "hud_step_label": "Step {step, number} of 8: {name}"
   },
   "ideas_wall": {
     "tab_mission": "🚀 Mission",

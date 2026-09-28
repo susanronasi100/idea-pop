@@ -124,4 +124,30 @@ describe('MissionHUD', () => {
     expect(screen.getByTestId('xp-info-mission')).toHaveTextContent('+20 XP');
     expect(await screen.findByTestId('xp-info-mine')).toHaveTextContent('You have 60 XP');
   });
+
+  it('hides the key info on the first page (the Brief)', () => {
+    renderHUD({
+      currentStep: 1,
+      reachedSteps: new Set([1]),
+      keyInfo: { problem: 'A 3-hour walk', goal: 'Cross safely', rules: 'Light things' },
+    });
+
+    expect(screen.queryByTestId('mission-key-info')).not.toBeInTheDocument();
+  });
+
+  it('says which page we are on under the circles', () => {
+    renderHUD({ currentStep: 3, reachedSteps: new Set([1, 2, 3]) });
+
+    expect(screen.getByTestId('progress-label')).toHaveTextContent('Step 3 of 8: Nature clues');
+  });
+
+  it('marks the current menu item without an arrow', () => {
+    renderHUD();
+
+    fireEvent.click(screen.getByTestId('mission-menu-button'));
+
+    const current = screen.getByTestId('mission-step-2');
+    expect(current).toHaveAttribute('aria-current', 'step');
+    expect(current).not.toHaveTextContent('←');
+  });
 });
