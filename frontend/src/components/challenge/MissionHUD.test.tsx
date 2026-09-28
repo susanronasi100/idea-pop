@@ -138,7 +138,8 @@ describe('MissionHUD', () => {
   it('says which page we are on under the circles', () => {
     renderHUD({ currentStep: 3, reachedSteps: new Set([1, 2, 3]) });
 
-    expect(screen.getByTestId('progress-label')).toHaveTextContent('Step 3 of 8: Nature clues');
+    expect(screen.getByTestId('progress-label')).toHaveTextContent('Step 3 of 8');
+    expect(screen.getByTestId('progress-label')).not.toHaveTextContent('Nature clues');
   });
 
   it('marks the current menu item without an arrow', () => {
@@ -149,5 +150,18 @@ describe('MissionHUD', () => {
     const current = screen.getByTestId('mission-step-2');
     expect(current).toHaveAttribute('aria-current', 'step');
     expect(current).not.toHaveTextContent('←');
+  });
+
+  it('closes the menu with the X or a tap outside', () => {
+    renderHUD();
+
+    fireEvent.click(screen.getByTestId('mission-menu-button'));
+    expect(screen.getByRole('button', { name: 'Close mission menu' })).toBeInTheDocument();
+    fireEvent.click(screen.getByTestId('mission-menu-button'));
+    expect(screen.queryByTestId('mission-menu')).not.toBeInTheDocument();
+
+    fireEvent.click(screen.getByTestId('mission-menu-button'));
+    fireEvent.click(screen.getByTestId('mission-menu-backdrop'));
+    expect(screen.queryByTestId('mission-menu')).not.toBeInTheDocument();
   });
 });

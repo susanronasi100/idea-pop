@@ -636,7 +636,8 @@
     "xp_info_keep": "XP تو هیچ‌وقت کم نمی‌شود.",
     "xp_info_once": "برای هر ویدیو، درس یا چالش فقط بار اول XP می‌گیری.",
     "xp_info_ok": "فهمیدم!",
-    "hud_step_label": "قدم {step, number} از ۸: {name}"
+    "hud_step_label": "قدم {step, number} از ۸",
+    "hud_menu_close_aria": "بستن منوی ماموریت"
   },
   "ideas_wall": {
     "tab_mission": "🚀 مأموریت",
