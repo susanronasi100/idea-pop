@@ -931,7 +931,7 @@ export interface components {
       skill_instructions?: string | null;
       related_explore_ids: string[];
       tools: {
-        kind: "five_whys" | "scamper" | "mind_map";
+        kind: "five_whys" | "scamper" | "mind_map" | "brainstorm";
         age_mode: "young" | "older";
       }[];
       age_tier_variants: {
