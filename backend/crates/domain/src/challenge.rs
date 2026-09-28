@@ -79,6 +79,7 @@ pub enum ToolKind {
     FiveWhys,
     Scamper,
     MindMap,
+    Brainstorm,
 }
 
 impl ToolKind {
@@ -87,6 +88,7 @@ impl ToolKind {
             ToolKind::FiveWhys => "five_whys",
             ToolKind::Scamper => "scamper",
             ToolKind::MindMap => "mind_map",
+            ToolKind::Brainstorm => "brainstorm",
         }
     }
 }

@@ -449,27 +449,26 @@ async fn seed_challenges(pool: &PgPool) -> anyhow::Result<()> {
             1,
             // steps JSON
             r#"[
-  {"step":"brief","title":"Max Can't Get to School!","story":"Max the rabbit wakes up and discovers the old wooden bridge over the river has collapsed. All his friends are waiting on the other side — and today is the science fair! Can YOU help Max find a way to cross safely?","image_url":null},
+  {"step":"brief","title":"Max Can't Get to the Science Fair!","story":"Max the rabbit wakes up to find the old wooden bridge over the river has collapsed. The river is 2 metres wide, his friends are waiting on the other side, and today is the science fair. Can YOU design a crossing that carries Max safely over, using only light materials he can carry?","image_url":null},
   {"step":"your_idea","prompt":"Do you already have an idea for how Max could cross the river?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Nature has solved river-crossing problems for millions of years. Let's look for clues!","clues":[{"text":"Water striders have wide, waxy feet that spread their weight across the surface — they never sink!","image_url":null,"habitat":"jungle"},{"text":"Beavers build log dams to block rivers and create calm ponds behind them.","image_url":null,"habitat":"jungle"},{"text":"Mangrove tree roots tangle together and trap mud, building new land in the water.","image_url":null,"habitat":"jungle"},{"text":"Coconuts float for months! Their thick husk traps air and keeps the seed dry.","image_url":null,"habitat":"ocean"}]},
-  {"step":"design_secret","secret":"Surface tension lets water stick to itself. A wide, flat object spreads weight across many water molecules — that's why a paperclip can float on still water even though metal is heavy!","reveal_hint":"Think about how you could spread Max's weight as broadly as possible…"},
-  {"step":"skill","instructions":"Watch how you can make a small ball of modelling clay sink, then flatten the same clay into a boat shape and make it float. Weight hasn't changed — shape has! Experiment with different widths and depths to see what holds the most cargo before sinking.","skill_refs":[]},
-  {"step":"sketch","prompt":"Draw Max's crossing solution — a bridge, a raft, stepping stones, or your own invention!","guidance":"Show the materials you would use and how they connect. Add labels for the most important parts."},
-  {"step":"build_and_test","instructions":"Build a small model of your crossing using cardboard, sticks, foil, or anything at home. Then test it by placing a small coin or pebble on it over a bowl of water.","test_criteria":["Does it hold at least one 'passenger' (coin) without sinking?","Does it stay stable when you gently push the water to create tiny waves?","Could Max step onto it from the bank — is there a clear entry point?"]},
-  {"step":"celebrate_and_share","celebration_text":"Max made it to the science fair — and won first prize for Most Creative Solution! Your bridge/raft/crossing idea is now part of Max's adventure forever.","share_prompt":"Take a photo of your model and share it on the Ideas Wall — which animal's trick inspired your design?"}
+  {"step":"nature_clues","intro":"How does nature stay on top of water? Nature has been crossing rivers and floating on water for millions of years. Let's look for clues!","clues":[{"text":"Water striders have long legs covered in tiny waxy hairs. They spread the insect's weight so widely that it stands on the water's skin without breaking it.","image_url":null,"habitat":"jungle"},{"text":"Fire ants link their bodies together into a living raft when floods come. Air trapped between them keeps the whole colony afloat for days.","image_url":null,"habitat":"jungle"},{"text":"The giant water lily's huge leaf has a rim and a web of air-filled ribs underneath, so it floats even with a small child on it.","image_url":null,"habitat":"jungle"},{"text":"Coconuts float across oceans for months. Their thick, fibrous husk traps air and keeps the seed dry.","image_url":null,"habitat":"ocean"}]},
+  {"step":"design_secret","secret":"An object floats when it pushes aside water that weighs more than it does. That's called buoyancy. A wide, hollow shape pushes aside lots of water, so even heavy things like steel ships float. Spreading weight over a big area also stops things breaking through the surface.","reveal_hint":"How could you make Max's crossing push aside as much water as possible?"},
+  {"step":"skill","instructions":"Make a ball of modelling clay and drop it in water. It sinks! Now flatten the same clay into a boat and add coins one at a time until it sinks. Try three boat shapes, like wide and flat, deep and narrow, and one with a rim. Record how many coins each one holds.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw Max's crossing: a bridge, a raft, stepping stones or your own invention.","guidance":"Label the materials and show where the air or the wide surface keeps it up. Add measurements."},
+  {"step":"build_and_test","instructions":"Build a model crossing from foil, straws, corks, card or sticks. Test it over a tray of water, loading it with coins as Max's weight.","test_criteria":["How many coins can it carry before it sinks or sags into the water?","Does it stay stable when you make small waves in the tray?","Improve one thing and test again. How many more coins does it hold?"]},
+  {"step":"celebrate_and_share","celebration_text":"Max made it to the science fair, and won the prize for Most Creative Crossing!","share_prompt":"Share your crossing and your coin results on the Ideas Wall. Which nature trick kept it afloat?"}
 ]"#,
             // tools JSON
             r#"[
-  {"kind":"five_whys","age_mode":"young"},
+  {"kind":"scamper","age_mode":"young"},
   {"kind":"scamper","age_mode":"older"}
 ]"#,
             // age_tier_variants JSON
             r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Focus on floating and surface area — build a wide raft from natural materials."},
-  {"age_tier":"10-12","title_override":null,"summary":"Compare bridge vs. raft solutions; measure load capacity and stability."},
-  {"age_tier":"12-18","title_override":"Engineering Max's Crossing","summary":"Apply truss and arch bridge principles; calculate load-per-unit-area and compare to surface tension data."}
+  {"age_tier":"10-12","title_override":null,"summary":"Compare boat shapes by the coins they carry, then build a crossing and improve its load in a second round."},
+  {"age_tier":"12-18","title_override":"Engineering Max's Crossing","summary":"Explain buoyancy and displacement, compare bridge and raft designs by load per gram of material, and link your best design to water striders or lily pads."}
 ]"#,
-            false, // free — the intro mission
+            false, // free — class-joined kids have no family subscription
         ),
         (
             "the-forest-picnic-problem",
@@ -478,130 +477,70 @@ async fn seed_challenges(pool: &PgPool) -> anyhow::Result<()> {
             2,
             // steps JSON
             r#"[
-  {"step":"brief","title":"Rain on the Way — Picnic in Danger!","story":"The Rossi family has been planning their forest picnic for weeks. They've packed sandwiches, juice boxes, and a birthday cake. But this morning the sky turned grey and the forecast says: 40% chance of showers. They won't cancel — they just need a shelter smart enough to keep everything dry. That's where YOU come in!","image_url":null},
-  {"step":"your_idea","prompt":"Got an idea for a portable, forest-friendly rain shelter?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Animals have been keeping dry for millions of years without umbrellas. Let's steal their best ideas!","clues":[{"text":"The lotus leaf is superhydrophobic — water droplets bead up and roll right off without wetting the surface at all.","image_url":null,"habitat":"jungle"},{"text":"A woodpecker's nest hole faces downward so rain can't drip inside.","image_url":null,"habitat":"jungle"},{"text":"Desert beetles tilt their backs into the wind to collect water droplets from fog onto bumpy surfaces — then roll the water to their mouths.","image_url":null,"habitat":"desert"},{"text":"Bird feathers have tiny hooks (barbules) that zip the feather into a nearly waterproof mat.","image_url":null,"habitat":"sky"}]},
-  {"step":"design_secret","secret":"The lotus effect works because the surface is covered in microscopic waxy bumps. Water droplets sit on top of these bumps (touching only the tips) and slide off carrying dirt with them. This is called superhydrophobicity!","reveal_hint":"What if you could make your shelter surface behave like a lotus leaf — or at least encourage water to run away from the picnic?"},
-  {"step":"skill","instructions":"Test three surfaces for waterproofing: plain paper, wax-coated paper (rub a candle on it), and plastic wrap. Drip water on each and observe. Which repels best? Which absorbs? Record your results in a simple table: Surface | Beads? | Absorbs? | Verdict.","skill_refs":[]},
-  {"step":"sketch","prompt":"Design the Rossi family's perfect forest shelter — it should be quick to set up, use natural or recycled materials, and shed rain away from the picnic area.","guidance":"Mark which surfaces are your 'lotus layer'. Show how rain flows off and away. Include a side view and a top view."},
-  {"step":"build_and_test","instructions":"Build a model shelter (a small tent or lean-to shape) using materials from around your home. Then pour a tablespoon of water on the roof and watch what happens.","test_criteria":["Does water run off rather than pool?","Is the picnic area underneath dry after the pour?","Would this shelter survive a gust of wind — is it stable?"]},
-  {"step":"celebrate_and_share","celebration_text":"The birthday cake stayed perfectly dry and the picnic was the best the Rossi family ever had! Your shelter design protected the day.","share_prompt":"Share your waterproof shelter design on the Ideas Wall — which nature trick did you borrow, and what material was your secret weapon?"}
+  {"step":"brief","title":"Rain on the Way: Picnic in Danger!","story":"The Rossi family has planned their forest picnic for weeks, with sandwiches, juice and a birthday cake. This morning the forecast says showers. They won't cancel, but they need a shelter that keeps everything dry, packs into a backpack and sets up in under 5 minutes. That's where YOU come in!","image_url":null},
+  {"step":"your_idea","prompt":"Got an idea for a quick, portable rain shelter?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature shed water? Plants and animals stay dry in the rain without umbrellas. Let's borrow their best ideas!","clues":[{"text":"The lotus leaf is covered in microscopic waxy bumps. Water droplets sit on the tips, roll right off and carry dirt away with them.","image_url":null,"habitat":"jungle"},{"text":"Duck feathers overlap like roof tiles and are coated with oil from a gland near the tail, so water slides off them.","image_url":null,"habitat":"ocean"},{"text":"Rainforest leaves often end in a long pointed \"drip tip\" that drains rain off quickly, so the leaf dries fast.","image_url":null,"habitat":"jungle"},{"text":"A woodpecker's nest hole usually faces away from the wind and rain, so water can't drip inside.","image_url":null,"habitat":"forest"}]},
+  {"step":"design_secret","secret":"The lotus effect works because water touches only the tips of tiny waxy bumps, so it can't spread out and soak in. Surfaces like this are called superhydrophobic, which means water-hating. Engineers copy the lotus leaf to make self-cleaning paint, glass and fabric.","reveal_hint":"How could your shelter make water bead up and run away from the picnic?"},
+  {"step":"skill","instructions":"Test four surfaces: plain paper, paper rubbed with a wax crayon, foil and a leaf. Drip 10 drops of water on each, tilted at the same angle, and count how many roll off. Record the surface, the drops that rolled off and whether any soaked in.","skill_refs":[]},
+  {"step":"sketch","prompt":"Design the Rossi family's shelter from the side and from above.","guidance":"Mark your \"lotus layer\", show the roof angle and draw arrows for where the rain goes."},
+  {"step":"build_and_test","instructions":"Build a model shelter from materials around your home. Put a tissue underneath as the picnic, then pour 3 tablespoons of water over the roof.","test_criteria":["Is the tissue under the shelter still dry?","Does the water run off, or does it pool on the roof?","Change the roof angle or material and test again. What changed?"]},
+  {"step":"celebrate_and_share","celebration_text":"The birthday cake stayed perfectly dry, and it was the best picnic the Rossi family ever had!","share_prompt":"Share your shelter and your drip-test table on the Ideas Wall. What was your secret waterproof material?"}
 ]"#,
             // tools JSON
             r#"[
   {"kind":"mind_map","age_mode":"young"},
-  {"kind":"scamper","age_mode":"older"}
+  {"kind":"mind_map","age_mode":"older"}
 ]"#,
             // age_tier_variants JSON
             r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Build a simple lean-to shelter from sticks and leaves; focus on slope direction and drainage."},
-  {"age_tier":"10-12","title_override":null,"summary":"Compare materials for waterproofing; measure how much water drains vs. pools in different designs."},
-  {"age_tier":"12-18","title_override":"Biomimicry: Designing a Superhydrophobic Shelter","summary":"Research the lotus effect and contact angle; design a shelter surface that maximises water roll-off using the principle of superhydrophobicity."}
+  {"age_tier":"10-12","title_override":null,"summary":"Run a drip test on four surfaces, then build a shelter and improve its roof angle or material."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Designing a Superhydrophobic Shelter","summary":"Research the lotus effect and contact angle, measure roll-off at different roof angles, and design a surface that maximises water shedding."}
 ]"#,
             true, // premium — unlocks with a family subscription
         ),
         (
-            "teach-the-machine-to-see",
-            "Teach the Machine to See",
+            "now-you-see-it",
+            "Now You See It, Now You Don't",
             1,
             3,
             // steps JSON
             r#"[
-  {"step":"brief","title":"The Robot That Can't Tell Cats from Dogs","story":"Meet Pixel, a friendly robot who wants to sort photos into 'cats' and 'dogs' — but right now it guesses randomly and gets almost everything wrong! Computers can't magically recognise things; SOMEONE has to teach them, using examples. Your mission: train a 'machine brain' to tell two things apart (cats vs dogs, thumbs-up vs thumbs-down, apples vs oranges) and see how good it gets.","image_url":null},
-  {"step":"your_idea","prompt":"How would YOU teach a friend who has never seen a cat to recognise one? Do you already have an idea?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Brains are the best learning machines we know. Let's see how living brains learn to recognise things.","clues":[{"text":"You can spot your best friend in a crowd in a split second — because you've seen their face thousands of times.","image_url":null,"habitat":"jungle"},{"text":"A newborn duckling learns what 'mum' looks like from the very first moving thing it sees — then follows it everywhere.","image_url":null,"habitat":"jungle"},{"text":"Honeybees learn which flowers have the best nectar by visiting them again and again, remembering colour and shape.","image_url":null,"habitat":"sky"},{"text":"A guide-dog puppy isn't born knowing its job — it practises with hundreds of examples before it gets good.","image_url":null,"habitat":"jungle"}]},
-  {"step":"design_secret","secret":"AI learns from EXAMPLES, not rules. The more examples you show it — and the more VARIED they are — the smarter it gets. Show it one-sided examples and it gets fooled. This is called machine learning, and choosing good examples is the whole secret.","reveal_hint":"Think about how many different cats a friend would need to see before they could recognise ANY cat…"},
-  {"step":"skill","instructions":"Learn about FEATURES — the little clues a classifier uses (pointy ears? whiskers? barks? round or oval?). UNPLUGGED: make a paper 'feature-checklist' classifier — a card that scores each mystery picture on 4 features and votes cat or dog. PLUGGED (optional): open the Machine Trainer below, make two classes, and get ready to train it with about 20 images each.","skill_refs":[],"hints":["Think about what makes a cat a cat — ears, whiskers, tail. Those are its 'features'.", "Pick features you can answer yes/no for every picture."]},
-  {"step":"sketch","prompt":"Pick your two categories and PLAN your examples before you collect them.","guidance":"Write down: What two things am I sorting? How many examples of each will I gather? How will I make them VARIED (different colours, angles, sizes)? A plan with varied examples beats a big pile of look-alikes."},
-  {"step":"build_and_test","instructions":"UNPLUGGED: run 10 mystery cards through your feature-checklist classifier and record each guess. PLUGGED (optional): train the Machine Trainer with your images, then test it on NEW pictures it has never seen. Either way, count how many it got right.","test_criteria":["Measure your accuracy: correct ÷ total (e.g. 7 out of 10 = 70%).","Now add MORE and MORE VARIED examples and test again — did your accuracy go up?","Find at least one picture the machine got wrong and work out WHY."],"hints":["Count only the ones it got RIGHT, then divide by how many you tested.", "If it keeps missing one kind, add more examples of that kind."]},
-  {"step":"celebrate_and_share","celebration_text":"You just trained a machine to see! You're now an AI teacher — and you discovered that good examples make a smart machine.","share_prompt":"Post your best accuracy score AND one example where the AI got fooled. Was your training data one-sided?"}
+  {"step":"brief","title":"The Birds Keep Flying Away!","story":"Aria's nature club wants to film the shy birds that visit the park pond, but the birds fly off whenever they spot the camera. The club needs a cover for the camera box that blends into the bushes. Can YOU design camouflage so good that your friends can't find it?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have a camouflage idea?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature hide in plain sight? Some animals are masters of disguise. They hide right in front of us. Let's discover their secrets!","clues":[{"text":"Cuttlefish can change their skin colour and pattern in less than a second to match the sand, rocks or seaweed around them.","image_url":null,"habitat":"ocean"},{"text":"Stick insects look and even move like twigs. They sway gently, as if the wind is blowing them.","image_url":null,"habitat":"jungle"},{"text":"Many fish and deer are darker on top and paler underneath. This 'countershading' cancels out the shadow on their bellies, so they look flat and hard to see.","image_url":null,"habitat":"forest"},{"text":"Zebras' bold stripes break up the outline of their bodies, so a herd is hard to pick apart when it's moving.","image_url":null,"habitat":"grassland"}]},
+  {"step":"design_secret","secret":"Eyes find objects by spotting outlines, shadows and colours that don't match. Good camouflage attacks all three: match the colours, break up the outline with a pattern, and cancel the shadow. The military and wildlife photographers use the same tricks.","reveal_hint":"Which gives your camera box away most: its colour, its shape or its shadow?"},
+  {"step":"skill","instructions":"Cut the same shape out of plain paper, patterned paper and paper you've coloured to match a spot in your garden or room. Hide each one in the same spot and ask a friend to find it. Time each search and record the results.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your camera cover in its hiding place.","guidance":"Label how you match colour, break up the outline and hide the shadow."},
+  {"step":"build_and_test","instructions":"Cover a small box with your camouflage using paper, fabric, leaves or paint. Hide it and a plain box in the same area, then ask 3 people to find each one.","test_criteria":["How many seconds, on average, does it take to spot your box compared to the plain one?","Which trick helped most: colour, outline or shadow? Test one at a time.","Does it still work from a different distance or angle?"]},
+  {"step":"celebrate_and_share","celebration_text":"The birds came right up to the pond, and the nature club filmed them all! Your camouflage fooled even the sharp-eyed herons.","share_prompt":"Share a photo of your hidden box on the Ideas Wall and challenge others to find it. How long did your friends take?"}
 ]"#,
             // tools JSON
             r#"[
   {"kind":"mind_map","age_mode":"young"},
-  {"kind":"five_whys","age_mode":"older"}
+  {"kind":"mind_map","age_mode":"older"}
 ]"#,
             // age_tier_variants JSON
             r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Sort two easy categories. Focus on collecting LOTS of varied examples and counting how many the machine gets right."},
-  {"age_tier":"10-12","title_override":null,"summary":"Measure accuracy as a percentage, improve it by adding varied data, and explain one case where the classifier was fooled."},
-  {"age_tier":"12-18","title_override":"Training an Image Classifier","summary":"Compare balanced vs. small training sets, track accuracy across rounds, and reason about which features drive misclassifications."}
+  {"age_tier":"10-12","title_override":null,"summary":"Time how long friends take to find plain and camouflaged objects, then improve your design one trick at a time."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Camouflage and Visual Perception","summary":"Explain background matching, disruptive patterns and countershading, collect timed search data from several viewers, and report which strategy mattered most."}
 ]"#,
             false, // free — class-joined kids have no family subscription
         ),
         (
-            "the-guess-who-tree",
-            "The Guess-Who Tree",
+            "water-from-thin-air",
+            "Water from Thin Air",
             1,
             4,
             // steps JSON
             r#"[
-  {"step":"brief","title":"Twenty Questions… but Smarter","story":"Pixel the robot wants to guess ANY animal you're thinking of by asking only yes/no questions — and it wants to win in as few questions as possible. But a bad first question wastes a turn! Your mission: build a question tree that guesses an animal in the fewest questions.","image_url":null},
-  {"step":"your_idea","prompt":"What is the SMARTEST first yes/no question you could ask to guess any animal? Got an idea?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Nature loves branching — big things split into smaller and smaller groups. Let's look for the pattern.","clues":[{"text":"A river starts as one big flow, then splits into streams, then tiny trickles — each split sends water a different way.","image_url":null,"habitat":"ocean"},{"text":"A tree trunk divides into big branches, then twigs — every fork narrows down where a leaf ends up.","image_url":null,"habitat":"jungle"},{"text":"Scientists identify a mystery leaf with a 'key': is the edge smooth? yes/no. Each answer cuts the choices in half.","image_url":null,"habitat":"jungle"},{"text":"A family tree branches from grandparents down to you — following the branches finds exactly one person.","image_url":null,"habitat":"jungle"}]},
-  {"step":"design_secret","secret":"This is a DECISION TREE — the way lots of AI makes choices. Each yes/no question splits a big group into smaller ones. The BEST question is the one that splits the group most evenly (roughly in half), because that throws away the most wrong answers at once and wins in the fewest guesses.","reveal_hint":"Which question removes MORE animals: 'Is it a zebra?' or 'Does it have four legs?'"},
-  {"step":"skill","instructions":"See how ONE good question cuts a big group in half. Warm-up in the Question Tree game below: tap a yes/no question and watch the animals split into a Yes group and a No group — the star meter shows how EVEN your split is, and even splits are the smartest. (No screen? Write 8 animals on cards and sort them by a yes/no question instead.)","skill_refs":[],"hints":["A good question splits your animals into two roughly equal groups.","Ask about a shared feature (legs? fur? water?) before guessing a single animal."]},
-  {"step":"sketch","prompt":"Pick the smartest FIRST question for your tree.","guidance":"In the Question Tree game, try different questions as your top split and watch the star meter. The one that splits the animals most evenly — closest to half and half — is the smartest start, because it throws away the most wrong answers at once. Then plan a follow-up question for each branch so every animal ends up alone at the tip."},
-  {"step":"build_and_test","instructions":"Build your whole tree in the Question Tree game: keep adding yes/no questions to each branch until every animal sits alone at the end of a path. Then press Play — think of an animal and let your tree guess it, counting the questions. Play a few rounds. (No screen? Have a friend secretly pick an animal and follow your paper tree, counting the questions.)","test_criteria":["Can your tree guess any of the 8 animals in 3 questions or fewer?","What is your AVERAGE number of questions over 5 rounds?","Swap your top question for a more even one and play again — did your average drop?"],"hints":["Put the question that splits the animals most evenly at the very top.","Find your longest path — that's your worst case. A more even question shortens it."]},
-  {"step":"celebrate_and_share","celebration_text":"You built a decision tree — the same idea powering everything from spam filters to game AIs! Fewer questions means a smarter tree.","share_prompt":"Share your finished tree and your best score — the fewest questions it took to guess an animal. What was your single smartest splitting question?"}
-]"#,
-            // tools JSON
-            r#"[
-  {"kind":"mind_map","age_mode":"young"},
-  {"kind":"five_whys","age_mode":"older"}
-]"#,
-            // age_tier_variants JSON
-            r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Build a yes/no question tree for 8 animals and try to guess each one in a few questions."},
-  {"age_tier":"10-12","title_override":null,"summary":"Measure the average number of questions and rearrange the tree so the best splitting question comes first."},
-  {"age_tier":"12-18","title_override":"Decision Trees & Information Gain","summary":"Reason about why an even split is best (information gain), and compare worst-case vs. average depth as you reorder questions."}
-]"#,
-            false, // free — class-joined kids have no family subscription
-        ),
-        (
-            "train-your-pet-algorithm",
-            "Train Your Pet Algorithm",
-            1,
-            5,
-            // steps JSON
-            r#"[
-  {"step":"brief","title":"The Robot Mouse and the Cheese","story":"Pixel has a new pet: a robot mouse stuck in a grid, trying to reach the cheese. The mouse doesn't get a map — it just tries moves, and you reward the good ones. Your mission: 'train' the mouse with rewards until it learns the best path to the cheese.","image_url":null},
-  {"step":"your_idea","prompt":"How do you train a puppy to do a new trick? Could the same idea train a robot? Got an idea?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Animals learn by trying things and remembering what paid off. Let's watch reward-learning in the wild.","clues":[{"text":"A puppy learns 'sit' because sitting earns a treat — behaviour that gets rewarded happens more often.","image_url":null,"habitat":"jungle"},{"text":"A crow tries different ways to crack a nut; the trick that works is the one it repeats tomorrow.","image_url":null,"habitat":"sky"},{"text":"A mouse in a maze slowly stops taking dead ends because they never lead to food.","image_url":null,"habitat":"jungle"},{"text":"Bees keep returning to the flower bed that gave the most nectar last time.","image_url":null,"habitat":"sky"}]},
-  {"step":"design_secret","secret":"This is REINFORCEMENT LEARNING. The AI tries moves, earns a REWARD for good ones and little or nothing for bad ones, and slowly builds up a 'map' of which moves pay off. Over many tries, it learns the path that earns the most reward — no one ever told it the answer directly.","reveal_hint":"If reaching the cheese is worth +10 and bumping a wall is worth 0, which moves will the mouse start to prefer?"},
-  {"step":"skill","instructions":"See how REWARDS can teach without giving a map. Warm-up in the Reward Maze game below: put the cheese on the grid and press 'Run a try' — watch the mouse wander at first, then slowly start preferring the moves that earned reward. (No screen? Draw a grid, write a reward number on each square, and nudge a paper 'mouse' toward the higher numbers by hand.)","skill_refs":[],"hints":["Give the cheese a big reward and wasted moves a small or negative one.","The mouse should prefer moves that lead to more reward over time."]},
-  {"step":"sketch","prompt":"Set up your maze world.","guidance":"In the Reward Maze game, place the START and the CHEESE, add a wall or a trap or two, and set the rewards (for example cheese +10, a wasted step -1, a trap -5). Before you run it, predict which path the mouse SHOULD learn."},
-  {"step":"build_and_test","instructions":"Press 'Run a try' several times and watch the mouse learn — the path it prefers should get shorter each round. Compare how many steps it took on try 1 versus try 5. Then change a reward, or move a wall, and run again to watch it re-learn. (No screen? Run your paper mouse for several rounds, nudging it toward higher-reward moves and recording the steps.)","test_criteria":["Compare TRIES to reach the cheese in round 1 vs. round 5 — did it get faster?","Does the mouse eventually avoid the traps and dead ends?","Change one reward number, predict what happens, then run it and check."],"hints":["Compare steps in round 1 with round 5 — is it fewer?","If it never improves, make the cheese reward bigger than the wasted-move penalty."]},
-  {"step":"celebrate_and_share","celebration_text":"Your pet algorithm learned to fetch the cheese — by rewards alone! That's how AIs learn to play games and control robots.","share_prompt":"Share your maze and how many tries it took the mouse to learn the best path. Which reward change made the biggest difference?"}
-]"#,
-            // tools JSON
-            r#"[
-  {"kind":"mind_map","age_mode":"young"},
-  {"kind":"scamper","age_mode":"older"}
-]"#,
-            // age_tier_variants JSON
-            r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Move a token mouse around a grid and reward it for reaching the cheese; watch it get faster."},
-  {"age_tier":"10-12","title_override":null,"summary":"Keep a reward table, count tries per round, and show the path improving as rewards guide the mouse."},
-  {"age_tier":"12-18","title_override":"Reinforcement Learning by Hand","summary":"Assign rewards and a simple update rule, run several episodes, and discuss exploration vs. exploiting the best-known path."}
-]"#,
-            false, // free — class-joined kids have no family subscription
-        ),
-        (
-            "spot-the-fake",
-            "Spot the Fake",
-            1,
-            6,
-            // steps JSON
-            r#"[
-  {"step":"brief","title":"Why Does the AI Keep Getting Fooled?","story":"Pixel trained a new classifier — but it keeps making silly mistakes, calling green apples 'not apples' and missing them completely. Something about how it learned is unfair. Your mission: build an AI on purpose-bad, one-sided examples, watch it get fooled, then FIX it by fixing the data.","image_url":null},
-  {"step":"your_idea","prompt":"Have you ever been tricked by something that looked like something else? How did the trick work? Got an idea about why Pixel is fooled?","fork_to_step":6},
-  {"step":"nature_clues","intro":"In nature, getting fooled can be a matter of life and death — and lots of animals have learned to fool others. Let's look at the tricksters.","clues":[{"text":"A stick insect looks exactly like a twig — predators' eyes are 'trained' on real twigs, so the insect slips by.","image_url":null,"habitat":"jungle"},{"text":"Some butterflies have giant eyespots on their wings that fool birds into thinking they face a bigger animal.","image_url":null,"habitat":"jungle"},{"text":"A harmless milk snake copies the bright stripes of a venomous coral snake, so predators avoid it by mistake.","image_url":null,"habitat":"desert"},{"text":"An octopus changes colour and texture to vanish against coral — the ultimate 'fake'.","image_url":null,"habitat":"ocean"}]},
-  {"step":"design_secret","secret":"An AI is only as fair as its examples. If it only ever sees RED apples, it secretly learns 'apple = red' — so a green apple fools it, just like a predator fooled by camouflage. This is called BIAS, and it comes from one-sided data. Fix the data (add the missing examples) and you fix the AI.","reveal_hint":"If you only showed the machine one colour of apple, what has it REALLY learned to detect?"},
-  {"step":"skill","instructions":"Learn how one-sided data creates bias. UNPLUGGED: build a card classifier trained only on red apples, then test it on a green apple and a red ball — watch it fail. PLUGGED (optional): in the Machine Trainer, train an 'apple' class using only red apples, then test green apples; then RETRAIN with varied apples and compare.","skill_refs":[],"hints":["If you only show red apples, the machine may secretly learn 'apple = red'.", "Predict which test picture will fool it before you try."]},
-  {"step":"sketch","prompt":"Plan a deliberately biased training set — and predict how it will fail.","guidance":"Write down the one-sided examples you'll use, then predict exactly which test items will fool the AI and why. Then plan the BALANCED set that would fix it."},
-  {"step":"build_and_test","instructions":"UNPLUGGED: run your test cards through the biased classifier and record the mistakes; then add the missing varied examples and test again. PLUGGED (optional): compare the Machine Trainer's accuracy before and after balancing the data.","test_criteria":["Measure accuracy with the BIASED data (expect it to be low on the surprising cases).","Fix the data, retrain/re-score, and measure accuracy AGAIN.","Explain in one sentence what bias your data had and how balancing it helped."],"hints":["Measure accuracy on the surprising cases before AND after adding variety.", "Ask: what kind of example was missing from the training pile?"]},
-  {"step":"celebrate_and_share","celebration_text":"You found the AI's blind spot AND fixed it — that's exactly the job of people who build fair AI in the real world.","share_prompt":"Share the bias you discovered and your before/after accuracy once you balanced the data."}
+  {"step":"brief","title":"The Garden Is Dying of Thirst!","story":"The school garden sits on a dry hillside where it hardly ever rains. But every morning, thick fog rolls in, and the plants are still thirsty. Can YOU design a fog catcher that turns morning mist into water for the garden?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for catching water from the air?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature collect water from the air? Some plants and animals live in deserts where it almost never rains. So where do they get their water? Let's find out!","clues":[{"text":"The Namib desert beetle does a headstand into the morning fog. Tiny water-loving bumps on its back catch droplets, which grow and roll down waxy grooves into its mouth.","image_url":null,"habitat":"desert"},{"text":"The thorny devil lizard has tiny channels between its scales. They pull water from damp sand across its skin to its mouth.","image_url":null,"habitat":"desert"},{"text":"Spider silk has little knots along each thread. Fog droplets collect on the knots and grow into big drops, which is why webs sparkle in the morning.","image_url":null,"habitat":"forest"},{"text":"Some cacti have spines shaped like cones with tiny grooves. Fog collects on the tips and slides down to the plant's base.","image_url":null,"habitat":"desert"}]},
+  {"step":"design_secret","secret":"Fog is made of tiny droplets too small to fall. A catcher gives them something to hit and stick to. Once enough droplets join, they're heavy enough to roll away along a smooth, slippery path. Fog nets in Chile and Morocco collect hundreds of litres of water a day this way.","reveal_hint":"Where should drops stick, and where should they slide?"},
+  {"step":"skill","instructions":"With an adult's help, hang three materials, like a mesh bag, a cotton cloth and a plastic sheet, in the steam above a bowl of hot water. After 5 minutes, measure how much water drips off each into a cup.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your fog catcher from the front and the side.","guidance":"Show where droplets stick, which way they run, and how the water gets into the collecting cup."},
+  {"step":"build_and_test","instructions":"Build a fog catcher from mesh, string, plastic, straws and a cup. Test it in a steamy bathroom after a shower or mist it with a spray bottle from 1 metre away.","test_criteria":["How many millilitres does it collect in 10 minutes?","Does the water reach the cup, or does it drip off somewhere else?","Change the mesh or the angle and test again. Did you collect more?"]},
+  {"step":"celebrate_and_share","celebration_text":"The garden is green again, watered by the morning fog! Your catcher turned mist into life.","share_prompt":"Share your fog catcher and how many millilitres it collected on the Ideas Wall. Which desert animal did you copy?"}
 ]"#,
             // tools JSON
             r#"[
@@ -610,38 +549,92 @@ async fn seed_challenges(pool: &PgPool) -> anyhow::Result<()> {
 ]"#,
             // age_tier_variants JSON
             r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Train a classifier on only one kind of example, see it get fooled, then add the missing examples to fix it."},
-  {"age_tier":"10-12","title_override":null,"summary":"Measure accuracy before and after balancing the data, and name the bias you created."},
-  {"age_tier":"12-18","title_override":"Bias & Fairness in Machine Learning","summary":"Design a biased dataset, quantify the accuracy gap on under-represented cases, and show how balancing the data closes it."}
+  {"age_tier":"10-12","title_override":null,"summary":"Compare materials in steam, then build a fog catcher and measure the millilitres it collects in 10 minutes."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Fog Harvesting","summary":"Explain hydrophilic and hydrophobic surfaces, measure collection rate against mesh type and angle, and compare with real fog nets in Chile and Morocco."}
 ]"#,
             false, // free — class-joined kids have no family subscription
         ),
         (
-            "bring-it-to-life",
-            "Bring It to Life!",
+            "save-the-egg",
+            "Save the Egg!",
             1,
-            7,
+            5,
             // steps JSON
             r#"[
-  {"step":"brief","title":"The Doodle That Wouldn't Move","story":"Meet Doodle, a little sketch who dreams of dancing — but stuck on the page, it can't move a muscle! Here's the secret grown-up movies don't tell you: cartoons and films don't really move either. They're just LOTS of still pictures, shown so fast that your brain blends them into motion. Your mission: bring something to life — a bouncing ball, a walking blob, a blooming flower — one frame at a time.","image_url":null},
-  {"step":"your_idea","prompt":"How would YOU make a drawing look like it's moving? Do you already have an idea?","fork_to_step":6},
-  {"step":"nature_clues","intro":"Your eyes and brain are amazing motion machines. Let's see how living things make — and see — movement.","clues":[{"text":"When a horse gallops, all four hooves leave the ground at once — too fast for anyone to see, until people lined up photos frame by frame and finally caught it.","image_url":null,"habitat":"desert"},{"text":"Your eyes hold onto each picture for a split second after it's gone. Flash pictures fast enough and your brain smooths them into one moving scene — that's why films feel alive.","image_url":null,"habitat":"jungle"},{"text":"A flock of starlings swirls like one giant creature. Each bird shifts a heartbeat after its neighbour, and all those tiny changes add up to a flowing, rippling shape.","image_url":null,"habitat":"sky"},{"text":"A cuttlefish sends bands of colour rippling across its skin by switching tiny dots on and off in sequence — a living animation played right on its body.","image_url":null,"habitat":"ocean"}]},
-  {"step":"design_secret","secret":"Animation is an ILLUSION. It's just a row of still pictures — called frames — each changed a tiny bit, played fast. The more frames you use, and the SMALLER the change between them, the smoother the motion looks. Big jumps look jerky; tiny steps look alive. That is the whole trick, and it has a name: frames per second.","reveal_hint":"Think about a flipbook: what happens if you draw only 3 pages for a jump versus 30 pages?"},
-  {"step":"skill","instructions":"Learn the animator's toolkit. A KEYFRAME is a big pose (ball at the top, ball on the ground). IN-BETWEENS are the small steps that connect the keyframes. TIMING is how fast you flip through them. UNPLUGGED: make a flipbook — draw a bouncing ball on the corner of 10-15 sticky notes, moving it a little on each page, then flip. PLUGGED (optional): open the Animation Studio below, add frames (draw one or snap a photo), and press play to watch them come alive.","skill_refs":[],"hints":["Start with just two keyframes — where your thing STARTS and where it ENDS. Then fill in the middle.","Move your object only a LITTLE between frames. Small changes make smooth motion."]},
-  {"step":"sketch","prompt":"Pick ONE simple thing to animate, then plan your frames before you make them.","guidance":"Storyboard it: What is moving? Where does it start and where does it end? Roughly how many frames will you need — and where will the motion need extra frames to look smooth? A simple move with enough frames beats a fancy idea with too few."},
-  {"step":"build_and_test","instructions":"UNPLUGGED: flip your flipbook and watch it move. PLUGGED (optional): in the Animation Studio, add your frames in order and press play. Either way, watch it back and fix the jerky parts.","test_criteria":["Play it back: does it read as smooth motion, or does it jump? Count how many frames you used.","Find the jerkiest moment and add one or two MORE frames right there, with smaller changes. Play again — is it smoother?","Try changing the speed (frames per second). Which speed makes your motion look best?"],"hints":["If a move looks jumpy, you usually need more frames in that spot — not faster playback.","Keep the paper or camera still so that only your object moves between frames."]},
-  {"step":"celebrate_and_share","celebration_text":"You just brought something to life — you're an animator now! You discovered that motion is really just still pictures plus tiny changes, played fast.","share_prompt":"Share your animation (or a photo of your flipbook) AND tell us: how many frames did it take, and where did you have to add more to make it smooth?"}
+  {"step":"brief","title":"Special Delivery: Handle with Care!","story":"A wildlife rescue centre needs to send a precious egg to another centre, and the parcel will be bumped and dropped along the way. Can YOU design packaging that protects a fragile egg from a 2-metre fall, using as little material as possible?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for protecting something fragile?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature protect against impact? Some animals and fruits survive huge knocks and falls every day. Let's find out how they do it!","clues":[{"text":"A woodpecker hammers trees up to 20 times a second. Its spongy skull bone and a long tongue bone wrapped around its head help soak up the shock.","image_url":null,"habitat":"forest"},{"text":"A pomelo fruit can fall 10 metres from a tree without splitting. Its thick peel is a foam of air pockets that squash and spread the impact.","image_url":null,"habitat":"jungle"},{"text":"Hedgehogs roll into a ball when they fall. Their springy spines bend and absorb the shock of landing.","image_url":null,"habitat":"forest"},{"text":"A bighorn sheep's horns and skull are built in layers that absorb the force when two rams crash heads.","image_url":null,"habitat":"grassland"}]},
+  {"step":"design_secret","secret":"A fall hurts because the object stops suddenly. If something squashes slowly on impact, the stop takes longer, and the force is much smaller. Layers of springy or foamy material do this, just like a pomelo peel. Engineers use these ideas to design bike helmets and car crumple zones.","reveal_hint":"How could your packaging make the egg stop more slowly?"},
+  {"step":"skill","instructions":"Drop a raw egg in a zip bag from 30 cm onto a tray. Then test the same height with the egg wrapped in paper, in bubble wrap and in crumpled paper. Record which ones crack. Always do this over a tray with an adult nearby.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your packaging as a cross-section, as if you cut it in half.","guidance":"Label each layer and how it slows the egg down. Write the total weight of materials."},
+  {"step":"build_and_test","instructions":"Build packaging from paper, card, straws, cotton, rubber bands or sponge. Drop it from 50 cm, then 1 metre, then 2 metres, over a tray or outside.","test_criteria":["What is the highest drop your egg survives?","How many grams of material did you use?","Remove one layer and test again. Is the egg still safe?"]},
+  {"step":"celebrate_and_share","celebration_text":"The egg arrived safely at the new rescue centre, and hatched into a healthy chick!","share_prompt":"Share your packaging and your highest safe drop on the Ideas Wall. Which nature trick protected the egg?"}
 ]"#,
             // tools JSON
             r#"[
-  {"kind":"mind_map","age_mode":"young"},
+  {"kind":"scamper","age_mode":"young"},
   {"kind":"scamper","age_mode":"older"}
 ]"#,
             // age_tier_variants JSON
             r#"[
-  {"age_tier":"8-10","title_override":null,"summary":"Animate one simple thing (a bouncing ball or a growing flower). Focus on making lots of frames with tiny changes, then flipping through them."},
-  {"age_tier":"10-12","title_override":null,"summary":"Plan keyframes and in-betweens, count your frames, and fix jerky spots by adding frames. Try two playback speeds and pick the best."},
-  {"age_tier":"12-18","title_override":"Frame-by-Frame Animation","summary":"Storyboard a short action, reason about frames-per-second and easing (slow-in / slow-out), and compare how frame count changes the feel of the motion."}
+  {"age_tier":"10-12","title_override":null,"summary":"Test wraps from low heights, then build packaging and find the highest drop your egg survives."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Impact Absorption","summary":"Explain impulse and stopping time, compare drop height survived per gram of packaging, and relate your layers to pomelo peel and woodpecker skulls."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "clean-the-pond",
+            "Clean the Pond",
+            1,
+            6,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"The Frog Pond Is Murky!","story":"After a big storm, the school frog pond is brown with mud and bits of leaves. The frogs need clean water, and there's no money for a pump or filter. Can YOU design a filter that makes murky water clear again, using only natural and recycled materials?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for cleaning dirty water?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature filter water? Nature cleans huge amounts of water every day, with no machines at all. Let's find out how!","clues":[{"text":"One oyster can filter up to 50 litres of water a day. It pulls water over its gills, where sticky mucus traps tiny bits of dirt and food.","image_url":null,"habitat":"ocean"},{"text":"Baleen whales gulp huge mouthfuls of seawater and push it out through bristly plates, called baleen, that trap krill inside.","image_url":null,"habitat":"ocean"},{"text":"Mangrove roots and marsh plants slow river water down, so mud and dirt sink to the bottom before the water reaches the sea.","image_url":null,"habitat":"jungle"},{"text":"Soil and sand clean rainwater as it trickles slowly through the layers into underground rivers.","image_url":null,"habitat":"forest"}]},
+  {"step":"design_secret","secret":"Filters work by trapping particles in gaps smaller than they are. The trick is to use layers: coarse gaps first to catch big bits, then finer and finer ones. If the fine layer comes first, it clogs straight away. Slowing water down also lets heavy mud settle on its own.","reveal_hint":"In what order should your layers go, and why?"},
+  {"step":"skill","instructions":"Mix a jar of muddy water. Pour equal amounts through cotton, sand, gravel and a coffee filter. Rate how clear each one comes out on a 1 to 5 scale, and time how long each takes to drain.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your filter as a cross-section.","guidance":"Label every layer from top to bottom and explain what each one catches."},
+  {"step":"build_and_test","instructions":"Build a layered filter in a cut plastic bottle, using gravel, sand, cotton, cloth or charcoal. Pour 250 ml of muddy water through it. This water is for frogs and plants only, never for drinking.","test_criteria":["How clear is the water that comes out, on your 1 to 5 scale?","How long does it take to filter 250 ml?","Change the order of your layers and test again. What happened?"]},
+  {"step":"celebrate_and_share","celebration_text":"The frog pond is clear again, and the frogs are croaking happily! Your filter saved their home.","share_prompt":"Share a before-and-after photo of your water on the Ideas Wall. Which layer made the biggest difference?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"five_whys","age_mode":"young"},
+  {"kind":"five_whys","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Compare filter materials for clarity and speed, then build a layered filter and test different layer orders."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Natural Filtration","summary":"Explain particle size and layered filtration, trade clarity against flow rate, and compare your filter with oysters and constructed wetlands."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "stop-the-beach-washing-away",
+            "Stop the Beach Washing Away",
+            1,
+            7,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"The Beach Is Disappearing!","story":"Every winter, big waves wash away more of Seaside Bay's beach, and the dunes are shrinking. The town wants to protect it without building a huge concrete wall. Can YOU design a barrier, inspired by nature, that stops the sand from washing away?","image_url":null},
+  {"step":"your_idea","prompt":"Do you already have an idea for holding sand in place?","fork_to_step":6},
+  {"step":"nature_clues","intro":"How does nature hold ground against water? Rivers, waves and wind move sand and soil all the time. Some plants and animals are experts at holding it in place. Let's look!","clues":[{"text":"Marram grass grows on sand dunes. Its long, tangled roots bind the sand together, and its leaves slow the wind so sand piles up instead of blowing away.","image_url":null,"habitat":"ocean"},{"text":"Mangrove trees stand on tangled stilt roots in the sea. The roots break up waves and trap mud, which slowly builds new land.","image_url":null,"habitat":"jungle"},{"text":"Oyster reefs grow in rough, bumpy mounds that slow down waves before they reach the shore.","image_url":null,"habitat":"ocean"},{"text":"Beavers build dams from sticks, mud and stones that slow rivers down and let mud settle behind them.","image_url":null,"habitat":"forest"}]},
+  {"step":"design_secret","secret":"Water carries sand away when it moves fast. Slow it down, and the sand drops and stays. Rough, bumpy, gappy barriers work better than flat walls, because they break up the wave's energy instead of bouncing it back. Tangled roots add a second trick: they hold the sand grains together.","reveal_hint":"How could your barrier slow the waves down instead of blocking them?"},
+  {"step":"skill","instructions":"Build a sand slope in a tray and pour 500 ml of water down it. Measure how much sand washes away by counting spoonfuls. Repeat with a flat card wall, a row of sticks and a mesh of string.","skill_refs":[]},
+  {"step":"sketch","prompt":"Draw your beach barrier from above and from the side.","guidance":"Show where the waves hit, how your barrier slows them, and what holds the sand in place."},
+  {"step":"build_and_test","instructions":"Build a beach in a tray and protect it with a barrier made from sticks, string, cloth, straws or stones. Make 20 waves by pushing the water with a flat piece of card.","test_criteria":["How much sand washes away compared to a beach with no barrier?","Does your barrier stay in place after 20 waves?","Improve one thing and test again. Did less sand wash away?"]},
+  {"step":"celebrate_and_share","celebration_text":"Seaside Bay's beach survived the winter storms! The dunes are growing again, thanks to your barrier.","share_prompt":"Share your barrier and your sand results on the Ideas Wall. Which nature trick did you copy?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"scamper","age_mode":"young"},
+  {"kind":"scamper","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Measure how much sand washes away with different barriers, then build and improve your own."},
+  {"age_tier":"12-18","title_override":"Biomimicry: Nature-Based Coastal Defence","summary":"Explain how wave energy moves sediment, compare reflective walls with rough permeable barriers, and link your design to living shorelines and mangrove restoration."}
 ]"#,
             false, // free — class-joined kids have no family subscription
         ),
@@ -866,6 +859,146 @@ async fn seed_challenges(pool: &PgPool) -> anyhow::Result<()> {
             r#"[
   {"age_tier":"10-12","title_override":null,"summary":"Measure how pine cones respond to damp and dry air, then build a two-layer petal and record how far it moves."},
   {"age_tier":"12-18","title_override":"Biomimicry: Hygroscopic Actuators","summary":"Explain hygroscopic bilayers and differential swelling, measure petal movement across repeated cycles, and compare with motor-free responsive building facades."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "the-guess-who-tree",
+            "The Guess-Who Tree",
+            1,
+            16,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Twenty Questions, but Smarter","story":"Pixel the robot wants to guess ANY animal you're thinking of by asking only yes/no questions, and it wants to win in as few questions as possible. A bad first question wastes a turn! Can YOU build a question tree that guesses any of 8 animals in 3 questions or fewer?","image_url":null},
+  {"step":"your_idea","prompt":"What is the smartest first yes/no question you could ask to guess any animal?","fork_to_step":6},
+  {"step":"nature_clues","intro":"Computers can't \"just know\" an answer. They follow steps. Here's how people and real AI break a big choice into small ones.","clues":[{"text":"A doctor asks a patient questions one by one (\"Fever? Cough?\") to narrow down what's wrong. Each answer rules out lots of illnesses.","image_url":null,"habitat":null},{"text":"Scientists identify a mystery leaf with a \"key\": is the edge smooth, yes or no? Each answer cuts the choices down.","image_url":null,"habitat":null},{"text":"Email apps use decision trees to decide spam or not spam: does it contain a strange link? Is the sender unknown?","image_url":null,"habitat":null},{"text":"In the game Guess Who, the best players never guess a single face first. They ask questions that knock out half the board.","image_url":null,"habitat":null}]},
+  {"step":"design_secret","secret":"This is a DECISION TREE, one of the oldest tools in AI. Each yes/no question splits a group into two smaller groups. The best question splits the group roughly in half, because it throws away the most wrong answers at once. With perfect half-splits, 3 questions can find 1 animal out of 8, and 10 questions can find 1 out of 1,024!","reveal_hint":"Which question removes more animals: \"Is it a zebra?\" or \"Does it have four legs?\""},
+  {"step":"skill","instructions":"UNPLUGGED first: write 8 animals on cards and sort them with one yes/no question. Count the Yes pile and the No pile. Try 5 different questions and record which one splits the cards most evenly. Then open the Question Tree game below and try the same questions, watching the star meter for even splits.","skill_refs":[],"hints":["A good question splits your animals into two roughly equal groups.","Ask about a shared feature (legs? fur? lives in water?) before guessing a single animal."]},
+  {"step":"sketch","prompt":"Plan your tree before you build it.","guidance":"Draw the tree on paper: your best first question at the top, then a follow-up question on each branch, until every animal sits alone at a tip. Mark the longest path, which is your worst case."},
+  {"step":"build_and_test","instructions":"Build your whole tree in the Question Tree game, then press Play. Think of an animal and let your tree guess it, counting the questions. Play 5 rounds, then swap in a better question and play 5 more.","test_criteria":["Can your tree guess any of the 8 animals in 3 questions or fewer?","What is your AVERAGE number of questions over 5 rounds?","Swap your top question for a more even one and play again. Did your average drop?"],"hints":["Put the question that splits the animals most evenly at the very top.","Find your longest path. That's your worst case, and a more even question shortens it."]},
+  {"step":"celebrate_and_share","celebration_text":"You built a decision tree, the same idea behind spam filters and game AI!","share_prompt":"Share your tree and your average number of questions. AI check: what could go wrong if a tree like yours decided something important, and someone's answer didn't fit any branch?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"brainstorm","age_mode":"young"},
+  {"kind":"brainstorm","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Sort cards with yes/no questions, build a tree that guesses 8 animals in 3 questions, and cut your average by reordering."},
+  {"age_tier":"12-18","title_override":"Decision Trees and Information Gain","summary":"Explain why an even split is best (information gain), compare worst-case and average depth, and work out how many questions 1,000 animals would need."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "teach-the-machine-to-see",
+            "Teach the Machine to See",
+            1,
+            17,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"The Robot That Can't Tell Apples from Oranges","story":"Pixel the robot wants to sort fruit at the school kitchen, but it guesses randomly and gets almost everything wrong. Last week you wrote the rules yourself. This time, nobody writes rules: Pixel must LEARN from examples you show it. Can YOU train Pixel to tell two things apart, and get it above 80% correct on pictures it has never seen?","image_url":null},
+  {"step":"your_idea","prompt":"How would YOU teach a friend who has never seen an orange to recognise one?","fork_to_step":6},
+  {"step":"nature_clues","intro":"Machine learning is everywhere. Here's how people and real AI learn to recognise things from examples.","clues":[{"text":"You can spot your best friend in a crowd in a split second, because you've seen their face thousands of times from every angle.","image_url":null,"habitat":null},{"text":"Phone cameras learn to find faces and pets by training on millions of example photos.","image_url":null,"habitat":null},{"text":"Doctors are testing AI that learns to spot diseases in X-rays after seeing thousands of labelled examples.","image_url":null,"habitat":null},{"text":"Plant-ID apps learn a flower's features, like petal shape, colour and leaf edges, from huge sets of labelled photos.","image_url":null,"habitat":null}]},
+  {"step":"design_secret","secret":"AI learns from EXAMPLES, not rules. It looks for FEATURES, little clues like colour, shape or texture, that separate one group from another. More examples help, but VARIED examples help most. The real test is always pictures the AI has never seen before, called test data. If you test it on its training pictures, it's like marking your own homework!","reveal_hint":"Why is it unfair to test the machine on the same pictures it learned from?"},
+  {"step":"skill","instructions":"UNPLUGGED first: make a feature-checklist card with 4 yes/no features, like \"round?\", \"orange colour?\", \"bumpy skin?\" and \"has a stalk?\". Score 10 fruit pictures and let the card vote. Then open the Machine Trainer below and make two classes. Use photos of objects only, never people's faces.","skill_refs":[],"hints":["Features are clues you can answer for every picture, like colour, shape and texture.","Keep some pictures aside. You'll need new ones for the real test."]},
+  {"step":"sketch","prompt":"Plan your data before you collect it.","guidance":"Write down: your two classes, how many training pictures of each (aim for 20), and how you'll make them VARIED, with different lighting, angles, sizes and backgrounds. Then set aside 10 NEW pictures for testing."},
+  {"step":"build_and_test","instructions":"Train the Machine Trainer with your pictures, then test it on the 10 pictures you set aside. Record each guess. Then add more varied examples, retrain, and test again on the same 10.","test_criteria":["What is your accuracy on the test pictures? (Correct ÷ total, like 7 out of 10 = 70%.)","After adding more varied examples, did your accuracy go up?","Find one picture the machine got wrong and explain WHY, based on its features."],"hints":["Count only the ones it got RIGHT, then divide by how many you tested.","If it keeps missing one kind, add more examples of that kind."]},
+  {"step":"celebrate_and_share","celebration_text":"You trained a machine to see! You're now an AI teacher, and you found out that good examples make a smart machine.","share_prompt":"Share your before-and-after accuracy. AI check: your classifier learned from YOUR pictures. Would it still work on someone else's photos?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"mind_map","age_mode":"young"},
+  {"kind":"mind_map","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Train a two-class classifier, test it on new pictures, and raise its accuracy by adding varied examples."},
+  {"age_tier":"12-18","title_override":"Training an Image Classifier","summary":"Separate training and test data, compare small and varied training sets, track accuracy across rounds, and explain which features cause mistakes."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "spot-the-fake",
+            "Spot the Fake",
+            1,
+            18,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Why Does the AI Keep Getting Fooled?","story":"Pixel's new fruit sorter passed its test, but in the school kitchen it keeps calling green apples \"not apples\". It isn't broken. It learned something unfair from its examples. Can YOU find out what Pixel secretly learned, prove it with data, and fix it?","image_url":null},
+  {"step":"your_idea","prompt":"Why do you think Pixel is being fooled by green apples?","fork_to_step":6},
+  {"step":"nature_clues","intro":"Bias happens when an AI learns from one-sided examples. Here's how it shows up in the real world.","clues":[{"text":"Some early face-detection systems worked worse on darker skin, because they had mostly been trained on lighter-skinned faces.","image_url":null,"habitat":null},{"text":"Voice assistants have often struggled with some accents, because they heard fewer examples of them while learning.","image_url":null,"habitat":null},{"text":"A husky-or-wolf classifier was once found to be \"cheating\": it had learned that snow in the background meant wolf.","image_url":null,"habitat":null},{"text":"Fair AI teams test their systems on every group of users and fix the data when one group gets worse results.","image_url":null,"habitat":null}]},
+  {"step":"design_secret","secret":"An AI is only as fair as its examples. If it only ever sees RED apples, it secretly learns \"apple = red\", so a green apple fools it. This is called BIAS, and it comes from one-sided data. To find it, test each group separately. To fix it, add the missing examples, not just more of the same.","reveal_hint":"If the machine only ever saw one colour of apple, what has it REALLY learned?"},
+  {"step":"skill","instructions":"UNPLUGGED first: make a card classifier trained only on red apples, then test it on a green apple and a red ball. Watch it fail both ways. Then in the Machine Trainer, train an \"apple\" class on red apples only.","skill_refs":[],"hints":["If you only show red apples, the machine may secretly learn \"apple = red\".","Predict which test picture will fool it before you try."]},
+  {"step":"sketch","prompt":"Plan a fair test.","guidance":"Make a table with a row for each group, like red apples, green apples and red balls. Predict the accuracy for each group, then plan the balanced training set that would fix the problem."},
+  {"step":"build_and_test","instructions":"Test the biased classifier on each group separately and record the accuracy per group. Then add the missing examples, retrain, and test each group again.","test_criteria":["What is the accuracy for each group with the biased data? Which group does worst?","After balancing the data, how much did the worst group improve?","Explain in one sentence what bias your data had and how you fixed it."],"hints":["Measure each group separately. An overall score can hide a group that does badly.","Ask: what kind of example was missing from the training pile?"]},
+  {"step":"celebrate_and_share","celebration_text":"You found the AI's blind spot AND fixed it. That's exactly what people who build fair AI do in the real world.","share_prompt":"Share your group-by-group accuracy, before and after. AI check: can you think of a real AI where unfair data could hurt someone?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"five_whys","age_mode":"young"},
+  {"kind":"five_whys","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Train a biased classifier, measure accuracy for each group, then balance the data and measure again."},
+  {"age_tier":"12-18","title_override":"Bias and Fairness in Machine Learning","summary":"Design a biased dataset, measure the accuracy gap between groups, balance the data to close it, and discuss a real-world case of AI bias."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "train-your-pet-algorithm",
+            "Train Your Pet Algorithm",
+            1,
+            19,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"The Robot Mouse and the Cheese","story":"Pixel has a new pet: a robot mouse in a maze. Nobody gives it a map or examples. It just tries moves, and you reward the good ones. Can YOU design a reward system that teaches the mouse the shortest path to the cheese, and avoids the traps?","image_url":null},
+  {"step":"your_idea","prompt":"How do you train a puppy to do a new trick? Could the same idea train a robot?","fork_to_step":6},
+  {"step":"nature_clues","intro":"Some AI learns by trial and error, collecting rewards. Here's where you can find it.","clues":[{"text":"A puppy learns \"sit\" because sitting earns a treat. Behaviour that gets rewarded happens more often.","image_url":null,"habitat":null},{"text":"Game-playing AIs learned chess and Go by playing millions of games against themselves, earning a reward only for winning.","image_url":null,"habitat":null},{"text":"Robots learn to walk by trial and error in computer simulations, rewarded for every step they stay upright.","image_url":null,"habitat":null},{"text":"Video game characters controlled by AI learn which moves earn points and which lose lives.","image_url":null,"habitat":null}]},
+  {"step":"design_secret","secret":"This is REINFORCEMENT LEARNING. The AI tries moves, earns a REWARD for good ones and a penalty for bad ones, and slowly builds up a map of which moves pay off. Nobody tells it the answer. The rewards you choose decide what it learns, so a badly chosen reward teaches the wrong thing! It also has to balance EXPLORING new paths with using the best path it already knows.","reveal_hint":"If the cheese is worth +10 and a wasted step costs -1, which paths will the mouse start to prefer?"},
+  {"step":"skill","instructions":"UNPLUGGED first: draw a 5×5 grid, write a reward number on each square, and move a paper mouse toward higher numbers. Then open the Reward Maze game below, place the cheese and press \"Run a try\". Watch the mouse wander at first, then start preferring moves that paid off.","skill_refs":[],"hints":["Give the cheese a big reward and wasted moves a small or negative one.","The mouse should prefer moves that lead to more reward over time."]},
+  {"step":"sketch","prompt":"Design your maze world and its rewards.","guidance":"Place the start, the cheese, a wall and a trap. Choose rewards, like cheese +10, wasted step -1 and trap -5. Before you run it, predict the path the mouse should learn."},
+  {"step":"build_and_test","instructions":"Run 5 tries in the Reward Maze and record the steps each try takes. Then change ONE reward, predict what will happen, and run 5 more tries.","test_criteria":["Compare the steps taken in try 1 and try 5. Did the mouse get faster?","Does it learn to avoid the trap?","Change one reward and predict the result first. Were you right?"],"hints":["Compare the steps in try 1 with try 5. Is it fewer?","If it never improves, make the cheese reward bigger than the wasted-step penalty."]},
+  {"step":"celebrate_and_share","celebration_text":"Your pet algorithm learned to find the cheese by rewards alone! That's how AIs learn to play games and control robots.","share_prompt":"Share your maze and your steps-per-try chart. AI check: what could go wrong if you rewarded the wrong thing, like rewarding speed but not safety?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"scamper","age_mode":"young"},
+  {"kind":"scamper","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Design rewards for a maze, record steps per try, and test how changing one reward changes what the mouse learns."},
+  {"age_tier":"12-18","title_override":"Reinforcement Learning by Hand","summary":"Set rewards and a simple update rule, run several episodes, graph learning over time, and discuss exploration versus exploitation."}
+]"#,
+            false, // free — class-joined kids have no family subscription
+        ),
+        (
+            "bring-it-to-life",
+            "Bring It to Life!",
+            1,
+            20,
+            // steps JSON
+            r#"[
+  {"step":"brief","title":"Doodle Wants to Dance","story":"Doodle is a little sketch who dreams of dancing, but stuck on the page, it can't move. Animators draw the big poses and then fill in lots of in-between pictures, which takes ages. Today, AI can guess those in-betweens for them. It's one of the ways AI \"generates\" new pictures and videos. Can YOU be the AI: bring Doodle to life by predicting the frames in between?","image_url":null},
+  {"step":"your_idea","prompt":"If you know where a bouncing ball starts and lands, how could you work out where it is in between?","fork_to_step":6},
+  {"step":"nature_clues","intro":"Generative AI makes new content by predicting what comes next. Here are some examples.","clues":[{"text":"Films and cartoons are really lots of still pictures, called frames, shown so fast your brain blends them into motion.","image_url":null,"habitat":null},{"text":"Some video apps use AI to create extra in-between frames, turning a jerky video into smooth slow motion.","image_url":null,"habitat":null},{"text":"Text AI predicts the next word, one word at a time, based on patterns from huge amounts of text it has read.","image_url":null,"habitat":null},{"text":"Image AI creates new pictures by learning patterns from millions of examples. It can also make mistakes, like extra fingers!","image_url":null,"habitat":null}]},
+  {"step":"design_secret","secret":"Generative AI doesn't copy. It PREDICTS what comes next, based on patterns it learned from examples. To predict an in-between frame, it looks at the frames before and after and guesses the smoothest path. Because AI can make mistakes and can make fake things look real, anything made by AI should be LABELLED as AI-generated. Idea Pop does this too!","reveal_hint":"Look at the frame before and the frame after. What pattern tells you where the ball is in between?"},
+  {"step":"skill","instructions":"UNPLUGGED first: draw a ball at the top of a sticky note and at the bottom of another. These are your keyframes. Now PREDICT 3 in-between frames, then flip them. Then open the Animation Studio below, add your keyframes, and draw the in-betweens you predicted.","skill_refs":[],"hints":["Start with just two keyframes, where your thing STARTS and where it ENDS. Then predict the middle.","Move your object only a LITTLE between frames. Small changes make smooth motion."]},
+  {"step":"sketch","prompt":"Storyboard your animation.","guidance":"Draw 3 keyframes for one simple action, like a bounce, a jump or a flower opening. Mark how many in-betweens you'll predict between each pair, and write the pattern you'll follow, like \"slower at the top\"."},
+  {"step":"build_and_test","instructions":"In the Animation Studio, add your keyframes and your predicted in-betweens, then play it. Fix the jerky parts by predicting more frames there. Use drawings or photos of objects only, never faces.","test_criteria":["Does it play as smooth motion? Count your keyframes and in-betweens.","Find the jerkiest moment, predict 2 more frames there, and play again. Is it smoother?","Ask a friend to spot which frames were keyframes and which were predicted. Could they tell?"],"hints":["If a move looks jumpy, you usually need more frames in that spot, not faster playback.","Keep the paper or camera still so only your object moves between frames."]},
+  {"step":"celebrate_and_share","celebration_text":"Doodle is dancing! You predicted frames the way generative AI does, and you brought a drawing to life.","share_prompt":"Share your animation, and label which frames you predicted. AI check: why is it important to label pictures and videos made by AI?"}
+]"#,
+            // tools JSON
+            r#"[
+  {"kind":"brainstorm","age_mode":"young"},
+  {"kind":"brainstorm","age_mode":"older"}
+]"#,
+            // age_tier_variants JSON
+            r#"[
+  {"age_tier":"10-12","title_override":null,"summary":"Draw keyframes, predict the in-between frames like a generative AI, and smooth out the jerky parts."},
+  {"age_tier":"12-18","title_override":"Generative AI and Frame Prediction","summary":"Explain how generative models predict from patterns, compare your predicted frames with evenly spaced ones (easing), and discuss labelling and deepfakes."}
 ]"#,
             false, // free — class-joined kids have no family subscription
         ),
