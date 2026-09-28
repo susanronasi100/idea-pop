@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import {
   fetchTeacherClass,
@@ -263,6 +263,7 @@ function BringHomeBox() {
 
 export default function TeacherDashboardPage() {
   const t = useTranslations('teacher_dashboard');
+  const locale = useLocale();
   const [classData, setClassData] = useState<TeacherClass | null>(null);
   const [challenges, setChallenges] = useState<ChallengeDetail[]>([]);
   const [gallery, setGallery] = useState<ClassGalleryItem[]>([]);
@@ -271,7 +272,7 @@ export default function TeacherDashboardPage() {
   useEffect(() => {
     Promise.all([
       fetchTeacherClass().catch(() => null),
-      fetchChallenges().catch(() => [] as ChallengeDetail[]),
+      fetchChallenges(locale).catch(() => [] as ChallengeDetail[]),
       fetchClassGallery().catch(() => [] as ClassGalleryItem[]),
     ]).then(([cls, chal, gal]) => {
       setClassData(cls as TeacherClass | null);
@@ -279,7 +280,7 @@ export default function TeacherDashboardPage() {
       setGallery((gal ?? []) as ClassGalleryItem[]);
       setLoading(false);
     });
-  }, []);
+  }, [locale]);
 
   function handleAssigned(challengeId: string) {
     const c = challenges.find((x) => x.id === challengeId);

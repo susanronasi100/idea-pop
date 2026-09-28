@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { fetchChallenges, fetchClassMission, requestPremiumUnlock } from '@/lib/api/client';
@@ -65,9 +65,10 @@ export default function ChallengesList() {
   const [tab, setTab] = useState<Tab>('mission');
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [wallUnlocked, setWallUnlocked] = useState(false);
+  const locale = useLocale();
 
   useEffect(() => {
-    fetchChallenges()
+    fetchChallenges(locale)
       .then((c) => setChallenges((c ?? []) as ChallengeDetail[]))
       .catch(() => {})
       .finally(() => setLoading(false));
@@ -75,7 +76,7 @@ export default function ChallengesList() {
     fetchClassMission()
       .then((m) => setAssignedId(m?.challenge_id ?? null))
       .catch(() => {});
-  }, []);
+  }, [locale]);
 
   // Prefer the class-assigned mission; fall back to the first challenge.
   const featured =

@@ -3,7 +3,7 @@
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
 import { Link } from '@/i18n/routing';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { useXpToast } from '@/lib/hooks/useXpToast';
 import { fetchChallenge, startAttempt, advanceStep } from '@/lib/api/client';
@@ -68,13 +68,15 @@ export default function ChallengePage() {
   const [skillPhase, setSkillPhase] = useState<'lab' | 'tool'>('lab');
   const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
 
+  const locale = useLocale();
+
   // Load challenge data
   useEffect(() => {
-    fetchChallenge(params.id)
+    fetchChallenge(params.id, locale)
       .then((c) => setChallenge(c as ChallengeDetail))
       .catch(() => setFetchError(true))
       .finally(() => setLoading(false));
-  }, [params.id]);
+  }, [params.id, locale]);
 
   // Restore wall-unlocked state from localStorage
   useEffect(() => {

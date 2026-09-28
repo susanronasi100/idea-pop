@@ -13,6 +13,8 @@ use sqlx::PgPool;
 
 #[path = "../seed_stories.rs"]
 mod seed_stories;
+#[path = "../seed_translations.rs"]
+mod seed_translations;
 
 #[tokio::main]
 async fn main() -> anyhow::Result<()> {
@@ -31,6 +33,7 @@ async fn main() -> anyhow::Result<()> {
     seed_quick_makes(&pool).await?;
     seed_challenges(&pool).await?;
     seed_stories::seed_stories(&pool).await?;
+    seed_translations::seed_translations(&pool).await?;
     seed_badges(&pool).await?;
 
     println!("seed complete");

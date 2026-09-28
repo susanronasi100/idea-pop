@@ -3,7 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import CaptureCard, { type CaptureData } from './CaptureCard';
-import ToolSelector from './tool/ToolSelector';
+import ToolSelector, { isToolKey } from './tool/ToolSelector';
 import { createProject } from '@/lib/api/client';
 import { GAME_BY_SLUG } from './gameEmbeds';
 
@@ -29,7 +29,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
     setSubmitting(true);
     try {
       const project = await createProject({
-        title: data.title || 'My sketch',
+        title: data.title || t('default_sketch_title'),
         what_i_made: data.what_i_made,
         what_i_used: data.what_i_used,
         what_was_hard: '',
@@ -75,7 +75,8 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
   // falling back to every authored kind if none match.
   const allTools = challenge.tools ?? [];
   const forAge = allTools.filter((t) => t.age_mode === ageMode).map((t) => t.kind);
-  const toolKinds = [...new Set(forAge.length > 0 ? forAge : allTools.map((t) => t.kind))];
+  // Kinds without a tool UI yet (e.g. brainstorm) are skipped.
+  const toolKinds = [...new Set(forAge.length > 0 ? forAge : allTools.map((t) => t.kind))].filter(isToolKey);
 
   return (
     <div data-testid="step-sketch" className="flex flex-col gap-4 px-4 py-6">

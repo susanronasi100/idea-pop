@@ -123,10 +123,19 @@ pub struct ChallengeQuery {
     pub season: Option<i16>,
     pub week: Option<i16>,
     pub age_mode: Option<String>,
+    /// UI language ("en", "fa"). Kid-facing text comes back in it when a
+    /// translation exists; otherwise the authored English is returned.
+    pub lang: Option<String>,
     #[serde(default = "default_page")]
     pub page: i64,
     #[serde(default = "default_per_page")]
     pub per_page: i64,
+}
+
+#[derive(Debug, Deserialize, IntoParams)]
+pub struct LangQuery {
+    /// UI language ("en", "fa"). Falls back to English when untranslated.
+    pub lang: Option<String>,
 }
 
 fn default_page() -> i64 {
@@ -139,17 +148,25 @@ fn default_per_page() -> i64 {
 // ── Mappers ───────────────────────────────────────────────────────────────────
 
 /// Habitat → (emoji, kid-facing label) for the flattened clue cards.
-fn habitat_display(habitat: &str) -> (&'static str, &'static str) {
-    match habitat {
-        "jungle" => ("🌿", "From the jungle"),
-        "ocean" => ("🌊", "From the ocean"),
-        "desert" => ("🏜️", "From the desert"),
-        "sky" => ("☁️", "From the sky"),
-        _ => ("✨", "From nature"),
+fn habitat_display(habitat: &str, persian: bool) -> (&'static str, &'static str) {
+    match (habitat, persian) {
+        ("jungle", false) => ("🌿", "From the jungle"),
+        ("jungle", true) => ("🌿", "از جنگل"),
+        ("ocean", false) => ("🌊", "From the ocean"),
+        ("ocean", true) => ("🌊", "از اقیانوس"),
+        ("desert", false) => ("🏜️", "From the desert"),
+        ("desert", true) => ("🏜️", "از بیابان"),
+        ("sky", false) => ("☁️", "From the sky"),
+        ("sky", true) => ("☁️", "از آسمان"),
+        (_, false) => ("✨", "From nature"),
+        (_, true) => ("✨", "از طبیعت"),
     }
 }
 
-fn challenge_to_dto(c: Challenge, has_premium: bool) -> ChallengeResponse {
+fn challenge_to_dto(c: Challenge, has_premium: bool, lang: Option<&str>) -> ChallengeResponse {
+    let lang = lang.unwrap_or("en");
+    let persian = lang.starts_with("fa");
+    let c = c.localized(lang);
     let steps: Vec<serde_json::Value> = c
         .steps
         .iter()
@@ -182,7 +199,8 @@ fn challenge_to_dto(c: Challenge, has_premium: bool) -> ChallengeResponse {
                 nature_clues = clues
                     .iter()
                     .map(|clue| {
-                        let (emoji, title) = habitat_display(clue.habitat.as_deref().unwrap_or(""));
+                        let (emoji, title) =
+                            habitat_display(clue.habitat.as_deref().unwrap_or(""), persian);
                         NatureClueResponse {
                             emoji: emoji.to_owned(),
                             title: title.to_owned(),
@@ -332,7 +350,7 @@ pub async fn list_challenges(
         items: page
             .items
             .into_iter()
-            .map(|c| challenge_to_dto(c, has_premium))
+            .map(|c| challenge_to_dto(c, has_premium, q.lang.as_deref()))
             .collect(),
         total: page.total,
         page: page.page,
@@ -344,7 +362,7 @@ pub async fn list_challenges(
 #[utoipa::path(
     get, path = "/challenges/{id}",
     tag = "challenges",
-    params(("id" = Uuid, Path, description = "Challenge UUID")),
+    params(("id" = Uuid, Path, description = "Challenge UUID"), LangQuery),
     responses(
         (status = 200, description = "Challenge detail", body = ChallengeResponse),
         (status = 401, description = "Unauthenticated",  body = crate::ProblemDetail),
@@ -355,10 +373,11 @@ pub async fn get_challenge(
     _auth: AuthToken,
     State(state): State<AppState>,
     Path(id): Path<Uuid>,
+    Query(q): Query<LangQuery>,
 ) -> Result<Json<ChallengeResponse>, ApiError> {
     let has_premium = caller_has_premium(&state, &_auth).await?;
     match state.challenge.find_by_id(id).await? {
-        Some(c) => Ok(Json(challenge_to_dto(c, has_premium))),
+        Some(c) => Ok(Json(challenge_to_dto(c, has_premium, q.lang.as_deref()))),
         None => Err(ApiError::Domain(idea_pop_domain::DomainError::NotFound)),
     }
 }

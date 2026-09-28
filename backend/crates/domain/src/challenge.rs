@@ -4,6 +4,8 @@
 //! age-tier copy) is encoded in the JSON payload, not in code.  One generic
 //! renderer serves any challenge; new missions require zero code changes.
 
+use std::collections::BTreeMap;
+
 use chrono::{DateTime, Utc};
 use serde::{Deserialize, Serialize};
 use uuid::Uuid;
@@ -183,6 +185,19 @@ impl ChallengeStep {
     }
 }
 
+// ── ChallengeTranslation ──────────────────────────────────────────────────────
+
+/// One locale's copy of a challenge's kid-facing text. It has the same shape
+/// as the authored English, so the one generic player renders either.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct ChallengeTranslation {
+    pub title: String,
+    pub steps: Vec<ChallengeStep>,
+    pub age_tier_variants: Vec<AgeTierVariant>,
+    #[serde(default)]
+    pub story: Option<MissionStory>,
+}
+
 // ── Challenge ─────────────────────────────────────────────────────────────────
 
 #[derive(Debug, Clone, Serialize, Deserialize)]
@@ -205,10 +220,53 @@ pub struct Challenge {
     /// The storytelling + gamified-instructor layer (Popi's story, chapters,
     /// games). Optional: missions without one play the classic way.
     pub story: Option<MissionStory>,
+    /// Kid-facing text in other locales, keyed by language code (e.g. "fa").
+    /// English is the authored copy above.
+    #[serde(default)]
+    pub translations: BTreeMap<String, ChallengeTranslation>,
     pub created_at: DateTime<Utc>,
 }
 
 impl Challenge {
+    /// The challenge as a kid reading `lang` sees it. Accepts a bare language
+    /// or a region tag ("fa", "fa-IR"). Each part of a translation replaces
+    /// the English only when it lines up with it (same step kinds, same
+    /// age tiers), so a stale or partial translation falls back to English
+    /// instead of breaking play.
+    pub fn localized(mut self, lang: &str) -> Self {
+        let lang = lang
+            .split(['-', '_'])
+            .next()
+            .unwrap_or("")
+            .to_ascii_lowercase();
+        let Some(t) = self.translations.remove(&lang) else {
+            return self;
+        };
+        let steps_match = t.steps.len() == self.steps.len()
+            && t.steps
+                .iter()
+                .zip(&self.steps)
+                .all(|(a, b)| a.kind_str() == b.kind_str());
+        if steps_match {
+            self.steps = t.steps;
+        }
+        let tiers_match = t.age_tier_variants.len() == self.age_tier_variants.len()
+            && t.age_tier_variants
+                .iter()
+                .zip(&self.age_tier_variants)
+                .all(|(a, b)| a.age_tier == b.age_tier);
+        if tiers_match {
+            self.age_tier_variants = t.age_tier_variants;
+        }
+        if !t.title.trim().is_empty() {
+            self.title = t.title;
+        }
+        if self.story.is_some() && t.story.is_some() {
+            self.story = t.story;
+        }
+        self
+    }
+
     /// Enforce the two structural invariants:
     /// 1. Exactly 8 steps.
     /// 2. At least one age-tier variant.
@@ -299,6 +357,7 @@ mod tests {
             skill_refs: vec![],
             is_premium: false,
             story: None,
+            translations: BTreeMap::new(),
             created_at: Utc::now(),
         }
     }
@@ -513,5 +572,55 @@ mod tests {
             ..Default::default()
         };
         assert!(ok.validate().is_ok());
+    }
+
+    fn persian() -> ChallengeTranslation {
+        let mut steps = canonical_steps();
+        if let ChallengeStep::Brief { title, .. } = &mut steps[0] {
+            *title = "مأموریت".into();
+        }
+        ChallengeTranslation {
+            title: "آزمایش".into(),
+            steps,
+            age_tier_variants: vec![AgeTierVariant {
+                age_tier: AgeTier::Young,
+                title_override: None,
+                summary: "سطح شروع".into(),
+            }],
+            story: None,
+        }
+    }
+
+    #[test]
+    fn localized_swaps_in_the_translation() {
+        let mut c = minimal_challenge(canonical_steps(), one_variant());
+        c.translations.insert("fa".into(), persian());
+        let fa = c.localized("fa-IR");
+        assert_eq!(fa.title, "آزمایش");
+        assert_eq!(fa.age_tier_variants[0].summary, "سطح شروع");
+        assert!(matches!(&fa.steps[0], ChallengeStep::Brief { title, .. } if title == "مأموریت"));
+        assert!(fa.validate().is_ok());
+    }
+
+    #[test]
+    fn localized_keeps_english_for_unknown_locale() {
+        let mut c = minimal_challenge(canonical_steps(), one_variant());
+        c.translations.insert("fa".into(), persian());
+        let en = c.localized("en");
+        assert_eq!(en.title, "Test");
+        assert_eq!(en.age_tier_variants[0].summary, "Entry level");
+    }
+
+    #[test]
+    fn localized_ignores_steps_that_do_not_line_up() {
+        let mut c = minimal_challenge(canonical_steps(), one_variant());
+        let mut t = persian();
+        t.steps.swap(0, 1);
+        t.age_tier_variants[0].age_tier = AgeTier::Teen;
+        c.translations.insert("fa".into(), t);
+        let fa = c.localized("fa");
+        assert_eq!(fa.title, "آزمایش");
+        assert!(matches!(&fa.steps[0], ChallengeStep::Brief { title, .. } if title == "Brief"));
+        assert_eq!(fa.age_tier_variants[0].summary, "Entry level");
     }
 }

@@ -65,7 +65,7 @@ export default function StepBuild({
     setSubmitting(true);
     try {
       await createProject({
-        title: data.title || 'My build',
+        title: data.title || t('default_build_title'),
         what_i_made: data.what_i_made,
         what_i_used: data.what_i_used,
         what_was_hard: data.what_was_hard ?? '',

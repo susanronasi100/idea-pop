@@ -1,6 +1,7 @@
 'use client'
 
 import { useState } from 'react'
+import { useTranslations } from 'next-intl'
 
 interface ToolFiveWhysProps {
   ageMode: 'young' | 'older'
@@ -8,6 +9,7 @@ interface ToolFiveWhysProps {
 }
 
 export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
+  const t = useTranslations('thinking_tools')
   const whyCount = ageMode === 'young' ? 3 : 5
   const [answers, setAnswers] = useState<string[]>(() => Array(whyCount).fill(''))
   const [hmw, setHmw] = useState('')
@@ -17,9 +19,7 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
     answers[answers.length - 1].trim().length >= 10
 
   const desc =
-    ageMode === 'young'
-      ? 'Keep asking "Why?" 3 times to find the real reason behind the problem.'
-      : 'Dig deeper by asking "Why?" 5 times. Each answer becomes the next question.'
+    ageMode === 'young' ? t('five_whys_desc_young') : t('five_whys_desc_older')
 
   const handleChange = (i: number, value: string) => {
     setAnswers((prev) => {
@@ -30,13 +30,13 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
   }
 
   const getLabel = (i: number): string => {
-    if (i === 0) return `WHY is "${topic}" a problem?`
-    return `WHY? ${i + 1}`
+    if (i === 0) return t('five_whys_first', { topic })
+    return t('five_whys_next', { n: i + 1 })
   }
 
   return (
     <div data-testid="tool-five-whys" className="rounded-card border border-ink/20 bg-tint-blue p-4">
-      <p className="font-display text-lg text-challenge mb-1">5 Whys ❓</p>
+      <p className="font-display text-lg text-challenge mb-1">{t('five_whys_title')}</p>
       <p className="font-body text-sm text-ink/60 mb-4">{desc}</p>
 
       {answers.map((answer, i) => (
@@ -47,7 +47,7 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
             type="text"
             value={answer}
             onChange={(e) => handleChange(i, e.target.value)}
-            placeholder={`Because…`}
+            placeholder={t('five_whys_placeholder')}
             className="w-full rounded-card border border-ink/20 px-3 py-2 font-body text-sm focus:outline-none focus:ring-2 focus:ring-challenge bg-white"
           />
         </div>
@@ -59,13 +59,13 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
           className="mt-4 rounded-card border border-challenge bg-challenge/10 p-4"
         >
           <p className="font-display text-challenge text-base mb-3">
-            🎯 Root found! Now ask: How Might We…?
+            {t('five_whys_root')}
           </p>
           <textarea
             data-testid="hmw-input"
             value={hmw}
             onChange={(e) => setHmw(e.target.value)}
-            placeholder="How Might We… (write your opportunity statement)"
+            placeholder={t('five_whys_hmw')}
             rows={3}
             className="w-full rounded-card border border-ink/20 px-3 py-2 font-body text-sm focus:outline-none focus:ring-2 focus:ring-challenge bg-white resize-none"
           />

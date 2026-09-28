@@ -394,9 +394,10 @@ export async function fetchMyProjects() {
 
 // ── Challenges ────────────────────────────────────────────────────────────────
 
-export async function fetchChallenge(id: string) {
+/** `lang` is the UI locale; the mission comes back translated when it can be. */
+export async function fetchChallenge(id: string, lang?: string) {
   const { data, error } = await apiClient.GET("/api/challenges/{id}", {
-    params: { path: { id } },
+    params: { path: { id }, query: lang ? { lang } : {} },
   });
   if (error) throw new Error("Failed to load challenge");
   return data;
@@ -706,8 +707,11 @@ export async function fetchReports() {
   return data;
 }
 
-export async function fetchChallenges() {
-  const { data, error } = await apiClient.GET("/api/challenges");
+/** `lang` is the UI locale; missions come back translated when they can be. */
+export async function fetchChallenges(lang?: string) {
+  const { data, error } = await apiClient.GET("/api/challenges", {
+    params: { query: lang ? { lang } : {} },
+  });
   if (error) throw new Error("Failed to load challenges");
   // The backend paginates ({items, total, …}); e2e route mocks may still
   // fulfil a bare array. Always hand consumers the array.

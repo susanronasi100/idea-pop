@@ -1,7 +1,7 @@
 'use client';
 
 import { useEffect, useState } from 'react';
-import { useTranslations, useFormatter } from 'next-intl';
+import { useLocale, useTranslations, useFormatter } from 'next-intl';
 import {
   fetchChallenges,
   fetchClassReport,
@@ -44,8 +44,10 @@ export default function ClassReport() {
   const [exporting, setExporting] = useState(false);
   const [printChild, setPrintChild] = useState<ClassReportStudent | null>(null);
 
+  const locale = useLocale();
+
   useEffect(() => {
-    fetchChallenges()
+    fetchChallenges(locale)
       .then((cs) =>
         setMissions((cs ?? []).map((c) => ({ id: c.id, title: c.title, emoji: c.emoji }))),
       )
@@ -58,7 +60,7 @@ export default function ClassReport() {
       })
       .catch(() => setError(true))
       .finally(() => setLoading(false));
-  }, []);
+  }, [locale]);
 
   async function loadMission(id: string) {
     setSelectedId(id);
