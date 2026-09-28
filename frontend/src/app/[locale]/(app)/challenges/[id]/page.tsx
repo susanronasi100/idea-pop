@@ -187,7 +187,8 @@ export default function ChallengePage() {
         reachedSteps={reachedSteps}
         onJumpTo={goToStep}
         ideaPath={ideaPath}
-        starTrail={story !== null}
+        keyInfo={story ? story.card : null}
+        summary={challenge.brief}
       />
 
       {/* Mission / Ideas Wall tabs */}

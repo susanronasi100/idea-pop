@@ -3,6 +3,10 @@ import { describe, it, expect, vi } from 'vitest';
 import type { ComponentProps } from 'react';
 import { NextIntlClientProvider } from 'next-intl';
 import MissionHUD from './MissionHUD';
+
+vi.mock('@/lib/api/client', () => ({
+  fetchKidProgress: vi.fn().mockResolvedValue({ xp_total: 60, level: 3, rank: 'Maker' }),
+}));
 import en from '../../../messages/en.json';
 
 const mockChallenge = {
@@ -79,5 +83,45 @@ describe('MissionHUD', () => {
     fireEvent.click(screen.getByTestId('mission-step-5'));
 
     expect(onJumpTo).not.toHaveBeenCalled();
+  });
+
+  it('shows all 8 circles: current highlighted, visited dark, locked hollow', () => {
+    renderHUD({ currentStep: 3, reachedSteps: new Set([1, 2, 3]) });
+
+    expect(screen.getByTestId('progress-dot-1')).toHaveAttribute('data-state', 'done');
+    expect(screen.getByTestId('progress-dot-3')).toHaveAttribute('data-state', 'current');
+    expect(screen.getByTestId('progress-dot-3')).toHaveAttribute('aria-current', 'step');
+    expect(screen.getByTestId('progress-dot-8')).toHaveAttribute('data-state', 'locked');
+    expect(screen.getByTestId('progress-dot-8')).toBeDisabled();
+  });
+
+  it('tapping a visited circle jumps back to it', () => {
+    const onJumpTo = vi.fn();
+    renderHUD({ onJumpTo });
+
+    fireEvent.click(screen.getByTestId('progress-dot-1'));
+
+    expect(onJumpTo).toHaveBeenCalledWith(1);
+  });
+
+  it('pins the problem, goal and rules under the title', () => {
+    renderHUD({
+      keyInfo: { problem: 'A 3-hour walk', goal: 'Cross safely', rules: 'Light things' },
+    });
+
+    const info = screen.getByTestId('mission-key-info');
+    expect(info).toHaveTextContent('A 3-hour walk');
+    expect(info).toHaveTextContent('Cross safely');
+    expect(info).toHaveTextContent('Light things');
+  });
+
+  it('opens the XP explainer from the XP badge', async () => {
+    renderHUD();
+
+    fireEvent.click(screen.getByTestId('hud-xp-button'));
+
+    expect(screen.getByRole('dialog', { name: /What is XP/ })).toBeInTheDocument();
+    expect(screen.getByTestId('xp-info-mission')).toHaveTextContent('+20 XP');
+    expect(await screen.findByTestId('xp-info-mine')).toHaveTextContent('You have 60 XP');
   });
 });
