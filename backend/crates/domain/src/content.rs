@@ -147,6 +147,9 @@ pub struct Course {
     pub age_min: i16,
     /// Materials needed across the course (e.g. "laptop", "internet").
     pub materials: Vec<String>,
+    /// Own price in Toman for a special expert course sold one by one, outside
+    /// the monthly plans. `None` = included in Plus / Family.
+    pub price_toman: Option<i32>,
     pub created_at: DateTime<Utc>,
 }
 
@@ -161,6 +164,9 @@ pub struct CourseSummary {
     pub creator_name: String,
     pub difficulty: i16,
     pub age_min: i16,
+    /// Own price in Toman for a special expert course sold one by one, outside
+    /// the monthly plans. `None` = included in Plus / Family.
+    pub price_toman: Option<i32>,
     pub lesson_count: i64,
 }
 

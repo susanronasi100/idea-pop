@@ -202,7 +202,7 @@ impl LibraryRepo for SqlxLibraryRepo {
         let rows = sqlx::query!(
             r#"SELECT c.id, c.title, c.slug, c.studio, c.creator_id,
                       cr.display_name AS creator_name,
-                      c.difficulty, c.age_min,
+                      c.difficulty, c.age_min, c.price_toman,
                       COUNT(l.id) AS "lesson_count!"
                FROM courses c
                JOIN creators cr ON cr.id = c.creator_id
@@ -225,6 +225,7 @@ impl LibraryRepo for SqlxLibraryRepo {
                 creator_name: r.creator_name,
                 difficulty: r.difficulty,
                 age_min: r.age_min,
+                price_toman: r.price_toman,
                 lesson_count: r.lesson_count,
             })
             .collect())
@@ -236,7 +237,7 @@ impl LibraryRepo for SqlxLibraryRepo {
     ) -> Result<Option<(Course, Vec<Lesson>)>, DomainError> {
         let row = sqlx::query!(
             r#"SELECT id, title, slug, studio, creator_id, summary,
-                      difficulty, age_min, materials, created_at
+                      difficulty, age_min, materials, price_toman, created_at
                FROM courses WHERE id = $1"#,
             id,
         )
@@ -256,6 +257,7 @@ impl LibraryRepo for SqlxLibraryRepo {
             difficulty: r.difficulty,
             age_min: r.age_min,
             materials: r.materials,
+            price_toman: r.price_toman,
             created_at: r.created_at,
         };
 

@@ -96,8 +96,37 @@ export default async function PricingPage({ params }: Props) {
               ],
               ctaFamily: tm("cta_family"),
               badgeValue: tm("badge_value"),
+              freeUntil: tm("free_until"),
+              wasPrice: tm("was_price"),
             }}
           />
+        </div>
+      </section>
+
+      {/* 1b. Special expert courses: bought one by one, outside every plan. A course gets its own price through
+             courses.price_toman (NULL = included in Plus / Family); the Library shows that price on the course. */}
+      <section aria-label={t("special_heading")} className="px-4 pb-8 md:pb-12">
+        <div
+          className="mx-auto max-w-4xl rounded-[20px] border-[3px] border-[#18785A] bg-white p-6 md:p-8"
+          data-reveal="grow"
+        >
+          <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
+            <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.5rem,1.25rem+1vw,2rem)] leading-[1.15] text-[#4F4F4F] text-center">
+              {keepTogether(t("special_heading"))}
+            </h2>
+            <span className="rounded-pill bg-[#F1D8FB] px-3 py-1 [font-family:var(--font-montserrat)] text-[14px] font-bold text-[#7A3D8A] whitespace-nowrap">
+              {t("special_tag")}
+            </span>
+          </div>
+          <p className={`${body} text-center text-[#4F4F4F] max-w-2xl mx-auto mb-6`}>{t("special_intro")}</p>
+          <ul className="grid gap-4 md:grid-cols-3" role="list">
+            {(["p1", "p2", "p3"] as const).map((k) => (
+              <li key={k} className="rounded-[16px] bg-[#FBFDF0] p-4">
+                <p className="font-display font-bold text-lg text-ink mb-1">{t(`special_${k}_title`)}</p>
+                <p className={`${body} text-sm text-[#4F4F4F]`}>{t(`special_${k}`)}</p>
+              </li>
+            ))}
+          </ul>
         </div>
       </section>
 

@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "SELECT c.id, c.title, c.slug, c.studio, c.creator_id,\n                      cr.display_name AS creator_name,\n                      c.difficulty, c.age_min,\n                      COUNT(l.id) AS \"lesson_count!\"\n               FROM courses c\n               JOIN creators cr ON cr.id = c.creator_id\n               LEFT JOIN lessons l ON l.course_id = c.id\n               GROUP BY c.id, cr.display_name\n               ORDER BY c.created_at",
+  "query": "SELECT c.id, c.title, c.slug, c.studio, c.creator_id,\n                      cr.display_name AS creator_name,\n                      c.difficulty, c.age_min, c.price_toman,\n                      COUNT(l.id) AS \"lesson_count!\"\n               FROM courses c\n               JOIN creators cr ON cr.id = c.creator_id\n               LEFT JOIN lessons l ON l.course_id = c.id\n               GROUP BY c.id, cr.display_name\n               ORDER BY c.created_at",
   "describe": {
     "columns": [
       {
@@ -93,6 +93,17 @@
       },
       {
         "ordinal": 8,
+        "name": "price_toman",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "courses",
+            "name": "price_toman"
+          }
+        }
+      },
+      {
+        "ordinal": 9,
         "name": "lesson_count!",
         "type_info": "Int8",
         "origin": "Expression"
@@ -110,8 +121,9 @@
       false,
       false,
       false,
+      true,
       null
     ]
   },
-  "hash": "e8efe376dfeeeb6037e86cbab6408602c339bcb0ea2bdf79a88fe9d1404a4523"
+  "hash": "e1d15fa692c7a6397c61e8100b30d12f4249d602196528a0fe4b567161e6ecb6"
 }

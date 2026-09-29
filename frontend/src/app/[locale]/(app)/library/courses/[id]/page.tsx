@@ -1,7 +1,7 @@
 'use client';
 
 import { use, useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { fetchCourse, fetchCreator } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -66,6 +66,7 @@ export default function CourseDetailPage({
   // Client component: params is a promise in Next 15, unwrapped with use().
   const { id } = use(params);
   const t = useTranslations('library');
+  const locale = useLocale();
   const tExplore = useTranslations('explore');
   const xpToast = useXpToast();
 
@@ -169,6 +170,15 @@ export default function CourseDetailPage({
                 </p>
               )}
               <div className="flex flex-wrap gap-2">
+                {course.price_toman != null && (
+                  // A special expert course, sold on its own outside the monthly plans (see the pricing page).
+                  <span
+                    data-testid="course-special-price"
+                    className="rounded-pill bg-tint-lavender px-3 py-1 font-body text-sm font-bold text-[#7A3D8A]"
+                  >
+                    {t('special_price', { price: new Intl.NumberFormat(locale).format(course.price_toman) })}
+                  </span>
+                )}
                 <MetaPill>{t('course_lessons', { count: lessons.length })}</MetaPill>
                 <MetaPill>⭐ {t(DIFFICULTY_KEYS[course.difficulty] ?? 'difficulty_easy')}</MetaPill>
                 <MetaPill>{t('age_plus', { age: course.age_min })}</MetaPill>

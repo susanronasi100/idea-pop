@@ -644,6 +644,8 @@ export default async function LandingPage({ params }: Props) {
               ],
               ctaFamily: t("pricing_teaser.cta_family"),
               badgeValue: t("pricing_teaser.badge_value"),
+              freeUntil: t("pricing_teaser.free_until"),
+              wasPrice: t("pricing_teaser.was_price"),
             }}
           />
         </div>

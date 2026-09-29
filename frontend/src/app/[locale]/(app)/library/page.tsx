@@ -2,7 +2,7 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 import { useRouter } from '@/i18n/routing';
 import { fetchStudios, fetchQuickMakes, fetchCourses } from '@/lib/api/client';
 import type { components } from '@/lib/api/schema';
@@ -57,6 +57,7 @@ function studioLabel(t: LibraryTranslator, slug: string): string {
 
 export default function LibraryPage() {
   const t = useTranslations('library');
+  const locale = useLocale();
   const router = useRouter();
 
   const [loading, setLoading] = useState(true);
@@ -131,6 +132,11 @@ export default function LibraryPage() {
             </span>
             <div className="min-w-0 flex-1">
               <p className="font-display text-lg font-bold text-ink">{featured.title}</p>
+              {featured.price_toman != null && (
+                <p className="w-fit rounded-pill bg-tint-lavender px-2.5 py-0.5 font-body text-xs font-bold text-[#7A3D8A]">
+                  {t('special_price', { price: new Intl.NumberFormat(locale).format(featured.price_toman) })}
+                </p>
+              )}
               <p className="font-body text-sm text-ink/60">
                 {t('with_creator', {
                   name: featured.creator_name,

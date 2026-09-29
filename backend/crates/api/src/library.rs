@@ -68,6 +68,8 @@ pub struct CourseDetailResponse {
     pub difficulty: i16,
     pub age_min: i16,
     pub materials: Vec<String>,
+    /// Own price in Toman for a special expert course sold one by one; null = included in Plus / Family.
+    pub price_toman: Option<i32>,
     pub created_at: DateTime<Utc>,
     pub lessons: Vec<LessonResponse>,
 }
@@ -82,6 +84,8 @@ pub struct CourseSummaryResponse {
     pub creator_name: String,
     pub difficulty: i16,
     pub age_min: i16,
+    /// Own price in Toman for a special expert course sold one by one; null = included in Plus / Family.
+    pub price_toman: Option<i32>,
     pub lesson_count: i64,
 }
 
@@ -160,6 +164,7 @@ pub async fn list_courses(
                 creator_name: c.creator_name,
                 difficulty: c.difficulty,
                 age_min: c.age_min,
+                price_toman: c.price_toman,
                 lesson_count: c.lesson_count,
             })
             .collect(),
@@ -236,6 +241,7 @@ pub async fn get_course(
             difficulty: course.difficulty,
             age_min: course.age_min,
             materials: course.materials,
+            price_toman: course.price_toman,
             created_at: course.created_at,
             lessons: lessons
                 .into_iter()

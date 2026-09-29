@@ -508,6 +508,51 @@ async fn course_detail_with_lessons() {
     assert_eq!(res.status(), StatusCode::NOT_FOUND);
 }
 
+/// A course is included in the plans (price_toman null) until it is given its own price as a special
+/// expert course; both the Library list and the course page then carry that price.
+#[tokio::test]
+async fn special_course_carries_its_own_price() {
+    let pool = test_pool().await;
+    let (_creator_id, course_id) = insert_creator_and_course(&pool).await;
+
+    let app = router(content_state(pool.clone()), None);
+    let token = register_and_token(&app, "special-course@test.com").await;
+
+    let res = app
+        .clone()
+        .oneshot(authed_get("/library/courses", &token))
+        .await
+        .unwrap();
+    let body = body_json(res).await;
+    assert!(body[0]["price_toman"].is_null());
+
+    sqlx::query("UPDATE courses SET price_toman = 350000 WHERE id = $1::uuid")
+        .bind(&course_id)
+        .execute(&pool)
+        .await
+        .unwrap();
+
+    let res = app
+        .clone()
+        .oneshot(authed_get("/library/courses", &token))
+        .await
+        .unwrap();
+    assert_eq!(body_json(res).await[0]["price_toman"], 350000);
+
+    let res = app
+        .oneshot(authed_get(&format!("/courses/{course_id}"), &token))
+        .await
+        .unwrap();
+    assert_eq!(body_json(res).await["price_toman"], 350000);
+
+    // A price must be positive; zero is not "free", it is a mistake.
+    let zero = sqlx::query("UPDATE courses SET price_toman = 0 WHERE id = $1::uuid")
+        .bind(&course_id)
+        .execute(&pool)
+        .await;
+    assert!(zero.is_err());
+}
+
 /// GET /creators/:id returns creator.
 #[tokio::test]
 async fn creator_detail() {

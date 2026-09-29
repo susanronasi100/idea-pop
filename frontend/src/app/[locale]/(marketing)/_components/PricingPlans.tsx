@@ -29,6 +29,10 @@ export interface PricingLabels {
   familyFeatures: string[];
   ctaFamily: string;
   badgeValue: string;
+  // Launch offer: the paid plans' prices are shown struck through with this line under them ("Free until December").
+  freeUntil: string;
+  // Read by screen readers before a struck-through price, which they otherwise read as a plain price.
+  wasPrice: string;
 }
 
 function Check() {
@@ -39,8 +43,24 @@ function Check() {
   );
 }
 
+/** A paid plan's price, struck through, over the launch offer that replaces it for now. */
+function OfferPrice({ price, labels }: { price: string; labels: PricingLabels }) {
+  return (
+    <>
+      <span className="block font-display text-ink/50 line-through decoration-2">
+        <span className="sr-only">{labels.wasPrice}: </span>
+        {price}
+      </span>
+      <span className="mt-1 block w-fit rounded-pill bg-[#D1EF5A] px-3 py-1 [font-family:var(--font-montserrat)] text-[15px] font-extrabold text-[#146047]">
+        {labels.freeUntil}
+      </span>
+    </>
+  );
+}
+
 export default function PricingPlans({ labels }: { labels: PricingLabels }) {
-  const [annual, setAnnual] = useState(true);
+  // Opens on Monthly: the monthly prices are the ones the plans are named by (200,000 / 500,000 Toman).
+  const [annual, setAnnual] = useState(false);
 
   const toggleBase =
     "rounded-pill px-5 py-2.5 [font-family:var(--font-montserrat)] text-[16px] font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#2E5F4B] focus-visible:ring-offset-2";
@@ -108,7 +128,7 @@ export default function PricingPlans({ labels }: { labels: PricingLabels }) {
           </span>
           <p className="font-display font-bold text-xl text-ink">
             {labels.plusName}{" "}
-            <span className="font-display">{annual ? labels.plusPriceAnnual : labels.plusPriceMonthly}</span>
+            <OfferPrice price={annual ? labels.plusPriceAnnual : labels.plusPriceMonthly} labels={labels} />
           </p>
           <p className="font-body text-sm font-semibold text-ink/50 mb-4">
             {annual ? labels.plusBillingAnnual : labels.plusBillingMonthly}
@@ -139,7 +159,7 @@ export default function PricingPlans({ labels }: { labels: PricingLabels }) {
           </span>
           <p className="font-display font-bold text-xl text-ink">
             {labels.familyName}{" "}
-            <span className="font-display">{annual ? labels.familyPriceAnnual : labels.familyPriceMonthly}</span>
+            <OfferPrice price={annual ? labels.familyPriceAnnual : labels.familyPriceMonthly} labels={labels} />
           </p>
           <p className="font-body text-sm font-semibold text-ink/50 mb-4">
             {annual ? labels.familyBillingAnnual : labels.familyBillingMonthly}

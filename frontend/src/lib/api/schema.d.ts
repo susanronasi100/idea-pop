@@ -852,6 +852,11 @@ export interface components {
       /** Format: int16 */
       age_min: number;
       materials: string[];
+      /**
+       * Format: int32
+       * @description Own price in Toman for a special expert course sold one by one; null = included in Plus / Family.
+       */
+      price_toman?: number | null;
       created_at: string;
       lessons: components["schemas"]["LessonResponse"][];
     };
@@ -885,6 +890,11 @@ export interface components {
       difficulty: number;
       /** Format: int16 */
       age_min: number;
+      /**
+       * Format: int32
+       * @description Own price in Toman for a special expert course sold one by one; null = included in Plus / Family.
+       */
+      price_toman?: number | null;
       /** Format: int64 */
       lesson_count: number;
     };

@@ -140,7 +140,7 @@
       "monthly": "Monthly",
       "annual": "Annual −50%",
       "free_name": "Free",
-      "free_price": "$0",
+      "free_price": "0 Toman",
       "free_f1": "all nature films",
       "free_f2": "2 missions / month",
       "free_f3": "3 saved makes",
@@ -148,10 +148,10 @@
       "free_f5": "class join via code",
       "cta_free": "Start free",
       "plus_name": "Plus",
-      "plus_price_annual": "$4.99/mo",
-      "plus_price_monthly": "$9.99/mo",
-      "plus_billing_annual": "billed annually $59.90, or $9.99 monthly",
-      "plus_billing_monthly": "billed monthly $9.99, cancel anytime",
+      "plus_price_annual": "100,000 Toman/mo",
+      "plus_price_monthly": "200,000 Toman/mo",
+      "plus_billing_annual": "billed annually 1,200,000 Toman, or 200,000 Toman monthly",
+      "plus_billing_monthly": "billed monthly 200,000 Toman, cancel anytime",
       "plus_intro": "everything in Free, plus:",
       "plus_f1": "unlimited missions + makes",
       "plus_f2": "full courses, full AI helper",
@@ -160,16 +160,18 @@
       "cta_plus": "Try 7 days free",
       "badge_popular": "MOST POPULAR",
       "family_name": "Family plan",
-      "family_price_annual": "$7.99/mo",
-      "family_price_monthly": "$12.99/mo",
-      "family_billing_annual": "billed annually $95.90",
-      "family_billing_monthly": "billed monthly $12.99",
+      "family_price_annual": "250,000 Toman/mo",
+      "family_price_monthly": "500,000 Toman/mo",
+      "family_billing_annual": "billed annually 3,000,000 Toman",
+      "family_billing_monthly": "billed monthly 500,000 Toman",
       "family_intro": "everything in Plus, for:",
       "family_f1": "up to 4 kid profiles",
       "family_f2": "one parent dashboard",
       "family_f3": "sibling team missions",
       "cta_family": "Start family plan",
-      "badge_value": "BEST VALUE"
+      "badge_value": "BEST VALUE",
+      "free_until": "Free until December",
+      "was_price": "Regular price"
     },
     "faq": {
       "heading": "Questions parents ask",
@@ -317,6 +319,15 @@
   "pricing": {
     "heading": "Start free. Upgrade when your kids enjoy it.",
     "compare_heading": "Compare everything",
+    "special_heading": "Special expert courses",
+    "special_intro": "Some courses and Library videos come from special guest experts. They sit outside every monthly plan and each one has its own price.",
+    "special_p1_title": "Not in any plan",
+    "special_p1": "Free, Plus and Family don't include them, so your monthly price never changes because of them.",
+    "special_p2_title": "Its price is on it",
+    "special_p2": "Look for the ✨ Special tag. The price is shown right on the course, before you start.",
+    "special_p3_title": "Pay once, only if you want it",
+    "special_p3": "You pay one time for that one course. A grown-up buys it; kids can see the price but can't pay.",
+    "special_tag": "✨ Special · own price",
     "col_feature": "Feature",
     "col_free": "Free",
     "col_plus": "Plus",
@@ -353,12 +364,22 @@
         "free": "—",
         "plus": "✓",
         "family": "✓"
+      },
+      {
+        "feature": "Special expert courses",
+        "free": "own price",
+        "plus": "own price",
+        "family": "own price"
       }
     ],
     "faq": [
       {
         "q": "Can I switch plans anytime?",
         "a": "yes, instantly"
+      },
+      {
+        "q": "Are all expert courses in the plans?",
+        "a": "most are; a few special ones have their own price"
       },
       {
         "q": "What happens to our makes if we cancel?",
@@ -374,11 +395,11 @@
     "cta_start": "Start free",
     "cta_watch": "Watch a sample",
     "free_label": "Free",
-    "free_price": "$0",
+    "free_price": "0 Toman",
     "standard_label": "Plus",
-    "monthly_price": "$9.99",
+    "monthly_price": "200,000 Toman",
     "per_month": "/month",
-    "annual_note": "or $59.90 /year",
+    "annual_note": "or 1,200,000 Toman /year",
     "kid_note": "A grown-up finishes the upgrade — you can't be charged here."
   },
   "explore": {
@@ -499,7 +520,8 @@
     "question_tree_aria": "Open the Question Tree tool",
     "reward_maze": "Reward Maze",
     "reward_maze_tagline": "Train a robot mouse with rewards",
-    "reward_maze_aria": "Open the Reward Maze tool"
+    "reward_maze_aria": "Open the Reward Maze tool",
+    "special_price": "✨ Special course · {price} Toman"
   },
   "footer": {
     "product": "Product",

@@ -1,6 +1,6 @@
 {
   "db_name": "PostgreSQL",
-  "query": "SELECT id, title, slug, studio, creator_id, summary,\n                      difficulty, age_min, materials, created_at\n               FROM courses WHERE id = $1",
+  "query": "SELECT id, title, slug, studio, creator_id, summary,\n                      difficulty, age_min, materials, price_toman, created_at\n               FROM courses WHERE id = $1",
   "describe": {
     "columns": [
       {
@@ -104,6 +104,17 @@
       },
       {
         "ordinal": 9,
+        "name": "price_toman",
+        "type_info": "Int4",
+        "origin": {
+          "Table": {
+            "table": "courses",
+            "name": "price_toman"
+          }
+        }
+      },
+      {
+        "ordinal": 10,
         "name": "created_at",
         "type_info": "Timestamptz",
         "origin": {
@@ -129,8 +140,9 @@
       false,
       false,
       false,
+      true,
       false
     ]
   },
-  "hash": "1cc442fdd4d2cd0c156c15027b13152ac42e4eb275903fa3fc9552cbb918c13d"
+  "hash": "7fba7610e2344eef32321f1029d497c68b7935940cd75f8c69a3b3ecb28bfd94"
 }
