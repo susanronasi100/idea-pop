@@ -43,7 +43,12 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
   // dropped into the new kid's app.
   const [isParent, setIsParent] = useState(false);
   const [parentEmailReady, setParentEmailReady] = useState(false);
-  const totalSteps = isParent ? 3 : 4;
+  /* Four steps for a parent adding a child, five for a kid on their own: the PIN
+     comes fourth for both, and only a kid signing up alone names a grown-up after
+     it. The PIN is the child's way back in on another device -- they never set a
+     password, so without it they would be locked out the moment this browser
+     forgets them. */
+  const totalSteps = isParent ? 4 : 5;
   const exitHref = isParent ? "/dashboard/parent" : "/sign-up";
 
   // Validation messages are catalog keys; fall back to any raw zod default
@@ -67,6 +72,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
       nickname: "",
       birth_year: undefined,
       parent_email: "",
+      login_pin: "",
     },
   });
 
@@ -95,7 +101,8 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
     1: t("step_avatar"),
     2: t("step_nickname"),
     3: t("step_birth_year"),
-    4: t("step_parent_email"),
+    4: t("step_pin"),
+    5: t("step_parent_email"),
   };
 
   async function advanceStep() {
@@ -103,6 +110,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
       1: ["avatar_id"],
       2: ["nickname"],
       3: ["birth_year"],
+      4: ["login_pin"],
     };
     const fields = fieldsByStep[step];
     if (fields) {
@@ -119,6 +127,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
       avatar_id: data.avatar_id,
       birth_year: data.birth_year,
       parent_email: data.parent_email,
+      login_pin: data.login_pin || undefined,
     };
     try {
       if (isParent) {
@@ -308,6 +317,46 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
                   {errMsg(errors.birth_year.message)}
                 </p>
               )}
+              <div className="mt-auto flex justify-center gap-3 pt-6">
+                <button type="button" className={backBtn} onClick={() => setStep((s) => s - 1)}>
+                  {t("before")}
+                </button>
+                <button type="button" className={nextBtn} onClick={advanceStep}>
+                  {t("next")}
+                </button>
+              </div>
+            </section>
+          )}
+
+          {/* The four digits that bring them back. A child sets no password, so this is
+              the only thing they will need to remember; a grown-up can give them a new
+              one if they forget it. */}
+          {step === 4 && (
+            <section data-testid="step-4" className={askStep}>
+              <p className="mb-4 text-center font-body text-sm text-white/60">
+                {t("step_pin_sub")}
+              </p>
+              <label htmlFor="login-pin" className="sr-only">
+                {t("step_pin")}
+              </label>
+              <input
+                id="login-pin"
+                type="text"
+                inputMode="numeric"
+                autoComplete="off"
+                maxLength={4}
+                autoFocus
+                dir="ltr"
+                placeholder={t("step_pin_placeholder")}
+                aria-invalid={!!errors.login_pin}
+                className={`${darkInput} text-center tracking-[0.5em]`}
+                {...register("login_pin")}
+              />
+              {errors.login_pin && (
+                <p role="alert" className="mt-2 text-xs text-red-300">
+                  {errMsg(errors.login_pin.message)}
+                </p>
+              )}
               {isParent && apiError && (
                 <div className="mt-3 rounded-lg border border-red-400/40 bg-red-500/15 px-4 py-3 text-sm text-red-200">
                   {apiError}
@@ -334,8 +383,8 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
             </section>
           )}
 
-          {step === 4 && !isParent && (
-            <section data-testid="step-4" className={askStep}>
+          {step === 5 && !isParent && (
+            <section data-testid="step-5" className={askStep}>
               <p className="mb-4 text-center font-body text-sm text-white/60">
                 {t("step_parent_email_sub")}
               </p>

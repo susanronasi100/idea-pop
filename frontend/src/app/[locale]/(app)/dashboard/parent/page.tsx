@@ -6,6 +6,7 @@ import { useTranslations, useFormatter } from 'next-intl';
 import {
   fetchParentChildren,
   fetchChildReport,
+  resetChildPin,
   grantConsent,
   revokeConsent,
   fetchSubscription,
@@ -147,6 +148,8 @@ export default function ParentDashboardPage() {
   const [sub, setSub] = useState<SubscriptionResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [reportChild, setReportChild] = useState<ParentChild | null>(null);
+  /* A new PIN, held only long enough for the parent to read it to their child. */
+  const [newPin, setNewPin] = useState<{ id: string; pin: string } | null>(null);
   const [billingLoading, setBillingLoading] = useState(false);
   const [account, setAccount] = useState<{ email: string; display_name: string } | null>(null);
 
@@ -242,6 +245,13 @@ export default function ParentDashboardPage() {
       const r = await fetchChildReport(child.id).catch(() => null);
       if (r) setReports((prev) => ({ ...prev, [child.id]: r as ChildReport }));
     }
+  }
+
+  /* A forgotten PIN: the server makes a new one and hands it back this once, so it can be read out to the child
+     and then exists nowhere but in their head. */
+  async function handleResetPin(child: ParentChild) {
+    const res = await resetChildPin(child.id).catch(() => null);
+    if (res) setNewPin({ id: child.id, pin: res.login_pin });
   }
 
   async function handleToggleClass(child: ParentChild) {
@@ -454,14 +464,38 @@ export default function ParentDashboardPage() {
                     })}
                   </p>
                 )}
-                <button
-                  type="button"
-                  data-testid="view-report-btn"
-                  onClick={() => handleViewReport(child)}
-                  className="w-fit font-display text-sm font-bold text-explore hover:underline"
-                >
-                  {t('view_report')}
-                </button>
+                <div className="flex flex-wrap items-center gap-4">
+                  <button
+                    type="button"
+                    data-testid="view-report-btn"
+                    onClick={() => handleViewReport(child)}
+                    className="w-fit font-display text-sm font-bold text-explore hover:underline"
+                  >
+                    {t('view_report')}
+                  </button>
+                  {/* A child signs in with four digits, not a password. When they forget them, this is where a new
+                      set comes from — shown once, here and nowhere else. */}
+                  <button
+                    type="button"
+                    data-testid="reset-child-pin-btn"
+                    onClick={() => handleResetPin(child)}
+                    className="w-fit font-display text-sm font-bold text-explore hover:underline"
+                  >
+                    {t('new_pin')}
+                  </button>
+                </div>
+                {newPin?.id === child.id && (
+                  <p
+                    role="status"
+                    data-testid="new-child-pin"
+                    className="rounded-lg bg-tint-lime px-4 py-3 font-body text-sm text-ink"
+                  >
+                    {t('new_pin_shown', { name: child.nickname })}{' '}
+                    <span dir="ltr" className="font-display text-base font-bold tracking-[0.3em]">
+                      {newPin.pin}
+                    </span>
+                  </p>
+                )}
               </div>
             );
           })

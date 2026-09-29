@@ -547,3 +547,57 @@ async fn resolve_approval(
         status: status.to_owned(),
     }))
 }
+
+#[derive(Debug, Serialize, ToSchema)]
+pub struct ResetChildPinResponse {
+    pub child_id: Uuid,
+    /// Shown once, here and nowhere else; only the hash is kept.
+    pub login_pin: String,
+}
+
+/// Give a child a new PIN when they have forgotten theirs, or a first one when
+/// a parent added them and never set one. Clears any pause on wrong tries.
+#[utoipa::path(post, path = "/parent/children/{id}/reset-pin", tag = "children",
+    params(("id" = Uuid, Path, description = "Child profile UUID")),
+    security(("bearer_auth" = [])),
+    responses(
+        (status = 200, description = "New PIN (shown once)", body = ResetChildPinResponse),
+        (status = 403, description = "Parent role required", body = crate::ProblemDetail),
+        (status = 404, description = "Not your child", body = crate::ProblemDetail),
+    ))]
+pub async fn reset_child_pin(
+    AdultAuth(claims): AdultAuth,
+    State(state): State<AppState>,
+    Path(child_id): Path<Uuid>,
+) -> Result<Json<ResetChildPinResponse>, ApiError> {
+    require_parent(&claims.role)?;
+    let mine: Option<Uuid> = sqlx::query_scalar(
+        "SELECT id FROM child_profiles WHERE id = $1 AND parent_account_id = $2",
+    )
+    .bind(child_id)
+    .bind(claims.account_id)
+    .fetch_optional(&state.db)
+    .await
+    .map_err(internal)?;
+    if mine.is_none() {
+        return Err(DomainError::NotFound.into());
+    }
+
+    let pin = crate::teacher::generate_pin();
+    let pin_hash = state.auth.hasher.hash(&pin).await?;
+    sqlx::query(
+        "UPDATE child_profiles
+         SET login_pin_hash = $1, pin_attempts = 0, pin_locked_until = NULL
+         WHERE id = $2",
+    )
+    .bind(&pin_hash)
+    .bind(child_id)
+    .execute(&state.db)
+    .await
+    .map_err(internal)?;
+
+    Ok(Json(ResetChildPinResponse {
+        child_id,
+        login_pin: pin,
+    }))
+}

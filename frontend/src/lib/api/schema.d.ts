@@ -25,6 +25,9 @@ export interface paths {
   "/api/children": {
     post: operations["createChild"];
   };
+  "/api/children/login": {
+    post: operations["childLogin"];
+  };
   "/api/children/{id}": {
     get: operations["getChild"];
   };
@@ -585,6 +588,9 @@ export interface paths {
       };
     };
   };
+  "/api/parent/children/{id}/reset-pin": {
+    post: operations["resetChildPin"];
+  };
   "/api/parent/children": {
     get: {
       responses: {
@@ -769,6 +775,22 @@ export interface components {
       avatar_id: string;
       birth_year: number;
       parent_email: string;
+      /** The four digits the child signs back in with on another device. */
+      login_pin?: string;
+    };
+    ChildLoginRequest: {
+      parent_email: string;
+      nickname: string;
+      pin: string;
+    };
+    ChildLoginResponse: {
+      child_id: string;
+      nickname: string;
+      access_token: string;
+    };
+    ResetChildPinResponse: {
+      child_id: string;
+      login_pin: string;
     };
     CreateChildResponse: {
       id: string;
@@ -1256,6 +1278,30 @@ export interface operations {
       201: {
         content: {
           "application/json": components["schemas"]["CreateChildResponse"];
+        };
+      };
+    };
+  };
+  childLogin: {
+    requestBody: {
+      content: {
+        "application/json": components["schemas"]["ChildLoginRequest"];
+      };
+    };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["ChildLoginResponse"];
+        };
+      };
+    };
+  };
+  resetChildPin: {
+    parameters: { path: { id: string } };
+    responses: {
+      200: {
+        content: {
+          "application/json": components["schemas"]["ResetChildPinResponse"];
         };
       };
     };

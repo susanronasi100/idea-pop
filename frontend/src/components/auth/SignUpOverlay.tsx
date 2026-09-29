@@ -9,6 +9,7 @@ import PersonaCards from "./PersonaCards";
 import RegisterForm from "./RegisterForm";
 import LoginForm from "./LoginForm";
 import ClassLogin from "./ClassLogin";
+import ChildLogin from "./ChildLogin";
 import KidOnboarding from "@/components/onboarding/KidOnboarding";
 
 /* The way in and out of an account, as an overlay: a link to the persona step, to logging in, or to signing in with
@@ -19,8 +20,13 @@ import KidOnboarding from "@/components/onboarding/KidOnboarding";
    cannot scroll, and focus returns to whatever opened it. */
 
 /* The pages this overlay stands in for, and the view each one opens. A link to any of them is answered here. */
-const ENTRIES = { "/sign-up": "persona", "/login": "login", "/class-login": "class" } as const;
-type View = Persona | keyof typeof ENTRIES extends never ? never : "persona" | "login" | "class" | Persona;
+const ENTRIES = {
+  "/sign-up": "persona",
+  "/login": "login",
+  "/class-login": "class",
+  "/child-login": "child",
+} as const;
+type View = "persona" | "login" | "class" | "child" | Persona;
 
 export default function SignUpOverlay() {
   const [open, setOpen] = useState(false);
@@ -110,7 +116,16 @@ export default function SignUpOverlay() {
      holding a card in the middle of an empty field of lime. */
   const wide = view === "persona";
   /* What a reader hears the dialog called: the heading of whichever step is showing. */
-  const label = view === "login" ? tLogin("heading") : view === "class" ? tClass("title") : view === "persona" ? undefined : t(`${view}_label`);
+  const label =
+    view === "login"
+      ? tLogin("heading")
+      : view === "child"
+        ? tLogin("kid_heading")
+        : view === "class"
+          ? tClass("title")
+          : view === "persona"
+            ? undefined
+            : t(`${view}_label`);
 
   return createPortal(
     <div
@@ -136,6 +151,7 @@ export default function SignUpOverlay() {
         {(view === "parent" || view === "teacher") && <RegisterForm role={view} onDone={close} />}
         {view === "login" && <LoginForm onDone={close} />}
         {view === "class" && <ClassLogin onDone={close} />}
+        {view === "child" && <ChildLogin onDone={close} />}
       </div>
     </div>,
     document.body,

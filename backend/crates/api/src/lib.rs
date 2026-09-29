@@ -64,7 +64,10 @@ use crate::{
         AgeTierVariantResponse, ChallengePageResponse, ChallengeResponse, NatureClueResponse,
         ToolResponse,
     },
-    children::{CreateChildRequest, CreateChildResponse, UpgradeRequestResponse},
+    children::{
+        ChildLoginRequest, ChildLoginResponse, CreateChildRequest, CreateChildResponse,
+        UpgradeRequestResponse,
+    },
     classes::{
         ClassLoginRequest, ClassLoginResponse, ClassRosterItem, CreateClassRequest,
         CreateClassResponse, JoinClassResponse,
@@ -81,7 +84,7 @@ use crate::{
     me::{ClassMissionResponse, MeResponse},
     parent::{
         ChildReportResponse, DisplayModeResponse, ParentApprovalResponse, ParentChildResponse,
-        ParentProjectSummary, ResolveApprovalRequest, ResolveApprovalResponse,
+        ParentProjectSummary, ResetChildPinResponse, ResolveApprovalRequest, ResolveApprovalResponse,
         UpdateDisplayModeRequest,
     },
     portfolio::{
@@ -227,8 +230,8 @@ pub struct CreateHealthLogRequest {
         auth::register, auth::login, auth::refresh, auth::logout, auth::verify_email,
         me::me, me::class_mission,
         account::get_email_preferences, account::put_email_preferences,
-        children::create_child, children::request_premium_unlock,
-        parent::list_children, parent::child_report,
+        children::create_child, children::child_login, children::request_premium_unlock,
+        parent::list_children, parent::reset_child_pin, parent::child_report,
         parent::set_display_mode, parent::list_approvals,
         parent::approve_approval, parent::dismiss_approval,
         consents::grant_consent, consents::revoke_consent,
@@ -260,6 +263,7 @@ pub struct CreateHealthLogRequest {
         AuthResponse, TokenResponse, MeResponse, ClassMissionResponse,
         EmailPreferencesResponse, UpdateEmailPreferencesRequest,
         CreateChildRequest, CreateChildResponse, UpgradeRequestResponse,
+        ChildLoginRequest, ChildLoginResponse, ResetChildPinResponse,
         ParentChildResponse, ChildReportResponse, ParentProjectSummary,
         UpdateDisplayModeRequest, DisplayModeResponse,
         ParentApprovalResponse, ResolveApprovalRequest, ResolveApprovalResponse,
@@ -532,12 +536,17 @@ pub fn router_with_metrics(
         )
         // Child profiles & consent
         .route("/children", post(children::create_child))
+        .route("/children/login", post(children::child_login))
         // Kid asks parent to unlock premium (kid-scoped; NO billing capability)
         .route(
             "/me/upgrade-request",
             post(children::request_premium_unlock),
         )
         .route("/parent/children", get(parent::list_children))
+        .route(
+            "/parent/children/:id/reset-pin",
+            post(parent::reset_child_pin),
+        )
         .route("/parent/children/:id/report", get(parent::child_report))
         .route(
             "/parent/children/:id/display-mode",

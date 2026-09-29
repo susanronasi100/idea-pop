@@ -93,6 +93,8 @@ export async function createChild(data: {
   avatar_id: string;
   birth_year: number;
   parent_email: string;
+  /** The four digits they sign back in with; a kid signing up alone always sets one. */
+  login_pin?: string;
 }): Promise<{ id: string; access_token: string }> {
   const { data: res, error } = await apiClient.POST("/api/children", {
     body: data,
@@ -100,6 +102,35 @@ export async function createChild(data: {
   if (error || !res) throw new Error("Could not create profile");
   setAccessToken(res.access_token);
   return res;
+}
+
+/**
+ * Sign a child back in on another device: their parent's email, their name and
+ * their PIN. A child never has a password, so this is their way in, next to the
+ * class code a student uses at school.
+ */
+export async function childLogin(
+  parentEmail: string,
+  nickname: string,
+  pin: string,
+): Promise<{ child_id: string; nickname: string; access_token: string }> {
+  const { data, error } = await apiClient.POST("/api/children/login", {
+    body: { parent_email: parentEmail, nickname, pin },
+  });
+  if (error || !data) throw new Error("Wrong email, name, or PIN");
+  setAccessToken(data.access_token);
+  return data;
+}
+
+/** Give a child a new PIN when they have forgotten it. Returns it once. */
+export async function resetChildPin(
+  childId: string,
+): Promise<{ child_id: string; login_pin: string }> {
+  const { data, error } = await apiClient.POST("/api/parent/children/{id}/reset-pin", {
+    params: { path: { id: childId } },
+  });
+  if (error || !data) throw new Error("Could not make a new PIN");
+  return data;
 }
 
 /**

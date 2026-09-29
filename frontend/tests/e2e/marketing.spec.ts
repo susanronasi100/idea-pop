@@ -69,6 +69,37 @@ test.describe('Marketing landing page', () => {
     await expect(overlay).toBeHidden();
   });
 
+  test('a kid chooses a secret number, and has a door of their own to come back through', async ({ page }) => {
+    await page.goto('/en');
+    const nav = page.getByTestId('marketing-nav');
+    await nav.getByRole('link', { name: /sign up for free/i }).first().click();
+    const overlay = page.getByTestId('sign-up-overlay');
+    await overlay.locator('[data-persona="kid"]').click();
+
+    // avatar, name, age, then the four digits they will come back with
+    await overlay.getByTestId('step-1').getByRole('button').first().click();
+    await overlay.getByTestId('step-1').getByRole('button').last().click();
+    await overlay.locator('#nickname').fill('Ada');
+    await overlay.getByTestId('step-2').getByRole('button').last().click();
+    await overlay.locator('#birth-year-select').selectOption('2015');
+    await overlay.getByTestId('step-3').getByRole('button').last().click();
+    await expect(overlay.locator('#login-pin')).toBeVisible();
+
+    // A grown-up's email is still asked for, after the number.
+    await overlay.locator('#login-pin').fill('4271');
+    await overlay.getByTestId('step-4').getByRole('button').last().click();
+    await expect(overlay.locator('#parent-email')).toBeVisible();
+
+    // And the log-in panel has a way in for a child who signed up at home.
+    await page.keyboard.press('Escape');
+    await nav.getByRole('link', { name: 'Log in', exact: true }).click();
+    await overlay.getByTestId('child-login-link').click();
+    await expect(overlay).toHaveAttribute('data-step', 'child');
+    await expect(overlay.getByTestId('child-login')).toBeVisible();
+    await expect(overlay.locator('#child-pin')).toBeVisible();
+    expect(page.url()).not.toContain('/child-login');
+  });
+
   test('the persona step still has its own page', async ({ page }) => {
     await page.goto('/en/sign-up');
     await expect(page.getByTestId('persona-select')).toBeVisible();

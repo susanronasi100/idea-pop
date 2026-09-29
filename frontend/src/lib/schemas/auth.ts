@@ -41,8 +41,21 @@ export const kidProfileSchema = z.object({
     .min(CURRENT_YEAR - 20, "err_birth_max_age")
     .max(CURRENT_YEAR - 4, "err_birth_min_age"),
   parent_email: z.string().email("err_parent_email"),
+  // A child never sets a password, so these four digits are how they sign back
+  // in on another device — the same shape as the class PIN they may meet at
+  // school. Optional in the schema because a parent adding a child can leave it
+  // and set one later from their dashboard; the kid's own sign-up asks for it.
+  login_pin: z.string().regex(/^\d{4}$/u, "err_pin").optional(),
 });
 export type KidProfileFormData = z.infer<typeof kidProfileSchema>;
+
+/** The child's way back in: their parent's email, their name, their PIN. */
+export const childLoginSchema = z.object({
+  parent_email: z.string().email("err_parent_email"),
+  nickname: z.string().min(1, "err_nickname_min"),
+  pin: z.string().regex(/^\d{4}$/u, "err_pin"),
+});
+export type ChildLoginFormData = z.infer<typeof childLoginSchema>;
 
 export const createClassSchema = z.object({
   name: z

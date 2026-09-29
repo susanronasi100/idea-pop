@@ -24,9 +24,11 @@ use idea_pop_domain::{DomainError, Role};
 
 use crate::{error::ApiError, extractor::AdultAuth, state::AppState};
 
-/// A random 4-digit class login PIN — classroom-friendly, shown to the teacher
-/// once, and only ever stored hashed. PIN login is rate-limited + lockable.
-fn generate_pin() -> String {
+/// A random 4-digit login PIN — child-friendly, shown to the grown-up once, and
+/// only ever stored hashed. PIN login is rate-limited + lockable. Shared with
+/// the parent's own reset, so a child's PIN is made the same way wherever it
+/// comes from.
+pub(crate) fn generate_pin() -> String {
     let n = (Uuid::new_v4().as_u128() % 10_000) as u16;
     format!("{n:04}")
 }
