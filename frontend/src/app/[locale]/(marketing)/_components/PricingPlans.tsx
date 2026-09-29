@@ -48,6 +48,9 @@ const outlineCta =
 const filledCta =
   "bg-[#D1EF5A] text-[#1F4D33] hover:brightness-105 hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:bg-[#B8D24F] focus-visible:ring-[#1F4D33] shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]";
 
+// One price style for all three plans: Free's "0 Toman" and the paid plans' "Free until December" look the same.
+const priceText = "font-display font-bold text-[1.5rem] leading-tight text-ink";
+
 interface PlanCardProps {
   name: string;
   badge?: { text: string; filled: boolean };
@@ -65,8 +68,8 @@ interface PlanCardProps {
 }
 
 /* One anatomy for all three plans, top to bottom: name, price block, billing note, a rule, what's included, and the
-   button pinned to the bottom so the three buttons line up. The launch offer is plain display text in the price slot
-   (not a filled pill, which read as a second button), with the regular price struck through above it. */
+   button pinned to the bottom so the three buttons line up. The launch offer sits in the price slot in the same style as
+   Free's price (not a filled pill, which read as a second button), with the regular price struck through above it. */
 function PlanCard({ name, badge, featured, price, regularPrice, billing, intro, features, cta, labels, reveal }: PlanCardProps) {
   return (
     <div
@@ -96,10 +99,16 @@ function PlanCard({ name, badge, featured, price, regularPrice, billing, intro, 
               <span className="sr-only">{labels.wasPrice}: </span>
               <s className="decoration-2">{regularPrice}</s>
             </p>
-            <p className="font-display font-bold text-[1.375rem] leading-tight text-[#18785A]">{labels.freeUntil}</p>
+            <p className={priceText}>{labels.freeUntil}</p>
           </>
         ) : (
-          <p className="font-display font-bold text-[1.625rem] leading-tight text-ink">{price}</p>
+          <>
+            {/* An empty line where the paid plans show their struck-through price, so all three prices sit level. */}
+            <p className="font-body text-base font-semibold invisible" aria-hidden="true">
+              &nbsp;
+            </p>
+            <p className={priceText}>{price}</p>
+          </>
         )}
         {billing && <p className="mt-1 font-body text-sm font-semibold text-ink/60">{billing}</p>}
       </div>
