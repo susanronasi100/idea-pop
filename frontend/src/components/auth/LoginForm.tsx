@@ -81,9 +81,10 @@ export default function LoginForm({ onDone }: { onDone?: () => void } = {}) {
         />
 
         <div className="-mt-2 text-right">
+          {/* The words are 19px tall; a finger needs 44, so the link carries a box that size around them. */}
           <Link
             href="/forgot-password"
-            className="font-body text-sm font-semibold text-explore underline-offset-2 hover:underline"
+            className="inline-flex min-h-[44px] items-center rounded-md px-1 font-body text-sm font-semibold text-explore underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
           >
             {t("forgot_password")}
           </Link>
@@ -98,7 +99,7 @@ export default function LoginForm({ onDone }: { onDone?: () => void } = {}) {
         {t("no_account")}{" "}
         <Link
           href="/sign-up"
-          className="font-semibold text-explore underline-offset-2 hover:underline"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-2 align-middle font-semibold text-explore underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
         >
           {t("sign_up")}
         </Link>

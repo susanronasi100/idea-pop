@@ -108,9 +108,10 @@ export default function RegisterForm({ role, onDone }: RegisterFormProps) {
 
       <p className="mt-6 text-center font-body text-sm text-ink/60">
         {t("already")}{" "}
+        {/* A finger needs more than the height of the word. */}
         <Link
           href="/login"
-          className="font-semibold text-explore underline-offset-2 hover:underline"
+          className="inline-flex min-h-[44px] min-w-[44px] items-center justify-center rounded-md px-2 align-middle font-semibold text-explore underline-offset-2 hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
         >
           {t("log_in")}
         </Link>

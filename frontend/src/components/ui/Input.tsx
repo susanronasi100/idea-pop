@@ -73,7 +73,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(function Input(
             onClick={() => setRevealed((prev) => !prev)}
             aria-label={revealed ? passwordToggleLabels.hide : passwordToggleLabels.show}
             aria-pressed={revealed}
-            className="absolute inset-y-0 ltr:right-3 rtl:left-3 flex items-center rounded text-ink/40 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
+            /* The eye is 20px of drawing, which is not 44px of finger: the button around it is, centred on the icon
+               so nothing moves. */
+            className="absolute inset-y-0 ltr:right-1 rtl:left-1 flex w-11 items-center justify-center rounded text-ink/40 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
           >
             {revealed ? (
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">
