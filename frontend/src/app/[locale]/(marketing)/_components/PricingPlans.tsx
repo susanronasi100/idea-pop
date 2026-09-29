@@ -43,18 +43,88 @@ function Check() {
   );
 }
 
-/** A paid plan's price, struck through, over the launch offer that replaces it for now. */
-function OfferPrice({ price, labels }: { price: string; labels: PricingLabels }) {
+const outlineCta =
+  "border border-[#18785A] text-[#146047] bg-white hover:bg-[#F4FADD] hover:border-2 active:bg-[#E3EFC4] active:text-[#0F4C39] active:border-2 active:border-[#0F4C39] focus-visible:ring-[#18785A] shadow-[0_4px_4px_rgba(0,0,0,0.25)]";
+const filledCta =
+  "bg-[#D1EF5A] text-[#1F4D33] hover:brightness-105 hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:bg-[#B8D24F] focus-visible:ring-[#1F4D33] shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]";
+
+interface PlanCardProps {
+  name: string;
+  badge?: { text: string; filled: boolean };
+  featured?: boolean;
+  /** Free plan: the price itself. */
+  price?: string;
+  /** Paid plans during the launch offer: the regular price, shown struck through above the offer line. */
+  regularPrice?: string;
+  billing?: string;
+  intro?: string;
+  features: string[];
+  cta: string;
+  labels: PricingLabels;
+  reveal: "grow" | "pop";
+}
+
+/* One anatomy for all three plans, top to bottom: name, price block, billing note, a rule, what's included, and the
+   button pinned to the bottom so the three buttons line up. The launch offer is plain display text in the price slot
+   (not a filled pill, which read as a second button), with the regular price struck through above it. */
+function PlanCard({ name, badge, featured, price, regularPrice, billing, intro, features, cta, labels, reveal }: PlanCardProps) {
   return (
-    <>
-      <span className="block font-display text-ink/50 line-through decoration-2">
-        <span className="sr-only">{labels.wasPrice}: </span>
-        {price}
-      </span>
-      <span className="mt-1 block w-fit rounded-pill bg-[#D1EF5A] px-3 py-1 [font-family:var(--font-montserrat)] text-[15px] font-extrabold text-[#146047]">
-        {labels.freeUntil}
-      </span>
-    </>
+    <div
+      className={`relative rounded-card bg-white p-6 pt-8 flex flex-col h-full border-[3px] ${
+        featured ? "border-[#CDEB5A] shadow-lg" : "border-[#18785A]"
+      }`}
+      data-reveal={reveal}
+      style={reveal === "grow" ? ({ "--motion-delay": "300ms" } as React.CSSProperties) : undefined}
+    >
+      {badge && (
+        <span
+          className={`absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-pill px-4 py-[6px] [font-family:var(--font-montserrat)] text-[14px] font-bold whitespace-nowrap ${
+            badge.filled ? "bg-[#D1EF5A] text-[#146047]" : "bg-white border border-[#18785A] text-[#18785A]"
+          }`}
+        >
+          {badge.text}
+        </span>
+      )}
+
+      <p className="font-display font-bold text-xl text-ink">{name}</p>
+
+      {/* Price block: a fixed height so the rules and lists start at the same line in all three cards. */}
+      <div className="mt-3 min-h-[7rem]">
+        {regularPrice ? (
+          <>
+            <p className="font-body text-base font-semibold text-ink/50">
+              <span className="sr-only">{labels.wasPrice}: </span>
+              <s className="decoration-2">{regularPrice}</s>
+            </p>
+            <p className="font-display font-bold text-[1.375rem] leading-tight text-[#18785A]">{labels.freeUntil}</p>
+          </>
+        ) : (
+          <p className="font-display font-bold text-[1.625rem] leading-tight text-ink">{price}</p>
+        )}
+        {billing && <p className="mt-1 font-body text-sm font-semibold text-ink/60">{billing}</p>}
+      </div>
+
+      <hr className="my-4 border-t border-[#18785A]/20" />
+
+      {intro && <p className="font-body text-sm font-bold text-ink mb-2">{intro}</p>}
+      <ul className="space-y-2 mb-6 flex-1" role="list">
+        {features.map((f) => (
+          <li key={f} className="font-body text-sm font-semibold text-ink">
+            <Check />
+            {f}
+          </li>
+        ))}
+      </ul>
+
+      <Link
+        href="/sign-up"
+        className={`mt-auto inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-6 py-3 text-[16px] transition-all duration-150 hover:scale-[1.05] active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2 ${
+          featured ? filledCta : outlineCta
+        }`}
+      >
+        {cta}
+      </Link>
+    </div>
   );
 }
 
@@ -98,90 +168,38 @@ export default function PricingPlans({ labels }: { labels: PricingLabels }) {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-start">
-        {/* Free */}
-        <div className="rounded-card bg-white border-[3px] border-[#18785A] p-6 flex flex-col" data-reveal="grow" style={{ "--motion-delay": "300ms" } as React.CSSProperties}>
-          <p className="font-display font-bold text-xl text-ink mb-4">
-            {labels.freeName}{" "}
-            <span className="font-display">{labels.freePrice}</span>
-          </p>
-          <ul className="space-y-2 mb-6 flex-1" role="list">
-            {labels.freeFeatures.map((f) => (
-              <li key={f} className="font-body text-sm font-semibold text-ink">
-                <Check />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/sign-up"
-            className="inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-6 py-3 text-[16px] border border-[#18785A] text-[#146047] bg-white transition-all duration-150 hover:bg-[#F4FADD] hover:border-2 hover:scale-[1.11] active:scale-[0.97] active:bg-[#E3EFC4] active:text-[#0F4C39] active:border-2 active:border-[#0F4C39] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18785A] focus-visible:ring-offset-2 shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-          >
-            {labels.ctaFree}
-          </Link>
-        </div>
-
-        {/* Plus */}
-        <div className="relative rounded-card bg-white border-[3px] border-[#CDEB5A] shadow-lg p-6 flex flex-col" data-reveal="pop">
-          <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-pill bg-[#D1EF5A] px-4 py-[6px] [font-family:var(--font-montserrat)] text-[14px] font-bold text-[#146047] whitespace-nowrap">
-            {labels.badgePopular}
-          </span>
-          <p className="font-display font-bold text-xl text-ink">
-            {labels.plusName}{" "}
-            <OfferPrice price={annual ? labels.plusPriceAnnual : labels.plusPriceMonthly} labels={labels} />
-          </p>
-          <p className="font-body text-sm font-semibold text-ink/50 mb-4">
-            {annual ? labels.plusBillingAnnual : labels.plusBillingMonthly}
-          </p>
-          <p className="font-body text-sm font-bold text-ink mb-2">
-            {labels.plusIntro}
-          </p>
-          <ul className="space-y-2 mb-6 flex-1" role="list">
-            {labels.plusFeatures.map((f) => (
-              <li key={f} className="font-body text-sm font-semibold text-ink">
-                <Check />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/sign-up"
-            className="inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-6 py-3 text-[16px] bg-[#D1EF5A] text-[#1F4D33] transition-all duration-150 hover:brightness-105 hover:scale-[1.11] hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:scale-[0.97] active:bg-[#B8D24F] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1F4D33] focus-visible:ring-offset-2 shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]"
-          >
-            {labels.ctaPlus}
-          </Link>
-        </div>
-
-        {/* Family */}
-        <div className="relative rounded-card bg-white border-[3px] border-[#18785A] p-6 flex flex-col" data-reveal="grow" style={{ "--motion-delay": "300ms" } as React.CSSProperties}>
-          <span className="absolute -top-3.5 left-1/2 -translate-x-1/2 rounded-pill bg-white border border-[#18785A] px-4 py-[6px] [font-family:var(--font-montserrat)] text-[14px] font-bold text-[#18785A] whitespace-nowrap">
-            {labels.badgeValue}
-          </span>
-          <p className="font-display font-bold text-xl text-ink">
-            {labels.familyName}{" "}
-            <OfferPrice price={annual ? labels.familyPriceAnnual : labels.familyPriceMonthly} labels={labels} />
-          </p>
-          <p className="font-body text-sm font-semibold text-ink/50 mb-4">
-            {annual ? labels.familyBillingAnnual : labels.familyBillingMonthly}
-          </p>
-          <p className="font-body text-sm font-bold text-ink mb-2">
-            {labels.familyIntro}
-          </p>
-          <ul className="space-y-2 mb-6 flex-1" role="list">
-            {labels.familyFeatures.map((f) => (
-              <li key={f} className="font-body text-sm font-semibold text-ink">
-                <Check />
-                {f}
-              </li>
-            ))}
-          </ul>
-          <Link
-            href="/sign-up"
-            className="inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-6 py-3 text-[16px] border border-[#18785A] text-[#146047] bg-white transition-all duration-150 hover:bg-[#F4FADD] hover:border-2 hover:scale-[1.11] active:scale-[0.97] active:bg-[#E3EFC4] active:text-[#0F4C39] active:border-2 active:border-[#0F4C39] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18785A] focus-visible:ring-offset-2 shadow-[0_4px_4px_rgba(0,0,0,0.25)]"
-          >
-            {labels.ctaFamily}
-          </Link>
-        </div>
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-4xl mx-auto items-stretch">
+        <PlanCard
+          name={labels.freeName}
+          price={labels.freePrice}
+          features={labels.freeFeatures}
+          cta={labels.ctaFree}
+          labels={labels}
+          reveal="grow"
+        />
+        <PlanCard
+          name={labels.plusName}
+          badge={{ text: labels.badgePopular, filled: true }}
+          featured
+          regularPrice={annual ? labels.plusPriceAnnual : labels.plusPriceMonthly}
+          billing={annual ? labels.plusBillingAnnual : labels.plusBillingMonthly}
+          intro={labels.plusIntro}
+          features={labels.plusFeatures}
+          cta={labels.ctaPlus}
+          labels={labels}
+          reveal="pop"
+        />
+        <PlanCard
+          name={labels.familyName}
+          badge={{ text: labels.badgeValue, filled: false }}
+          regularPrice={annual ? labels.familyPriceAnnual : labels.familyPriceMonthly}
+          billing={annual ? labels.familyBillingAnnual : labels.familyBillingMonthly}
+          intro={labels.familyIntro}
+          features={labels.familyFeatures}
+          cta={labels.ctaFamily}
+          labels={labels}
+          reveal="grow"
+        />
       </div>
     </div>
   );

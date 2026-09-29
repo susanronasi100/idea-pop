@@ -106,24 +106,43 @@ export default async function PricingPage({ params }: Props) {
       {/* 1b. Special expert courses: bought one by one, outside every plan. A course gets its own price through
              courses.price_toman (NULL = included in Plus / Family); the Library shows that price on the course. */}
       <section aria-label={t("special_heading")} className="px-4 pb-8 md:pb-12">
+        {/* An information panel, not a fourth plan: a cream tint instead of the plan cards' green frame, the heading
+            and intro on one side and the three facts as a quiet list on the other, each marked by a small icon. */}
         <div
-          className="mx-auto max-w-4xl rounded-[20px] border-[3px] border-[#18785A] bg-white p-6 md:p-8"
+          className="mx-auto max-w-4xl rounded-[24px] bg-[#FBF7D5] p-6 md:p-10 grid gap-6 md:grid-cols-[2fr_3fr] md:gap-10"
           data-reveal="grow"
         >
-          <div className="flex flex-wrap items-center justify-center gap-3 mb-3">
-            <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.5rem,1.25rem+1vw,2rem)] leading-[1.15] text-[#4F4F4F] text-center">
+          <div>
+            <span
+              className="mb-3 flex h-12 w-12 items-center justify-center rounded-full bg-white text-2xl shadow-sm"
+              aria-hidden="true"
+            >
+              ✨
+            </span>
+            <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.5rem,1.25rem+1vw,2rem)] leading-[1.15] text-[#4F4F4F] mb-3">
               {keepTogether(t("special_heading"))}
             </h2>
-            <span className="rounded-pill bg-[#F1D8FB] px-3 py-1 [font-family:var(--font-montserrat)] text-[14px] font-bold text-[#7A3D8A] whitespace-nowrap">
-              {t("special_tag")}
-            </span>
+            <p className={`${body} text-[#4F4F4F]`}>{t("special_intro")}</p>
           </div>
-          <p className={`${body} text-center text-[#4F4F4F] max-w-2xl mx-auto mb-6`}>{t("special_intro")}</p>
-          <ul className="grid gap-4 md:grid-cols-3" role="list">
-            {(["p1", "p2", "p3"] as const).map((k) => (
-              <li key={k} className="rounded-[16px] bg-[#FBFDF0] p-4">
-                <p className="font-display font-bold text-lg text-ink mb-1">{t(`special_${k}_title`)}</p>
-                <p className={`${body} text-sm text-[#4F4F4F]`}>{t(`special_${k}`)}</p>
+          <ul className="flex flex-col divide-y divide-[#18785A]/15" role="list">
+            {(
+              [
+                ["p1", "🧩"],
+                ["p2", "🏷️"],
+                ["p3", "🔑"],
+              ] as const
+            ).map(([k, icon]) => (
+              <li key={k} className="flex gap-4 py-4 first:pt-0 last:pb-0">
+                <span
+                  className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-white text-lg"
+                  aria-hidden="true"
+                >
+                  {icon}
+                </span>
+                <div>
+                  <p className="font-display font-bold text-lg text-ink">{t(`special_${k}_title`)}</p>
+                  <p className={`${body} text-sm text-[#4F4F4F]`}>{t(`special_${k}`)}</p>
+                </div>
               </li>
             ))}
           </ul>
