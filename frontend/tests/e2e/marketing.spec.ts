@@ -89,15 +89,6 @@ test.describe('Marketing landing page', () => {
     await overlay.locator('#login-pin').fill('4271');
     await overlay.getByTestId('step-4').getByRole('button').last().click();
     await expect(overlay.locator('#parent-email')).toBeVisible();
-
-    // And the log-in panel has a way in for a child who signed up at home.
-    await page.keyboard.press('Escape');
-    await nav.getByRole('link', { name: 'Log in', exact: true }).click();
-    await overlay.getByTestId('child-login-link').click();
-    await expect(overlay).toHaveAttribute('data-step', 'child');
-    await expect(overlay.getByTestId('child-login')).toBeVisible();
-    await expect(overlay.locator('#child-pin')).toBeVisible();
-    expect(page.url()).not.toContain('/child-login');
   });
 
   test('the persona step still has its own page', async ({ page }) => {

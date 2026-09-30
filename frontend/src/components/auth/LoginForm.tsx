@@ -119,11 +119,6 @@ export default function LoginForm({ onDone }: { onDone?: () => void } = {}) {
             {t("class_code_button")}
           </Link>
         </div>
-        <div>
-          <Link href="/child-login" data-testid="child-login-link" className={`${btnGlass} mt-3 w-full`}>
-            {t("kid_button")}
-          </Link>
-        </div>
       </div>
     </div>
   );

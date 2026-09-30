@@ -606,7 +606,6 @@
       "student_cta": "Are you a student with a class code?",
     "class_code_hint": "Your teacher gave you a class code?",
     "class_code_button": "Log in with a class code",
-    "kid_button": "I'm a kid",
     "kid_heading": "Welcome back",
     "kid_sub": "Tell us your grown-up's email, your name, and your secret number.",
     "kid_parent_email": "A grown-up's email",
