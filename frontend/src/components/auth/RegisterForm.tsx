@@ -8,14 +8,16 @@ import { useRouter, Link } from "@/i18n/routing";
 import { registerSchema, type RegisterFormData } from "@/lib/schemas/auth";
 import { register } from "@/lib/api/client";
 import { setPersona, dashboardHref } from "@/lib/auth/persona";
-import { Button } from "@/components/ui/Button";
+import { btnLime } from "@/components/ui/kit";
 import { Input } from "@/components/ui/Input";
 
 interface RegisterFormProps {
   role: "parent" | "teacher";
+  /* The sign-up overlay passes this so it can close itself as the app moves on. */
+  onDone?: () => void;
 }
 
-export default function RegisterForm({ role }: RegisterFormProps) {
+export default function RegisterForm({ role, onDone }: RegisterFormProps) {
   const t = useTranslations("auth.register");
   const ta = useTranslations("auth");
   const router = useRouter();
@@ -36,6 +38,7 @@ export default function RegisterForm({ role }: RegisterFormProps) {
     try {
       await register(data.email, data.password, role);
       setPersona(role);
+      onDone?.();
       router.push(dashboardHref(role));
     } catch (err) {
       const code = (err as Error & { code?: string }).code;
@@ -98,15 +101,9 @@ export default function RegisterForm({ role }: RegisterFormProps) {
           {...field("passwordConfirm")}
         />
 
-        <Button
-          variant="primary"
-          size="lg"
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full"
-        >
+        <button type="submit" disabled={isSubmitting} className={`${btnLime} w-full disabled:opacity-40 disabled:pointer-events-none`}>
           {isSubmitting ? "…" : t("submit")}
-        </Button>
+        </button>
       </form>
 
       <p className="mt-6 text-center font-body text-sm text-ink/60">

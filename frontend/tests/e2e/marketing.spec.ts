@@ -7,16 +7,72 @@ test.describe('Marketing landing page', () => {
     await expect(page.getByRole('heading', { level: 1 })).toContainText('Ask nature');
   });
 
-  test('Start free CTA navigates to sign-up', async ({ page }) => {
+  test('the sign-up button opens the persona overlay over the page', async ({ page }) => {
     await page.goto('/en');
     // The redesigned hero CTAs are "Start Exploring" / "Start a simple
-    // challenge"; the "Start free" sign-up entry point lives in the nav.
+    // challenge"; the sign-up entry point is the lime button in the nav. It now
+    // opens the persona step over the page instead of loading /sign-up.
     const nav = page.getByTestId('marketing-nav');
-    const startLink = nav.getByRole('link', { name: /start free/i }).first();
+    const startLink = nav.getByRole('link', { name: /sign up for free/i }).first();
     await expect(startLink).toBeVisible();
     await startLink.click();
-    await page.waitForURL(/sign-up/, { timeout: 5000 });
-    expect(page.url()).toContain('/sign-up');
+    const overlay = page.getByTestId('sign-up-overlay');
+    await expect(overlay).toBeVisible();
+    await expect(overlay.getByRole('button', { name: /kid/i })).toBeVisible();
+    expect(page.url()).not.toContain('/sign-up');
+    // Escape closes it and leaves the visitor where they were.
+    await page.keyboard.press('Escape');
+    await expect(overlay).toBeHidden();
+  });
+
+  test('the steps after the choice stay in the overlay', async ({ page }) => {
+    await page.goto('/en');
+    const nav = page.getByTestId('marketing-nav');
+    await nav.getByRole('link', { name: /sign up for free/i }).first().click();
+    const overlay = page.getByTestId('sign-up-overlay');
+    await expect(overlay).toHaveAttribute('data-step', 'persona');
+
+    // A kid goes on to the four steps without leaving the page they were reading.
+    await overlay.locator('[data-persona="kid"]').click();
+    await expect(overlay).toHaveAttribute('data-step', 'kid');
+    await expect(overlay.getByTestId('kid-wizard')).toBeVisible();
+    expect(page.url()).not.toContain('/onboarding');
+
+    // The first step's "before" goes back to the choice rather than loading a page.
+    await overlay.getByTestId('step-1').getByRole('button').nth(-2).click();
+    await expect(overlay).toHaveAttribute('data-step', 'persona');
+
+    // A parent gets their form in the same panel, and the cross cancels the whole thing.
+    await overlay.locator('[data-persona="parent"]').click();
+    await expect(overlay.getByTestId('register-form')).toBeVisible();
+    expect(page.url()).not.toContain('/sign-up');
+    await overlay.getByRole('button').first().click();
+    await expect(overlay).toBeHidden();
+  });
+
+  test('logging in opens in place, and the class code is a way of its own', async ({ page }) => {
+    await page.goto('/en');
+    const nav = page.getByTestId('marketing-nav');
+    await nav.getByRole('link', { name: 'Log in', exact: true }).click();
+    const overlay = page.getByTestId('sign-up-overlay');
+    await expect(overlay).toHaveAttribute('data-step', 'login');
+    await expect(overlay.getByTestId('login-form')).toBeVisible();
+    expect(page.url()).not.toContain('/login');
+
+    // A student with a code from their teacher has a button of their own, not a line of small print.
+    await overlay.getByTestId('class-code-link').click();
+    await expect(overlay).toHaveAttribute('data-step', 'class');
+    await expect(overlay.getByTestId('class-login')).toBeVisible();
+    expect(page.url()).not.toContain('/class-login');
+
+    await page.keyboard.press('Escape');
+    await expect(overlay).toBeHidden();
+  });
+
+  test('the persona step still has its own page', async ({ page }) => {
+    await page.goto('/en/sign-up');
+    await expect(page.getByTestId('persona-select')).toBeVisible();
+    await expect(page.getByTestId('sign-up-overlay')).toBeHidden();
   });
 
   test('nav is visible and has correct links', async ({ page }) => {
@@ -25,6 +81,15 @@ test.describe('Marketing landing page', () => {
     await expect(nav).toBeVisible();
     await expect(nav.getByRole('link', { name: /the method/i })).toBeVisible();
     await expect(nav.getByRole('link', { name: /pricing/i })).toBeVisible();
+  });
+
+  test('the nav offers a way to sign up and a way back in', async ({ page }) => {
+    await page.goto('/en');
+    const nav = page.getByTestId('marketing-nav');
+    await expect(nav.getByRole('link', { name: /sign up for free/i })).toBeVisible();
+    const logIn = nav.getByRole('link', { name: 'Log in', exact: true });
+    await expect(logIn).toBeVisible();
+    await expect(logIn).toHaveAttribute('href', //en/login$/);
   });
 
   test('footer shows trust badges', async ({ page }) => {

@@ -8,10 +8,11 @@ import { useRouter, Link } from "@/i18n/routing";
 import { loginSchema, type LoginFormData } from "@/lib/schemas/auth";
 import { login } from "@/lib/api/client";
 import { dashboardHref, reconcilePersona } from "@/lib/auth/persona";
-import { Button } from "@/components/ui/Button";
+import { btnLime, btnGlass } from "@/components/ui/kit";
 import { Input } from "@/components/ui/Input";
 
-export default function LoginForm() {
+/* onDone is the overlay's: it closes itself as the app moves on. */
+export default function LoginForm({ onDone }: { onDone?: () => void } = {}) {
   const t = useTranslations("auth.login");
   const ta = useTranslations("auth");
   const router = useRouter();
@@ -33,6 +34,7 @@ export default function LoginForm() {
       // cookie (a parent logging in on a kid-onboarded browser must land on
       // the parent dashboard, not in the kid UI).
       const persona = reconcilePersona(role);
+      onDone?.();
       router.push(dashboardHref(persona));
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
@@ -87,15 +89,9 @@ export default function LoginForm() {
           </Link>
         </div>
 
-        <Button
-          variant="primary"
-          size="lg"
-          type="submit"
-          disabled={isSubmitting}
-          className="w-full"
-        >
+        <button type="submit" disabled={isSubmitting} className={`${btnLime} w-full disabled:opacity-40 disabled:pointer-events-none`}>
           {isSubmitting ? "…" : t("submit")}
-        </Button>
+        </button>
       </form>
 
       <p className="mt-6 text-center font-body text-sm text-ink/60">
@@ -108,15 +104,18 @@ export default function LoginForm() {
         </Link>
       </p>
 
-      <p className="mt-2 text-center font-body text-sm text-ink/60">
-        {t("student_cta")}{" "}
+      {/* The other way in, for a student with a code from their teacher: a way of its own rather than a line of
+          small print under the one for grown-ups. */}
+      <div className="mt-7 border-t border-ink/10 pt-6">
+        <p className="text-center font-body text-sm text-ink/70">{t("class_code_hint")}</p>
         <Link
           href="/class-login"
-          className="font-semibold text-explore underline-offset-2 hover:underline"
+          data-testid="class-code-link"
+          className={`${btnGlass} mt-3 w-full`}
         >
-          {t("student_link")}
+          {t("class_code_button")}
         </Link>
-      </p>
+      </div>
     </div>
   );
 }

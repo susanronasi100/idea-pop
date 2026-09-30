@@ -40,15 +40,15 @@ describe('MarketingNav', () => {
     expect(screen.getAllByRole('link', { name: /for teachers/i })[0]).toBeInTheDocument();
   });
 
-  it('renders Sign up link', () => {
+  it('renders Log in link', () => {
     render(<MarketingNav />);
-    expect(screen.getByRole('link', { name: /sign up/i })).toBeInTheDocument();
+    expect(screen.getByRole('link', { name: /^log in$/i })).toBeInTheDocument();
   });
 
-  it('renders Start free CTA link', () => {
+  it('renders the sign-up CTA link', () => {
     render(<MarketingNav />);
-    const startLinks = screen.getAllByRole('link', { name: /^start free$/i });
-    expect(startLinks.length).toBeGreaterThan(0);
+    const signUpLinks = screen.getAllByRole('link', { name: /^sign up for free$/i });
+    expect(signUpLinks.length).toBeGreaterThan(0);
   });
 
   it('mobile menu is closed by default — hamburger has aria-label Open menu', () => {

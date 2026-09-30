@@ -132,23 +132,23 @@ test.describe("Login page", () => {
 });
 
 // ---------------------------------------------------------------------------
-// 6. Marketing Start free CTA → sign-up
+// 6. Marketing sign-up CTA → the persona step
 // ---------------------------------------------------------------------------
 
 test.describe("Marketing to sign-up integration", () => {
-  test('nav "Start free" CTA navigates to /sign-up', async ({ page }) => {
+  test('the nav\'s "Sign up for free" opens the persona step', async ({ page }) => {
     await page.goto("/en");
 
     // The redesigned hero CTAs are "Start Exploring" / "Start a simple
-    // challenge"; the "Start free" sign-up entry point lives in the nav.
+    // challenge"; the sign-up entry point is the lime button in the nav. It
+    // opens the persona step over the page rather than loading /sign-up.
     const nav = page.getByTestId("marketing-nav");
-    const startLink = nav.getByRole("link", { name: /start free/i }).first();
+    const startLink = nav.getByRole("link", { name: /sign up for free/i }).first();
     await expect(startLink).toBeVisible();
     await startLink.click();
 
-    await page.waitForURL(/sign-up/, { timeout: 5000 });
-    expect(page.url()).toContain("/sign-up");
-    await expect(page.getByTestId("persona-select")).toBeVisible();
+    await expect(page.getByTestId("sign-up-overlay")).toBeVisible();
+    expect(page.url()).not.toContain("/sign-up");
   });
 });
 

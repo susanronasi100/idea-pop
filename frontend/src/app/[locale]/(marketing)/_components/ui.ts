@@ -24,17 +24,8 @@ export const cardShapeLime = "rounded-[20px] shadow-[inset_0_0_0_1px_#D1EF5A,0_4
 
 export const pagePhoto = "rounded-[20px] md:rounded-[28px] shadow-[0_6px_18px_rgba(0,0,0,0.18)]";
 
-/* The button kit: primary is the lime fill with #1F4D33 text (7.3:1 — #18785A only reached 4.2:1, which fails at
-   the 15px phone size), secondary is the see-through fill. Both rest on a 1px inset stroke, thicken to 2px and scale
-   to 1.11 on hover (the label then reads 20px without the box moving anything), and darken when pressed. */
-export const btnLime =
-  "inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-8 md:px-[53px] py-3 text-[clamp(0.9375rem,0.79rem+0.68vw,1.125rem)] bg-[#D1EF5A] text-[#1F4D33] transition-all duration-150 hover:brightness-105 hover:scale-[1.11] hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:scale-[0.97] active:bg-[#B8D24F] active:shadow-[inset_0_0_0_2px_#18785A,0_2px_2px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#1F4D33] focus-visible:ring-offset-2 select-none shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]";
-// Glass button: the fill is 46% white so what's behind shows through (the hero scene);
-// the stroke is an inset shadow like the lime button's.
-export const btnGlass =
-  "inline-flex items-center justify-center rounded-pill [font-family:var(--font-montserrat)] font-extrabold px-8 md:px-[53px] py-3 text-[clamp(0.9375rem,0.79rem+0.68vw,1.125rem)] bg-white/[.46] text-[#146047] transition-all duration-150 hover:bg-[#F4FADD] hover:scale-[1.11] hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:scale-[0.97] active:bg-[#E3EFC4] active:text-[#0F4C39] active:shadow-[inset_0_0_0_2px_#0F4C39,0_2px_2px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18785A] focus-visible:ring-offset-2 select-none shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]";
-
-/* The glass button was drawn for light backgrounds. On the deep green band its #146047 label only reaches 3.3:1, so
-   there it keeps the same fill and stroke and darkens the label to #0E3B2C (5.4:1) - the designer's call. Written as
-   a replace so there is still only one glass button to change; the literal class is what Tailwind reads. */
+/* The button kit lives with the rest of the shared UI now, so signing up and logging in wear the same two
+   buttons as the marketing pages. Re-exported here so every page that already imports them is unchanged. */
+export { btnLime, btnGlass } from "@/components/ui/kit";
+import { btnGlass } from "@/components/ui/kit";
 export const btnGlassOnDark = btnGlass.replace("text-[#146047]", "text-[#0E3B2C]");

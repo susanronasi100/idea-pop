@@ -284,7 +284,8 @@ export default function MarketingNav() {
       href: "/for-teachers" as const,
       icon: icons.teachers,
     },
-    { label: t("sign_up"), href: "/sign-up" as const, icon: icons.signup },
+    // Signing up is the lime button on the right, so the capsule holds the way back in.
+    { label: t("log_in"), href: "/login" as const, icon: icons.signup },
   ];
 
   // next-intl hands back the path without the locale, so "/method" matches on both languages.
@@ -541,7 +542,9 @@ export default function MarketingNav() {
 
           {/* Mobile hamburger */}
           <button
-            className="rounded-pill bg-white p-[0.719rem] text-ink/70 shadow-md hover:bg-ink/5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore md:hidden"
+            className={`rounded-pill p-[0.719rem] shadow-md transition-all duration-150 active:scale-[0.95] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore motion-reduce:transition-none md:hidden ${
+              menuOpen ? "bg-[#EEFFA9] text-[#0F4C39] shadow-[inset_0_0_0_1px_#18785A]" : "bg-white text-ink/70 hover:bg-ink/5 active:bg-[#F4FADD]"
+            }`}
             aria-label={menuOpen ? "Close menu" : "Open menu"}
             aria-expanded={menuOpen}
             aria-controls="mobile-menu"
@@ -585,18 +588,30 @@ export default function MarketingNav() {
           id="mobile-menu"
           className="mx-4 rounded-card bg-white px-4 pb-4 pt-2 shadow-lg md:hidden"
         >
-          <ul className="space-y-1" role="list">
-            {navLinks.map(({ label, href }) => (
-              <li key={href}>
-                <Link
-                  href={href}
-                  className="block rounded px-3 py-2 text-sm font-semibold text-ink/70 hover:bg-ink/5 hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
-                  onClick={() => setMenuOpen(false)}
-                >
-                  {label}
-                </Link>
-              </li>
-            ))}
+          <ul className="space-y-2" role="list">
+            {/* The rows carry their states in the fill alone, with no outline: nothing at rest, the paler lime under
+                the pointer, and the card lime, set heavier, for the page you are already on -- the capsule's
+                travelling circle says that on a computer and is not here. The outline belongs to the two language
+                pills below, where it separates one choice from the other. A finger gets a 44px row either way. */}
+            {navLinks.map(({ label, href }) => {
+              const active = isCurrent(href);
+              return (
+                <li key={href}>
+                  <Link
+                    href={href}
+                    aria-current={active ? "page" : undefined}
+                    className={`flex min-h-[44px] items-center rounded-pill px-4 text-[15px] transition-all duration-150 active:scale-[0.97] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore motion-reduce:transition-none ${
+                      active
+                        ? "bg-[#EEFFA9] font-bold text-[#0F4C39]"
+                        : "font-semibold text-[#146047] hover:bg-[#F4FADD] active:brightness-95"
+                    }`}
+                    onClick={() => setMenuOpen(false)}
+                  >
+                    {label}
+                  </Link>
+                </li>
+              );
+            })}
             <li className="mt-1 border-t border-[#D1EF5A] px-3 pt-3">
               <p className="flex items-center gap-2 text-sm font-semibold text-[#146047]">
                 <NavIcon paths={icons.language} />
@@ -610,7 +625,7 @@ export default function MarketingNav() {
                     lang={code}
                     aria-pressed={locale === code}
                     onClick={() => switchLocale(code)}
-                    className={`min-h-[44px] flex-1 rounded-pill px-4 text-[15px] font-semibold text-[#146047] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore ${code === "fa" ? "[font-family:var(--font-persian)]" : "[font-family:var(--font-montserrat)]"} ${locale === code ? "bg-[#EEFFA9] shadow-[inset_0_0_0_1px_#18785A]" : "bg-white shadow-[inset_0_0_0_1px_#D1EF5A]"}`}
+                    className={`min-h-[44px] flex-1 rounded-pill px-4 text-[15px] font-semibold text-[#146047] transition-all duration-150 active:scale-[0.97] active:brightness-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore motion-reduce:transition-none ${code === "fa" ? "[font-family:var(--font-persian)]" : "[font-family:var(--font-montserrat)]"} ${locale === code ? "bg-[#EEFFA9] shadow-[inset_0_0_0_1px_#18785A]" : "bg-white shadow-[inset_0_0_0_1px_#D1EF5A] hover:bg-[#F4FADD]"}`}
                   >
                     {label}
                   </button>
