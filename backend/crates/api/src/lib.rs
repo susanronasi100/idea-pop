@@ -84,8 +84,8 @@ use crate::{
     me::{ClassMissionResponse, MeResponse},
     parent::{
         ChildReportResponse, DisplayModeResponse, ParentApprovalResponse, ParentChildResponse,
-        ParentProjectSummary, ResetChildPinResponse, ResolveApprovalRequest, ResolveApprovalResponse,
-        UpdateDisplayModeRequest,
+        ParentProjectSummary, ResetChildPinResponse, ResolveApprovalRequest,
+        ResolveApprovalResponse, UpdateDisplayModeRequest,
     },
     portfolio::{
         CreateProjectRequest, CreateReportRequest, IdeaListResponse, IdeaResponse,

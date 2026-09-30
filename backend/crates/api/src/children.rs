@@ -204,7 +204,9 @@ pub async fn child_login(
     let Some(row) = row else {
         return Err(unauthorized());
     };
-    let child_id: Uuid = row.try_get("id").map_err(|e| DomainError::Internal(e.to_string()))?;
+    let child_id: Uuid = row
+        .try_get("id")
+        .map_err(|e| DomainError::Internal(e.to_string()))?;
 
     let locked_until: Option<DateTime<Utc>> = row.try_get("pin_locked_until").ok().flatten();
     if let Some(until) = locked_until {
@@ -239,11 +241,13 @@ pub async fn child_login(
         return Err(unauthorized());
     }
 
-    sqlx::query("UPDATE child_profiles SET pin_attempts = 0, pin_locked_until = NULL WHERE id = $1")
-        .bind(child_id)
-        .execute(&state.db)
-        .await
-        .map_err(|e| DomainError::Internal(e.to_string()))?;
+    sqlx::query(
+        "UPDATE child_profiles SET pin_attempts = 0, pin_locked_until = NULL WHERE id = $1",
+    )
+    .bind(child_id)
+    .execute(&state.db)
+    .await
+    .map_err(|e| DomainError::Internal(e.to_string()))?;
 
     let parent_account_id: Uuid = row
         .try_get("parent_account_id")
