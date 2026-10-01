@@ -115,7 +115,7 @@ export default function PersonaCards({ onChosen, onPick }: { onChosen?: () => vo
   ];
 
   /* Pointing at a card swaps it on a computer; on a touch screen, where there is no pointer, pressing it does. */
-  const swap = "transition-opacity duration-500 ease-in-out motion-reduce:transition-none";
+  const swap = "transition-opacity duration-[900ms] ease-in-out motion-reduce:transition-none";
   const heading = "[font-family:var(--font-cherry)] font-normal text-[24px] leading-[1.2] text-[#F3FFC2]";
 
   return (
@@ -129,7 +129,7 @@ export default function PersonaCards({ onChosen, onPick }: { onChosen?: () => vo
           data-persona={c.key}
           data-picked={picked === c.key}
           aria-pressed={pointer ? undefined : picked === c.key}
-          className="group relative h-[158px] w-full max-w-[321px] rounded-[20px] bg-[#4F4F4F] text-start transition-[transform,box-shadow] duration-500 ease-out hover:scale-[1.03] hover:shadow-[0_10px_24px_rgba(0,0,0,0.22)] active:scale-[0.99] active:duration-150 data-[picked=true]:scale-[1.02] data-[picked=true]:shadow-[inset_0_0_0_3px_#D1EF5A,0_6px_14px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#18785A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3FFC2] motion-reduce:transition-none"
+          className="group relative h-[158px] w-full max-w-[321px] rounded-[20px] bg-[#4F4F4F] text-start transition-[transform,box-shadow] duration-[800ms] ease-out hover:scale-[1.03] hover:shadow-[0_10px_24px_rgba(0,0,0,0.22)] active:scale-[0.99] active:duration-150 data-[picked=true]:scale-[1.02] data-[picked=true]:shadow-[inset_0_0_0_3px_#D1EF5A,0_6px_14px_rgba(0,0,0,0.25)] focus-visible:outline-none focus-visible:ring-4 focus-visible:ring-[#18785A] focus-visible:ring-offset-2 focus-visible:ring-offset-[#F3FFC2] motion-reduce:transition-none"
         >
           <Image
             unoptimized
