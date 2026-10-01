@@ -141,14 +141,6 @@ export default function XpInfoDialog({ missionXp, onClose }: XpInfoDialogProps) 
               <li>{t('xp_info_keep')}</li>
               <li>{t('xp_info_once')}</li>
             </ul>
-
-            <button
-              type="button"
-              onClick={onClose}
-              className="rounded-pill bg-challenge py-2.5 font-display text-sm text-white hover:bg-challenge/90 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
-            >
-              {t('xp_info_ok')}
-            </button>
           </div>
         </div>
       </div>
