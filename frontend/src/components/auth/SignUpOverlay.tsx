@@ -11,10 +11,6 @@ import LoginForm from "./LoginForm";
 import ClassLogin from "./ClassLogin";
 import ChildLogin from "./ChildLogin";
 import KidOnboarding from "@/components/onboarding/KidOnboarding";
-import { useFadeSwap } from "@/lib/hooks/useFadeSwap";
-
-/* How long the panel takes to fade away when it closes (matches .signup-backdrop-out). */
-const CLOSE_MS = 400;
 
 /* The way in and out of an account, as an overlay: a link to the persona step, to logging in, or to signing in with
    a class code opens in place instead of loading a page, so a visitor never loses where they were, and every step
@@ -38,13 +34,6 @@ export default function SignUpOverlay() {
   /* Which step is showing. "persona" is the choice of who you are, "login" and "class" the two ways back in, and a
      persona is that path's own steps -- all in this one panel, so the page behind never changes. */
   const [view, setView] = useState<View>("persona");
-  /* While closing, the panel stays on screen to fade out, then goes. */
-  const [closing, setClosing] = useState(false);
-  /* The step on screen trails `view` by one fade: the old step fades out, then the new one fades in. */
-  const { shown, fadeClass, snap } = useFadeSwap(view);
-  /* Read inside the document click handler, which is set up once. */
-  const openRef = useRef(false);
-  openRef.current = open;
   const panelRef = useRef<HTMLDivElement>(null);
   const openerRef = useRef<HTMLElement | null>(null);
   const t = useTranslations("auth.persona_select");
@@ -55,23 +44,12 @@ export default function SignUpOverlay() {
   useEffect(() => setMounted(true), []);
 
   const close = useCallback(() => {
-    setClosing(true);
+    setOpen(false);
+    setView("persona");
     const opener = openerRef.current;
     openerRef.current = null;
     if (opener?.isConnected) opener.focus();
   }, []);
-
-  // Once the fade-out has played, take the overlay away and reset it for next time.
-  useEffect(() => {
-    if (!closing) return;
-    const reduced = window.matchMedia?.("(prefers-reduced-motion: reduce)").matches;
-    const id = window.setTimeout(() => {
-      setOpen(false);
-      setClosing(false);
-      setView("persona");
-    }, reduced ? 0 : CLOSE_MS);
-    return () => window.clearTimeout(id);
-  }, [closing]);
 
   // Catch clicks on any link to one of the pages this overlay stands in for, wherever it is -- including the links
   // inside the panel itself, which is how logging in reaches the persona step and the class code.
@@ -95,15 +73,12 @@ export default function SignUpOverlay() {
       e.stopImmediatePropagation();
       // A link inside the panel only changes the step, so the thing to give focus back to stays the one outside it.
       if (!panelRef.current?.contains(link)) openerRef.current = link;
-      // Opening from closed shows the chosen step at once; inside an open panel the steps fade from one to the next.
-      if (!openRef.current) snap(target);
       setView(target);
-      setClosing(false);
       setOpen(true);
     }
     document.addEventListener("click", onClick, true);
     return () => document.removeEventListener("click", onClick, true);
-  }, [snap]);
+  }, []);
 
   // Each of those steps has its own page; there the overlay would be a copy of what is already on screen.
   useEffect(() => { if (pathname in ENTRIES) setOpen(false); }, [pathname]);
@@ -139,22 +114,22 @@ export default function SignUpOverlay() {
 
   /* Only the three cards need the full width; every other step is a form, so the panel follows the step rather than
      holding a card in the middle of an empty field of lime. */
-  const wide = shown === "persona";
+  const wide = view === "persona";
   /* What a reader hears the dialog called: the heading of whichever step is showing. */
   const label =
-    shown === "login"
+    view === "login"
       ? tLogin("heading")
-      : shown === "child"
+      : view === "child"
         ? tLogin("kid_heading")
-        : shown === "class"
+        : view === "class"
           ? tClass("title")
-          : shown === "persona"
+          : view === "persona"
             ? undefined
-            : t(`${shown}_label`);
+            : t(`${view}_label`);
 
   return createPortal(
     <div
-      className={`fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/45 p-4 py-8 ${closing ? "signup-backdrop-out" : "signup-backdrop-in"}`}
+      className="fixed inset-0 z-[100] flex items-center justify-center overflow-y-auto bg-black/45 p-4 py-8"
       onMouseDown={(e) => { if (e.target === e.currentTarget) close(); }}
     >
       <div
@@ -163,23 +138,20 @@ export default function SignUpOverlay() {
         aria-modal="true"
         {...(wide ? { "aria-labelledby": "sign-up-overlay-heading" } : { "aria-label": label })}
         data-testid="sign-up-overlay"
-        data-step={shown}
+        data-step={view}
         tabIndex={-1}
         /* The cross keeps one margin from the panel's corner on every step. The steps that hold a card of their own
            start below it, so it never sits on top of one. */
-        className={`relative w-full rounded-[32px] bg-[#F3FFC2] px-4 pb-10 shadow-[0_18px_50px_rgba(0,0,0,0.25)] outline-none transition-[max-width,padding] duration-500 ease-out md:px-10 ${wide ? "max-w-[930px] pt-10" : "max-w-[560px] pt-[72px]"} ${closing ? "signup-fade-out" : "signup-fade-in"}`}
+        className={`relative w-full rounded-[32px] bg-[#F3FFC2] px-4 pb-10 shadow-[0_18px_50px_rgba(0,0,0,0.25)] outline-none md:px-10 ${wide ? "max-w-[930px] pt-10" : "max-w-[560px] pt-[72px]"}`}
       >
         {/* The way out is the same on every step: this cross, the backdrop, or Escape. */}
         <CloseButton onClose={close} label={t("close")} />
-        {/* Keyed by step, so each new step plays its fade-in from the start. */}
-        <div key={shown} className={fadeClass}>
-          {shown === "persona" && <SignUpPanel onPick={setView} />}
-          {shown === "kid" && <KidOnboarding onExit={() => setView("persona")} onDone={close} />}
-          {(shown === "parent" || shown === "teacher") && <RegisterForm role={shown} onDone={close} />}
-          {shown === "login" && <LoginForm onDone={close} />}
-          {shown === "class" && <ClassLogin onDone={close} />}
-          {shown === "child" && <ChildLogin onDone={close} />}
-        </div>
+        {view === "persona" && <SignUpPanel onPick={setView} />}
+        {view === "kid" && <KidOnboarding onExit={() => setView("persona")} onDone={close} />}
+        {(view === "parent" || view === "teacher") && <RegisterForm role={view} onDone={close} />}
+        {view === "login" && <LoginForm onDone={close} />}
+        {view === "class" && <ClassLogin onDone={close} />}
+        {view === "child" && <ChildLogin onDone={close} />}
       </div>
     </div>,
     document.body,

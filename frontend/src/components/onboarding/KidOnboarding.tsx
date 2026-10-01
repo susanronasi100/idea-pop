@@ -11,7 +11,6 @@ import { AVATARS } from "@/lib/avatars";
 import { addChild, createChild, fetchMe } from "@/lib/api/client";
 import { getPersona, setPersona } from "@/lib/auth/persona";
 import { btnLime, btnGlassOnCard, tighten } from "@/components/ui/kit";
-import { useFadeSwap } from "@/lib/hooks/useFadeSwap";
 
 const BIRTH_YEARS = Array.from({ length: 17 }, (_, i) => 2022 - i);
 
@@ -37,8 +36,6 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
   const format = useFormatter();
   const router = useRouter();
   const [step, setStep] = useState(1);
-  /* The step on screen trails `step` by one fade: the old one fades out, then the next fades in. */
-  const { shown: shownStep, fadeClass } = useFadeSwap(step);
 
   // A signed-in parent adding a child (dashboard → "Invite your child") vs. a
   // kid self-signing up. Parents skip the parent-email step — we already know
@@ -166,7 +163,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
         style={{ backgroundColor: CARD }}
       >
         <p className="mb-5 text-center font-display text-lg font-bold text-[#CDEB5A]">
-          {format.number(shownStep)} · {stepTitle[shownStep]}
+          {format.number(step)} · {stepTitle[step]}
         </p>
 
         {isParent && (
@@ -176,9 +173,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
         )}
 
         <form onSubmit={handleSubmit(onSubmit)} noValidate>
-          {/* Keyed by step, so each new step plays its fade-in from the start. */}
-          <div key={shownStep} className={fadeClass}>
-          {shownStep === 1 && (
+          {step === 1 && (
             <section data-testid="step-1">
               <Controller
                 name="avatar_id"
@@ -262,7 +257,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
             </section>
           )}
 
-          {shownStep === 2 && (
+          {step === 2 && (
             <section data-testid="step-2" className={askStep}>
               <p className="mb-4 text-center font-body text-sm text-white/60">
                 {t("step_nickname_sub")}
@@ -296,7 +291,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
             </section>
           )}
 
-          {shownStep === 3 && (
+          {step === 3 && (
             <section data-testid="step-3" className={askStep}>
               <p className="mb-4 text-center font-body text-sm text-white/60">
                 {t("step_birth_year_sub")}
@@ -336,7 +331,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
           {/* The four digits that bring them back. A child sets no password, so this is
               the only thing they will need to remember; a grown-up can give them a new
               one if they forget it. */}
-          {shownStep === 4 && (
+          {step === 4 && (
             <section data-testid="step-4" className={askStep}>
               <p className="mb-4 text-center font-body text-sm text-white/60">
                 {t("step_pin_sub")}
@@ -388,7 +383,7 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
             </section>
           )}
 
-          {shownStep === 5 && !isParent && (
+          {step === 5 && !isParent && (
             <section data-testid="step-5" className={askStep}>
               <p className="mb-4 text-center font-body text-sm text-white/60">
                 {t("step_parent_email_sub")}
@@ -426,7 +421,6 @@ export default function KidOnboarding({ onExit, onDone }: { onExit?: () => void;
               </div>
             </section>
           )}
-          </div>
         </form>
 
         {/* progress dots */}
