@@ -275,3 +275,16 @@ html {
 .celebrate-bob { animation: celebrate-bob 2.6s ease-in-out infinite; }
 .celebrate-fall { animation: celebrate-fall 2.8s ease-in infinite; }
 .celebrate-twinkle { animation: celebrate-twinkle 1.6s ease-in-out infinite; }
+
+/* Popi floats in the air wherever he appears; the sound bars bounce while he talks.
+   The prefers-reduced-motion rule above collapses both. */
+@keyframes popi-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+@keyframes popi-bar {
+  0%, 100% { transform: scaleY(0.4); }
+  50% { transform: scaleY(1); }
+}
+.popi-float { animation: popi-float 3s ease-in-out infinite; }
+.popi-bar { animation: popi-bar 0.6s ease-in-out infinite; transform-origin: bottom; }

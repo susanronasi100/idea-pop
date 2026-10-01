@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { Link } from '@/i18n/routing';
+import PopiAvatar from '@/components/PopiAvatar';
 
 export default function NotFound() {
   const t = useTranslations('not_found');
@@ -11,9 +12,7 @@ export default function NotFound() {
       data-testid="not-found"
       className="flex min-h-screen flex-col items-center justify-center gap-5 bg-tint-blush px-6 py-16 text-center font-body"
     >
-      <span className="text-7xl" aria-hidden="true">
-        🐧
-      </span>
+      <PopiAvatar size={120} />
       <h1 className="font-display text-3xl font-bold text-ink sm:text-4xl">{t('title')}</h1>
       <p className="max-w-md text-base text-ink/70">{t('body')}</p>
       <Link

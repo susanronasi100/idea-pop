@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { askMissionHelper } from '@/lib/api/client';
+import PopiAvatar from '@/components/PopiAvatar';
 
 interface MissionHelperProps {
   challengeId: string;
@@ -73,13 +74,8 @@ export default function MissionHelper({
         className="flex w-full items-center justify-between bg-tint-lavender px-4 py-3 font-display text-sm text-ink transition-colors hover:bg-tint-lavender-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
       >
         <span className="flex items-center gap-2">
-          {/* Same penguin as the floating Ask-Me mascot — Popi is ONE character. */}
-          <span
-            className="flex h-8 w-8 shrink-0 items-center justify-center rounded-full bg-challenge text-lg"
-            aria-hidden="true"
-          >
-            🐧
-          </span>
+          {/* Same robot as the floating Ask-Me mascot — Popi is ONE character. */}
+          <PopiAvatar size={36} className="shrink-0" />
           {t('toggle')}
         </span>
         <span
@@ -134,7 +130,7 @@ export default function MissionHelper({
 
           {phase === 'answered' && (
             <div data-testid="helper-answer" className="rounded-card bg-tint-blue p-3">
-              <p className="font-display text-xs font-bold text-ink/60">🐧 {t('answer_label')}</p>
+              <p className="font-display text-xs font-bold text-ink/60">🤖 {t('answer_label')}</p>
               <p className="mt-1 font-body text-sm text-ink">{answer}</p>
             </div>
           )}

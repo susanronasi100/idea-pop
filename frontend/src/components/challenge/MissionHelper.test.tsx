@@ -91,7 +91,7 @@ describe('MissionHelper', () => {
     await waitFor(() => expect(mockAsk).not.toHaveBeenCalled());
   });
 
-  it('speaks as Popi — the toggle and answers carry the penguin persona', async () => {
+  it('speaks as Popi — the toggle and answers carry the Popi persona', async () => {
     mockAsk.mockResolvedValue({ answer: 'Try a wider base!', blocked: false });
     renderHelper();
     expect(screen.getByTestId('helper-toggle')).toHaveTextContent('Ask Popi');

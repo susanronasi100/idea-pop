@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import MissionHelper from './MissionHelper';
+import PopiAvatar from '@/components/PopiAvatar';
 
 // Dark-launch flag for the scoped AI helper (server enforces the real gates).
 const HELPER_ON = process.env.NEXT_PUBLIC_MISSION_HELPER === 'true';
@@ -211,7 +212,7 @@ export default function CaptureCard({
           }}
           className="flex w-full items-center gap-2 rounded-card bg-tint-lavender p-3 font-body text-sm text-ink/60 transition-colors hover:bg-tint-lavender-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
         >
-          <span aria-hidden="true">🐧</span>
+          <PopiAvatar size={28} />
           <span>{t('brainstorm_popi')}</span>
         </button>
         {showPopi &&

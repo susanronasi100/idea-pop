@@ -5,6 +5,7 @@ import { useTranslations, useFormatter } from 'next-intl';
 import { Link } from '@/i18n/routing';
 import { Button } from '@/components/ui/Button';
 import { fetchClassMission } from '@/lib/api/client';
+import PopiAvatar from '@/components/PopiAvatar';
 
 // ─── ParentHandoffModal ───────────────────────────────────────────────────────
 // Safety rule: kids MUST see this modal when tapping any paid-plan CTA.
@@ -102,7 +103,7 @@ export default function KidDashboardPage() {
       <div className="px-4 pb-12">
         {/* ── XP / level strip ──────────────────────────────────────── */}
         <div className="flex items-center gap-3 mt-6 mb-8">
-          <span className="text-3xl" aria-hidden="true">🐧</span>
+          <PopiAvatar size={52} />
           <div>
             <p className="font-display font-bold text-ink text-lg leading-none">
               {t('welcome', { nickname: displayName })}

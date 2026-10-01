@@ -2,6 +2,7 @@
 
 import { useEffect } from 'react';
 import { useTranslations } from 'next-intl';
+import PopiAvatar from '@/components/PopiAvatar';
 
 /** Which "how this works" blurb to show — chosen from the current route. */
 export type HelpSection =
@@ -59,9 +60,7 @@ export default function HelpPanel({ section, onClose }: HelpPanelProps) {
       >
         <div className="flex items-start justify-between gap-3">
           <div className="flex items-center gap-2">
-            <span className="text-3xl" aria-hidden="true">
-              🐧
-            </span>
+            <PopiAvatar size={48} />
             <h2 className="font-display text-lg font-bold text-ink">{t('title')}</h2>
           </div>
           <button

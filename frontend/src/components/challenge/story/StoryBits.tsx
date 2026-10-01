@@ -2,7 +2,9 @@
 
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import PopiAvatar from '@/components/PopiAvatar';
+import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
 import type { MissionStory } from './types';
 
 /**
@@ -11,17 +13,40 @@ import type { MissionStory } from './types';
  */
 export function Popi({ text, label }: { text: string; label?: string }) {
   const t = useTranslations('story');
+  const locale = useLocale();
+  const voice = usePopiVoice(locale);
   return (
     <div data-testid="story-popi" className="flex items-end gap-3">
-      <span
-        aria-hidden="true"
-        className="story-bob flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-challenge text-3xl shadow-[0_4px_10px_rgba(26,111,166,0.3)]"
-      >
-        🐧
-      </span>
-      <div className="rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
-        <p className="font-display text-xs text-challenge">{label ?? t('popi_says')}</p>
-        <p className="font-body text-sm font-medium text-ink sm:text-base">{text}</p>
+      <PopiAvatar size={84} className="shrink-0" />
+      <div className="flex flex-1 items-center gap-3 rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
+        <div className="min-w-0 flex-1">
+          <p className="flex items-center gap-2 font-display text-xs text-challenge">
+            {label ?? t('popi_says')}
+            {voice.speaking && (
+              <span aria-hidden="true" className="inline-flex h-3 items-end gap-[2px]">
+                {[0, 0.15, 0.3, 0.1, 0.25].map((d, i) => (
+                  <span
+                    key={i}
+                    className="popi-bar block h-3 w-[3px] rounded bg-challenge"
+                    style={{ animationDelay: `${d}s` }}
+                  />
+                ))}
+              </span>
+            )}
+          </p>
+          <p className="font-body text-sm font-medium text-ink sm:text-base">{text}</p>
+        </div>
+        {voice.available && (
+          <button
+            type="button"
+            data-testid="popi-speak"
+            aria-label={voice.speaking ? t('popi_stop') : t('popi_listen')}
+            onClick={() => (voice.speaking ? voice.stop() : voice.speak(text))}
+            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-challenge text-base text-white shadow-[0_2px_6px_rgba(45,156,219,0.4)] transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          >
+            <span aria-hidden="true">{voice.speaking ? '⏹' : '🔊'}</span>
+          </button>
+        )}
       </div>
     </div>
   );
@@ -46,10 +71,7 @@ export function Character3D({
   className?: string;
 }) {
   return (
-    <span
-      className={`story-hop-in relative inline-flex flex-col items-center ${className}`}
-      style={{ width: size }}
-    >
+    <span className={`story-hop-in relative inline-flex flex-col items-center ${className}`} style={{ width: size }}>
       <span className="story-float block" style={{ width: size, height: size }}>
         {src ? (
           <Image
@@ -60,7 +82,12 @@ export function Character3D({
             className="h-full w-full object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.15)]"
           />
         ) : (
-          <span role="img" aria-label={alt} className="flex h-full w-full items-center justify-center" style={{ fontSize: size * 0.55 }}>
+          <span
+            role="img"
+            aria-label={alt}
+            className="flex h-full w-full items-center justify-center"
+            style={{ fontSize: size * 0.55 }}
+          >
             {emoji}
           </span>
         )}
@@ -93,7 +120,14 @@ export function SceneStage({
       } ${story.scene_image ? 'bg-white' : 'bg-gradient-to-b from-tint-blue via-tint-cream to-tint-lime'}`}
     >
       {story.scene_image ? (
-        <Image src={story.scene_image} alt="" fill sizes="(max-width: 768px) 100vw, 640px" className="object-cover" priority={priority} />
+        <Image
+          src={story.scene_image}
+          alt=""
+          fill
+          sizes="(max-width: 768px) 100vw, 640px"
+          className="object-cover"
+          priority={priority}
+        />
       ) : (
         <span aria-hidden="true" className="pointer-events-none absolute inset-0">
           <span className="story-float absolute left-[12%] top-6 block h-16 w-16 rounded-full bg-white/60" />
@@ -102,13 +136,7 @@ export function SceneStage({
           <span className="absolute bottom-0 left-0 right-0 block h-10 bg-white/40" />
         </span>
       )}
-      <Character3D
-        src={story.hero.image}
-        emoji={story.hero.emoji}
-        alt={alt}
-        size={170}
-        className="relative z-10 m-3"
-      />
+      <Character3D src={story.hero.image} emoji={story.hero.emoji} alt={alt} size={170} className="relative z-10 m-3" />
     </div>
   );
 }
@@ -135,7 +163,12 @@ export function Confetti({ pieces = 70 }: { pieces?: number }) {
         <i
           key={i}
           className="story-confetti-piece"
-          style={{ left: `${b.left}%`, background: b.color, animationDuration: `${b.dur}s`, animationDelay: `${b.delay}s` }}
+          style={{
+            left: `${b.left}%`,
+            background: b.color,
+            animationDuration: `${b.dur}s`,
+            animationDelay: `${b.delay}s`,
+          }}
         />
       ))}
     </div>

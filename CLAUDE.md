@@ -37,7 +37,7 @@ packages/api-types, .github/workflows, docs/.
 - Section colors (chameleon nav): Explore green, Library #F2994A, Challenge #2D9CDB, Pricing purple.
 - Pastel page tints: #F3FFC2 lime, #FBF7D5 cream, #C0F0FF blue, #F1D8FB lavender, #F9DED7 blush.
 - One button system (primary/secondary/tertiary) with default/hover/focus/pressed/disabled. One input anatomy.
-- One mascot: the PENGUIN — "Ask Me" in the app, "Hi, I'm Idea Pop!" on marketing. ("Poppy" is only the
+- One mascot: POPI, a small floating robot (frontend/public/popi/popi.png) — "Ask Me" in the app, "Hi, I'm Idea Pop!" on marketing. ("Poppy" is only the
   TTS narrator-voice identity from the Voice Bible, not a visual character.) One icon set. Tablet-first, WCAG AA.
 - Edition-2 UI notes: app shell = persistent LEFT SIDEBAR (My profile · Exploring · Library · Challenges) +
   content area in per-section tint + top-right IDEA POP logo (tree-in-a-bulb badge) + a floating "Ask Me"

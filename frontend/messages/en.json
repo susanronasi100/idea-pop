@@ -1479,6 +1479,8 @@
   },
   "story": {
     "popi_says": "Popi says",
+    "popi_listen": "Listen to Popi",
+    "popi_stop": "Stop",
     "popi_power_up": "Popi · Idea power-up",
     "popi_tip": "Popi tip",
     "popi_ending": "Popi tells the ending",
