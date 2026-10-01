@@ -259,7 +259,7 @@ html {
   from { opacity: 1; }
   to { opacity: 0; }
 }
-.signup-fade-in { animation: signup-fade-in 600ms cubic-bezier(0.22, 1, 0.36, 1) both; }
-.signup-fade-out { animation: signup-fade-out 350ms ease-in both; }
-.signup-backdrop-in { animation: signup-backdrop-in 500ms ease-out both; }
-.signup-backdrop-out { animation: signup-backdrop-out 400ms ease-in both; }
+.signup-fade-in { animation: signup-fade-in 850ms cubic-bezier(0.22, 1, 0.36, 1) both; }
+.signup-fade-out { animation: signup-fade-out 450ms ease-in both; }
+.signup-backdrop-in { animation: signup-backdrop-in 600ms ease-out both; }
+.signup-backdrop-out { animation: signup-backdrop-out 450ms ease-in both; }

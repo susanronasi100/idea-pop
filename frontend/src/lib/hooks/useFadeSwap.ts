@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 /** How long a step takes to fade out before the next one replaces it (matches .signup-fade-out). */
-export const FADE_OUT_MS = 350;
+export const FADE_OUT_MS = 450;
 
 function prefersReducedMotion(): boolean {
   return typeof window !== 'undefined' && window.matchMedia?.('(prefers-reduced-motion: reduce)').matches;

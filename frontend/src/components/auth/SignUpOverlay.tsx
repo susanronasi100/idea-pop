@@ -14,7 +14,7 @@ import KidOnboarding from "@/components/onboarding/KidOnboarding";
 import { useFadeSwap } from "@/lib/hooks/useFadeSwap";
 
 /* How long the panel takes to fade away when it closes (matches .signup-backdrop-out). */
-const CLOSE_MS = 400;
+const CLOSE_MS = 450;
 
 /* The way in and out of an account, as an overlay: a link to the persona step, to logging in, or to signing in with
    a class code opens in place instead of loading a page, so a visitor never loses where they were, and every step
