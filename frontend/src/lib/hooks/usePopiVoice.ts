@@ -42,14 +42,18 @@ export function usePopiVoice(locale: string) {
     if (typeof window === 'undefined' || !('speechSynthesis' in window)) return;
     const synth = window.speechSynthesis;
     const pick = () => {
-      const voices = synth.getVoices().filter((v) => v.lang.toLowerCase().startsWith(lang));
-      // Neural voices first (Edge "Natural"/"Online", then Google's), then voices known to
-      // sound warm for storytelling, then anything else for the language.
+      const all = synth.getVoices().filter((v) => v.lang.toLowerCase().startsWith(lang));
+      // Popi speaks English with an American accent: use US voices when the browser has any.
+      const us = all.filter((v) => v.lang.toLowerCase().replace('_', '-') === 'en-us');
+      const voices = lang === 'en' && us.length ? us : all;
+      // Popi is a boy: male voices first, then neural ones (Edge "Natural"/"Online",
+      // then Google's), then anything else for the language.
+      const MALE = /(guy|davis|andrew|christopher|eric|roger|brian|steffan|tony|jason|david|mark|male|farid)/i;
       const rank = (v: SpeechSynthesisVoice) => {
         const n = v.name;
+        const male = MALE.test(n) && !/female/i.test(n) ? 0 : 10;
         const tier = /natural/i.test(n) ? 0 : /online/i.test(n) ? 1 : /google/i.test(n) ? 2 : 3;
-        const warm = /(aria|jenny|ana|sonia|libby|zira|samantha|female|dilara|farid)/i.test(n) ? 0 : 0.5;
-        return tier + warm;
+        return male + tier;
       };
       setVoice([...voices].sort((a, b) => rank(a) - rank(b))[0] ?? null);
     };
