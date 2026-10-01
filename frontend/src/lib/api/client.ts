@@ -411,6 +411,15 @@ export async function fetchProgressSummary() {
   return data;
 }
 
+/** +5 XP, once per mission, for defining its problem with the 5W1H questions. */
+export async function claimDefineBonus(challengeId: string) {
+  const { data, error } = await apiClient.POST("/api/challenges/{id}/define-bonus", {
+    params: { path: { id: challengeId } },
+  });
+  if (error) throw new Error("Failed to claim the bonus");
+  return data;
+}
+
 export async function fetchKidProgress() {
   const { data, error } = await apiClient.GET("/api/me/progress");
   if (error) throw new Error("Failed to load progress");

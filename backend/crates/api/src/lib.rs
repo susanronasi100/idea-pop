@@ -247,7 +247,7 @@ pub struct CreateHealthLogRequest {
         challenges::list_challenges, challenges::get_challenge,
         help::ask_helper, help::parent_help_messages,
         help::teacher_help_messages, help::set_helper_enabled,
-        progress::post_video_view, progress::post_lesson_complete,
+        progress::post_video_view, progress::post_lesson_complete, progress::post_define_bonus,
         progress::start_attempt, progress::advance_step,
         progress::get_me_progress,
         portfolio::create_project, portfolio::list_my_projects,
@@ -612,6 +612,10 @@ pub fn router_with_metrics(
         .route("/teacher/help-messages", get(help::teacher_help_messages))
         // Progress (kid-scoped tokens only — child_id derived from JWT)
         .route("/progress/video-view", post(progress::post_video_view))
+        .route(
+            "/challenges/:id/define-bonus",
+            post(progress::post_define_bonus),
+        )
         .route(
             "/progress/lesson-complete",
             post(progress::post_lesson_complete),

@@ -11,7 +11,7 @@ interface Props {
   update: (patch: Partial<MissionGame>) => void;
 }
 
-const BADGES: BadgeKey[] = ['clue', 'tool', 'retry'];
+const BADGES: BadgeKey[] = ['define', 'clue', 'tool', 'retry'];
 
 /** Story top for step 8 — "And ever since then…": the hero in the scene,
  *  confetti, the mission sticker, the bonus badges and a one-tap reflection.

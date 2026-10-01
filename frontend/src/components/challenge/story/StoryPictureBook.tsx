@@ -3,6 +3,8 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Popi } from './StoryBits';
+import DefineCelebration from './DefineCelebration';
+import { claimDefineBonus } from '@/lib/api/client';
 import type { MissionStory } from './types';
 
 type Page = MissionStory['opening'][number];
@@ -14,6 +16,11 @@ interface Props {
   define: Define | null;
   answers: Record<string, string>;
   onAnswer: (key: string, value: string) => void;
+  /** The mission, for claiming the 5W1H bonus XP. */
+  challengeId: string;
+  /** True once the 5W1H badge has been earned, so the celebration plays only once. */
+  celebrated: boolean;
+  onCelebrated: () => void;
   onDone: () => void;
 }
 
@@ -23,7 +30,16 @@ interface Props {
    Persian, so neither do the things placed on it. */
 
 /** Step 1 as a picture book: one illustrated opening page at a time, with Back and Next. */
-export default function StoryPictureBook({ pages, define, answers, onAnswer, onDone }: Props) {
+export default function StoryPictureBook({
+  pages,
+  define,
+  answers,
+  onAnswer,
+  challengeId,
+  celebrated,
+  onCelebrated,
+  onDone,
+}: Props) {
   const t = useTranslations('story');
   const [index, setIndex] = useState(0);
   const page = pages[index];
@@ -40,6 +56,20 @@ export default function StoryPictureBook({ pages, define, answers, onAnswer, onD
     ro.observe(el);
     return () => ro.disconnect();
   }, []);
+  // The celebration plays once, the first time every 5W1H box has an answer: when the kid
+  // leaves the last box, or presses Next. XP comes from the server, once per mission.
+  const [celebration, setCelebration] = useState<{ xp: number } | null>(null);
+  const allAnswered = !!define && define.prompts.every((p) => (answers[p.key] ?? '').trim().length >= 2);
+  function maybeCelebrate(): boolean {
+    if (!allAnswered || celebrated || celebration) return false;
+    setCelebration({ xp: 0 });
+    onCelebrated();
+    claimDefineBonus(challengeId)
+      .then((r) => setCelebration((c) => (c ? { xp: r?.xp_earned ?? 0 } : c)))
+      .catch(() => {});
+    return true;
+  }
+
   const u = (pct: number) => `${(width * pct) / 100}px`;
 
   // Load every page's picture up front, so Next shows the next one at once.
@@ -103,10 +133,16 @@ export default function StoryPictureBook({ pages, define, answers, onAnswer, onD
 
             {page.thought && (
               <div className="absolute left-[58.5%] top-[19.5%] w-[23%] font-body text-[#1B3A6B]">
-                <p className="font-semibold leading-[1.35]" style={{ fontSize: u(page.thought.big.length > 36 ? 1.9 : 2.4) }}>
+                <p
+                  className="font-semibold leading-[1.35]"
+                  style={{ fontSize: u(page.thought.big.length > 36 ? 1.9 : 2.4) }}
+                >
                   {page.thought.big}
                 </p>
-                <p className="font-medium leading-[1.35]" style={{ marginTop: u(1), fontSize: u(page.thought.small.length > 40 ? 1.45 : 1.75) }}>
+                <p
+                  className="font-medium leading-[1.35]"
+                  style={{ marginTop: u(1), fontSize: u(page.thought.small.length > 40 ? 1.45 : 1.75) }}
+                >
                   {page.thought.small}
                 </p>
               </div>
@@ -129,7 +165,10 @@ export default function StoryPictureBook({ pages, define, answers, onAnswer, onD
         )}
       </div>
 
-      {last && define && <DefineProblemCard define={define} answers={answers} onAnswer={onAnswer} />}
+      {last && define && (
+        <DefineProblemCard define={define} answers={answers} onAnswer={onAnswer} onLeave={maybeCelebrate} />
+      )}
+      {celebration && <DefineCelebration xp={celebration.xp} onClose={() => setCelebration(null)} />}
 
       <div className="flex items-center justify-between">
         {index > 0 ? (
@@ -147,7 +186,10 @@ export default function StoryPictureBook({ pages, define, answers, onAnswer, onD
         <button
           type="button"
           data-testid="story-page-next"
-          onClick={() => (last ? onDone() : setIndex((i) => i + 1))}
+          onClick={() => {
+            if (!last) setIndex((i) => i + 1);
+            else if (!maybeCelebrate()) onDone();
+          }}
           className="rounded-pill bg-challenge px-5 py-2 font-body text-sm font-bold text-white transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
         >
           {t('page_next')}
@@ -162,10 +204,13 @@ function DefineProblemCard({
   define,
   answers,
   onAnswer,
+  onLeave,
 }: {
   define: Define;
   answers: Record<string, string>;
   onAnswer: (key: string, value: string) => void;
+  /** Called when the kid leaves a box, to check whether every box is now answered. */
+  onLeave: () => void;
 }) {
   return (
     <div data-testid="define-problem" className="story-rise flex flex-col gap-4">
@@ -205,6 +250,7 @@ function DefineProblemCard({
                   type="text"
                   value={answers[p.key] ?? ''}
                   onChange={(e) => onAnswer(p.key, e.target.value)}
+                  onBlur={onLeave}
                   placeholder={p.example}
                   maxLength={120}
                   dir="auto"

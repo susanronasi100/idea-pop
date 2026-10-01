@@ -13,6 +13,8 @@ pub const XP_EXPLORE: i16 = 5;
 pub const XP_LEARN: i16 = 10;
 pub const XP_SOLVE: i16 = 20;
 pub const XP_CYCLE_BONUS: i16 = 15;
+/// Defining a mission's problem with the 5W1H questions (once per mission).
+pub const XP_DEFINE_BONUS: i16 = 5;
 
 // ── XP source type ────────────────────────────────────────────────────────────
 
@@ -23,6 +25,7 @@ pub enum XpSourceType {
     Learn,
     Solve,
     CycleBonus,
+    DefineBonus,
 }
 
 impl XpSourceType {
@@ -32,6 +35,7 @@ impl XpSourceType {
             XpSourceType::Learn => "learn",
             XpSourceType::Solve => "solve",
             XpSourceType::CycleBonus => "cycle_bonus",
+            XpSourceType::DefineBonus => "define_bonus",
         }
     }
 
@@ -41,6 +45,7 @@ impl XpSourceType {
             "learn" => Some(XpSourceType::Learn),
             "solve" => Some(XpSourceType::Solve),
             "cycle_bonus" => Some(XpSourceType::CycleBonus),
+            "define_bonus" => Some(XpSourceType::DefineBonus),
             _ => None,
         }
     }
@@ -51,6 +56,7 @@ impl XpSourceType {
             XpSourceType::Learn => XP_LEARN,
             XpSourceType::Solve => XP_SOLVE,
             XpSourceType::CycleBonus => XP_CYCLE_BONUS,
+            XpSourceType::DefineBonus => XP_DEFINE_BONUS,
         }
     }
 }
@@ -136,6 +142,30 @@ pub fn award_solve(
         source_type: XpSourceType::Solve,
         source_id: challenge_id,
         amount: XP_SOLVE,
+        created_at: now,
+    })
+}
+
+/// Award +5 XP the first time a kid defines a mission's problem with the 5W1H
+/// questions. Returns None if already awarded for this mission (idempotent).
+pub fn award_define_bonus(
+    child_id: Uuid,
+    challenge_id: Uuid,
+    now: DateTime<Utc>,
+    existing: &[XpEvent],
+) -> Option<XpEvent> {
+    if existing
+        .iter()
+        .any(|e| e.source_type == XpSourceType::DefineBonus && e.source_id == challenge_id)
+    {
+        return None;
+    }
+    Some(XpEvent {
+        id: Uuid::new_v4(),
+        child_id,
+        source_type: XpSourceType::DefineBonus,
+        source_id: challenge_id,
+        amount: XP_DEFINE_BONUS,
         created_at: now,
     })
 }
@@ -621,6 +651,21 @@ mod tests {
             second.is_none(),
             "completing same challenge twice must not re-award XP"
         );
+    }
+
+    #[test]
+    fn award_define_bonus_once_per_mission() {
+        let child_id = Uuid::new_v4();
+        let chal_id = Uuid::new_v4();
+        let now = Utc::now();
+
+        let first =
+            award_define_bonus(child_id, chal_id, now, &[]).expect("first definition awards XP");
+        assert_eq!(first.amount, XP_DEFINE_BONUS);
+        assert_eq!(first.source_type.as_str(), "define_bonus");
+        assert!(award_define_bonus(child_id, chal_id, now, &[first.clone()]).is_none());
+        // A different mission earns its own bonus.
+        assert!(award_define_bonus(child_id, Uuid::new_v4(), now, &[first]).is_some());
     }
 
     #[test]

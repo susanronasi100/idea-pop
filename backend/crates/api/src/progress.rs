@@ -19,9 +19,9 @@ use uuid::Uuid;
 
 use idea_pop_domain::{
     progress::{
-        award_cycle_bonus, evaluate_new_badges, level_from_xp, medal_from_count, rank_from_level,
-        xp_total, AnalyticsEvent, AnalyticsEventKind, AttemptStatus, ChallengeAttempt,
-        CycleActivityResult, XpEvent, XpSourceType,
+        award_cycle_bonus, award_define_bonus, evaluate_new_badges, level_from_xp,
+        medal_from_count, rank_from_level, xp_total, AnalyticsEvent, AnalyticsEventKind,
+        AttemptStatus, ChallengeAttempt, CycleActivityResult, XpEvent, XpSourceType,
     },
     DomainError,
 };
@@ -255,6 +255,57 @@ pub async fn post_video_view(
         rank: rank.as_str().to_owned(),
         is_new,
         cycle_bonus_earned,
+    }))
+}
+
+// ── POST /challenges/{id}/define-bonus ───────────────────────────────────────
+
+/// +5 XP, once per mission, when the kid has defined the mission's problem with
+/// the 5W1H questions. The answers themselves stay on the kid's device; only the
+/// fact of finishing is recorded.
+#[utoipa::path(
+    post, path = "/challenges/{id}/define-bonus", tag = "progress",
+    params(("id" = Uuid, Path, description = "Challenge UUID")),
+    responses(
+        (status = 200, description = "XP awarded (or 0 if already awarded)", body = XpAwardResponse),
+        (status = 403, description = "Non-kid token rejected", body = crate::ProblemDetail),
+        (status = 404, description = "Challenge not found", body = crate::ProblemDetail),
+    )
+)]
+pub async fn post_define_bonus(
+    KidAuth { child_id, .. }: KidAuth,
+    State(state): State<AppState>,
+    Path(challenge_id): Path<Uuid>,
+) -> Result<Json<XpAwardResponse>, ApiError> {
+    if state.challenge.find_by_id(challenge_id).await?.is_none() {
+        return Err(ApiError::Domain(idea_pop_domain::DomainError::NotFound));
+    }
+    let g = &state.gamification;
+    let now = Utc::now();
+
+    let events = g.xp.list_events(child_id).await?;
+    let award = award_define_bonus(child_id, challenge_id, now, &events);
+    let is_new = award.is_some();
+    let mut xp_earned: i16 = 0;
+    if let Some(event) = award {
+        g.xp.append_event(&event).await?;
+        xp_earned = event.amount;
+    }
+
+    let events = g.xp.list_events(child_id).await?;
+    let total = xp_total(&events);
+    let level = level_from_xp(total);
+    let rank = rank_from_level(level);
+    g.xp.upsert_progress(child_id, total, level, rank.as_str())
+        .await?;
+
+    Ok(Json(XpAwardResponse {
+        xp_earned,
+        xp_total: total,
+        level,
+        rank: rank.as_str().to_owned(),
+        is_new,
+        cycle_bonus_earned: false,
     }))
 }
 
