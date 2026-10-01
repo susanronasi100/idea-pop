@@ -103,10 +103,10 @@ export default function StoryPictureBook({ pages, define, answers, onAnswer, onD
 
             {page.thought && (
               <div className="absolute left-[58.5%] top-[19.5%] w-[23%] font-body text-[#1B3A6B]">
-                <p className="font-semibold leading-[1.35]" style={{ fontSize: u(2.4) }}>
+                <p className="font-semibold leading-[1.35]" style={{ fontSize: u(page.thought.big.length > 36 ? 1.9 : 2.4) }}>
                   {page.thought.big}
                 </p>
-                <p className="font-medium leading-[1.35]" style={{ marginTop: u(1), fontSize: u(1.75) }}>
+                <p className="font-medium leading-[1.35]" style={{ marginTop: u(1), fontSize: u(page.thought.small.length > 40 ? 1.45 : 1.75) }}>
                   {page.thought.small}
                 </p>
               </div>
