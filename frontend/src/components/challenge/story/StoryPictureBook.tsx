@@ -1,7 +1,9 @@
 'use client';
 
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
+import { joinSegments } from '@/lib/narration';
 import { Popi } from './StoryBits';
 import DefineCelebration from './DefineCelebration';
 import { claimDefineBonus } from '@/lib/api/client';
@@ -41,9 +43,13 @@ export default function StoryPictureBook({
   onDone,
 }: Props) {
   const t = useTranslations('story');
+  const voice = usePopiVoice(useLocale());
   const [index, setIndex] = useState(0);
   const page = pages[index];
   const last = index === pages.length - 1;
+  // Turning the page ends the narration of the page before.
+  const { stop } = voice;
+  useEffect(() => stop, [index, stop]);
 
   // The picture's width in px; every size on it is a share of this (u(4) = 4% of the width).
   const frameRef = useRef<HTMLDivElement>(null);
@@ -182,6 +188,21 @@ export default function StoryPictureBook({
           </button>
         ) : (
           <span />
+        )}
+        {voice.available && (
+          <button
+            type="button"
+            data-testid="story-page-listen"
+            aria-label={voice.speaking ? t('popi_stop') : t('listen_story')}
+            onClick={() =>
+              voice.speaking
+                ? voice.stop()
+                : voice.speak(joinSegments([page.beat, page.text, page.thought?.big, page.thought?.small]))
+            }
+            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-challenge shadow-[0_2px_6px_rgba(45,156,219,0.3)] transition-all hover:bg-challenge/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          >
+            <span aria-hidden="true">{voice.speaking ? '⏹' : '🔊'}</span>
+          </button>
         )}
         <button
           type="button"
