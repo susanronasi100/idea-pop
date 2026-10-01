@@ -792,7 +792,6 @@
     "xp_info_keep": "Your XP is never taken away.",
     "xp_info_once": "You earn XP for each video, lesson or challenge only the first time.",
     "xp_info_ok": "Got it!",
-    "hud_step_label": "Step {step, number} of 8",
     "hud_menu_close_aria": "Close mission menu"
   },
   "ideas_wall": {

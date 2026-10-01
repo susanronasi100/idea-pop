@@ -135,11 +135,11 @@ describe('MissionHUD', () => {
     expect(screen.queryByTestId('mission-key-info')).not.toBeInTheDocument();
   });
 
-  it('says which page we are on under the circles', () => {
+  it('names the current step under the circles, as the menu does', () => {
     renderHUD({ currentStep: 3, reachedSteps: new Set([1, 2, 3]) });
 
-    expect(screen.getByTestId('progress-label')).toHaveTextContent('Step 3 of 8');
-    expect(screen.getByTestId('progress-label')).not.toHaveTextContent('Nature clues');
+    expect(screen.getByTestId('progress-label')).toHaveTextContent('Nature clues');
+    expect(screen.getByTestId('progress-label')).not.toHaveTextContent('Step 3 of 8');
   });
 
   it('marks the current menu item without an arrow', () => {

@@ -127,7 +127,8 @@ export default function MissionHUD({
       ) : null}
 
       {/* Progress: all eight steps. Current = highlighted, visited = dark,
-          not yet unlocked = hollow ring. */}
+          not yet unlocked = hollow ring. Under them, the current step's name,
+          the same name the menu uses. */}
       <div className="flex items-center justify-center gap-1.5 bg-white px-4 pb-2.5 pt-1">
         {ALL_STEPS.map((step) => {
           const isCurrent = step === currentStep;
@@ -163,7 +164,7 @@ export default function MissionHUD({
         aria-live="polite"
         className="bg-white px-4 pb-2.5 text-center font-body text-sm font-semibold text-challenge"
       >
-        {t('hud_step_label', { step: currentStep })}
+        {t(`step_name_${currentStep}`)}
       </p>
 
       {xpOpen && (
