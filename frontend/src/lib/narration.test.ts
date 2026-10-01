@@ -8,8 +8,8 @@ describe('planNarration', () => {
     );
     expect(plan.map((p) => p.text)).toEqual([
       'Once upon a time…',
-      'There was a boy called Max',
-      'who lived in a small village at the edge of a thick jungle.',
+      'There was a boy called Max who lived in a small village',
+      'at the edge of a thick jungle.',
     ]);
     expect(plan[0].pauseAfter).toBeGreaterThan(400); // a rest before what comes next
     expect(plan[1].pauseAfter).toBeLessThan(200); // only a quiet breath mid-sentence
