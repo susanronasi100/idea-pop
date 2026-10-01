@@ -639,6 +639,7 @@
     "section_inspire_aria": "الهام بگیر",
     "section_cta_aria": "آیدیا پاپ را امتحان کن",
     "hud_menu_aria": "منوی مأموریت",
+    "hud_menu_title": "مراحل مأموریت",
     "hud_xp": "+{xp, number} XP",
     "hud_step_aria": "قدم {step}{state, select, current { (فعلی)} done { (انجام شد)} locked { (قفل)} other {}}",
     "step_name_1": "شرح مأموریت",

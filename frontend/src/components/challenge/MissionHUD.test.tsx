@@ -156,8 +156,8 @@ describe('MissionHUD', () => {
     renderHUD();
 
     fireEvent.click(screen.getByTestId('mission-menu-button'));
-    expect(screen.getByRole('button', { name: 'Close mission menu' })).toBeInTheDocument();
-    fireEvent.click(screen.getByTestId('mission-menu-button'));
+    expect(screen.getByTestId('mission-menu-button')).toHaveTextContent('☰');
+    fireEvent.click(screen.getByRole('button', { name: 'Close mission menu' }));
     expect(screen.queryByTestId('mission-menu')).not.toBeInTheDocument();
 
     fireEvent.click(screen.getByTestId('mission-menu-button'));

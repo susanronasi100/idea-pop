@@ -760,6 +760,7 @@
     "section_inspire_aria": "Get inspired",
     "section_cta_aria": "Try Idea Pop",
     "hud_menu_aria": "Mission menu",
+    "hud_menu_title": "Mission steps",
     "hud_xp": "+{xp, number} XP",
     "hud_step_aria": "Step {step}{state, select, current { (current)} done { (done)} locked { (locked)} other {}}",
     "step_name_1": "Brief",

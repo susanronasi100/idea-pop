@@ -51,10 +51,10 @@ export default function MissionHUD({
       {/* Title bar */}
       {/* z-50 keeps the bar above the tap-outside backdrop, so ✕ still works */}
       <div className="relative z-50 flex items-center gap-2 bg-white px-4 py-3 shadow-sm">
-        {/* Left: menu toggle (☰ opens, ✕ closes) */}
+        {/* Left: menu toggle (☰ opens and closes; the open menu also has its own ✕) */}
         <button
           data-testid="mission-menu-button"
-          aria-label={menuOpen ? t('hud_menu_close_aria') : t('hud_menu_aria')}
+          aria-label={t('hud_menu_aria')}
           aria-expanded={menuOpen}
           onClick={() => {
             setXpOpen(false);
@@ -63,7 +63,7 @@ export default function MissionHUD({
           className="flex h-9 w-9 shrink-0 items-center justify-center rounded-lg text-ink hover:bg-tint-blue transition-colors"
         >
           <span className="text-lg leading-none" aria-hidden="true">
-            {menuOpen ? '✕' : '☰'}
+            ☰
           </span>
         </button>
 
@@ -185,7 +185,22 @@ export default function MissionHUD({
           data-testid="mission-menu"
           className="absolute left-0 right-0 top-full z-50 rounded-b-xl border-t border-ink/10 bg-white shadow-xl"
         >
-          <ul role="list" className="flex flex-col gap-1 p-2">
+          {/* Laid out like the XP panel: a heading with a ✕ to close, and the list
+              kept to a centred column rather than stretched edge to edge. */}
+          <div className="mx-auto max-w-2xl">
+          <div className="flex items-center justify-between px-5 pt-4">
+            <h2 className="font-display text-lg text-challenge">🗺️ {t('hud_menu_title')}</h2>
+            <button
+              type="button"
+              data-testid="mission-menu-close"
+              onClick={() => setMenuOpen(false)}
+              aria-label={t('hud_menu_close_aria')}
+              className="rounded-lg p-1 text-ink/50 hover:bg-tint-blue hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
+            >
+              ✕
+            </button>
+          </div>
+          <ul role="list" className="flex flex-col gap-1 p-2 pb-4">
             {ALL_STEPS.map((step) => {
               const isReached = reachedSteps.has(step);
               const isCurrent = step === currentStep;
@@ -228,6 +243,7 @@ export default function MissionHUD({
               );
             })}
           </ul>
+          </div>
         </div>
       )}
     </div>
