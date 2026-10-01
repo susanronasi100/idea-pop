@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Popi, RewardPop, backClass, pillCtaClass } from './StoryBits';
+import { Popi, RewardPop, backClass, pillCtaClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame, GameUpdate } from './useMissionGame';
 
@@ -40,7 +40,6 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
 
   return (
     <div data-testid="tool-lesson" className="flex flex-col gap-5 py-4">
-      <ChapterBanner story={story} step="tool" />
 
       <div role="tablist" aria-label={t('tool_steps_aria')} className="flex gap-1.5 rounded-pill bg-white p-1">
         {PHASES.map((ph, i) => (

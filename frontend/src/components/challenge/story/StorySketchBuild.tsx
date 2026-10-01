@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Character3D, Popi, RewardPop, optionClass } from './StoryBits';
+import { Character3D, Popi, RewardPop, optionClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
 
@@ -14,7 +14,6 @@ export function StorySketchTop({ story, game, update }: { story: MissionStory; g
   const favText = fav ? game.toolAnswers[fav.key] : null;
   return (
     <div data-testid="story-sketch" className="flex flex-col gap-4 pt-4">
-      <ChapterBanner story={story} step="sketch" />
       <Popi text={story.guide.sketch} />
       {favText && (
         <p className="rounded-2xl bg-[#fff5d1] px-4 py-2.5 font-body text-sm font-semibold text-ink">
@@ -121,7 +120,6 @@ export function StoryFairTest({
 
   return (
     <div data-testid="story-fair-test" className="flex flex-col gap-4 pt-4">
-      <ChapterBanner story={story} step="build_and_test" />
       <div className="flex items-end gap-2">
         <Character3D src={story.hero.image} emoji={story.hero.emoji} alt={story.hero.name} size={92} className="hidden shrink-0 sm:inline-flex" />
         <div className="flex-1"><Popi text={story.guide.build_and_test} /></div>

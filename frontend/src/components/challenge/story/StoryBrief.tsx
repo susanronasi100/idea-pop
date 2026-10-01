@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, SceneStage, Popi, ctaClass, optionClass } from './StoryBits';
+import { SceneStage, Popi, ctaClass, optionClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame } from './useMissionGame';
 
@@ -34,7 +34,6 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
 
   return (
     <div data-testid="story-brief" className="flex flex-col gap-5 py-4">
-      <ChapterBanner story={story} step="brief" />
 
       <div className="grid gap-3 sm:grid-cols-3">
         {story.opening.map((page, i) => (

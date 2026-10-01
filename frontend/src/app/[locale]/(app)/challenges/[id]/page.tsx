@@ -25,7 +25,7 @@ import StoryLab from '@/components/challenge/story/StoryLab';
 import ToolLesson from '@/components/challenge/story/ToolLesson';
 import StoryEnding from '@/components/challenge/story/StoryEnding';
 import { StoryFairTest, StorySketchTop } from '@/components/challenge/story/StorySketchBuild';
-import { ChapterBanner, Popi } from '@/components/challenge/story/StoryBits';
+import { Popi } from '@/components/challenge/story/StoryBits';
 import { useMissionGame } from '@/components/challenge/story/useMissionGame';
 import type { components } from '@/lib/api/schema';
 
@@ -235,7 +235,6 @@ export default function ChallengePage() {
 
           {currentStep === 2 && story && (
             <div className="flex flex-col gap-4 pt-4">
-              <ChapterBanner story={story} step="your_idea" />
               <Popi text={story.guide.your_idea} />
             </div>
           )}

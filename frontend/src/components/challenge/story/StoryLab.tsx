@@ -2,7 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import MissionHints from '../MissionHints';
-import { ChapterBanner, Popi, backClass, optionClass, pillCtaClass } from './StoryBits';
+import { Popi, backClass, optionClass, pillCtaClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
 
@@ -39,7 +39,6 @@ export default function StoryLab({ challenge, story, game, update, onNext, onBac
 
   return (
     <div data-testid="story-lab" className="flex flex-col gap-5 py-4">
-      <ChapterBanner story={story} step="skill" />
       <Popi text={story.guide.skill} />
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">

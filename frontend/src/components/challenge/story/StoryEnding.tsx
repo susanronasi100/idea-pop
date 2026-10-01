@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, SceneStage, Confetti, Popi, optionClass } from './StoryBits';
+import { SceneStage, Confetti, Popi, optionClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame } from './useMissionGame';
 
@@ -21,7 +21,6 @@ export default function StoryEnding({ story, game, update }: Props) {
   return (
     <div data-testid="story-ending" className="flex flex-col gap-5 pt-4">
       <Confetti />
-      <ChapterBanner story={story} step="celebrate_and_share" />
 
       <SceneStage story={story} alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })} align="end" />
 

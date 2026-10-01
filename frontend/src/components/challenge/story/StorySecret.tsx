@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Popi, backClass, pillCtaClass } from './StoryBits';
+import { Popi, backClass, pillCtaClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
 
@@ -23,7 +23,6 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
 
   return (
     <div data-testid="story-secret" className="flex flex-col gap-5 py-4">
-      <ChapterBanner story={story} step="design_secret" />
       <Popi text={story.guide.design_secret} />
 
       <div className="story-rise flex flex-col gap-2 rounded-card bg-gradient-to-br from-white from-60% to-tint-blue p-5">

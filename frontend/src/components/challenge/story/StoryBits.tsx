@@ -27,45 +27,6 @@ export function Popi({ text, label }: { text: string; label?: string }) {
   );
 }
 
-/** The chapter banner: chapter label + Story Spine beat, title, one line of
- *  story, and a book spine that fills as the chapters are read. */
-export function ChapterBanner({
-  story,
-  step,
-}: {
-  story: MissionStory;
-  step: string;
-}) {
-  const index = story.chapters.findIndex((c) => c.step === step);
-  const chapter = story.chapters[index];
-  if (!chapter) return null;
-  return (
-    <div
-      data-testid="chapter-banner"
-      className="story-rise flex items-center gap-3 rounded-card bg-white px-4 py-3 shadow-[inset_0_-4px_0_rgba(26,111,166,0.12)]"
-    >
-      <span aria-hidden="true" className="flex h-11 w-11 shrink-0 items-center justify-center rounded-xl bg-tint-cream text-2xl">
-        📖
-      </span>
-      <div className="min-w-0 flex-1">
-        <p className="font-body text-[11px] font-bold uppercase tracking-wider text-ink/60">
-          {chapter.label} · {chapter.beat}
-        </p>
-        <p className="font-display text-lg text-challenge">{chapter.title}</p>
-        <p className="font-body text-sm text-ink">{chapter.line}</p>
-      </div>
-      <span aria-hidden="true" className="hidden gap-[3px] sm:flex">
-        {story.chapters.map((c, i) => (
-          <span
-            key={c.step}
-            className={`block h-[22px] w-2 rounded-[3px] ${i <= index ? 'bg-challenge' : 'bg-ink/10'}`}
-          />
-        ))}
-      </span>
-    </div>
-  );
-}
-
 /**
  * One of the app's 3D character renders, alive: an entrance hop, then a slow
  * idle float over a breathing floor shadow. Falls back to the emoji when a

@@ -2,7 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { ChapterBanner, Character3D, Popi, RewardPop, backClass, pillCtaClass } from './StoryBits';
+import { Character3D, Popi, RewardPop, backClass, pillCtaClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame, GameUpdate } from './useMissionGame';
 
@@ -46,7 +46,6 @@ export default function StoryClues({ story, game, update, award, onNext, onBack 
 
   return (
     <div data-testid="story-clues" className="flex flex-col gap-5 py-4">
-      <ChapterBanner story={story} step="nature_clues" />
       <Popi text={story.guide.nature_clues} />
 
       <div>
