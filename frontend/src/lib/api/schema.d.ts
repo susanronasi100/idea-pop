@@ -989,7 +989,18 @@ export interface components {
       hero: { name: string; role: string; image: string | null; emoji: string };
       scene_image: string | null;
       /** Exactly 3: Once upon a time / Every day / Until one day. */
-      opening: { beat: string; emoji: string; text: string }[];
+      opening: {
+        beat: string;
+        emoji: string;
+        text: string;
+        /** Full illustration; when present the Brief is a picture book. */
+        image?: string | null;
+        /** Label in the picture's top corner, e.g. "3 hours". */
+        badge?: string | null;
+        /** Where it happens, labelled in the picture's bottom corner. */
+        place?: string | null;
+        thought?: { big: string; small: string } | null;
+      }[];
       card: { hero: string; place: string; problem: string; goal: string; rules: string; helpers: string };
       /** One per step in play order: brief, your_idea, nature_clues,
        * design_secret, skill, tool, sketch, build_and_test, celebrate_and_share. */

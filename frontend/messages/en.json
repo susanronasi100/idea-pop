@@ -1493,6 +1493,8 @@
     "quick_check": "Quick check",
     "quick_check_hint": "Look at the story, then tap your answer.",
     "lets_start": "Let's start! 🚀",
+    "page_next": "Next →",
+    "page_back": "← Back",
     "clues_progress": "Open all {total} clues · {opened}/{total} opened",
     "clue_opened": "{name} clue, opened",
     "clue_closed": "{name} clue, tap to open",

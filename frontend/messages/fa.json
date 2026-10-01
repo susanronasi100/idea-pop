@@ -1493,6 +1493,8 @@
     "quick_check": "سؤال سریع",
     "quick_check_hint": "به داستان نگاه کن، بعد جوابت را بزن.",
     "lets_start": "بزن بریم! 🚀",
+    "page_next": "بعدی ←",
+    "page_back": "→ قبلی",
     "clues_progress": "همه‌ی {total} سرنخ را باز کن · {opened} از {total} باز شده",
     "clue_opened": "سرنخ {name}، باز شده",
     "clue_closed": "سرنخ {name}، برای باز کردن بزن",

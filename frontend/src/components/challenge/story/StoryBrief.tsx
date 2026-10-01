@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { SceneStage, Popi, ctaClass, optionClass } from './StoryBits';
+import StoryPictureBook from './StoryPictureBook';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame } from './useMissionGame';
 
@@ -22,6 +23,12 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
   const t = useTranslations('story');
   const [wrong, setWrong] = useState<number | null>(null);
   const qc = story.quick_check;
+
+  // A mission whose opening pages carry pictures tells its start as a picture
+  // book, one page at a time, and goes straight on from the last page.
+  if (story.opening.length > 0 && story.opening.every((p) => p.image)) {
+    return <StoryPictureBook pages={story.opening} onDone={onNext} />;
+  }
 
   function answer(i: number) {
     if (i === qc.answer) {

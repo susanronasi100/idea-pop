@@ -3,9 +3,9 @@
   "hero": { "name": "Max", "role": "a student", "image": "/landing/hero/measure-boy.webp", "emoji": "🎒" },
   "scene_image": "/landing/try-mission-river.webp",
   "opening": [
-    { "beat": "Once upon a time…", "emoji": "🏡", "text": "There was a boy called Max who lived in a small village at the edge of a thick jungle." },
-    { "beat": "Every day…", "emoji": "🥾", "text": "Max walked 3 hours to school, because a huge river cut right across his path and the only way was the long way round." },
-    { "beat": "Until one day…", "emoji": "💡", "text": "Max stopped on the riverbank and thought: \"What if I could cross right here? School would be minutes away, not hours!\"" }
+    { "beat": "Once upon a time…", "emoji": "🏡", "text": "There was a boy called Max who lived in a small village at the edge of a thick jungle.", "image": "/challenge/max/opening-1.png", "place": "The village" },
+    { "beat": "Every day…", "emoji": "🥾", "text": "Max walked 3 hours to school, because a huge river cut right across his path and the only way was the long way round.", "image": "/challenge/max/opening-2.png", "badge": "3 hours" },
+    { "beat": "Until one day…", "emoji": "💡", "text": "Max stopped on the riverbank and thought:", "image": "/challenge/max/opening-3.png", "thought": {"big": "What if I could cross right here?", "small": "School would be minutes away, not hours!"} }
   ],
   "card": {
     "hero": "Max, a student",

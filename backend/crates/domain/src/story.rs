@@ -57,6 +57,27 @@ pub struct StoryPage {
     pub beat: String,
     pub emoji: String,
     pub text: String,
+    /// A full illustration for the page (a path under the frontend's public
+    /// folder). When the opening pages have one, the Brief shows them as a
+    /// picture book, one page at a time, with the beat and text written on it.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub image: Option<String>,
+    /// A short label pinned to the picture's top corner, e.g. "3 hours".
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub badge: Option<String>,
+    /// Where the picture takes place, labelled in its bottom corner.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub place: Option<String>,
+    /// What the hero is thinking, shown in the picture's thought bubble.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub thought: Option<StoryThought>,
+}
+
+/// A thought bubble on a picture page: a big line and a smaller one under it.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct StoryThought {
+    pub big: String,
+    pub small: String,
 }
 
 /// The story card that defines the project on the Brief screen.
@@ -339,6 +360,10 @@ mod tests {
                     beat: "Once upon a time…".into(),
                     emoji: "🏡".into(),
                     text: "a".into(),
+                    image: None,
+                    badge: None,
+                    place: None,
+                    thought: None,
                 };
                 3
             ],
