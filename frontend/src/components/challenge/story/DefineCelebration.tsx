@@ -68,9 +68,6 @@ export default function DefineCelebration({ xp, onClose }: Props) {
           <span className={`${chip} left-1 top-5 bg-white text-ink`}>
             ⭐ <span dir="ltr">+{xp > 0 ? xp : 5} XP</span>
           </span>
-          <span className={`${chip} right-0 top-[70px] bg-challenge text-white`} style={{ animationDelay: '0.6s' }}>
-            {t('badge_icon_define')} {t('celebrate_badge', { badge: t('badge_define') })}
-          </span>
           <span className={`${chip} bottom-8 left-3 bg-white text-ink`} style={{ animationDelay: '1.2s' }}>
             ✅ {t('celebrate_defined')}
           </span>
