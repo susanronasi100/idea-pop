@@ -110,7 +110,7 @@ export default function LoginForm({ onDone }: { onDone?: () => void } = {}) {
           home. A child has no password, so without these the form above would have nothing to offer them. */}
       <div className="mt-7 space-y-5 border-t border-ink/10 pt-6">
         <div>
-          <p className="text-center font-body text-lg text-ink/80">{t("class_code_hint")}</p>
+          <p className="text-center font-body text-lg font-bold text-ink">{t("class_code_hint")}</p>
           <Link
             href="/class-login"
             data-testid="class-code-link"
