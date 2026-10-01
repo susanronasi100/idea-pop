@@ -32,6 +32,8 @@ export interface MissionGame {
   change: string;
   reflection: string | null;
   badges: BadgeKey[];
+  /** The kid's 5W1H answers defining the problem, keyed by prompt (who, what…). */
+  defineAnswers: Record<string, string>;
 }
 
 export const EMPTY_GAME: MissionGame = {
@@ -54,6 +56,7 @@ export const EMPTY_GAME: MissionGame = {
   change: '',
   reflection: null,
   badges: [],
+  defineAnswers: {},
 };
 
 function storageKey(challengeId: string) {

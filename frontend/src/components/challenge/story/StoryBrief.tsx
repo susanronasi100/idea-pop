@@ -27,7 +27,15 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
   // A mission whose opening pages carry pictures tells its start as a picture
   // book, one page at a time, and goes straight on from the last page.
   if (story.opening.length > 0 && story.opening.every((p) => p.image)) {
-    return <StoryPictureBook pages={story.opening} onDone={onNext} />;
+    return (
+      <StoryPictureBook
+        pages={story.opening}
+        define={story.define_problem ?? null}
+        answers={game.defineAnswers ?? {}}
+        onAnswer={(key, value) => update({ defineAnswers: { ...(game.defineAnswers ?? {}), [key]: value } })}
+        onDone={onNext}
+      />
+    );
   }
 
   function answer(i: number) {

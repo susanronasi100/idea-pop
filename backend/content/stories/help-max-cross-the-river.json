@@ -101,5 +101,50 @@
     "question": "Which nature trick kept your crossing afloat?",
     "options": ["🦟 Water strider", "🐜 Fire ants", "🪷 Water lily", "🥥 Coconut"]
   },
-  "sticker": { "name": "River Crosser", "emoji": "🌉" }
+  "sticker": { "name": "River Crosser", "emoji": "🌉" },
+  "define_problem": {
+    "popi": "Let's be problem detectives! Answer the 6 big questions, Who, What, Where, When, Why and How, to define Max's problem.",
+    "title": "The big question",
+    "question": "What exactly is the problem?",
+    "hint": "Answer each question in a few words.",
+    "image": "/challenge/max/river.jpg",
+    "prompts": [
+      {
+        "key": "who",
+        "label": "Who",
+        "question": "Who has the problem?",
+        "example": "Max, a student"
+      },
+      {
+        "key": "what",
+        "label": "What",
+        "question": "What is the problem?",
+        "example": "He can't get across the river"
+      },
+      {
+        "key": "where",
+        "label": "Where",
+        "question": "Where does it happen?",
+        "example": "At the big river in the jungle"
+      },
+      {
+        "key": "when",
+        "label": "When",
+        "question": "When does it happen?",
+        "example": "Every school day"
+      },
+      {
+        "key": "why",
+        "label": "Why",
+        "question": "Why is it a problem?",
+        "example": "The long way takes 3 hours"
+      },
+      {
+        "key": "how",
+        "label": "How",
+        "question": "How might we help?",
+        "example": "Design a light way to cross"
+      }
+    ]
+  }
 }

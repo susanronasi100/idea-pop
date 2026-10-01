@@ -254,6 +254,36 @@ pub struct MissionStory {
     pub test: FairTest,
     pub reflection: Reflection,
     pub sticker: Sticker,
+    /// Defining the problem with the 5W1H questions, shown with Popi under the
+    /// last opening picture of a picture-book Brief. Optional.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub define_problem: Option<DefineProblem>,
+}
+
+/// "The big question": the kid pins the problem down by answering Who, What,
+/// Where, When, Why and How in their own words.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct DefineProblem {
+    /// Popi's line above the questions.
+    pub popi: String,
+    pub title: String,
+    pub question: String,
+    pub hint: String,
+    /// A picture beside the questions (a path under the frontend's public folder).
+    pub image: Option<String>,
+    pub prompts: Vec<DefinePrompt>,
+}
+
+/// One of the 5W1H questions.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct DefinePrompt {
+    /// Stable id: who, what, where, when, why, how.
+    pub key: String,
+    /// The short tag shown on the box ("Who").
+    pub label: String,
+    pub question: String,
+    /// A sample answer, shown greyed out until the kid types.
+    pub example: String,
 }
 
 fn invalid(msg: impl Into<String>) -> DomainError {
@@ -472,6 +502,7 @@ mod tests {
                 name: "River Crosser".into(),
                 emoji: "🌉".into(),
             },
+            define_problem: None,
         }
     }
 

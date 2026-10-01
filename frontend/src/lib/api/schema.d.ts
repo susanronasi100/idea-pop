@@ -1053,6 +1053,15 @@ export interface components {
       };
       reflection: { question: string; options: string[] };
       sticker: { name: string; emoji: string };
+      /** 5W1H problem definition shown with Popi under the last opening picture. */
+      define_problem?: {
+        popi: string;
+        title: string;
+        question: string;
+        hint: string;
+        image: string | null;
+        prompts: { key: string; label: string; question: string; example: string }[];
+      } | null;
     };
     IdeaWallEntry: {
       id: string;
