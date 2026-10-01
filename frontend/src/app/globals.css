@@ -228,6 +228,12 @@ html {
 .story-pop { animation: story-pop 0.45s ease-out; }
 .story-shake { animation: story-shake 0.35s; }
 .story-rise { animation: story-rise 0.45s ease-out both; }
+/* A picture-book page's words: a gentle fade only, never a moment at zero, so they are always readable. */
+@keyframes story-fade {
+  from { opacity: 0.4; }
+  to { opacity: 1; }
+}
+.story-fade { animation: story-fade 0.35s ease-out both; }
 .story-hop-in { animation: story-hop-in 0.7s cubic-bezier(0.2, 1.4, 0.4, 1) both; }
 .story-stick { animation: story-stick 1s cubic-bezier(0.2, 1.6, 0.4, 1) both; }
 .story-shadow { animation: story-shadow 3.2s ease-in-out infinite; }
