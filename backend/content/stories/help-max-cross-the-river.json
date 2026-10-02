@@ -112,38 +112,73 @@
       {
         "key": "who",
         "label": "Who",
-        "question": "Who has the problem?",
-        "example": "Max, a student"
+        "question": "Who has a problem in our story?",
+        "example": "Max",
+        "keywords": [
+          "max"
+        ],
+        "hint": "Look at the pictures: who is the boy with the backpack?"
       },
       {
         "key": "what",
         "label": "What",
-        "question": "What is the problem?",
-        "example": "He can't get across the river"
+        "question": "What does Max need to do?",
+        "example": "Cross the river",
+        "keywords": [
+          "cross",
+          "river",
+          "across",
+          "other side"
+        ],
+        "hint": "Max wants to get to the other side of something big… what is it?"
       },
       {
         "key": "where",
         "label": "Where",
-        "question": "Where does it happen?",
-        "example": "At the big river in the jungle"
+        "question": "Where does Max need to cross?",
+        "example": "The big river in the jungle",
+        "keywords": [
+          "river",
+          "jungle",
+          "water"
+        ],
+        "hint": "Look at picture 3: what is Max sitting next to?"
       },
       {
         "key": "when",
         "label": "When",
-        "question": "When does it happen?",
-        "example": "Every school day"
+        "question": "When does Max have this problem?",
+        "example": "Every day, on his way to school",
+        "keywords": [
+          "every day",
+          "day",
+          "morning",
+          "school"
+        ],
+        "hint": "Look at picture 2: how often does Max walk to school?"
       },
       {
         "key": "why",
         "label": "Why",
-        "question": "Why is it a problem?",
-        "example": "The long way takes 3 hours"
+        "question": "Why is this a big problem for Max?",
+        "example": "The long way round takes 3 hours",
+        "keywords": [
+          "3",
+          "three",
+          "hour",
+          "long",
+          "far",
+          "time"
+        ],
+        "hint": "How long does Max walk to school the long way?"
       },
       {
         "key": "how",
         "label": "How",
-        "question": "How might we help?",
-        "example": "Design a light way to cross"
+        "question": "How might we help Max cross?",
+        "example": "Build a light raft or a bridge",
+        "keywords": [],
+        "hint": ""
       }
     ]
   }

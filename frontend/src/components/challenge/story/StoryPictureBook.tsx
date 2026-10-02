@@ -18,6 +18,9 @@ interface Props {
   define: Define | null;
   answers: Record<string, string>;
   onAnswer: (key: string, value: string) => void;
+  /** The 5W1H questions answered so far, in order; the next one opens after each. */
+  done: string[];
+  onDoneChange: (done: string[]) => void;
   /** The mission, for claiming the 5W1H bonus XP. */
   challengeId: string;
   /** True once the 5W1H badge has been earned, so the celebration plays only once. */
@@ -37,6 +40,8 @@ export default function StoryPictureBook({
   define,
   answers,
   onAnswer,
+  done,
+  onDoneChange,
   challengeId,
   celebrated,
   onCelebrated,
@@ -65,9 +70,9 @@ export default function StoryPictureBook({
   // The celebration plays once, the first time every 5W1H box has an answer: when the kid
   // leaves the last box, or presses Next. XP comes from the server, once per mission.
   const [celebration, setCelebration] = useState<{ xp: number } | null>(null);
-  const allAnswered = !!define && define.prompts.every((p) => (answers[p.key] ?? '').trim().length >= 2);
-  function maybeCelebrate(): boolean {
-    if (!allAnswered || celebrated || celebration) return false;
+  const allAnswered = !!define && define.prompts.every((p) => done.includes(p.key));
+  function maybeCelebrate(finished = allAnswered): boolean {
+    if (!finished || celebrated || celebration) return false;
     setCelebration({ xp: 0 });
     onCelebrated();
     claimDefineBonus(challengeId)
@@ -172,7 +177,17 @@ export default function StoryPictureBook({
       </div>
 
       {last && define && (
-        <DefineProblemCard define={define} answers={answers} onAnswer={onAnswer} onLeave={maybeCelebrate} />
+        <DefineProblemCard
+          define={define}
+          answers={answers}
+          onAnswer={onAnswer}
+          done={done}
+          onDone={(key) => {
+            const next = done.includes(key) ? done : [...done, key];
+            onDoneChange(next);
+            if (define.prompts.every((q) => next.includes(q.key))) maybeCelebrate(true);
+          }}
+        />
       )}
       {celebration && <DefineCelebration xp={celebration.xp} onClose={() => setCelebration(null)} />}
 
@@ -220,19 +235,63 @@ export default function StoryPictureBook({
   );
 }
 
-/** "The big question": Popi asks the kid to pin the problem down with Who, What, Where, When, Why and How. */
+/** Loose matching for a child's answer: case, Arabic/Persian letter forms, digits and
+ *  half-spaces don't matter; any one key word is enough. */
+function normalize(text: string): string {
+  return text
+    .toLowerCase()
+    .replace(/[‌‏]/g, '')
+    .replace(/ي/g, 'ی')
+    .replace(/ك/g, 'ک')
+    .replace(/[۰-۹]/g, (d) => String('۰۱۲۳۴۵۶۷۸۹'.indexOf(d)))
+    .replace(/\s+/g, ' ')
+    .trim();
+}
+export function answerFits(answer: string, keywords: string[]): boolean {
+  const a = normalize(answer);
+  if (a.length < 2) return false;
+  return keywords.length === 0 || keywords.some((k) => a.includes(normalize(k)));
+}
+
+/** "The big question": Popi asks Who, What, Where, When, Why and How one at a time. Each question
+ *  opens only once the one before it is answered; a miss gets Popi's hint, and a second try always
+ *  goes on, so no one gets stuck. */
 function DefineProblemCard({
   define,
   answers,
   onAnswer,
-  onLeave,
+  done,
+  onDone,
 }: {
   define: Define;
   answers: Record<string, string>;
   onAnswer: (key: string, value: string) => void;
-  /** Called when the kid leaves a box, to check whether every box is now answered. */
-  onLeave: () => void;
+  /** Keys already answered, in order. */
+  done: string[];
+  onDone: (key: string) => void;
 }) {
+  const t = useTranslations('story');
+  const [missed, setMissed] = useState<Record<string, number>>({});
+  const current = define.prompts.find((p) => !done.includes(p.key)) ?? null;
+  const currentIndex = current ? define.prompts.indexOf(current) : define.prompts.length;
+  const locked = define.prompts.slice(currentIndex + 1);
+  const inputRef = useRef<HTMLInputElement>(null);
+  useEffect(() => {
+    if (done.length > 0) inputRef.current?.focus();
+  }, [done.length]);
+
+  function check() {
+    if (!current) return;
+    const answer = answers[current.key] ?? '';
+    if (answer.trim().length < 2) return;
+    const tries = missed[current.key] ?? 0;
+    if (answerFits(answer, current.keywords ?? []) || tries >= 1) {
+      onDone(current.key);
+    } else {
+      setMissed((m) => ({ ...m, [current.key]: tries + 1 }));
+    }
+  }
+
   return (
     <div data-testid="define-problem" className="story-rise flex flex-col gap-4">
       <Popi text={define.popi} />
@@ -256,29 +315,96 @@ function DefineProblemCard({
             // eslint-disable-next-line @next/next/no-img-element -- a small story photo
             <img src={define.image} alt="" className="w-full rounded-2xl sm:w-[40%]" />
           )}
-          <div className="flex flex-1 flex-col gap-2">
-            {define.prompts.map((p) => (
-              <label
-                key={p.key}
-                data-testid={`define-${p.key}`}
-                className="flex flex-col gap-1 rounded-xl border border-[#e3e9f1] bg-white px-3 py-2"
+          <div className="flex flex-1 flex-col gap-2" aria-live="polite">
+            <p className="font-body text-xs font-bold text-[#2D6FC4]">
+              {current
+                ? t('define_progress', { n: currentIndex + 1, total: define.prompts.length })
+                : t('define_complete')}
+            </p>
+
+            {define.prompts
+              .filter((p) => done.includes(p.key))
+              .map((p) => (
+                <div
+                  key={p.key}
+                  data-testid={`define-${p.key}`}
+                  data-state="done"
+                  className="story-rise rounded-xl border border-[#bfe6c8] bg-[#F3FBF5] px-3 py-2"
+                >
+                  <p className="flex items-center gap-2 font-body text-sm font-bold text-[#1B3A6B]">
+                    <span className="rounded-md bg-[#2e9e55] px-1.5 py-0.5 text-xs text-white">{p.label}</span>
+                    {p.question} <span aria-hidden="true">✓</span>
+                  </p>
+                  <p dir="auto" className="mt-1 font-body text-sm font-semibold text-[#1d7a3a]">
+                    {answers[p.key]}
+                  </p>
+                </div>
+              ))}
+
+            {current && (
+              <div
+                key={current.key}
+                data-testid={`define-${current.key}`}
+                data-state="current"
+                className="story-rise rounded-xl border-2 border-challenge bg-white px-3 py-2.5 shadow-[0_4px_14px_rgba(45,156,219,0.18)]"
               >
-                <span className="flex items-center gap-2 font-body text-sm font-bold text-[#1B3A6B]">
-                  <span className="rounded-md bg-[#2D6FC4] px-1.5 py-0.5 text-xs text-white">{p.label}</span>
-                  {p.question}
-                </span>
-                <input
-                  type="text"
-                  value={answers[p.key] ?? ''}
-                  onChange={(e) => onAnswer(p.key, e.target.value)}
-                  onBlur={onLeave}
-                  placeholder={p.example}
-                  maxLength={120}
-                  dir="auto"
-                  className="border-b border-dashed border-[#cfd8e3] bg-transparent pb-1 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
-                />
-              </label>
-            ))}
+                <label
+                  htmlFor={`define-input-${current.key}`}
+                  className="flex items-center gap-2 font-body text-sm font-bold text-[#1B3A6B]"
+                >
+                  <span className="rounded-md bg-[#2D6FC4] px-1.5 py-0.5 text-xs text-white">{current.label}</span>
+                  {current.question}
+                </label>
+                <form
+                  className="mt-2 flex gap-2"
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    check();
+                  }}
+                >
+                  <input
+                    ref={inputRef}
+                    id={`define-input-${current.key}`}
+                    type="text"
+                    value={answers[current.key] ?? ''}
+                    onChange={(e) => onAnswer(current.key, e.target.value)}
+                    placeholder={t('define_placeholder')}
+                    maxLength={120}
+                    dir="auto"
+                    className="min-w-0 flex-1 rounded-xl border border-[#cfd8e3] px-3 py-2 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
+                  />
+                  <button
+                    type="submit"
+                    data-testid="define-check"
+                    disabled={(answers[current.key] ?? '').trim().length < 2}
+                    className="shrink-0 rounded-pill bg-challenge px-4 py-2 font-body text-sm font-bold text-white transition-all hover:brightness-110 active:scale-95 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+                  >
+                    {t('define_check')}
+                  </button>
+                </form>
+                {(missed[current.key] ?? 0) > 0 && current.hint && (
+                  <p
+                    data-testid="define-hint"
+                    className="mt-2 rounded-xl bg-[#FFF7E0] px-3 py-2 font-body text-sm text-[#7a5a00]"
+                  >
+                    💡 {t('define_almost')} {current.hint}
+                  </p>
+                )}
+              </div>
+            )}
+
+            {locked.length > 0 && (
+              <div className="flex flex-wrap gap-1.5" aria-hidden="true">
+                {locked.map((p) => (
+                  <span
+                    key={p.key}
+                    className="rounded-pill bg-[#eef2f7] px-3 py-1 font-body text-xs font-bold text-[#9aa6b4]"
+                  >
+                    🔒 {p.label}
+                  </span>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </section>

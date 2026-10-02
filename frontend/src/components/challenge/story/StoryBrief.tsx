@@ -33,6 +33,8 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
         define={story.define_problem ?? null}
         answers={game.defineAnswers ?? {}}
         onAnswer={(key, value) => update({ defineAnswers: { ...(game.defineAnswers ?? {}), [key]: value } })}
+        done={game.defineDone ?? []}
+        onDoneChange={(next) => update({ defineDone: next })}
         challengeId={challenge.id}
         celebrated={game.badges.includes('define')}
         onCelebrated={() => update({ badges: game.badges.includes('define') ? game.badges : [...game.badges, 'define'] })}

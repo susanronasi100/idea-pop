@@ -34,6 +34,8 @@ export interface MissionGame {
   badges: BadgeKey[];
   /** The kid's 5W1H answers defining the problem, keyed by prompt (who, what…). */
   defineAnswers: Record<string, string>;
+  /** The 5W1H questions answered so far, in order (they open one by one). */
+  defineDone: string[];
 }
 
 export const EMPTY_GAME: MissionGame = {
@@ -57,6 +59,7 @@ export const EMPTY_GAME: MissionGame = {
   reflection: null,
   badges: [],
   defineAnswers: {},
+  defineDone: [],
 };
 
 function storageKey(challengeId: string) {

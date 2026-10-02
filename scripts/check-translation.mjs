@@ -14,6 +14,9 @@ const FROZEN_KEYS = new Set([
   'fork_to_step', 'skill_refs', 'locked',
 ]);
 
+// Keys whose value is language-specific and may differ in length (e.g. answer keywords).
+const FREE_KEYS = new Set(['keywords']);
+
 const [, , enPath, faPath] = process.argv;
 if (!enPath || !faPath) {
   console.error('usage: check-translation.mjs <english.json> <translated.json>');
@@ -41,6 +44,7 @@ function walk(en, fa, path, frozen) {
     const fk = Object.keys(fa).sort().join(',');
     if (ek !== fk) return errors.push(`${where}: keys [${fk}], expected [${ek}]`);
     for (const k of Object.keys(en)) {
+      if (FREE_KEYS.has(k)) continue;
       walk(en[k], fa[k], path ? `${path}.${k}` : k, frozen || FROZEN_KEYS.has(k));
     }
     return;

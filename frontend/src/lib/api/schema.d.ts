@@ -1072,7 +1072,16 @@ export interface components {
         question: string;
         hint: string;
         image: string | null;
-        prompts: { key: string; label: string; question: string; example: string }[];
+        prompts: {
+          key: string;
+          label: string;
+          question: string;
+          example: string;
+          /** Any one of these words means the answer found the key idea; empty = any answer. */
+          keywords?: string[];
+          /** Popi's nudge when the answer misses. */
+          hint?: string;
+        }[];
       } | null;
     };
     IdeaWallEntry: {

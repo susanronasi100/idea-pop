@@ -282,8 +282,16 @@ pub struct DefinePrompt {
     /// The short tag shown on the box ("Who").
     pub label: String,
     pub question: String,
-    /// A sample answer, shown greyed out until the kid types.
+    /// A sample answer (kept for authors; not shown, so it never gives the answer away).
+    #[serde(default)]
     pub example: String,
+    /// Words that show the answer found the key idea (any one is enough). Empty means
+    /// any answer is welcome, e.g. the child's own idea for "How".
+    #[serde(default)]
+    pub keywords: Vec<String>,
+    /// Popi's nudge when an answer misses the key idea.
+    #[serde(default)]
+    pub hint: String,
 }
 
 fn invalid(msg: impl Into<String>) -> DomainError {
