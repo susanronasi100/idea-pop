@@ -37,11 +37,16 @@ export default function StepIdeaFork({
         <button
           data-testid="idea-yes"
           onClick={onYes}
-          className="flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className="group flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
         >
-          <span className="text-5xl" role="img" aria-label={t('fork_yes_emoji_label')}>
-            💡
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element -- a small transparent notebook drawing */}
+          <img
+            src="/challenge/fork/idea-yes.webp"
+            alt={t('fork_yes_emoji_label')}
+            width={360}
+            height={360}
+            className="h-32 w-32 object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.15)] transition-transform group-hover:-rotate-3 group-hover:scale-105"
+          />
           <span className="font-display text-lg text-ink">{t('fork_yes_title')}</span>
           <span className="font-body text-sm text-ink/50">{t('fork_yes_sub')}</span>
         </button>
@@ -50,11 +55,16 @@ export default function StepIdeaFork({
         <button
           data-testid="idea-no"
           onClick={onNo}
-          className="flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className="group flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
         >
-          <span className="text-5xl" role="img" aria-label={t('fork_no_emoji_label')}>
-            🌿
-          </span>
+          {/* eslint-disable-next-line @next/next/no-img-element -- a small transparent notebook drawing */}
+          <img
+            src="/challenge/fork/idea-no.webp"
+            alt={t('fork_no_emoji_label')}
+            width={360}
+            height={360}
+            className="h-32 w-32 object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.15)] transition-transform group-hover:-rotate-3 group-hover:scale-105"
+          />
           <span className="font-display text-lg text-ink">{t('fork_no_title')}</span>
           <span className="font-body text-sm text-ink/50">{t('fork_no_sub')}</span>
         </button>
