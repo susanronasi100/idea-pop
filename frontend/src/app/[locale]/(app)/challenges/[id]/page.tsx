@@ -181,8 +181,9 @@ export default function ChallengePage() {
   const gameProps = { game, update: updateGame };
 
   // A picture-book brief fills the frame; every other step keeps the narrow reading column.
+  // The Your idea? choice cards get room to be big, too.
   const wide =
-    currentStep === 1 && story && story.opening.length > 0 && story.opening.every((p) => p.image)
+    (currentStep === 1 && story && story.opening.length > 0 && story.opening.every((p) => p.image)) || currentStep === 2
       ? 'max-w-5xl'
       : 'max-w-2xl';
   return (

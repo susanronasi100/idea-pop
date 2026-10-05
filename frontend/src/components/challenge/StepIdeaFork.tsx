@@ -2,7 +2,10 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { btnSecondary } from '@/components/challenge/buttons';
+import { btnPrimary, btnSecondary } from '@/components/challenge/buttons';
+
+const card =
+  'group flex cursor-pointer flex-col items-center gap-4 rounded-[20px] bg-white p-5 pb-6 text-center shadow-[0_6px_18px_rgba(0,0,0,0.12)] transition-[transform,box-shadow] duration-[800ms] ease-out hover:scale-[1.03] hover:shadow-[0_12px_28px_rgba(27,58,107,0.22)] active:scale-[0.99] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 type AgeMode = import('@/lib/hooks/useAgeMode').AgeMode;
@@ -25,48 +28,53 @@ export default function StepIdeaFork({
   const t = useTranslations('mission');
 
   return (
-    <div data-testid="step-idea-fork" className="mx-auto flex max-w-lg flex-col items-center gap-8 px-4 py-8">
+    <div data-testid="step-idea-fork" className="mx-auto flex max-w-3xl flex-col items-center gap-8 px-4 py-8">
       {/* Heading */}
       <h2 className="font-display text-2xl text-challenge text-center">
         {t('fork_heading')}
       </h2>
 
-      {/* Two choice cards */}
-      <div className="grid w-full grid-cols-1 gap-4 sm:grid-cols-2">
-        {/* YES card */}
+      {/* Two choice cards, in the site's card look: rounded, soft shadow, a tinted picture
+          panel, and the same slow grow on hover as the sign-up cards. */}
+      <div className="grid w-full grid-cols-1 gap-6 sm:grid-cols-2">
         <button
+          type="button"
           data-testid="idea-yes"
           onClick={onYes}
-          className="group flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className={card}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- a small transparent notebook drawing */}
-          <img
-            src="/challenge/fork/idea-yes.webp"
-            alt={t('fork_yes_emoji_label')}
-            width={360}
-            height={360}
-            className="h-32 w-32 object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.15)] transition-transform group-hover:-rotate-3 group-hover:scale-105"
-          />
-          <span className="font-display text-lg text-ink">{t('fork_yes_title')}</span>
-          <span className="font-body text-sm text-ink/50">{t('fork_yes_sub')}</span>
+          <span className="flex w-full items-center justify-center rounded-[16px] bg-[#F3FFC2] py-4">
+            {/* eslint-disable-next-line @next/next/no-img-element -- a transparent notebook drawing */}
+            <img
+              src="/challenge/fork/idea-yes.webp"
+              alt={t('fork_yes_emoji_label')}
+              width={360}
+              height={360}
+              className="h-44 w-44 object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.18)] transition-transform duration-[800ms] ease-out group-hover:-rotate-3 group-hover:scale-105 sm:h-52 sm:w-52"
+            />
+          </span>
+          <span className="font-display text-2xl text-ink">{t('fork_yes_title')}</span>
+          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_yes_sub')} →</span>
         </button>
 
-        {/* NO card */}
         <button
+          type="button"
           data-testid="idea-no"
           onClick={onNo}
-          className="group flex cursor-pointer flex-col items-center gap-3 rounded-card border-2 border-transparent bg-white p-6 text-center shadow-sm transition-all hover:border-challenge hover:shadow-md active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className={card}
         >
-          {/* eslint-disable-next-line @next/next/no-img-element -- a small transparent notebook drawing */}
-          <img
-            src="/challenge/fork/idea-no.webp"
-            alt={t('fork_no_emoji_label')}
-            width={360}
-            height={360}
-            className="h-32 w-32 object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.15)] transition-transform group-hover:-rotate-3 group-hover:scale-105"
-          />
-          <span className="font-display text-lg text-ink">{t('fork_no_title')}</span>
-          <span className="font-body text-sm text-ink/50">{t('fork_no_sub')}</span>
+          <span className="flex w-full items-center justify-center rounded-[16px] bg-[#F1D8FB] py-4">
+            {/* eslint-disable-next-line @next/next/no-img-element -- a transparent notebook drawing */}
+            <img
+              src="/challenge/fork/idea-no.webp"
+              alt={t('fork_no_emoji_label')}
+              width={360}
+              height={360}
+              className="h-44 w-44 object-contain drop-shadow-[0_8px_10px_rgba(0,0,0,0.18)] transition-transform duration-[800ms] ease-out group-hover:-rotate-3 group-hover:scale-105 sm:h-52 sm:w-52"
+            />
+          </span>
+          <span className="font-display text-2xl text-ink">{t('fork_no_title')}</span>
+          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_no_sub')} →</span>
         </button>
       </div>
 
