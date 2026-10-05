@@ -12,21 +12,39 @@ import { btnIcon, btnPrimary, btnSecondary } from '@/components/challenge/button
  * Popi — the ONE penguin (same character as the Ask-Me mascot), here as the
  * story guide who narrates each chapter.
  */
-/** `grand`: Popi pops in big, then settles to his normal size (step 1, TEMP rule 24). */
-export function Popi({ text, label, grand = false }: { text: string; label?: string; grand?: boolean }) {
+/** `grand`: the moment Popi starts reading his line, he grows big, then settles back to his
+ *  normal size (step 1, TEMP rule 24). `talking` says his line is being read by someone
+ *  else's voice (the automatic narration), so he reacts to that too. */
+export function Popi({
+  text,
+  label,
+  grand = false,
+  talking = false,
+}: {
+  text: string;
+  label?: string;
+  grand?: boolean;
+  talking?: boolean;
+}) {
   const t = useTranslations('story');
   const locale = useLocale();
   const voice = usePopiVoice(locale);
+  const speaking = voice.speaking || talking;
+  // Each start of speech replays the grow-and-settle (a new key restarts the animation).
+  const [pulse, setPulse] = useState(0);
+  useEffect(() => {
+    if (speaking) setPulse((n) => n + 1);
+  }, [speaking]);
   return (
     <div data-testid="story-popi" className="flex items-end gap-3">
-      <span className={`shrink-0 ${grand ? 'popi-grand' : ''}`}>
+      <span key={pulse} className={`shrink-0 ${grand && pulse > 0 ? 'popi-grand' : ''}`}>
         <PopiAvatar size={84} />
       </span>
       <div className="flex flex-1 items-center gap-3 rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-2 font-body font-bold text-xs text-challenge">
             {label ?? t('popi_says')}
-            {voice.speaking && (
+            {speaking && (
               <span aria-hidden="true" className="inline-flex h-3 items-end gap-[2px]">
                 {[0, 0.15, 0.3, 0.1, 0.25].map((d, i) => (
                   <span

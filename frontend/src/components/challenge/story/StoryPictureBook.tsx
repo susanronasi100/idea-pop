@@ -279,6 +279,7 @@ export default function StoryPictureBook({
       {last && define && (
         <DefineProblemCard
           define={define}
+          popiTalking={auto.phase === 'finale' && voice.speaking}
           answers={answers}
           onAnswer={onAnswer}
           done={done}
@@ -330,8 +331,11 @@ function DefineProblemCard({
   onAnswer,
   done,
   onDone,
+  popiTalking,
 }: {
   define: Define;
+  /** Popi's line is being read aloud by the automatic narration. */
+  popiTalking: boolean;
   answers: Record<string, string>;
   onAnswer: (key: string, value: string) => void;
   /** Keys already answered, in order. */
@@ -362,7 +366,7 @@ function DefineProblemCard({
 
   return (
     <div data-testid="define-problem" className="story-rise flex flex-col gap-4">
-      <Popi text={define.popi} grand />
+      <Popi text={define.popi} grand talking={popiTalking} />
       <section className="rounded-[20px] border border-[#dfe8f2] bg-[#F4F8FC] p-4 sm:p-5">
         <div className="flex items-center gap-3">
           <span

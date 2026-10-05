@@ -99,7 +99,7 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
       {/* The scene: the story's backdrop with the 3D hero standing in it */}
       <SceneStage story={story} alt={t('hero_alt', { name: story.hero.name, role: story.hero.role })} priority />
 
-      <Popi text={story.guide.brief} grand />
+      <Popi text={story.guide.brief} grand talking={auto.phase === 'finale' && voice.speaking} />
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">
         <p className="font-body font-bold text-xs text-challenge">{t('your_mission')}</p>

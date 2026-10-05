@@ -223,10 +223,10 @@ html {
 @keyframes story-shadow {
   50% { transform: scaleX(0.82); opacity: 0.18; }
 }
-/* Popi's entrance on step 1: he arrives big, then settles to his normal size (TEMP rule 24). */
+/* Popi on step 1: as he starts reading his line he grows big, then settles to his normal size (TEMP rule 24). */
 @keyframes popi-grand {
-  0% { transform: scale(0.6); opacity: 0; }
-  25% { transform: scale(1.7); opacity: 1; }
+  0% { transform: scale(1); }
+  25% { transform: scale(1.7); }
   45% { transform: scale(1.7); }
   80% { transform: scale(0.94); }
   100% { transform: scale(1); }
