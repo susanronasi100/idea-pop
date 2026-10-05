@@ -99,9 +99,22 @@ export default function StoryPictureBook({
       >
         {/* width/height hold the picture's shape while it loads, so the words always have room. */}
         {/* eslint-disable-next-line @next/next/no-img-element -- a story page sized by its own width */}
-        <img key={page.image} src={page.image ?? ''} alt="" width={717} height={430} className="block h-auto w-full" />
+        <img
+          key={page.image}
+          src={page.image ?? ''}
+          alt=""
+          width={page.layout ? 1400 : 717}
+          height={page.layout ? 788 : 430}
+          className="block h-auto w-full"
+        />
 
-        {width > 0 && (
+        {width > 0 && page.layout && (
+          <div key={index} className="story-fade absolute inset-0">
+            <BoxedWords page={page} layout={page.layout} u={u} />
+          </div>
+        )}
+
+        {width > 0 && !page.layout && (
           <div key={index} className="story-fade absolute inset-0">
             <span
               aria-hidden="true"
@@ -409,5 +422,79 @@ function DefineProblemCard({
         </div>
       </section>
     </div>
+  );
+}
+
+type Box = [number, number, number, number];
+const boxStyle = ([left, top, w, h]: Box) => ({ left: `${left}%`, top: `${top}%`, width: `${w}%`, height: `${h}%` });
+
+/** Words for a picture drawn with empty boxes for them: the beat and the line in the text box
+ *  (with the thought under them when the picture has no box of its own for it), the badge in its box. */
+function BoxedWords({
+  page,
+  layout,
+  u,
+}: {
+  page: Page;
+  layout: NonNullable<Page['layout']>;
+  u: (pct: number) => string;
+}) {
+  const thoughtInText = page.thought && !layout.thought;
+  // The words always fit their box: start at full size and step down until nothing spills over.
+  const boxRef = useRef<HTMLDivElement>(null);
+  const [scale, setScale] = useState(1);
+  const fitKey = `${page.text}|${u(1)}`;
+  useLayoutEffect(() => setScale(1), [fitKey]);
+  useLayoutEffect(() => {
+    const el = boxRef.current;
+    if (el && el.scrollHeight > el.clientHeight + 1 && scale > 0.5) setScale((v) => v * 0.92);
+  }, [scale, fitKey]);
+  const textSize = 1.85 * scale;
+  return (
+    <>
+      <div
+        ref={boxRef}
+        className="absolute flex flex-col justify-center overflow-hidden text-[#1B3A6B]"
+        style={{ ...boxStyle(layout.text as Box), padding: `${u(0.8)} ${u(2.2)}` }}
+      >
+        <h2 className="font-display leading-[1.1]" style={{ fontSize: u(3.2 * Math.max(scale, 0.75)) }}>
+          {page.beat}
+        </h2>
+        <p className="font-body font-semibold leading-[1.35]" style={{ marginTop: u(0.3), fontSize: u(textSize) }}>
+          {page.text}
+          {thoughtInText && (
+            <>
+              {' '}
+              <span className="italic">
+                “{page.thought!.big} {page.thought!.small}”
+              </span>
+            </>
+          )}
+        </p>
+      </div>
+
+      {page.badge && layout.badge && (
+        <span
+          className="absolute flex items-center font-body font-bold text-[#1B3A6B]"
+          style={{ ...boxStyle(layout.badge as Box), fontSize: u(2.1) }}
+        >
+          {page.badge}
+        </span>
+      )}
+
+      {page.thought && layout.thought && (
+        <div
+          className="absolute flex flex-col justify-center font-body text-[#1B3A6B]"
+          style={boxStyle(layout.thought as Box)}
+        >
+          <p className="font-semibold leading-[1.35]" style={{ fontSize: u(1.9) }}>
+            {page.thought.big}
+          </p>
+          <p className="font-medium leading-[1.35]" style={{ marginTop: u(0.6), fontSize: u(1.5) }}>
+            {page.thought.small}
+          </p>
+        </div>
+      )}
+    </>
   );
 }

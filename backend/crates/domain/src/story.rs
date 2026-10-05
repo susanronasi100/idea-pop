@@ -71,6 +71,23 @@ pub struct StoryPage {
     /// What the hero is thinking, shown in the picture's thought bubble.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub thought: Option<StoryThought>,
+    /// Where the words go on this picture, when it was drawn with empty boxes
+    /// for them. Without it the classic layout is used.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub layout: Option<PageLayout>,
+}
+
+/// Boxes on a picture, each `[left, top, width, height]` in percent of the
+/// picture. `text` holds the beat and the line (and the thought when the
+/// picture has no thought box); `badge` holds the badge; `thought` holds
+/// the thought bubble's words.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct PageLayout {
+    pub text: [f32; 4],
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub badge: Option<[f32; 4]>,
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub thought: Option<[f32; 4]>,
 }
 
 /// A thought bubble on a picture page: a big line and a smaller one under it.
@@ -402,6 +419,7 @@ mod tests {
                     badge: None,
                     place: None,
                     thought: None,
+                    layout: None,
                 };
                 3
             ],

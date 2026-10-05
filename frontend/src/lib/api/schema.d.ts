@@ -1012,6 +1012,12 @@ export interface components {
         /** Where it happens, labelled in the picture's bottom corner. */
         place?: string | null;
         thought?: { big: string; small: string } | null;
+        /** Boxes on the picture for the words, [left, top, width, height] in %. */
+        layout?: {
+          text: [number, number, number, number];
+          badge?: [number, number, number, number] | null;
+          thought?: [number, number, number, number] | null;
+        } | null;
       }[];
       card: { hero: string; place: string; problem: string; goal: string; rules: string; helpers: string };
       /** One per step in play order: brief, your_idea, nature_clues,
