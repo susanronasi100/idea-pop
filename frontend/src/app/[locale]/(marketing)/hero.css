@@ -5,7 +5,8 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  background: #263522;
+  /* the page lime (the spec's #263522 showed as a dark band while the pictures load) */
+  background: #f3ffc2;
 }
 .hero-world {
   position: absolute;

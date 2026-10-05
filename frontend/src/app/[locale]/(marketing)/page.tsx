@@ -168,28 +168,27 @@ export default async function LandingPage({ params }: Props) {
     <div className="bg-[#F3FFC2] overflow-x-clip">
       <ScrollReveal />
       {/* 1. Hero — the animated nature-to-classroom scene (HeroScene.tsx), the copy layered above it */}
-      <section aria-label="hero" className="relative lg:pt-[5.5rem]" dir="ltr" data-scroll-timeline="hero">
+      <section aria-label="hero" className="relative" dir="ltr" data-scroll-timeline="hero">
         {/* The box has the artwork's own 1670:942 shape, so the designer's contain layout fills it edge to edge.
-            Large screens: the copy sits on the empty pale-green wall at the left of the artwork (centred, it would cover
-            the question paper above the bird). Below that the wall is too small for the copy, so it goes above.
-            lg: the box starts under the fixed nav capsule, which would otherwise cover the question paper. */}
-        <div className="relative flex w-full flex-col lg:block lg:aspect-[1670/942]">
-          <div className="relative order-2 aspect-[1670/942] w-full lg:absolute lg:inset-0 lg:aspect-auto">
+            Wide screens (xl): the copy sits on the empty pale-green wall at the left of the artwork (centred, it would cover
+            the question paper above the bird). Below that the wall is too small for the copy, so it goes above. The nav floats over the photo. */}
+        <div className="relative flex w-full flex-col xl:block xl:aspect-[1670/942]">
+          <div className="relative order-2 aspect-[1670/942] w-full xl:absolute xl:inset-0 xl:aspect-auto">
             <HeroScene />
           </div>
 
           {/* hero copy — fluid type per the designer's responsive spec
               (clamp() from a 375px mobile floor to the 1440px design size).
-              Below lg: in the flow above the picture, 7rem down (clear of the nav).
-              lg and up: on the wall, sized to the artwork so the buttons stay above the girl. */}
+              Below xl: in the flow above the picture, 7rem down (clear of the nav).
+              xl and up: on the wall, sized to the artwork so the buttons stay above the girl. */}
           <div
-            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center lg:absolute lg:left-[7%] lg:top-[3%] lg:w-[35%] lg:p-0 lg:text-start"
+            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center xl:absolute xl:left-[7.5%] xl:top-[12%] xl:w-[34%] xl:p-0 xl:text-start"
             dir={locale === "fa" ? "rtl" : "ltr"}
             data-scroll="hero-copy"
           >
             {/* Cherry Bomb One ships a single 400 weight — the spec's Regular.
                 Motion: the lines rise in one after another while the scene settles. */}
-            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "lg:text-[clamp(1.875rem,2.5vw,3.25rem)]" : "lg:text-[clamp(2.25rem,3.3vw,4rem)]"}`} data-intro="rise" style={motionDelay(350)}>
+            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.75rem,2.3vw,3rem)]" : "xl:text-[clamp(2rem,2.9vw,3.5rem)]"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
                 <span className="text-[#18785A]">
@@ -199,11 +198,11 @@ export default async function LandingPage({ params }: Props) {
               </span>{" "}
               <span className="text-[#194D3D]">{t("hero.headline_2")}</span>
             </h1>
-            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] lg:text-[clamp(1.5rem,2.1vw,2.5rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
+            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.25rem,1.8vw,2.25rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
               <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
             </p>
-            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto lg:mx-0 mt-3" data-intro="rise" style={motionDelay(770)}>
+            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:text-[clamp(0.875rem,1.05vw,1.25rem)] mt-3" data-intro="rise" style={motionDelay(770)}>
               {t("hero.body_1_pre")}
               <span className="text-[#18785A]">{t("hero.body_1_word")}</span>
               {t("hero.body_1_post")}
@@ -213,7 +212,7 @@ export default async function LandingPage({ params }: Props) {
             </p>
             {/* A hovered button grows 11% (up to ~19px a side), so the pair needs 32px side by side and 16px stacked to
                 keep a grown button clear of its neighbour. */}
-            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-8 lg:gap-5 lg:w-max lg:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
+            <div className="flex flex-col sm:flex-row xl:flex-col items-center xl:items-start justify-center gap-4 sm:gap-8 xl:gap-3 xl:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
               <Link
                 href="/exploring"
                 className={btnLime}
