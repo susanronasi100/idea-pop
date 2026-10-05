@@ -36,13 +36,20 @@ interface Props {
    on the picture at every screen size. Positions use left/right, not start/end: the picture does not flip in
    Persian, so neither do the things placed on it. */
 
+const HOW_KEY = 'how';
+
+/** The How question of a story's 5W1H, which Popi asks on step 2 (TEMP rules 22-23). */
+export function howQuestion(story: MissionStory): string | null {
+  return story.define_problem?.prompts.find((p) => p.key === HOW_KEY)?.question ?? null;
+}
+
 /** Everything Popi reads aloud on one picture. */
 const pageWords = (p: Page) => joinSegments([p.beat, p.text, p.thought?.big, p.thought?.small]);
 
 /** Step 1 as a picture book: one illustrated opening page at a time, with Back and Next. */
 export default function StoryPictureBook({
   pages,
-  define,
+  define: defineAll,
   answers,
   onAnswer,
   done,
@@ -54,6 +61,8 @@ export default function StoryPictureBook({
 }: Props) {
   const t = useTranslations('story');
   const voice = usePopiVoice(useLocale());
+  // The How question asks for ideas, so it waits for step 2 (TEMP rule 22).
+  const define = defineAll ? { ...defineAll, prompts: defineAll.prompts.filter((p) => p.key !== HOW_KEY) } : null;
   const [index, setIndex] = useState(0);
   const page = pages[index];
   const last = index === pages.length - 1;
@@ -240,6 +249,9 @@ export default function StoryPictureBook({
         ) : (
           <span />
         )}
+        {last && define && !allAnswered ? (
+          <span />
+        ) : (
         <button
           type="button"
           data-testid="story-page-next"
@@ -251,6 +263,7 @@ export default function StoryPictureBook({
         >
           {t('page_next')}
         </button>
+        )}
       </div>
 
       {auto.phase === 'blocked' && (
@@ -276,7 +289,15 @@ export default function StoryPictureBook({
           }}
         />
       )}
-      {celebration && <DefineCelebration xp={celebration.xp} onClose={() => setCelebration(null)} />}
+      {celebration && (
+        <DefineCelebration
+          xp={celebration.xp}
+          onClose={() => {
+            setCelebration(null);
+            onDone();
+          }}
+        />
+      )}
 
     </div>
   );
@@ -341,7 +362,7 @@ function DefineProblemCard({
 
   return (
     <div data-testid="define-problem" className="story-rise flex flex-col gap-4">
-      <Popi text={define.popi} />
+      <Popi text={define.popi} grand />
       <section className="rounded-[20px] border border-[#dfe8f2] bg-[#F4F8FC] p-4 sm:p-5">
         <div className="flex items-center gap-3">
           <span

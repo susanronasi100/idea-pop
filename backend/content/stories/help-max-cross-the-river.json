@@ -103,7 +103,7 @@
   },
   "sticker": { "name": "River Crosser", "emoji": "🌉" },
   "define_problem": {
-    "popi": "Let's be problem detectives! Answer the 6 big questions, Who, What, Where, When, Why and How, to define Max's problem.",
+    "popi": "Let's be problem detectives! Answer the 5 big questions, Who, What, Where, When and Why, to define Max's problem.",
     "title": "The big question",
     "question": "What exactly is the problem?",
     "hint": "Answer each question in a few words.",

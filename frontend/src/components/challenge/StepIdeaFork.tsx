@@ -2,7 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
-import { btnText } from '@/components/challenge/buttons';
+import { btnSecondary } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 type AgeMode = import('@/lib/hooks/useAgeMode').AgeMode;
@@ -63,7 +63,7 @@ export default function StepIdeaFork({
       {/* Back link */}
       <button
         onClick={onBack}
-        className={btnText}
+        className={`${btnSecondary} self-center`}
       >
         {t('back')}
       </button>

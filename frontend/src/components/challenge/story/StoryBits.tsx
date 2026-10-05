@@ -12,13 +12,16 @@ import { btnIcon, btnPrimary, btnSecondary } from '@/components/challenge/button
  * Popi — the ONE penguin (same character as the Ask-Me mascot), here as the
  * story guide who narrates each chapter.
  */
-export function Popi({ text, label }: { text: string; label?: string }) {
+/** `grand`: Popi pops in big, then settles to his normal size (step 1, TEMP rule 24). */
+export function Popi({ text, label, grand = false }: { text: string; label?: string; grand?: boolean }) {
   const t = useTranslations('story');
   const locale = useLocale();
   const voice = usePopiVoice(locale);
   return (
     <div data-testid="story-popi" className="flex items-end gap-3">
-      <PopiAvatar size={84} className="shrink-0" />
+      <span className={`shrink-0 ${grand ? 'popi-grand' : ''}`}>
+        <PopiAvatar size={84} />
+      </span>
       <div className="flex flex-1 items-center gap-3 rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-2 font-body font-bold text-xs text-challenge">

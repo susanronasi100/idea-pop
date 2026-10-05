@@ -26,6 +26,7 @@ import ToolLesson from '@/components/challenge/story/ToolLesson';
 import StoryEnding from '@/components/challenge/story/StoryEnding';
 import { StoryFairTest, StorySketchTop } from '@/components/challenge/story/StorySketchBuild';
 import { Popi } from '@/components/challenge/story/StoryBits';
+import { howQuestion } from '@/components/challenge/story/StoryPictureBook';
 import { useMissionGame } from '@/components/challenge/story/useMissionGame';
 import type { components } from '@/lib/api/schema';
 
@@ -240,7 +241,7 @@ export default function ChallengePage() {
 
           {currentStep === 2 && story && (
             <div className="flex flex-col gap-4 pt-4">
-              <Popi text={story.guide.your_idea} />
+              <Popi text={howQuestion(story) ?? story.guide.your_idea} />
             </div>
           )}
 
