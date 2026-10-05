@@ -1,131 +1,236 @@
-import { getImageProps, type StaticImageData } from "next/image";
+"use client";
 
-// The designer's workshop scene, split into layers (tablet and desktop; phones keep their own hero picture).
-// The background is the Figma frame without anyone in it; every kid, animal and tool is the designer's own PNG,
-// cleaned of stray background-removal pixels and exported at its size in the 3840×1611 scene (mirrored where the
-// scene mirrors it). The gears, compass and brace had no PNG, so they were cut from the Figma frame.
-import background from "../../../../../public/landing/hero/background.webp";
-import artSupplies from "../../../../../public/landing/hero/art-supplies.webp";
-import bear from "../../../../../public/landing/hero/bear.webp";
-import bucketHatKid from "../../../../../public/landing/hero/bucket-hat-kid.webp";
-import caterpillar from "../../../../../public/landing/hero/caterpillar.webp";
-import crab from "../../../../../public/landing/hero/crab.webp";
-import deer from "../../../../../public/landing/hero/deer.webp";
-import gears from "../../../../../public/landing/hero/gears.webp";
-import girl from "../../../../../public/landing/hero/girl.webp";
-import lizard from "../../../../../public/landing/hero/lizard.webp";
-import measureBoy from "../../../../../public/landing/hero/measure-boy.webp";
-import mechanicalBird from "../../../../../public/landing/hero/mechanical-bird.webp";
-import overallsBoy from "../../../../../public/landing/hero/overalls-boy.webp";
-import parrot from "../../../../../public/landing/hero/parrot.webp";
-import toolbox from "../../../../../public/landing/hero/toolbox.webp";
-import toolsBoy from "../../../../../public/landing/hero/tools-boy.webp";
-import turtle from "../../../../../public/landing/hero/turtle.webp";
+/* eslint-disable @next/next/no-img-element -- full-canvas artwork layers inside one camera-transformed world; their
+   native 1670×942 placement is the point, so next/image's resizing does not apply */
+import { useEffect, useRef, useState } from "react";
 
-// 1×1 transparent GIF: phones never download the layered scene.
-const BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
-const SCENE_W = 3840;
-const SCENE_H = 1611;
-// How wide the scene is drawn: it covers the hero box (85vh tall, never under 770px or 350px + 20.6vw) at 2.384:1.
-const SCENE_SIZES = "max(100vw, 202.6vh, 1836px, calc(835px + 49.1vw))";
-// Motion (motion.css): the scene comes in first, then the layers appear one after another from the sides of the scene
-// toward its centre.
-const FIRST_LAYER_MS = 1400;
-const LAYER_STEP_MS = 130;
+/* The accepted IDEA POP hero animation (the designer's Engineering Specification, "shelf refinement 16 / caption
+   refinement 15"), reproduced from her reference runtime in IDEA_POP_Final_Assets/04_Preview:
+   a 650ms hold on full-screen nature, then a 3.96s camera pull-back into the classroom, then the subjects fade in
+   (deer → sketching boy → middle group → girl → bird → question → papers and graphite marks), 23.45s in all,
+   played once. Every layer is a full 1670×942 canvas placed at (0,0) inside one `world` that carries the single
+   camera transform. The assets are her 04_Preview PNGs as WebP (same pixels and alpha, smaller files). */
 
-type Layer = {
-  src: StaticImageData;
-  // top-left corner in scene pixels
-  x: number;
-  y: number;
-  // kids and animals pop up, tools drop in
-  motion: "pop" | "drop";
-  // 0 = outermost, appears first
-  order: number;
-  // grounded kids and animals grow up out of the floor; the flying parrot and the tools move from their middle
-  grounded?: boolean;
-};
+const W = 1670;
+const H = 942;
+const HOLD_MS = 650;
+const DURATION_MS = 22800;
+const CAMERA_MS = 3960;
+const AIM = { x: 1227, y: 496 };
+// bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
+const REV = "final-2026-10-05";
+const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
 
-// Back to front: whoever stands lower in the picture is in front.
-const LAYERS: Layer[] = [
-  // 115px right of its Figma spot, as in the approved single-picture hero: there its tail had crossed "Ages 8+" at
-  // laptop sizes
-  { src: parrot, x: 2604, y: 348, motion: "pop", order: 4 },
-  { src: deer, x: 1945, y: 768, motion: "pop", order: 13, grounded: true },
-  { src: bucketHatKid, x: 1478, y: 874, motion: "pop", order: 11, grounded: true },
-  { src: caterpillar, x: 389, y: 1211, motion: "pop", order: 0, grounded: true },
-  { src: overallsBoy, x: 2258, y: 826, motion: "pop", order: 7, grounded: true },
-  { src: crab, x: 2145, y: 1240, motion: "pop", order: 10, grounded: true },
-  { src: bear, x: 1666, y: 1081, motion: "pop", order: 14, grounded: true },
-  { src: toolsBoy, x: 967, y: 560, motion: "pop", order: 5, grounded: true },
-  { src: lizard, x: 2437, y: 1245, motion: "pop", order: 6, grounded: true },
-  { src: girl, x: 2815, y: 718, motion: "pop", order: 2, grounded: true },
-  { src: measureBoy, x: 769, y: 727, motion: "pop", order: 3, grounded: true },
-  { src: mechanicalBird, x: 1385, y: 1326, motion: "drop", order: 8 },
-  { src: toolbox, x: 1554, y: 1425, motion: "drop", order: 12 },
-  // the compass lies on the bird's base, so it travels with the bird
-  { src: gears, x: 1363, y: 1425, motion: "drop", order: 8 },
-  { src: artSupplies, x: 2094, y: 1396, motion: "drop", order: 9 },
-  { src: turtle, x: 662, y: 1479, motion: "pop", order: 1, grounded: true },
+const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
+const ease = (x: number) => x * x * x * (x * (x * 6 - 15) + 10);
+const lerp = (a: number, b: number, amount: number) => a + (b - a) * amount;
+
+// Timed opacity fades, in ms after the hold (spec section 5).
+const FADES: ReadonlyArray<readonly [id: string, start: number, end: number]> = [
+  ["deer", 4136, 6336],
+  ["boy", 5280, 7480],
+  ["kids", 6424, 8800],
+  ["girl", 9000, 11200],
+  ["birdBody", 11400, 13400],
+  ["birdWing", 11400, 13800],
+  ["question", 14000, 15800],
+  ["paper1", 16200, 18100],
+  ["marks1", 17100, 19200],
+  ["paper2", 18300, 20200],
+  ["marks2", 18900, 21100],
+  ["paper3", 20400, 22300],
+  ["marks3", 20400, 22800],
 ];
 
-const pct = (value: number, of: number) => `${((value / of) * 100).toFixed(4)}%`;
+// Back to front (spec section 3). `fade` layers start hidden; the rest arrive with the camera.
+const LAYERS: ReadonlyArray<{ id: string; file: string; z: number; fade?: boolean }> = [
+  { id: "classroom", file: "classroom-structure", z: 2 },
+  { id: "plants", file: "classroom-plants", z: 3 },
+  { id: "props", file: "classroom-props", z: 3 },
+  { id: "tree", file: "tree-canopy", z: 3 },
+  { id: "bushes", file: "foreground-bushes", z: 4 },
+  { id: "deer", file: "deer", z: 4, fade: true },
+  { id: "boy", file: "sketching-boy", z: 4, fade: true },
+  { id: "kids", file: "kids-group", z: 4, fade: true },
+  { id: "table", file: "foreground-table", z: 5 },
+  { id: "girl", file: "main-girl", z: 6, fade: true },
+  { id: "birdWing", file: "bird-wing-sketch", z: 7, fade: true },
+  { id: "paper1", file: "observation-paper-01", z: 7, fade: true },
+  { id: "paper2", file: "observation-paper-02", z: 7, fade: true },
+  { id: "paper3", file: "observation-paper-03", z: 7, fade: true },
+  { id: "birdBody", file: "bird-body", z: 8, fade: true },
+  { id: "marks1", file: "motion-sketch-01", z: 9, fade: true },
+  { id: "marks2", file: "motion-sketch-02", z: 9, fade: true },
+  { id: "marks3", file: "motion-sketch-03", z: 9, fade: true },
+  { id: "question", file: "question-text", z: 10, fade: true },
+];
 
 export default function HeroScene() {
-  const { props: backgroundProps } = getImageProps({
-    src: background,
-    alt: "",
-    sizes: SCENE_SIZES,
-    quality: 85,
-    loading: "eager",
-    fetchPriority: "high",
-  });
+  const viewportRef = useRef<HTMLDivElement>(null);
+  const worldRef = useRef<HTMLDivElement>(null);
+  const sceneryRef = useRef<HTMLImageElement>(null);
+  const floorRef = useRef<HTMLDivElement>(null);
+  const layerRefs = useRef<Record<string, HTMLImageElement | null>>({});
+  const [state, setState] = useState<"preparing" | "ready" | "fallback">("preparing");
+
+  useEffect(() => {
+    const viewport = viewportRef.current;
+    const world = worldRef.current;
+    const scenery = sceneryRef.current;
+    const floor = floorRef.current;
+    if (!viewport || !world || !scenery || !floor) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+
+    let clock = 0; // accumulated playback time after readiness, ms
+    let last: number | null = null;
+    let playing = true;
+    let ready = false;
+    let frame = 0;
+    let cancelled = false;
+
+    // Draws every layer from one logical time t (ms after the hold), at the hero box's current size.
+    const draw = () => {
+      const t = Math.max(0, Math.min(clock - HOLD_MS, DURATION_MS));
+      const vw = viewport.clientWidth;
+      const vh = viewport.clientHeight;
+      if (!vw || !vh) return;
+      const portrait = vw / vh < 1.1 && vw < 1000;
+      const s = portrait ? vw / W : Math.min(vw / W, vh / H);
+      const hx = (vw - W * s) / 2;
+      const hy = portrait ? 0 : (vh - H * s) / 2;
+
+      // The camera: inverse zoom and its target both interpolate toward the fixed artwork point (1227, 496).
+      const e = ease(clamp01(t / CAMERA_MS));
+      const startZoom = Math.max(3.6, vw / (700 * s), vh / (280 * s)) * 1.04;
+      const zoom = 1 / lerp(1 / startZoom, 1, e);
+      const scale = s * zoom;
+      const cx = lerp(vw / 2, hx + AIM.x * s, e);
+      const cy = lerp(vh / 2, hy + AIM.y * s, e);
+      const tx = cx - AIM.x * scale;
+      const ty = cy - AIM.y * scale;
+      world.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
+
+      // The landscape photograph is fitted to the visible part of the rear opening, so no photo edge ever shows.
+      const vl = Math.max(0, tx + 780 * scale);
+      const vr = Math.min(vw, tx + 1670 * scale);
+      const vt = Math.max(0, ty + 110 * scale);
+      const vb = Math.min(vh, ty + 841 * scale);
+      const required = Math.max(
+        (2 * Math.max(cx - vl, vr - cx)) / 1425,
+        (2 * Math.max(cy - vt, vb - cy)) / 1104,
+      );
+      const photoScale = Math.max(
+        required,
+        lerp(Math.max(vw / 1425, vh / 1104), Math.max((886 * s) / 1425, (686 * s) / 1104), e),
+      );
+      const guarded = photoScale + 2 / 1104;
+      const pw = 1425 * guarded;
+      const ph = 1104 * guarded;
+      scenery.style.left = `${(cx - pw / 2 - tx) / scale}px`;
+      scenery.style.top = `${(cy - ph / 2 - ty) / scale}px`;
+      scenery.style.width = `${pw / scale}px`;
+      scenery.style.height = `${ph / scale}px`;
+
+      // The floor continues below the artwork only where a portrait box needs it.
+      floor.style.height = `${portrait ? Math.max(103, vh / s - 839) : 103}px`;
+
+      for (const [id, start, end] of FADES) {
+        const el = layerRefs.current[id];
+        if (!el) continue;
+        const opacity = ease(clamp01((t - start) / (end - start)));
+        el.style.opacity = String(opacity);
+        el.style.visibility = opacity === 0 ? "hidden" : "visible";
+      }
+    };
+
+    const finish = () => {
+      clock = HOLD_MS + DURATION_MS;
+      playing = false;
+      draw();
+    };
+
+    // One requestAnimationFrame loop and one clock; a stalled frame never advances it by more than 100ms.
+    const tick = (now: number) => {
+      frame = 0;
+      if (last !== null && playing) {
+        clock += Math.min(now - last, 100);
+        if (clock >= HOLD_MS + DURATION_MS) {
+          clock = HOLD_MS + DURATION_MS;
+          playing = false;
+        }
+      }
+      last = now;
+      draw();
+      if (playing) frame = requestAnimationFrame(tick);
+    };
+
+    // Resizing or rotating redraws from the current time; it never restarts the playback.
+    const resize = new ResizeObserver(() => {
+      last = null;
+      if (ready) draw();
+    });
+    resize.observe(viewport);
+    const onVisibility = () => {
+      last = null;
+    };
+    document.addEventListener("visibilitychange", onVisibility);
+    const onReducedChange = (ev: MediaQueryListEvent) => {
+      if (ev.matches && ready) finish();
+    };
+    reduced.addEventListener("change", onReducedChange);
+
+    // Fetch and decode every layer together before the clock starts, so no partial scene ever flashes.
+    const images = [...world.querySelectorAll("img")];
+    Promise.all(images.map((img) => img.decode()))
+      .then(() => {
+        if (cancelled) return;
+        ready = true;
+        setState("ready");
+        if (reduced.matches) finish();
+        else {
+          draw();
+          frame = requestAnimationFrame(tick);
+        }
+      })
+      .catch(() => {
+        // An essential layer failed: show the completed Master Hero instead; the copy above stays usable.
+        if (!cancelled) setState("fallback");
+      });
+
+    return () => {
+      cancelled = true;
+      cancelAnimationFrame(frame);
+      resize.disconnect();
+      document.removeEventListener("visibilitychange", onVisibility);
+      reduced.removeEventListener("change", onReducedChange);
+    };
+  }, []);
 
   return (
-    <div aria-hidden="true" className="pointer-events-none absolute inset-0 hidden md:block [container-type:size]">
-      {/* The scene covers the hero box the way object-cover + object-bottom did: the full width, or wider than the box
-          when the box is relatively tall, always anchored to the bottom centre (100cqh × 2.3836 = the scene's width at
-          the box's height). */}
-      <div
-        data-intro="scene"
-        className="absolute bottom-0 left-[calc(50cqw_-_max(50cqw,119.18cqh))] aspect-[3840/1611] w-[max(100cqw,238.36cqh)]"
-      >
-        <picture>
-          <source media="(max-width: 767px)" srcSet={BLANK_GIF} />
-          {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-          <img {...backgroundProps} alt="" className="absolute inset-0 h-full w-full" />
-        </picture>
-        {LAYERS.map((layer) => {
-          const { props } = getImageProps({
-            src: layer.src,
-            alt: "",
-            sizes: `calc(${SCENE_SIZES} * ${(layer.src.width / SCENE_W).toFixed(4)})`,
-            quality: 90,
-            loading: "eager",
-          });
-          return (
-            <picture key={layer.src.src}>
-              <source media="(max-width: 767px)" srcSet={BLANK_GIF} />
-              {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-              <img
-                {...props}
-                alt=""
-                data-intro={layer.motion === "pop" ? "layer-pop" : "layer-drop"}
-                className={`absolute h-auto max-w-none ${layer.grounded ? "origin-bottom" : ""}`}
-                style={
-                  {
-                    ...props.style,
-                    left: pct(layer.x, SCENE_W),
-                    top: pct(layer.y, SCENE_H),
-                    width: pct(layer.src.width, SCENE_W),
-                    "--motion-delay": `${FIRST_LAYER_MS + layer.order * LAYER_STEP_MS}ms`,
-                  } as React.CSSProperties
-                }
-              />
-            </picture>
-          );
-        })}
+    <div ref={viewportRef} aria-hidden="true" className="hero-viewport" data-state={state}>
+      <div ref={worldRef} className="hero-world">
+        <img className="hero-layer" style={{ zIndex: 0 }} src={src("nature-continuous")} alt="" />
+        <div className="hero-scenery">
+          <img ref={sceneryRef} className="hero-scenery-image" src={src("nature-background")} alt="" />
+        </div>
+        {LAYERS.slice(0, 1).map((l) => (
+          <img key={l.id} className="hero-layer" style={{ zIndex: l.z }} src={src(l.file)} alt="" />
+        ))}
+        <div ref={floorRef} className="hero-floor" style={{ backgroundImage: `linear-gradient(165deg, #ead9bc44, #ad956666), url(/landing/hero-final/floor-texture.png?v=${REV})` }} />
+        {LAYERS.slice(1).map((l) => (
+          <img
+            key={l.id}
+            ref={(el) => {
+              layerRefs.current[l.id] = el;
+            }}
+            className="hero-layer"
+            style={{ zIndex: l.z, ...(l.fade ? { opacity: 0, visibility: "hidden" } : null) }}
+            src={src(l.file)}
+            alt=""
+          />
+        ))}
       </div>
+      {state === "fallback" && <img className="hero-fallback" src={src("master-hero")} alt="" />}
     </div>
   );
 }

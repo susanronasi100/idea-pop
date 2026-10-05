@@ -1,22 +1,17 @@
 import { Fragment } from "react";
 import { getTranslations } from "next-intl/server";
-import Image, { getImageProps } from "next/image";
+import Image from "next/image";
 import { Link } from "@/i18n/routing";
 import PricingPlans from "./_components/PricingPlans";
 import AskIdeaPop from "./_components/AskIdeaPop";
 import ScrollReveal from "./_components/ScrollReveal";
 import { btnGlass, btnLime, cardShape, cardShapeLime, fromCenter, keepTogether, motionDelay } from "./_components/ui";
 import FaqList from "./_components/FaqList";
-// Tablet and desktop hero: the designer's workshop scene built from layers, so every kid and animal can animate in.
+// The hero: the designer's accepted camera pull-back from nature into the classroom (IDEA_POP_Final_Assets spec).
 import HeroScene from "./_components/HeroScene";
 import "./motion.css";
+import "./hero.css";
 
-// Phones: the same scene without the characters, cropped to the middle 60% a phone actually shows.
-import heroSceneMobile from "../../../../public/landing/hero-scene-mobile.webp";
-// Phones only: characters layered on that scene (hero-kid-3, the bear and the parrot, oriented per the mobile design).
-import heroMobileGirl from "../../../../public/landing/hero-mobile-girl.png";
-import heroMobileBear from "../../../../public/landing/hero-mobile-bear.png";
-import heroMobileParrot from "../../../../public/landing/hero-mobile-parrot.png";
 // The designer's Figma export (5760×3060) at 2880 wide. Its left ~42% is 49% opaque in the export; flattened on white,
 // which matches the Figma frame (over the page's #F3FFC2 that side turned green).
 import paintingGirl from "../../../../public/landing/paint-together.webp";
@@ -55,8 +50,6 @@ import expertMath from "../../../../public/landing/experts/math.png";
 const kidMakes = [kidMake1, kidMake2, kidMake3, kidMake4, kidMake5, kidMake6];
 
 const DEEP = "#2E5F4B";
-// 1×1 transparent GIF: a <picture> source that makes desktop skip the phone-only hero images entirely.
-const BLANK_GIF = "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -80,12 +73,6 @@ export async function generateMetadata({ params }: Props) {
 export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "marketing" });
-
-  // Phones get their own hero picture (tablet and desktop use HeroScene), so it is a <picture> built from getImageProps.
-  const { props: heroMobileProps } = getImageProps({ alt: "", fill: true, quality: 90, loading: "eager", fetchPriority: "high", src: heroSceneMobile, sizes: "max(100vw, 773px)" });
-  const { props: heroParrotProps } = getImageProps({ src: heroMobileParrot, alt: "", sizes: "108px", quality: 90, loading: "eager" });
-  const { props: heroGirlProps } = getImageProps({ src: heroMobileGirl, alt: "", sizes: "99px", quality: 90, loading: "eager" });
-  const { props: heroBearProps } = getImageProps({ src: heroMobileBear, alt: "", sizes: "98px", quality: 90, loading: "eager" });
 
   const faqItems = t.raw("faq.items") as Array<{ q: string; a: string }>;
   const kidMakeAlts = t.raw("kids_made.alts") as string[];
@@ -180,67 +167,29 @@ export default async function LandingPage({ params }: Props) {
     // so the scroll-linked motion still follows the page.
     <div className="bg-[#F3FFC2] overflow-x-clip">
       <ScrollReveal />
-      {/* 1. Hero — composited workshop scene */}
-      <section aria-label="hero" className="relative" dir="ltr" data-scroll-timeline="hero">
-        {/* Desktop: 85% of viewport height per design, but never shorter than max(770px, 350px + 20.6vw).
-            The copy sits at a fixed px position while the bottom-anchored scene scales with the box, so on short
-            windows the kids' and animals' faces rose behind the description; from this height every face stays
-            below the text (short windows scroll to the kids' feet instead). Phones: at least 540px, and taller when the
-            copy needs it (see the copy below). */}
-        <div className="relative w-full overflow-hidden min-h-[540px] md:h-[85vh] md:min-h-[max(770px,calc(350px_+_20.6vw))]">
-          {/* Motion: the scene comes in first (fades in while zooming out), then the kids and animals appear one after
-              another from the sides toward the centre. It keeps its full size as the hero scrolls away. */}
-          <div className="absolute inset-0 overflow-hidden">
-            {/* Phones only. object-bottom anchors the cover crop so any trim comes off the top, never the feet; sizes is
-                the drawn width at the 540px floor (540px × 1.43; the hero grows to ~650px with the Persian text and still
-                gets the same files at phone pixel densities), quality 90 because the default 75 visibly softened faces and hair.
-                Chrome fetches images even inside display:none, so each phone <picture> swaps in BLANK_GIF from md up
-                to keep tablets and desktops from downloading them. */}
-            <picture>
-              <source media="(min-width: 768px)" srcSet={BLANK_GIF} />
-              {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-              <img {...heroMobileProps} alt="" className="object-cover object-bottom md:hidden" data-intro="scene" />
-            </picture>
-
-            {/* Phones only. The scene is drawn at the box's height (772×540 at the floor) around the box centre, so the
-                parrot's offset from 50% keeps it over the same spot; the girl and the bear stand a fixed distance above
-                the bottom. Motion: after the scene, from the side to the centre: the girl pops up, the parrot swoops
-                down, then the bear pops up. */}
-            <div aria-hidden="true" className="pointer-events-none absolute inset-0 md:hidden">
-              <picture>
-                <source media="(min-width: 768px)" srcSet={BLANK_GIF} />
-                {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-                <img {...heroParrotProps} alt="" className="absolute left-[calc(50%_+_30px)] top-4 h-auto w-[108px] -translate-x-1/2" data-intro="drop" style={{ ...heroParrotProps.style, ...motionDelay(1550) }} />
-              </picture>
-              <picture>
-                <source media="(min-width: 768px)" srcSet={BLANK_GIF} />
-                {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-                <img {...heroGirlProps} alt="" className="absolute bottom-[33px] left-6 h-[169px] w-auto origin-bottom" data-intro="pop" style={{ ...heroGirlProps.style, ...motionDelay(1400) }} />
-              </picture>
-              <picture>
-                <source media="(min-width: 768px)" srcSet={BLANK_GIF} />
-                {/* eslint-disable-next-line @next/next/no-img-element -- a <picture> needs a raw img; its props come from getImageProps */}
-                <img {...heroBearProps} alt="" className="absolute bottom-[6px] right-[calc(24px_+_25%)] h-[88px] w-auto origin-bottom" data-intro="pop" style={{ ...heroBearProps.style, ...motionDelay(1700) }} />
-              </picture>
-            </div>
-
+      {/* 1. Hero — the animated nature-to-classroom scene (HeroScene.tsx), the copy layered above it */}
+      <section aria-label="hero" className="relative lg:pt-[5.5rem]" dir="ltr" data-scroll-timeline="hero">
+        {/* The box has the artwork's own 1670:942 shape, so the designer's contain layout fills it edge to edge.
+            Large screens: the copy sits on the empty pale-green wall at the left of the artwork (centred, it would cover
+            the question paper above the bird). Below that the wall is too small for the copy, so it goes above.
+            lg: the box starts under the fixed nav capsule, which would otherwise cover the question paper. */}
+        <div className="relative flex w-full flex-col lg:block lg:aspect-[1670/942]">
+          <div className="relative order-2 aspect-[1670/942] w-full lg:absolute lg:inset-0 lg:aspect-auto">
             <HeroScene />
           </div>
 
           {/* hero copy — fluid type per the designer's responsive spec
               (clamp() from a 375px mobile floor to the 1440px design size).
-              Phones: in the flow, 7rem down (clear of the nav), keeping 200px under the buttons for the girl and the bear,
-              so the second button never touches the girl (English is ~580px tall at 375px); a longer text (Persian)
-              makes the hero taller rather than pushing the buttons onto her.
-              Desktop: a fixed 6rem from the top, ~20px under the nav capsule, which is fixed at top-3. */}
+              Below lg: in the flow above the picture, 7rem down (clear of the nav).
+              lg and up: on the wall, sized to the artwork so the buttons stay above the girl. */}
           <div
-            className="relative z-10 pt-28 pb-[200px] md:absolute md:inset-x-0 md:top-[6rem] md:py-0 px-[clamp(1rem,-1rem+8vw,6rem)] text-center"
+            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center lg:absolute lg:left-[7%] lg:top-[3%] lg:w-[35%] lg:p-0 lg:text-start"
             dir={locale === "fa" ? "rtl" : "ltr"}
             data-scroll="hero-copy"
           >
             {/* Cherry Bomb One ships a single 400 weight — the spec's Regular.
                 Motion: the lines rise in one after another while the scene settles. */}
-            <h1 className="[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)]" data-intro="rise" style={motionDelay(350)}>
+            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "lg:text-[clamp(1.875rem,2.5vw,3.25rem)]" : "lg:text-[clamp(2.25rem,3.3vw,4rem)]"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
                 <span className="text-[#18785A]">
@@ -250,11 +199,11 @@ export default async function LandingPage({ params }: Props) {
               </span>{" "}
               <span className="text-[#194D3D]">{t("hero.headline_2")}</span>
             </h1>
-            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
+            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] lg:text-[clamp(1.5rem,2.1vw,2.5rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
               <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
             </p>
-            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto mt-3" data-intro="rise" style={motionDelay(770)}>
+            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto lg:mx-0 mt-3" data-intro="rise" style={motionDelay(770)}>
               {t("hero.body_1_pre")}
               <span className="text-[#18785A]">{t("hero.body_1_word")}</span>
               {t("hero.body_1_post")}
@@ -264,7 +213,7 @@ export default async function LandingPage({ params }: Props) {
             </p>
             {/* A hovered button grows 11% (up to ~19px a side), so the pair needs 32px side by side and 16px stacked to
                 keep a grown button clear of its neighbour. */}
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-4 sm:gap-8 mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
+            <div className="flex flex-col sm:flex-row items-center justify-center lg:justify-start gap-4 sm:gap-8 lg:gap-5 lg:w-max lg:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
               <Link
                 href="/exploring"
                 className={btnLime}
