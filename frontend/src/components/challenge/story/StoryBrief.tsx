@@ -70,6 +70,15 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
 
   return (
     <div data-testid="story-brief" className="flex flex-col gap-5 py-4">
+      {auto.phase === 'blocked' && (
+        <p
+          data-testid="popi-tap-hint"
+          className="story-pop self-center rounded-pill bg-white px-4 py-2 font-body text-sm font-bold text-challenge shadow-sm"
+        >
+          <span aria-hidden="true">👆 </span>
+          {t('tap_to_listen')}
+        </p>
+      )}
 
       <div className="grid gap-3 sm:grid-cols-3">
         {story.opening.map((page, i) => (

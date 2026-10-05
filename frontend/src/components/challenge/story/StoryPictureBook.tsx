@@ -61,7 +61,7 @@ export default function StoryPictureBook({
   const { stop } = voice;
   useEffect(() => stop, [index, stop]);
   // Popi reads the pages by himself, turning them, then his own message (TEMP rule 19).
-  useAutoNarration({
+  const auto = useAutoNarration({
     id: challengeId,
     voice,
     pages: pages.map(pageWords),
@@ -247,6 +247,16 @@ export default function StoryPictureBook({
           {t('page_next')}
         </button>
       </div>
+
+      {auto.phase === 'blocked' && (
+        <p
+          data-testid="popi-tap-hint"
+          className="story-pop self-center rounded-pill bg-white px-4 py-2 font-body text-sm font-bold text-challenge shadow-sm"
+        >
+          <span aria-hidden="true">👆 </span>
+          {t('tap_to_listen')}
+        </p>
+      )}
 
       {last && define && (
         <DefineProblemCard

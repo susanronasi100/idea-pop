@@ -110,6 +110,8 @@ export function useAutoNarration({
         setPhase(resume.current);
         return;
       }
+      // Before Popi starts, a tap (scrolling, focusing the window) only unlocks sound for him.
+      if (phase === 'wait') return;
       latest.current.voice.stop();
       setPhase('off');
     };

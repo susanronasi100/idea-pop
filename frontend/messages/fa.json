@@ -1481,6 +1481,7 @@
     "popi_says": "پاپی می‌گوید",
     "popi_listen": "گوش دادن به پاپی",
     "listen_story": "گوش دادن به داستان",
+    "tap_to_listen": "هر جا را لمس کن تا پاپی برایت بخواند",
     "define_progress": "سؤال {n} از {total}",
     "define_complete": "به هر ۶ سؤال جواب دادی. کارآگاه‌بازی عالی!",
     "define_placeholder": "جوابت را بنویس…",

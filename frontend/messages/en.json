@@ -1481,6 +1481,7 @@
     "popi_says": "Popi says",
     "popi_listen": "Listen to Popi",
     "listen_story": "Listen to the story",
+    "tap_to_listen": "Tap anywhere and Popi will read to you",
     "define_progress": "Question {n} of {total}",
     "define_complete": "All 6 answered. Great detective work!",
     "define_placeholder": "Type your answer…",
