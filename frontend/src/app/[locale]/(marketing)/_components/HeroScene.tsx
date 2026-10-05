@@ -8,7 +8,8 @@ import { useEffect, useRef, useState } from "react";
    refinement 15"), reproduced from her reference runtime in IDEA_POP_Final_Assets/04_Preview:
    a 650ms hold on full-screen nature, then a 3.96s camera pull-back into the classroom, then the subjects fade in
    (deer → sketching boy → middle group → girl → bird → question → papers and graphite marks), 23.45s in all,
-   played once. Every layer is a full 1670×942 canvas placed at (0,0) inside one `world` that carries the single
+   played once. Changed with susan on 2026-10-05: the zoom moves in log space, the landscape only ever shrinks (with a
+   little depth), and the people, bird and question are lossless. Every layer is a full 1670×942 canvas placed at (0,0) inside one `world` that carries the single
    camera transform. The assets are her 04_Preview PNGs as WebP (same pixels and alpha, smaller files). */
 
 const W = 1670;
@@ -18,7 +19,7 @@ const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
-const REV = "final-2026-10-05";
+const REV = "final-2026-10-06";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
@@ -107,30 +108,35 @@ export default function HeroScene() {
       const hx = (vw - W * s) / 2;
       const hy = portrait ? 0 : (vh - H * s) / 2;
 
-      // The camera: inverse zoom and its target both interpolate toward the fixed artwork point (1227, 496).
-      const e = ease(clamp01(t / CAMERA_MS));
+      // The camera pulls back from deep inside the opening to the finished framing. The zoom moves evenly in log
+      // space (a steady dolly, not a lurch at the start) and its target eases toward the artwork point (1227, 496),
+      // so the walls and the roof slide past as one room.
       const startZoom = Math.max(3.6, vw / (700 * s), vh / (280 * s)) * 1.04;
-      const zoom = 1 / lerp(1 / startZoom, 1, e);
-      const scale = s * zoom;
-      const cx = lerp(vw / 2, hx + AIM.x * s, e);
-      const cy = lerp(vh / 2, hy + AIM.y * s, e);
-      const tx = cx - AIM.x * scale;
-      const ty = cy - AIM.y * scale;
+      const camera = (e: number) => {
+        const zoom = Math.pow(startZoom, 1 - e);
+        const scale = s * zoom;
+        const cx = lerp(vw / 2, hx + AIM.x * s, e);
+        const cy = lerp(vh / 2, hy + AIM.y * s, e);
+        return { zoom, scale, cx, cy, tx: cx - AIM.x * scale, ty: cy - AIM.y * scale };
+      };
+      // The landscape sits farther away than the room, so it shrinks a little less than the room does (depth), and it
+      // never grows: at each moment it takes the largest size it will need from now on, which also keeps the rear
+      // opening covered at every camera position.
+      const finalFit = Math.max((886 * s) / 1425, (686 * s) / 1104);
+      const photoFor = (e: number) => {
+        const c = camera(e);
+        const vl = Math.max(0, c.tx + 780 * c.scale);
+        const vr = Math.min(vw, c.tx + 1670 * c.scale);
+        const vt = Math.max(0, c.ty + 110 * c.scale);
+        const vb = Math.min(vh, c.ty + 841 * c.scale);
+        const required = Math.max((2 * Math.max(c.cx - vl, vr - c.cx)) / 1425, (2 * Math.max(c.cy - vt, vb - c.cy)) / 1104);
+        return Math.max(required, finalFit * Math.pow(c.zoom, 0.85));
+      };
+      const e = ease(clamp01(t / CAMERA_MS));
+      const { scale, cx, cy, tx, ty } = camera(e);
       world.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-
-      // The landscape photograph is fitted to the visible part of the rear opening, so no photo edge ever shows.
-      const vl = Math.max(0, tx + 780 * scale);
-      const vr = Math.min(vw, tx + 1670 * scale);
-      const vt = Math.max(0, ty + 110 * scale);
-      const vb = Math.min(vh, ty + 841 * scale);
-      const required = Math.max(
-        (2 * Math.max(cx - vl, vr - cx)) / 1425,
-        (2 * Math.max(cy - vt, vb - cy)) / 1104,
-      );
-      const photoScale = Math.max(
-        required,
-        lerp(Math.max(vw / 1425, vh / 1104), Math.max((886 * s) / 1425, (686 * s) / 1104), e),
-      );
+      let photoScale = photoFor(e);
+      for (let i = 1; i <= 48; i++) photoScale = Math.max(photoScale, photoFor(e + ((1 - e) * i) / 48));
       const guarded = photoScale + 2 / 1104;
       const pw = 1425 * guarded;
       const ph = 1104 * guarded;

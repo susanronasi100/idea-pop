@@ -177,6 +177,8 @@ export default async function LandingPage({ params }: Props) {
         <div className="relative flex w-full flex-col xl:block xl:aspect-[1670/942]">
           <div className="relative order-2 aspect-[1670/942] w-full xl:absolute xl:inset-0 xl:aspect-auto">
             <HeroScene />
+            {/* Wide screens: a soft blur along the top of the photo, so the nav and Sign up button read clearly over it. */}
+            <div aria-hidden="true" className="hero-navblur hidden xl:block" />
           </div>
 
           {/* hero copy — fluid type per the designer's responsive spec
@@ -185,14 +187,14 @@ export default async function LandingPage({ params }: Props) {
               xl and up: exactly on the plain wall (right of the lamp and vines, above the shelves and the girl), and it
               fades in with the girl (HeroScene.tsx drives [data-hero-copy]). */}
           <div
-            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center xl:absolute xl:left-[12.4%] xl:top-[18.8%] xl:w-[30%] xl:p-0 xl:text-start"
+            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center xl:absolute xl:left-[12.4%] xl:top-[16%] xl:w-[30%] xl:p-0 xl:text-start"
             dir={locale === "fa" ? "rtl" : "ltr"}
             data-scroll="hero-copy"
             data-hero-copy
           >
             {/* Cherry Bomb One ships a single 400 weight — the spec's Regular.
                 Motion: the lines rise in one after another while the scene settles. */}
-            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.5rem,2vw,2.5rem)]" : "xl:text-[clamp(1.75rem,2.5vw,3rem)]"}`} data-intro="rise" style={motionDelay(350)}>
+            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.5rem,2.15vw,2.75rem)]" : "xl:text-[clamp(2.125rem,3.15vw,4rem)]"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
                 <span className="text-[#18785A]">
@@ -202,7 +204,7 @@ export default async function LandingPage({ params }: Props) {
               </span>{" "}
               <span className="text-[#194D3D]">{t("hero.headline_2")}</span>
             </h1>
-            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.125rem,1.55vw,1.875rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
+            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.375rem,2.05vw,2.5rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
               <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
             </p>
