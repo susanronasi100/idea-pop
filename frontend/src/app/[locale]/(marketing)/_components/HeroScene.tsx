@@ -18,6 +18,7 @@ const HOLD_MS = 650;
 const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
+const PHOTO_STEPS = 400;
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
 const REV = "final-2026-10-06";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
@@ -96,6 +97,7 @@ export default function HeroScene() {
     let ready = false;
     let frame = 0;
     let cancelled = false;
+    let photoTable: { key: string; values: number[] } = { key: "", values: [] };
 
     // Draws every layer from one logical time t (ms after the hold), at the hero box's current size.
     const draw = () => {
@@ -135,8 +137,20 @@ export default function HeroScene() {
       const e = ease(clamp01(t / CAMERA_MS));
       const { scale, cx, cy, tx, ty } = camera(e);
       world.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-      let photoScale = photoFor(e);
-      for (let i = 1; i <= 48; i++) photoScale = Math.max(photoScale, photoFor(e + ((1 - e) * i) / 48));
+      // A table of "largest size still needed" over the whole move, built once per hero size; reading it by linear
+      // interpolation keeps the size strictly non-increasing from frame to frame.
+      const key = `${vw}x${vh}`;
+      if (photoTable.key !== key) {
+        const values = new Array<number>(PHOTO_STEPS + 1);
+        for (let i = PHOTO_STEPS; i >= 0; i--) {
+          const raw = photoFor(i / PHOTO_STEPS);
+          values[i] = i === PHOTO_STEPS ? raw : Math.max(raw, values[i + 1]);
+        }
+        photoTable = { key, values };
+      }
+      const at = e * PHOTO_STEPS;
+      const lo = Math.min(PHOTO_STEPS - 1, Math.floor(at));
+      const photoScale = lerp(photoTable.values[lo], photoTable.values[lo + 1], at - lo);
       const guarded = photoScale + 2 / 1104;
       const pw = 1425 * guarded;
       const ph = 1104 * guarded;
