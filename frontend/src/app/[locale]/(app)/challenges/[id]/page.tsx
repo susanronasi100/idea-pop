@@ -179,6 +179,11 @@ export default function ChallengePage() {
   const story = challenge.story ?? null;
   const gameProps = { game, update: updateGame };
 
+  // A picture-book brief fills the frame; every other step keeps the narrow reading column.
+  const wide =
+    currentStep === 1 && story && story.opening.length > 0 && story.opening.every((p) => p.image)
+      ? 'max-w-5xl'
+      : 'max-w-2xl';
   return (
     <div data-testid="challenge-page" className="min-h-screen bg-tint-blue">
       <MissionHUD
@@ -192,7 +197,7 @@ export default function ChallengePage() {
       />
 
       {/* Mission / Ideas Wall tabs */}
-      <div className="max-w-2xl mx-auto px-4 pt-4">
+      <div className={`${wide} mx-auto px-4 pt-4`}>
         <div className="flex gap-0 rounded-card overflow-hidden border border-ink/10 mb-4" role="tablist">
           <button
             role="tab"
@@ -225,7 +230,7 @@ export default function ChallengePage() {
 
       {/* Mission tab content */}
       {activeTab === 'mission' && (
-        <div className="max-w-2xl mx-auto px-4 pb-24">
+        <div className={`${wide} mx-auto px-4 pb-24`}>
           {currentStep === 1 &&
             (story ? (
               <StoryBrief challenge={challenge} story={story} {...gameProps} onNext={() => goToStep(2)} />

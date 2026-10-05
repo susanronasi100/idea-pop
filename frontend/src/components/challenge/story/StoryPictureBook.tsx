@@ -95,7 +95,9 @@ export default function StoryPictureBook({
       <div
         ref={frameRef}
         data-testid={`story-page-${index + 1}`}
-        className="relative overflow-hidden rounded-[20px] shadow-[0_6px_18px_rgba(0,0,0,0.15)]"
+        className="relative mx-auto w-full overflow-hidden rounded-[20px] shadow-[0_6px_18px_rgba(0,0,0,0.15)]"
+        // As wide as the frame, but never so tall that the picture and its buttons leave the screen.
+        style={{ maxWidth: 'calc((100dvh - 380px) * 1.777)' }}
       >
         {/* width/height hold the picture's shape while it loads, so the words always have room. */}
         {/* eslint-disable-next-line @next/next/no-img-element -- a story page sized by its own width */}
@@ -189,22 +191,8 @@ export default function StoryPictureBook({
         )}
       </div>
 
-      {last && define && (
-        <DefineProblemCard
-          define={define}
-          answers={answers}
-          onAnswer={onAnswer}
-          done={done}
-          onDone={(key) => {
-            const next = done.includes(key) ? done : [...done, key];
-            onDoneChange(next);
-            if (define.prompts.every((q) => next.includes(q.key))) maybeCelebrate(true);
-          }}
-        />
-      )}
-      {celebration && <DefineCelebration xp={celebration.xp} onClose={() => setCelebration(null)} />}
-
-      <div className="flex items-center justify-between">
+      {/* Back and Next sit right under the photo, above anything else on the page. */}
+      <div className="mx-auto flex w-full items-center justify-between" style={{ maxWidth: 'calc((100dvh - 380px) * 1.777)' }}>
         {index > 0 ? (
           <button
             type="button"
@@ -244,6 +232,22 @@ export default function StoryPictureBook({
           {t('page_next')}
         </button>
       </div>
+
+      {last && define && (
+        <DefineProblemCard
+          define={define}
+          answers={answers}
+          onAnswer={onAnswer}
+          done={done}
+          onDone={(key) => {
+            const next = done.includes(key) ? done : [...done, key];
+            onDoneChange(next);
+            if (define.prompts.every((q) => next.includes(q.key))) maybeCelebrate(true);
+          }}
+        />
+      )}
+      {celebration && <DefineCelebration xp={celebration.xp} onClose={() => setCelebration(null)} />}
+
     </div>
   );
 }
