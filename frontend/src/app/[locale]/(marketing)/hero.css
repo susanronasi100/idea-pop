@@ -54,6 +54,19 @@
   pointer-events: none;
   background-size: auto, 96px 46px;
 }
+/* The question paper, a little smaller and lower than delivered (susan, 2026-10-05) so the nav capsule floating over
+   the photo leaves it readable. Scaled about the paper's own centre in artwork pixels. */
+.hero-question {
+  transform-origin: 1067px 120px;
+  transform: translateY(30px) scale(0.72);
+}
+/* Wide screens: the copy on the wall waits for the girl (HeroScene.tsx fades it in with her). */
+@media (min-width: 1280px) {
+  [data-hero-copy] {
+    opacity: 0;
+    visibility: hidden;
+  }
+}
 /* An essential layer failed to load: the completed Master Hero, still. */
 .hero-fallback {
   position: absolute;

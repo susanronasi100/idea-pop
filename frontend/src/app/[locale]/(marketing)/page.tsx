@@ -47,6 +47,8 @@ import expertScience from "../../../../public/landing/experts/science.png";
 import expertHistory from "../../../../public/landing/experts/history.png";
 import expertArt from "../../../../public/landing/experts/art.png";
 import expertMath from "../../../../public/landing/experts/math.png";
+// On the wall (xl) the hero buttons are a size smaller so the pair fits between the shelves and the girl.
+const heroWallButton = "xl:px-8 xl:py-2.5 xl:text-[clamp(0.875rem,1vw,1.0625rem)]";
 const kidMakes = [kidMake1, kidMake2, kidMake3, kidMake4, kidMake5, kidMake6];
 
 const DEEP = "#2E5F4B";
@@ -180,15 +182,17 @@ export default async function LandingPage({ params }: Props) {
           {/* hero copy — fluid type per the designer's responsive spec
               (clamp() from a 375px mobile floor to the 1440px design size).
               Below xl: in the flow above the picture, 7rem down (clear of the nav).
-              xl and up: on the wall, sized to the artwork so the buttons stay above the girl. */}
+              xl and up: exactly on the plain wall (right of the lamp and vines, above the shelves and the girl), and it
+              fades in with the girl (HeroScene.tsx drives [data-hero-copy]). */}
           <div
-            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center xl:absolute xl:left-[7.5%] xl:top-[12%] xl:w-[34%] xl:p-0 xl:text-start"
+            className="relative z-10 order-1 pt-28 pb-8 px-[clamp(1rem,-1rem+8vw,6rem)] text-center xl:absolute xl:left-[12.4%] xl:top-[18.8%] xl:w-[30%] xl:p-0 xl:text-start"
             dir={locale === "fa" ? "rtl" : "ltr"}
             data-scroll="hero-copy"
+            data-hero-copy
           >
             {/* Cherry Bomb One ships a single 400 weight — the spec's Regular.
                 Motion: the lines rise in one after another while the scene settles. */}
-            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.75rem,2.3vw,3rem)]" : "xl:text-[clamp(2rem,2.9vw,3.5rem)]"}`} data-intro="rise" style={motionDelay(350)}>
+            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.5rem,2vw,2.5rem)]" : "xl:text-[clamp(1.75rem,2.5vw,3rem)]"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
                 <span className="text-[#18785A]">
@@ -198,11 +202,11 @@ export default async function LandingPage({ params }: Props) {
               </span>{" "}
               <span className="text-[#194D3D]">{t("hero.headline_2")}</span>
             </h1>
-            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.25rem,1.8vw,2.25rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
+            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.125rem,1.55vw,1.875rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
               <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
             </p>
-            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:text-[clamp(0.875rem,1.05vw,1.25rem)] mt-3" data-intro="rise" style={motionDelay(770)}>
+            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:text-[clamp(0.875rem,0.95vw,1.125rem)] mt-3 xl:mt-2" data-intro="rise" style={motionDelay(770)}>
               {t("hero.body_1_pre")}
               <span className="text-[#18785A]">{t("hero.body_1_word")}</span>
               {t("hero.body_1_post")}
@@ -212,14 +216,14 @@ export default async function LandingPage({ params }: Props) {
             </p>
             {/* A hovered button grows 11% (up to ~19px a side), so the pair needs 32px side by side and 16px stacked to
                 keep a grown button clear of its neighbour. */}
-            <div className="flex flex-col sm:flex-row xl:flex-col items-center xl:items-start justify-center gap-4 sm:gap-8 xl:gap-3 xl:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
+            <div className="flex flex-col sm:flex-row xl:flex-col items-center xl:items-start justify-center gap-4 sm:gap-8 xl:gap-2.5 xl:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
               <Link
                 href="/exploring"
-                className={btnLime}
+                className={`${btnLime} ${heroWallButton}`}
               >
                 {t("hero.cta_explore")}
               </Link>
-              <Link href="/challenges" prefetch={false} className={btnGlass}>
+              <Link href="/challenges" prefetch={false} className={`${btnGlass} ${heroWallButton}`}>
                 {t("hero.cta_challenge")}
               </Link>
             </div>

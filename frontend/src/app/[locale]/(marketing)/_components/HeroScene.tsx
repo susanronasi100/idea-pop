@@ -43,7 +43,7 @@ const FADES: ReadonlyArray<readonly [id: string, start: number, end: number]> = 
 ];
 
 // Back to front (spec section 3). `fade` layers start hidden; the rest arrive with the camera.
-const LAYERS: ReadonlyArray<{ id: string; file: string; z: number; fade?: boolean }> = [
+const LAYERS: ReadonlyArray<{ id: string; file: string; z: number; fade?: boolean; className?: string }> = [
   { id: "classroom", file: "classroom-structure", z: 2 },
   { id: "plants", file: "classroom-plants", z: 3 },
   { id: "props", file: "classroom-props", z: 3 },
@@ -62,7 +62,7 @@ const LAYERS: ReadonlyArray<{ id: string; file: string; z: number; fade?: boolea
   { id: "marks1", file: "motion-sketch-01", z: 9, fade: true },
   { id: "marks2", file: "motion-sketch-02", z: 9, fade: true },
   { id: "marks3", file: "motion-sketch-03", z: 9, fade: true },
-  { id: "question", file: "question-text", z: 10, fade: true },
+  { id: "question", file: "question-text", z: 10, fade: true, className: "hero-question" },
 ];
 
 export default function HeroScene() {
@@ -80,6 +80,14 @@ export default function HeroScene() {
     const floor = floorRef.current;
     if (!viewport || !world || !scenery || !floor) return;
     const reduced = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // On wide screens the hero copy sits on the wall and fades in with the girl; narrower, it is above the picture.
+    const copy = document.querySelector<HTMLElement>("[data-hero-copy]");
+    const wide = window.matchMedia("(min-width: 1280px)");
+    const showCopy = (opacity: number) => {
+      if (!copy) return;
+      copy.style.opacity = String(opacity);
+      copy.style.visibility = opacity === 0 ? "hidden" : "visible";
+    };
 
     let clock = 0; // accumulated playback time after readiness, ms
     let last: number | null = null;
@@ -141,6 +149,7 @@ export default function HeroScene() {
         el.style.opacity = String(opacity);
         el.style.visibility = opacity === 0 ? "hidden" : "visible";
       }
+      showCopy(wide.matches ? ease(clamp01((t - 9000) / 2200)) : 1);
     };
 
     const finish = () => {
@@ -194,7 +203,9 @@ export default function HeroScene() {
       })
       .catch(() => {
         // An essential layer failed: show the completed Master Hero instead; the copy above stays usable.
-        if (!cancelled) setState("fallback");
+        if (cancelled) return;
+        setState("fallback");
+        showCopy(1);
       });
 
     return () => {
@@ -223,7 +234,7 @@ export default function HeroScene() {
             ref={(el) => {
               layerRefs.current[l.id] = el;
             }}
-            className="hero-layer"
+            className={`hero-layer ${l.className ?? ""}`}
             style={{ zIndex: l.z, ...(l.fade ? { opacity: 0, visibility: "hidden" } : null) }}
             src={src(l.file)}
             alt=""
