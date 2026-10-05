@@ -5,6 +5,7 @@ import MissionHints from '../MissionHints';
 import { Popi, backClass, optionClass, pillCtaClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
+import { btnText } from '@/components/challenge/buttons';
 
 interface Props {
   challenge: ChallengeDetail;
@@ -42,7 +43,7 @@ export default function StoryLab({ challenge, story, game, update, onNext, onBac
       <Popi text={story.guide.skill} />
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-display text-xs text-challenge">{lab.title}</p>
+        <p className="font-body font-bold text-xs text-challenge">{lab.title}</p>
         {challenge.skill_instructions && (
           <div className="flex items-start gap-2">
             <span className="shrink-0 rounded-md bg-tint-lime px-2 py-1 font-body text-[11px] font-bold uppercase tracking-wide text-explore">
@@ -117,7 +118,7 @@ export default function StoryLab({ challenge, story, game, update, onNext, onBac
       >
         {t('lab_next')}
       </button>
-      <button type="button" data-testid="lab-skip" onClick={onNext} className="self-center font-body text-sm text-challenge hover:underline">
+      <button type="button" data-testid="lab-skip" onClick={onNext} className={`${btnText} self-center`}>
         {t('lab_skip')}
       </button>
       <button type="button" onClick={onBack} className={backClass}>

@@ -58,7 +58,7 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
           data-testid="root-found"
           className="mt-4 rounded-card border border-challenge bg-challenge/10 p-4"
         >
-          <p className="font-display text-challenge text-base mb-3">
+          <p className="font-body font-bold text-challenge text-base mb-3">
             {t('five_whys_root')}
           </p>
           <textarea

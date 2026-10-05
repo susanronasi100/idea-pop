@@ -5,6 +5,7 @@ import { useTranslations, useFormatter } from 'next-intl';
 import Link from 'next/link';
 import AudiencePicker from './AudiencePicker';
 import { submitIdea } from '@/lib/api/client';
+import { btnPrimary } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -93,7 +94,7 @@ export default function StepCelebrate({
           data-testid="wall-submit-section"
           className="bg-white rounded-card shadow-sm p-4 flex flex-col gap-3"
         >
-          <p className="font-display text-base text-ink">{t('wall_post_heading')}</p>
+          <p className="font-body font-bold text-base text-ink">{t('wall_post_heading')}</p>
           <p className="font-body text-sm text-ink/50">
             {t('wall_post_note')}
           </p>
@@ -118,7 +119,7 @@ export default function StepCelebrate({
             data-testid="wall-submit-btn"
             onClick={handleWallSubmit}
             disabled={sending || !sketchProjectId}
-            className="bg-challenge text-white font-display text-base px-5 py-2.5 rounded-card disabled:opacity-40"
+            className={btnPrimary}
           >
             {sending ? tWall('submit_sending') : t('wall_share_button')}
           </button>

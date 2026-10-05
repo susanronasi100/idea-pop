@@ -2,6 +2,7 @@
 
 import React from 'react';
 import { useTranslations } from 'next-intl';
+import { btnPrimary } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 type AgeMode = import('@/lib/hooks/useAgeMode').AgeMode;
@@ -61,7 +62,7 @@ export default function StepBrief({ challenge, ageMode, onNext }: StepBriefProps
       {/* CTA */}
       <button
         onClick={onNext}
-        className="w-full rounded-card bg-challenge px-8 py-4 font-display text-lg text-white transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+        className={`${btnPrimary} w-full`}
       >
         {t('lets_go')}
       </button>

@@ -204,7 +204,7 @@ export default function ChallengePage() {
             aria-selected={activeTab === 'mission'}
             data-testid="tab-mission"
             onClick={() => setActiveTab('mission')}
-            className={`flex-1 py-2.5 font-display text-sm transition-colors ${
+            className={`flex-1 py-2.5 font-body text-sm font-bold transition-colors ${
               activeTab === 'mission'
                 ? 'bg-challenge text-white'
                 : 'bg-white text-ink/60 hover:bg-tint-blue'
@@ -217,7 +217,7 @@ export default function ChallengePage() {
             aria-selected={activeTab === 'wall'}
             data-testid="tab-wall"
             onClick={() => setActiveTab('wall')}
-            className={`flex-1 py-2.5 font-display text-sm transition-colors ${
+            className={`flex-1 py-2.5 font-body text-sm font-bold transition-colors ${
               activeTab === 'wall'
                 ? 'bg-challenge text-white'
                 : 'bg-white text-ink/60 hover:bg-tint-blue'

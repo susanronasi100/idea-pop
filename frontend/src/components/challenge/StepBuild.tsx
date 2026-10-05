@@ -13,6 +13,7 @@ import { GAME_BY_SLUG } from './gameEmbeds';
 // Dark-launch flag for the scoped AI helper (server enforces the real gates).
 const HELPER_ON = process.env.NEXT_PUBLIC_MISSION_HELPER === 'true';
 import { createProject } from '@/lib/api/client';
+import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -113,7 +114,7 @@ export default function StepBuild({
 
       {/* Checklist card */}
       <div data-testid="build-checklist" className="bg-white rounded-card p-4 mb-4">
-        <p className="font-display text-base text-ink mb-3">{t('build_checklist_title')}</p>
+        <p className="font-body font-bold text-base text-ink mb-3">{t('build_checklist_title')}</p>
         <div className="flex flex-col gap-2">
           {CHECKLIST_KEYS.map((key, i) => (
             <label key={i} className="flex items-center gap-3 cursor-pointer font-body text-sm text-ink">
@@ -160,7 +161,7 @@ export default function StepBuild({
       {/* Test question card */}
       {!hideTestQuestion && (
         <div className="bg-tint-blue rounded-card p-4 text-center mb-4">
-          <p className="font-display text-base text-ink mb-3">{t('test_question')}</p>
+          <p className="font-body font-bold text-base text-ink mb-3">{t('test_question')}</p>
           <div className="flex gap-3 justify-center">
             <button
               data-testid="test-worked"
@@ -206,7 +207,7 @@ export default function StepBuild({
           data-testid={`${game.testIdPrefix}-mission-complete`}
           disabled={(!hideTestQuestion && testResult === null) || submitting}
           onClick={() => void handleGameComplete()}
-          className="bg-challenge text-white font-display text-lg px-6 py-3 rounded-card w-full disabled:opacity-40"
+          className={`${btnPrimary} w-full`}
         >
           {submitting ? t('saving') : t('build_submit')}
         </button>
@@ -228,7 +229,7 @@ export default function StepBuild({
       <button
         type="button"
         onClick={onBack}
-        className="font-body text-sm text-ink/50 text-left mt-2"
+        className={`${btnText} mt-2 self-start`}
       >
         {t('back')}
       </button>

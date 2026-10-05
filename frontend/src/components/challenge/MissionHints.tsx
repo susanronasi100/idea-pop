@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { btnSecondary } from '@/components/challenge/buttons';
 
 interface MissionHintsProps {
   /** Ordered nudges; the LAST entry is the big give-away hint. */
@@ -31,7 +32,7 @@ export default function MissionHints({ hints }: MissionHintsProps) {
         data-testid="hints-toggle"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between bg-tint-cream px-4 py-3 font-display text-sm text-ink transition-colors hover:bg-tint-cream/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
+        className="flex w-full items-center justify-between bg-tint-cream px-4 py-3 font-body font-bold text-sm text-ink transition-colors hover:bg-tint-cream/80 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
       >
         <span>{t('toggle')}</span>
         <span
@@ -55,7 +56,7 @@ export default function MissionHints({ hints }: MissionHintsProps) {
                 data-testid={`hint-item-${i}`}
                 className={`rounded-card p-3 ${isBig ? 'bg-tint-blush' : 'bg-tint-cream'}`}
               >
-                <p className="font-display text-xs font-bold text-ink/60">
+                <p className="font-body text-xs font-bold text-ink/60">
                   {isBig ? t('big_hint_label') : t('hint_label', { number: i + 1 })}
                 </p>
                 <p className="mt-1 font-body text-sm text-ink">{hint}</p>
@@ -72,7 +73,7 @@ export default function MissionHints({ hints }: MissionHintsProps) {
               type="button"
               data-testid="hint-reveal-btn"
               onClick={() => setShown((prev) => prev + 1)}
-              className="self-start rounded-pill border-2 border-challenge px-4 py-2 font-display text-sm font-bold text-challenge transition-colors hover:bg-tint-blue focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40"
+              className={`${btnSecondary} self-start`}
             >
               {revealLabel}
             </button>

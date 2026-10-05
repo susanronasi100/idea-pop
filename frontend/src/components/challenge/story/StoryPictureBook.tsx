@@ -3,11 +3,13 @@
 import { useEffect, useLayoutEffect, useRef, useState } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
+import { useAutoNarration } from '@/lib/hooks/useAutoNarration';
 import { joinSegments } from '@/lib/narration';
 import { Popi } from './StoryBits';
 import DefineCelebration from './DefineCelebration';
 import { claimDefineBonus } from '@/lib/api/client';
 import type { MissionStory } from './types';
+import { btnIcon, btnPrimary, btnSecondary } from '@/components/challenge/buttons';
 
 type Page = MissionStory['opening'][number];
 type Define = NonNullable<MissionStory['define_problem']>;
@@ -34,6 +36,9 @@ interface Props {
    on the picture at every screen size. Positions use left/right, not start/end: the picture does not flip in
    Persian, so neither do the things placed on it. */
 
+/** Everything Popi reads aloud on one picture. */
+const pageWords = (p: Page) => joinSegments([p.beat, p.text, p.thought?.big, p.thought?.small]);
+
 /** Step 1 as a picture book: one illustrated opening page at a time, with Back and Next. */
 export default function StoryPictureBook({
   pages,
@@ -55,6 +60,16 @@ export default function StoryPictureBook({
   // Turning the page ends the narration of the page before.
   const { stop } = voice;
   useEffect(() => stop, [index, stop]);
+  // Popi reads the pages by himself, turning them, then his own message (TEMP rule 19).
+  useAutoNarration({
+    id: challengeId,
+    voice,
+    pages: pages.map(pageWords),
+    onTurn: setIndex,
+    finale: define?.popi,
+    onFinale: () =>
+      document.querySelector('[data-testid="define-problem"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
+  });
 
   // The picture's width in px; every size on it is a share of this (u(4) = 4% of the width).
   const frameRef = useRef<HTMLDivElement>(null);
@@ -198,7 +213,7 @@ export default function StoryPictureBook({
             type="button"
             data-testid="story-page-back"
             onClick={() => setIndex((i) => i - 1)}
-            className="rounded-pill border-2 border-challenge bg-white px-5 py-2 font-body text-sm font-bold text-challenge transition-all hover:bg-challenge/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+            className={btnSecondary}
           >
             {t('page_back')}
           </button>
@@ -213,9 +228,9 @@ export default function StoryPictureBook({
             onClick={() =>
               voice.speaking
                 ? voice.stop()
-                : voice.speak(joinSegments([page.beat, page.text, page.thought?.big, page.thought?.small]))
+                : voice.speak(pageWords(page))
             }
-            className="flex h-10 w-10 items-center justify-center rounded-full bg-white text-lg text-challenge shadow-[0_2px_6px_rgba(45,156,219,0.3)] transition-all hover:bg-challenge/10 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+            className={btnIcon}
           >
             <span aria-hidden="true">{voice.speaking ? '⏹' : '🔊'}</span>
           </button>
@@ -227,7 +242,7 @@ export default function StoryPictureBook({
             if (!last) setIndex((i) => i + 1);
             else if (!maybeCelebrate()) onDone();
           }}
-          className="rounded-pill bg-challenge px-5 py-2 font-body text-sm font-bold text-white transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className={btnPrimary}
         >
           {t('page_next')}
         </button>
@@ -394,7 +409,7 @@ function DefineProblemCard({
                     type="submit"
                     data-testid="define-check"
                     disabled={(answers[current.key] ?? '').trim().length < 2}
-                    className="shrink-0 rounded-pill bg-challenge px-4 py-2 font-body text-sm font-bold text-white transition-all hover:brightness-110 active:scale-95 disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+                    className={btnPrimary}
                   >
                     {t('define_check')}
                   </button>

@@ -13,6 +13,11 @@ function loadManifest(): Promise<Manifest> {
   return manifestPromise;
 }
 
+export interface SpeakOptions {
+  onEnd?: () => void;
+  onBlocked?: () => void;
+}
+
 /**
  * Popi's voice. A line that has a recorded file (a voice-actor read made with ElevenLabs)
  * plays that file; any other line is told by the browser's own speech, phrase by phrase
@@ -75,9 +80,11 @@ export function usePopiVoice(locale: string) {
     setSpeaking(false);
   }, []);
 
-  /** Plays the recorded read when there is one; otherwise tells the line phrase by phrase. */
+  /** Plays the recorded read when there is one; otherwise tells the line phrase by phrase.
+   *  `onEnd` runs when the line finishes on its own (not when it is stopped); `onBlocked`
+   *  runs when the browser refuses to play sound before the child has tapped the page. */
   const speak = useCallback(
-    (text: string) => {
+    (text: string, opts?: SpeakOptions) => {
       const file = recorded[text.trim()];
       if (!file && !voice) return;
       stop();
@@ -87,9 +94,17 @@ export function usePopiVoice(locale: string) {
       if (file) {
         const a = new Audio(`/audio/popi/${file}`);
         audio.current = a;
-        a.onended = () => run.current === id && setSpeaking(false);
+        a.onended = () => {
+          if (run.current !== id) return;
+          setSpeaking(false);
+          opts?.onEnd?.();
+        };
         a.onerror = () => run.current === id && setSpeaking(false);
-        a.play().catch(() => run.current === id && setSpeaking(false));
+        a.play().catch((err: unknown) => {
+          if (run.current !== id) return;
+          setSpeaking(false);
+          if (err instanceof DOMException && err.name === 'NotAllowedError') opts?.onBlocked?.();
+        });
         return;
       }
 
@@ -99,6 +114,7 @@ export function usePopiVoice(locale: string) {
         if (run.current !== id) return;
         if (i >= phrases.length || !voice) {
           setSpeaking(false);
+          opts?.onEnd?.();
           return;
         }
         const p = phrases[i];
@@ -111,7 +127,11 @@ export function usePopiVoice(locale: string) {
           if (run.current !== id) return;
           timer.current = window.setTimeout(() => say(i + 1), p.pauseAfter);
         };
-        u.onerror = () => run.current === id && setSpeaking(false);
+        u.onerror = (e) => {
+          if (run.current !== id) return;
+          setSpeaking(false);
+          if (e.error === 'not-allowed') opts?.onBlocked?.();
+        };
         synth.speak(u);
       };
       say(0);

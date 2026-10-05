@@ -38,7 +38,7 @@ export default function IdeaCard({ idea, onReact, onRemix, remixing = false }: I
         >
           {avatar}
         </span>
-        <span className="font-display text-sm text-ink">{idea.author_nickname}</span>
+        <span className="font-body font-bold text-sm text-ink">{idea.author_nickname}</span>
       </div>
 
       {/* Project photo */}

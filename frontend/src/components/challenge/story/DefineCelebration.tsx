@@ -3,6 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslations } from 'next-intl';
+import { btnPrimary } from '@/components/challenge/buttons';
 
 interface Props {
   /** XP the server just awarded (0 when it was already given before). */
@@ -96,7 +97,7 @@ export default function DefineCelebration({ xp, onClose }: Props) {
           type="button"
           data-testid="define-celebration-go"
           onClick={onClose}
-          className="mt-5 w-full rounded-pill bg-challenge py-3 font-body text-base font-extrabold text-white transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+          className={`${btnPrimary} mt-5 w-full`}
         >
           {t('celebrate_go')}
         </button>

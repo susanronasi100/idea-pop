@@ -6,6 +6,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import PopiAvatar from '@/components/PopiAvatar';
 import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
 import type { MissionStory } from './types';
+import { btnIcon, btnPrimary, btnSecondary } from '@/components/challenge/buttons';
 
 /**
  * Popi — the ONE penguin (same character as the Ask-Me mascot), here as the
@@ -20,7 +21,7 @@ export function Popi({ text, label }: { text: string; label?: string }) {
       <PopiAvatar size={84} className="shrink-0" />
       <div className="flex flex-1 items-center gap-3 rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
         <div className="min-w-0 flex-1">
-          <p className="flex items-center gap-2 font-display text-xs text-challenge">
+          <p className="flex items-center gap-2 font-body font-bold text-xs text-challenge">
             {label ?? t('popi_says')}
             {voice.speaking && (
               <span aria-hidden="true" className="inline-flex h-3 items-end gap-[2px]">
@@ -42,7 +43,7 @@ export function Popi({ text, label }: { text: string; label?: string }) {
             data-testid="popi-speak"
             aria-label={voice.speaking ? t('popi_stop') : t('popi_listen')}
             onClick={() => (voice.speaking ? voice.stop() : voice.speak(text))}
-            className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-challenge text-base text-white shadow-[0_2px_6px_rgba(45,156,219,0.4)] transition-all hover:brightness-110 active:scale-95 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+            className={btnIcon}
           >
             <span aria-hidden="true">{voice.speaking ? '⏹' : '🔊'}</span>
           </button>
@@ -182,7 +183,7 @@ export function RewardPop({ text }: { text: string }) {
       role="status"
       aria-live="polite"
       data-testid="story-reward"
-      className="story-pop self-center rounded-pill bg-[#fff5d1] px-4 py-2 font-display text-sm text-[#6b4d00] shadow-sm"
+      className="story-pop self-center rounded-pill bg-[#fff5d1] px-4 py-2 font-body font-bold text-sm text-[#6b4d00] shadow-sm"
     >
       {text}
     </p>
@@ -190,10 +191,8 @@ export function RewardPop({ text }: { text: string }) {
 }
 
 /** Shared button looks, matching the existing mission CTAs. */
-export const ctaClass =
-  'w-full rounded-card bg-challenge px-8 py-4 font-display text-lg text-white transition-all hover:brightness-110 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2';
-export const pillCtaClass =
-  'self-center rounded-pill bg-challenge px-6 py-3 font-body text-sm font-bold text-white transition-all hover:brightness-110 active:scale-95 disabled:cursor-not-allowed disabled:opacity-40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2';
+export const ctaClass = `${btnPrimary} w-full`;
+export const pillCtaClass = `${btnPrimary} self-center`;
 export const optionClass = (state: 'idle' | 'right' | 'wrong' | 'picked') =>
   [
     'rounded-2xl border-2 px-4 py-3 font-body text-sm font-semibold transition-all focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge',
@@ -205,4 +204,4 @@ export const optionClass = (state: 'idle' | 'right' | 'wrong' | 'picked') =>
           ? 'border-challenge bg-challenge/10 text-ink'
           : 'border-ink/10 bg-white text-ink hover:border-challenge',
   ].join(' ');
-export const backClass = 'self-center font-body text-sm text-ink/50 transition-colors hover:text-ink';
+export const backClass = `${btnSecondary} self-center`;

@@ -71,14 +71,14 @@ export default function StoryClues({ story, game, update, award, onNext, onBack 
               <span className="story-flip-inner block min-h-[220px]">
                 <span className="story-face flex flex-col items-center justify-center gap-1 rounded-card bg-white p-4 text-center shadow-sm">
                   <Character3D src={c.image} emoji={c.emoji} alt={c.name} size={96} />
-                  <span className="font-display text-base text-ink">{c.name}</span>
+                  <span className="font-body font-bold text-base text-ink">{c.name}</span>
                   <span className="font-body text-xs text-ink/60">{c.tagline} · {t('tap_to_open')}</span>
                 </span>
                 <span className="story-face story-back flex flex-col gap-1.5 rounded-card bg-white p-4 shadow-sm">
-                  <span className="font-display text-base text-ink">{c.emoji} {c.name}</span>
-                  <span className="font-display text-xs text-explore">{t('its_trick')}</span>
+                  <span className="font-body font-bold text-base text-ink">{c.emoji} {c.name}</span>
+                  <span className="font-body font-bold text-xs text-explore">{t('its_trick')}</span>
                   <span className="font-body text-sm text-ink">{c.trick}</span>
-                  <span className="font-display text-xs text-explore">{t('what_it_does')}</span>
+                  <span className="font-body font-bold text-xs text-explore">{t('what_it_does')}</span>
                   <span className="font-body text-sm text-ink">{c.does}</span>
                 </span>
               </span>
@@ -89,7 +89,7 @@ export default function StoryClues({ story, game, update, award, onNext, onBack 
 
       {allOpen && (
         <div data-testid="match-game" className="story-rise flex flex-col gap-3 rounded-card bg-white p-5">
-          <p className="font-display text-xs text-challenge">{t('match_title')}</p>
+          <p className="font-body font-bold text-xs text-challenge">{t('match_title')}</p>
           <p className="font-body text-sm text-ink">{t('match_how')}</p>
           <div className="flex flex-wrap gap-2">
             {cards.map((c, i) => {

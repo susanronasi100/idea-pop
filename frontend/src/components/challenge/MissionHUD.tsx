@@ -231,7 +231,7 @@ export default function MissionHUD({
                     />
 
                     {/* Step number */}
-                    <span className="w-5 shrink-0 font-display text-base text-ink/50">
+                    <span className="w-5 shrink-0 font-body font-bold text-base text-ink/50">
                       {step}
                     </span>
 

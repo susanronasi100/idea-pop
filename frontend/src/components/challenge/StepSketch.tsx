@@ -6,6 +6,7 @@ import CaptureCard, { type CaptureData } from './CaptureCard';
 import ToolSelector, { isToolKey } from './tool/ToolSelector';
 import { createProject } from '@/lib/api/client';
 import { GAME_BY_SLUG } from './gameEmbeds';
+import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -122,7 +123,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
             data-testid={`${game.testIdPrefix}-sketch-continue`}
             onClick={() => void handleGameContinue()}
             disabled={submitting}
-            className="bg-challenge text-white font-display text-lg px-6 py-3 rounded-card w-full disabled:opacity-40"
+            className={`${btnPrimary} w-full`}
           >
             {submitting ? t('saving') : tg('sketch_continue')}
           </button>
@@ -142,7 +143,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
       <button
         type="button"
         onClick={onBack}
-        className="font-body text-sm text-ink/50 text-left mt-2"
+        className={`${btnText} mt-2 self-start`}
       >
         {t('back')}
       </button>

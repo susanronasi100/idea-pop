@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { Character3D, Popi, RewardPop, optionClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
+import { btnIcon } from '@/components/challenge/buttons';
 
 
 /** Story top for step 6: chapter, Popi, the starred tool idea as a reminder
@@ -22,7 +23,7 @@ export function StorySketchTop({ story, game, update }: { story: MissionStory; g
       )}
       <fieldset className="flex flex-col gap-2 rounded-card bg-white p-4">
         <legend className="sr-only">{t('checklist_title')}</legend>
-        <p aria-hidden="true" className="font-display text-sm text-ink">{t('checklist_title')}</p>
+        <p aria-hidden="true" className="font-body font-bold text-sm text-ink">{t('checklist_title')}</p>
         {story.sketch_checklist.map((item, i) => {
           const on = game.sketchChecks.includes(i);
           return (
@@ -66,7 +67,7 @@ function Counter({
         data-testid={`${testId}-minus`}
         aria-label={t('one_less')}
         onClick={() => onChange(Math.max(0, value - 1))}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-challenge text-xl font-bold text-white active:scale-95"
+        className={`${btnIcon} text-xl`}
       >
         −
       </button>
@@ -76,7 +77,7 @@ function Counter({
         data-testid={`${testId}-plus`}
         aria-label={t('one_more')}
         onClick={() => onChange(Math.min(999, value + 1))}
-        className="flex h-10 w-10 items-center justify-center rounded-full bg-challenge text-xl font-bold text-white active:scale-95"
+        className={`${btnIcon} text-xl`}
       >
         +
       </button>
@@ -127,7 +128,7 @@ export function StoryFairTest({
 
       <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
         <div className="flex flex-col gap-3 rounded-card bg-tint-cream p-4">
-          <p className="font-display text-base text-ink">{t('round', { n: 1 })}</p>
+          <p className="font-body font-bold text-base text-ink">{t('round', { n: 1 })}</p>
           <Counter label={test.measure} value={game.round1} onChange={(n) => setRound('round1', n)} testId="round1" />
           <p className="font-body text-sm font-semibold text-ink">{test.check_question}</p>
           <div className="flex flex-wrap gap-2">
@@ -145,7 +146,7 @@ export function StoryFairTest({
           </div>
         </div>
         <div className="flex flex-col gap-3 rounded-card bg-tint-lime p-4">
-          <p className="font-display text-base text-ink">{t('round', { n: 2 })}</p>
+          <p className="font-body font-bold text-base text-ink">{t('round', { n: 2 })}</p>
           <Counter label={test.measure} value={game.round2} onChange={(n) => setRound('round2', n)} testId="round2" />
           <label htmlFor="story-change" className="font-body text-sm font-semibold text-ink">{test.change_prompt}</label>
           <input

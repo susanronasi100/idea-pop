@@ -26,12 +26,12 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
       <Popi text={story.guide.design_secret} />
 
       <div className="story-rise flex flex-col gap-2 rounded-card bg-gradient-to-br from-white from-60% to-tint-blue p-5">
-        <p className="font-display text-xs text-challenge">{t('secret_unlocked')}</p>
+        <p className="font-body font-bold text-xs text-challenge">{t('secret_unlocked')}</p>
         <p className="font-body text-base text-ink">{challenge.design_secret}</p>
       </div>
 
       <div data-testid="predict-game" className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-display text-xs text-challenge">{p.prompt}</p>
+        <p className="font-body font-bold text-xs text-challenge">{p.prompt}</p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {p.items.map((item, i) => {
             const guess = game.predictions[i];

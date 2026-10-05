@@ -2,6 +2,7 @@
 
 import { useState } from 'react'
 import { useTranslations } from 'next-intl'
+import { btnSecondary } from '@/components/challenge/buttons';
 
 interface ToolMindMapProps {
   ageMode: 'young' | 'older'
@@ -37,7 +38,7 @@ export default function ToolMindMap({ ageMode, topic }: ToolMindMapProps) {
 
       {/* Center node */}
       <div className="flex items-center justify-center mb-6">
-        <div className="rounded-card border-2 border-challenge bg-challenge/10 px-4 py-2 font-display text-challenge text-sm text-center max-w-xs">
+        <div className="rounded-card border-2 border-challenge bg-challenge/10 px-4 py-2 font-body font-bold text-challenge text-sm text-center max-w-xs">
           {topic}
         </div>
       </div>
@@ -64,7 +65,7 @@ export default function ToolMindMap({ ageMode, topic }: ToolMindMapProps) {
         <button
           data-testid="add-branch"
           onClick={addBranch}
-          className="mt-4 font-body text-sm text-challenge border border-challenge/40 rounded-card px-3 py-1.5 hover:bg-challenge/10 transition-colors"
+          className={`${btnSecondary} mt-4`}
         >
           {t('mind_map_add')}
         </button>

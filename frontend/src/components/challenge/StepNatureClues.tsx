@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
+import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -67,7 +68,7 @@ export default function StepNatureClues({
               <span className="text-4xl" aria-hidden="true">{clue.emoji}</span>
 
               {/* The clue itself is the star — habitat is just a tag. */}
-              <p className="font-display text-base text-ink">{clue.description}</p>
+              <p className="font-body font-bold text-base text-ink">{clue.description}</p>
 
               <div className="flex items-center gap-2 flex-wrap">
                 <span className="bg-tint-lime text-ink/70 text-xs px-2 py-0.5 rounded-full">
@@ -81,7 +82,7 @@ export default function StepNatureClues({
                   <button
                     data-testid={`watch-clue-${index}`}
                     onClick={() => toggleWatched(index)}
-                    className="text-xs font-body text-challenge underline underline-offset-2 hover:opacity-80 transition-opacity"
+                    className={`${btnText} self-start`}
                   >
                     {isWatched ? t('watched') : t('watch_clip')}
                   </button>
@@ -95,14 +96,14 @@ export default function StepNatureClues({
       <div className="flex flex-col items-center gap-3 pt-2">
         <button
           onClick={onNext}
-          className="w-full sm:w-auto bg-challenge text-white font-body text-sm font-semibold px-6 py-3 rounded-card shadow-sm hover:opacity-90 active:opacity-80 transition-opacity"
+          className={`${btnPrimary} w-full sm:w-auto`}
         >
           {t('got_it_secret')}
         </button>
 
         <button
           onClick={onBack}
-          className="font-body text-sm text-ink/50 hover:text-ink transition-colors"
+          className={btnText}
         >
           {t('back')}
         </button>

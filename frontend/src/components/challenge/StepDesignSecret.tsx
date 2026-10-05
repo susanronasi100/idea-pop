@@ -1,6 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
+import { btnSecondary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -50,14 +51,14 @@ export default function StepDesignSecret({
       <div className="flex flex-col items-center gap-3 pt-2">
         <button
           onClick={onNext}
-          className="w-full sm:w-auto bg-white text-challenge border border-challenge font-body text-sm font-semibold px-6 py-3 rounded-card shadow-sm hover:bg-challenge/5 active:bg-challenge/10 transition-colors"
+          className={`${btnSecondary} w-full sm:w-auto`}
         >
           {t('secret_got_it')}
         </button>
 
         <button
           onClick={onBack}
-          className="font-body text-sm text-ink/50 hover:text-ink transition-colors"
+          className={btnText}
         >
           {t('back')}
         </button>

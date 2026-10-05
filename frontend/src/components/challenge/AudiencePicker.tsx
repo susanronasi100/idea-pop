@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { updateVisibility } from '@/lib/api/client';
+import { btnPrimary } from '@/components/challenge/buttons';
 
 interface AudiencePickerProps {
   projectId: string | null;
@@ -56,7 +57,7 @@ export default function AudiencePicker({ projectId, onDone }: AudiencePickerProp
             className="mt-1"
           />
           <div>
-            <span className="font-display text-ink">{t('audience_private')}</span>
+            <span className="font-body font-bold text-ink">{t('audience_private')}</span>
             <p className="font-body text-sm text-ink/70">{t('audience_private_sub')}</p>
           </div>
         </label>
@@ -73,7 +74,7 @@ export default function AudiencePicker({ projectId, onDone }: AudiencePickerProp
             className="mt-1"
           />
           <div>
-            <span className="font-display text-ink">{t('audience_class')}</span>
+            <span className="font-body font-bold text-ink">{t('audience_class')}</span>
             <p className="font-body text-sm text-ink/70">{t('audience_class_sub')}</p>
           </div>
         </label>
@@ -89,7 +90,7 @@ export default function AudiencePicker({ projectId, onDone }: AudiencePickerProp
             className="mt-1 cursor-not-allowed"
           />
           <div>
-            <span className="font-display text-ink">{t('audience_public')}</span>
+            <span className="font-body font-bold text-ink">{t('audience_public')}</span>
             <p className="font-body text-sm text-ink/70">{t('audience_public_sub')}</p>
           </div>
         </label>
@@ -115,7 +116,7 @@ export default function AudiencePicker({ projectId, onDone }: AudiencePickerProp
         data-testid="audience-save"
         onClick={handleSave}
         disabled={saving || saved || projectId === null}
-        className="bg-challenge text-white font-display px-6 py-2 rounded-card disabled:opacity-50 disabled:cursor-not-allowed"
+        className={btnPrimary}
       >
         {saving ? t('saving') : saved ? t('saved') : t('save')}
       </button>

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { askMissionHelper } from '@/lib/api/client';
 import PopiAvatar from '@/components/PopiAvatar';
+import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 interface MissionHelperProps {
   challengeId: string;
@@ -71,7 +72,7 @@ export default function MissionHelper({
         data-testid="helper-toggle"
         onClick={() => setOpen((prev) => !prev)}
         aria-expanded={open}
-        className="flex w-full items-center justify-between bg-tint-lavender px-4 py-3 font-display text-sm text-ink transition-colors hover:bg-tint-lavender-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
+        className="flex w-full items-center justify-between bg-tint-lavender px-4 py-3 font-body font-bold text-sm text-ink transition-colors hover:bg-tint-lavender-deep focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-inset focus-visible:ring-ink/40"
       >
         <span className="flex items-center gap-2">
           {/* Same robot as the floating Ask-Me mascot — Popi is ONE character. */}
@@ -112,7 +113,7 @@ export default function MissionHelper({
               data-testid="helper-ask-btn"
               onClick={() => void handleAsk()}
               disabled={phase === 'loading' || question.trim().length === 0}
-              className="rounded-pill bg-challenge px-5 py-2 font-display text-sm font-bold text-white transition-all hover:brightness-110 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/40 disabled:opacity-50"
+              className={btnPrimary}
             >
               {t('send')}
             </button>
@@ -130,7 +131,7 @@ export default function MissionHelper({
 
           {phase === 'answered' && (
             <div data-testid="helper-answer" className="rounded-card bg-tint-blue p-3">
-              <p className="font-display text-xs font-bold text-ink/60">🤖 {t('answer_label')}</p>
+              <p className="font-body text-xs font-bold text-ink/60">🤖 {t('answer_label')}</p>
               <p className="mt-1 font-body text-sm text-ink">{answer}</p>
             </div>
           )}
@@ -152,7 +153,7 @@ export default function MissionHelper({
               type="button"
               data-testid="helper-ask-another"
               onClick={reset}
-              className="self-start font-body text-sm font-semibold text-challenge hover:underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
+              className={`${btnText} self-start`}
             >
               {t('ask_another')}
             </button>

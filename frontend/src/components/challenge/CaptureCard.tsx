@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
 import MissionHelper from './MissionHelper';
 import PopiAvatar from '@/components/PopiAvatar';
+import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 // Dark-launch flag for the scoped AI helper (server enforces the real gates).
 const HELPER_ON = process.env.NEXT_PUBLIC_MISSION_HELPER === 'true';
@@ -116,14 +117,14 @@ export default function CaptureCard({
               <button
                 type="button"
                 onClick={() => fileInputRef.current?.click()}
-                className="font-body text-sm text-ink/60 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
+                className={btnText}
               >
                 {t('change_photo')}
               </button>
               <button
                 type="button"
                 onClick={removePhoto}
-                className="font-body text-sm text-ink/60 underline focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge"
+                className={btnText}
               >
                 {t('remove_photo')}
               </button>
@@ -235,7 +236,7 @@ export default function CaptureCard({
         type="button"
         disabled={!canSubmit || submitting}
         onClick={handleSubmit}
-        className="bg-challenge text-white font-display text-lg px-6 py-3 rounded-card w-full disabled:opacity-40"
+        className={`${btnPrimary} w-full`}
       >
         {submitting ? t('saving') : submitLabel}
       </button>

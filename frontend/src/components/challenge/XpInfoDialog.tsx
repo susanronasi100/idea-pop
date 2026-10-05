@@ -121,7 +121,7 @@ export default function XpInfoDialog({ missionXp, onClose }: XpInfoDialogProps) 
 
             {/* 2. How XP is counted */}
             <div className="flex flex-col gap-1.5">
-              <p className="font-display text-sm text-ink">{t('xp_info_how_title')}</p>
+              <p className="font-body font-bold text-sm text-ink">{t('xp_info_how_title')}</p>
               <ul className="flex flex-col gap-1.5">
                 {EARN_ROWS.map((row) => (
                   <li key={row.key} className="flex items-center gap-2">

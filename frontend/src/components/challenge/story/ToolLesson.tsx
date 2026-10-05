@@ -65,7 +65,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
         <>
           <Popi label={t('popi_power_up')} text={tool.intro} />
           <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-            <p className="font-display text-xs text-challenge">{t('tool_what_is', { tool: tool.name })}</p>
+            <p className="font-body font-bold text-xs text-challenge">{t('tool_what_is', { tool: tool.name })}</p>
             <div className="flex flex-wrap justify-center gap-1.5" aria-label={t('tool_pieces_aria')}>
               {tool.parts.map((p, i) => (
                 <span
@@ -114,11 +114,11 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
                   <span className="story-flip-inner block min-h-[150px]">
                     <span className="story-face flex flex-col items-center justify-center gap-1 rounded-card bg-white p-4 text-center shadow-sm">
                       <span className="font-display text-4xl text-challenge">{p.key}</span>
-                      <span className="font-display text-sm text-ink">{p.name}</span>
+                      <span className="font-body font-bold text-sm text-ink">{p.name}</span>
                       <span className="font-body text-xs text-ink/60">{t('tap_to_see')}</span>
                     </span>
                     <span className="story-face story-back flex flex-col justify-center gap-1.5 rounded-card bg-white p-4 shadow-sm">
-                      <span className="font-display text-xs text-explore">{p.name}</span>
+                      <span className="font-body font-bold text-xs text-explore">{p.name}</span>
                       <span className="font-body text-sm text-ink">{p.example}</span>
                     </span>
                   </span>
@@ -143,7 +143,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
           <Popi label={t('popi_power_up')} text={t('tool_try_intro', { count: tool.parts.length })} />
           <div className="flex flex-col gap-3 rounded-card bg-white p-5">
             <div className="flex items-center justify-between">
-              <p className="font-display text-xs text-challenge">{t('tool_try_title', { tool: tool.name })}</p>
+              <p className="font-body font-bold text-xs text-challenge">{t('tool_try_title', { tool: tool.name })}</p>
               <b className="font-body text-sm tabular-nums">{t('tool_lit', { lit, total: tool.parts.length })}</b>
             </div>
             <div className="h-3 overflow-hidden rounded-pill bg-ink/10" role="progressbar" aria-valuemin={0} aria-valuemax={tool.parts.length} aria-valuenow={lit}>
@@ -155,7 +155,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
               return (
                 <div key={p.key} className={`flex flex-col gap-1.5 rounded-2xl p-3 transition-colors ${on ? 'bg-[#eaf7ff]' : 'bg-tint-blue'}`}>
                   <div className="flex items-center justify-between">
-                    <span className="flex items-center gap-2 font-display text-base text-challenge">
+                    <span className="flex items-center gap-2 font-body font-bold text-base text-challenge">
                       <span className={`flex h-8 min-w-8 items-center justify-center rounded-lg px-1.5 text-base ${on ? 'story-pop bg-challenge text-white' : 'bg-white text-ink/30'}`}>{p.key}</span>
                       {p.name}
                     </span>

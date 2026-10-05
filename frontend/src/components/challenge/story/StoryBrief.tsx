@@ -1,7 +1,10 @@
 'use client';
 
 import { useState } from 'react';
-import { useTranslations } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
+import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
+import { useAutoNarration } from '@/lib/hooks/useAutoNarration';
+import { joinSegments } from '@/lib/narration';
 import { SceneStage, Popi, ctaClass, optionClass } from './StoryBits';
 import StoryPictureBook from './StoryPictureBook';
 import type { ChallengeDetail, MissionStory } from './types';
@@ -23,10 +26,23 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
   const t = useTranslations('story');
   const [wrong, setWrong] = useState<number | null>(null);
   const qc = story.quick_check;
+  const pictureBook = story.opening.length > 0 && story.opening.every((p) => p.image);
+  // Popi reads the three opening cards by himself, then his own line (TEMP rule 19).
+  // The picture book runs its own reading, so this one stays off there.
+  const voice = usePopiVoice(useLocale());
+  const auto = useAutoNarration({
+    id: challenge.id,
+    enabled: !pictureBook,
+    voice,
+    pages: story.opening.map((p) => joinSegments([p.beat, p.text])),
+    finale: story.guide.brief,
+    onFinale: () =>
+      document.querySelector('[data-testid="story-popi"]')?.scrollIntoView({ behavior: 'smooth', block: 'center' }),
+  });
 
   // A mission whose opening pages carry pictures tells its start as a picture
   // book, one page at a time, and goes straight on from the last page.
-  if (story.opening.length > 0 && story.opening.every((p) => p.image)) {
+  if (pictureBook) {
     return (
       <StoryPictureBook
         pages={story.opening}
@@ -59,7 +75,9 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
         {story.opening.map((page, i) => (
           <div
             key={page.beat}
-            className={`story-rise flex flex-col gap-1.5 rounded-2xl p-4 ${i === 2 ? 'bg-tint-blush' : 'bg-tint-cream'}`}
+            className={`story-rise flex flex-col gap-1.5 rounded-2xl p-4 transition-shadow ${i === 2 ? 'bg-tint-blush' : 'bg-tint-cream'} ${
+              auto.reading === i ? 'ring-2 ring-challenge ring-offset-2' : ''
+            }`}
             style={{ animationDelay: `${i * 0.15}s` }}
           >
             <span className="text-3xl" aria-hidden="true">{page.emoji}</span>
@@ -75,7 +93,7 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
       <Popi text={story.guide.brief} />
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-display text-xs text-challenge">{t('your_mission')}</p>
+        <p className="font-body font-bold text-xs text-challenge">{t('your_mission')}</p>
         <h2 className="font-display text-2xl text-ink">{challenge.title}</h2>
         <dl data-testid="story-card" className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {CARD_KEYS.map((k) => (

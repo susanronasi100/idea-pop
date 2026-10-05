@@ -5,6 +5,7 @@ import { useTranslations } from 'next-intl';
 import type { components } from '@/lib/api/schema';
 import { fetchIdeas, reactToIdea, remixIdea } from '@/lib/api/client';
 import IdeaCard from './IdeaCard';
+import { btnSecondary } from '@/components/challenge/buttons';
 
 type IdeaWallEntry = components['schemas']['IdeaWallEntry'];
 
@@ -119,7 +120,7 @@ export default function IdeasWallTab({
             type="button"
             onClick={onWriteMyIdea}
             data-testid="write-my-idea-cta"
-            className="mt-2 px-5 py-2.5 rounded-full bg-tint-blue text-ink font-display text-sm hover:opacity-80 transition-opacity"
+            className={`${btnSecondary} mt-2`}
           >
             {tWall('locked_cta')}
           </button>

@@ -58,7 +58,7 @@ export default function ToolSelector({ tools, topic, ageMode }: ToolSelectorProp
       <button
         data-testid="tool-accordion-toggle"
         onClick={() => setOpen((prev) => !prev)}
-        className="w-full flex items-center justify-between px-4 py-3 bg-tint-lavender font-display text-sm text-ink hover:bg-tint-lavender/80 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 bg-tint-lavender font-body font-bold text-sm text-ink hover:bg-tint-lavender/80 transition-colors"
         aria-expanded={open}
       >
         <span>{accordionTitle}</span>
