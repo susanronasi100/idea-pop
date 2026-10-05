@@ -67,9 +67,11 @@ export default function StoryPictureBook({
     pages: pages.map(pageWords),
     onTurn: setIndex,
     finale: define?.popi,
-    onFinale: () =>
-      document.querySelector('[data-testid="define-problem"]')?.scrollIntoView({ behavior: 'smooth', block: 'start' }),
   });
+  // Each picture page starts at the top of the screen, with the picture in full view.
+  useEffect(() => {
+    frameRef.current?.closest('main')?.scrollTo({ top: 0, behavior: 'smooth' });
+  }, [index]);
 
   // The picture's width in px; every size on it is a share of this (u(4) = 4% of the width).
   const frameRef = useRef<HTMLDivElement>(null);
@@ -207,20 +209,21 @@ export default function StoryPictureBook({
       </div>
 
       {/* Back and Next sit right under the photo, above anything else on the page. */}
-      <div className="mx-auto flex w-full items-center justify-between" style={{ maxWidth: 'calc((100dvh - 380px) * 1.777)' }}>
+      {/* Three equal columns, so 🔊 sits exactly under the middle of the photo. */}
+      <div className="mx-auto grid w-full grid-cols-3 items-center" style={{ maxWidth: 'calc((100dvh - 380px) * 1.777)' }}>
         {index > 0 ? (
           <button
             type="button"
             data-testid="story-page-back"
             onClick={() => setIndex((i) => i - 1)}
-            className={btnSecondary}
+            className={`${btnSecondary} justify-self-start`}
           >
             {t('page_back')}
           </button>
         ) : (
           <span />
         )}
-        {voice.available && (
+        {voice.available ? (
           <button
             type="button"
             data-testid="story-page-listen"
@@ -230,10 +233,12 @@ export default function StoryPictureBook({
                 ? voice.stop()
                 : voice.speak(pageWords(page))
             }
-            className={btnIcon}
+            className={`${btnIcon} justify-self-center`}
           >
             <span aria-hidden="true">{voice.speaking ? '⏹' : '🔊'}</span>
           </button>
+        ) : (
+          <span />
         )}
         <button
           type="button"
@@ -242,7 +247,7 @@ export default function StoryPictureBook({
             if (!last) setIndex((i) => i + 1);
             else if (!maybeCelebrate()) onDone();
           }}
-          className={btnPrimary}
+          className={`${btnPrimary} justify-self-end`}
         >
           {t('page_next')}
         </button>

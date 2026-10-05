@@ -15,5 +15,6 @@ export const btnSecondary = `${base} border-2 border-challenge bg-white px-6 py-
 /** Small text action: Skip, I don't know. */
 export const btnText = `${base} px-2 py-2 text-sm text-challenge underline-offset-2 hover:underline`;
 
-/** Round icon: Listen, plus/minus, microphone. Give it an aria-label. */
-export const btnIcon = `${base} h-10 w-10 shrink-0 bg-challenge text-lg text-white shadow-[0_2px_6px_rgba(45,156,219,0.4)] hover:brightness-110`;
+/** Round icon: Listen, plus/minus, microphone. Give it an aria-label. A raised 3D
+ *  button: a lighter top, a darker edge underneath, and it sinks onto the edge when pressed. */
+export const btnIcon = `${base} h-11 w-11 shrink-0 bg-gradient-to-b from-[#6CC4F2] to-challenge text-lg text-white shadow-[inset_0_2px_0_rgba(255,255,255,0.45),0_4px_0_#1B6FA3,0_7px_12px_rgba(27,111,163,0.35)] hover:brightness-110 active:translate-y-[3px] active:scale-100 active:shadow-[inset_0_2px_0_rgba(255,255,255,0.45),0_1px_0_#1B6FA3,0_2px_4px_rgba(27,111,163,0.3)]`;
