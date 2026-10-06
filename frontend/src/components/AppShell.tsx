@@ -529,7 +529,7 @@ function AppShellInner({
 
       {/* Upgrade card (kid + parent) */}
       {showUpgrade && (
-        <a
+        <Link
           href={persona === 'parent' ? '/dashboard/parent#account' : '/profile'}
           className="group mt-14 flex flex-col items-center gap-3 rounded-[0.75rem] bg-[var(--sec-tint)] px-3 pb-4 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--sec-text)]"
         >
@@ -548,7 +548,7 @@ function AppShellInner({
           <span className="inline-flex min-h-12 items-center rounded-pill bg-[var(--sec-up-bg)] px-8 font-body text-lg font-extrabold text-[color:var(--sec-up-text)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18),0_4px_4px_rgba(0,0,0,0.25)] transition-transform group-hover:scale-105 group-active:scale-[0.97]">
             {t('shell.upgrade_cta')}
           </span>
-        </a>
+        </Link>
       )}
 
       {/* In-app language switch (all personas) — quiet footer, off the design

@@ -1,5 +1,7 @@
-import AppShell from "@/components/AppShell";
+import { cookies } from "next/headers";
+import AppShellGate from "@/components/AppShellGate";
 
-export default function AppLayout({ children }: { children: React.ReactNode }) {
-  return <AppShell>{children}</AppShell>;
+export default async function AppLayout({ children }: { children: React.ReactNode }) {
+  const signedIn = (await cookies()).has("ideapop_persona");
+  return <AppShellGate signedIn={signedIn}>{children}</AppShellGate>;
 }
