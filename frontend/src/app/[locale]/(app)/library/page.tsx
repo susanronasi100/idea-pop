@@ -212,11 +212,12 @@ export default function LibraryPage() {
                   data-testid="studio-card"
                   onClick={() => router.push(`/library?studio=${s.slug}`)}
                   aria-label={t('studio_card_aria', { label, makes, courses: courseN })}
-                  className="flex min-h-[6.5rem] flex-col justify-center gap-1 rounded-[1.25rem] px-5 py-4 text-left text-white shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
-                  style={{ backgroundColor: ORANGE, ['--tw-ring-color' as string]: ORANGE }}
+                  className="flex min-h-[6.5rem] flex-col justify-center gap-1 rounded-[1.25rem] px-5 py-4 text-left text-[#5A2405] shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-2"
+                  // The design's light orange tile with dark brown text (6:1, easy to read).
+                  style={{ backgroundColor: '#F2994A', ['--tw-ring-color' as string]: '#5A2405' }}
                 >
                   <span className="font-display text-xl font-bold leading-tight">{label}</span>
-                  <span className="flex items-center gap-1.5 font-body text-sm font-semibold text-white">
+                  <span className="flex items-center gap-1.5 font-body text-sm font-semibold text-[#3D1A04]">
                     <span aria-hidden="true">{s.emoji}</span>
                     {makes > 0 || courseN > 0 ? (
                       <span>

@@ -146,7 +146,9 @@ export default function ExplorePage() {
                       className="relative z-20 font-display text-2xl font-bold leading-tight"
                       style={{ color: cat.ink }}
                     >
-                      {label}
+                      {t.rich(`category_titles.${cat.slug}`, {
+                        hl: (chunks) => <span className="text-[#A3101A]">{chunks}</span>,
+                      })}
                     </h2>
                     <p
                       className="relative z-20 mt-0.5 font-body text-sm font-semibold capitalize"

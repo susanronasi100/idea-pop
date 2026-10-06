@@ -405,6 +405,12 @@
   "explore": {
     "heading": "Animal Superpowers",
     "subheading": "Organized by superpower, not species — because that's how real engineers think.",
+    "category_titles": {
+      "masters_of_disguise": "Masters of <hl>Disguise</hl>",
+      "soft_engineers": "Soft <hl>Engineers</hl>",
+      "speed_champions": "<hl>Speed</hl> Champions",
+      "master_builders": "Master <hl>Builders</hl>"
+    },
     "categories": {
       "masters_of_disguise": "Masters of Disguise",
       "soft_engineers": "Soft Engineers",

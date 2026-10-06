@@ -1004,6 +1004,12 @@
   "explore": {
     "heading": "قدرت‌های فوق‌العاده حیوانات",
     "subheading": "بر اساس قدرت، نه گونه — چون مهندسان واقعی همین‌طور فکر می‌کنند.",
+    "category_titles": {
+      "masters_of_disguise": "استادان <hl>تغییر شکل</hl>",
+      "soft_engineers": "<hl>مهندسان</hl> نرم",
+      "speed_champions": "قهرمانان <hl>سرعت</hl>",
+      "master_builders": "<hl>سازندگان</hl> بزرگ"
+    },
     "categories": {
       "masters_of_disguise": "استادان تغییر شکل",
       "soft_engineers": "مهندسان نرم",
