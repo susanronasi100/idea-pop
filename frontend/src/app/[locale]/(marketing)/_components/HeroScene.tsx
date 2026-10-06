@@ -8,8 +8,8 @@ import { useEffect, useRef, useState } from "react";
    refinement 15"), reproduced from her reference runtime in IDEA_POP_Final_Assets/04_Preview:
    a 650ms hold on full-screen nature, then a 3.96s camera pull-back into the classroom, then the subjects fade in
    (deer → sketching boy → middle group → girl → bird → question → papers and graphite marks), 23.45s in all,
-   played once. Changed with susan on 2026-10-05: the zoom moves in log space, the landscape only ever shrinks (with a
-   little depth), and the people, bird and question are lossless. Every layer is a full 1670×942 canvas placed at (0,0) inside one `world` that carries the single
+   played once. Changed with susan on 2026-10-05: the zoom moves in log space, the landscape photo keeps its on-load size
+   (no zoom), and the people, bird and question are lossless. Every layer is a full 1670×942 canvas placed at (0,0) inside one `world` that carries the single
    camera transform. The assets are her 04_Preview PNGs as WebP (same pixels and alpha, smaller files). */
 
 const W = 1670;
@@ -18,7 +18,6 @@ const HOLD_MS = 650;
 const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
-const PHOTO_STEPS = 400;
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
 const REV = "final-2026-10-06";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
@@ -97,7 +96,6 @@ export default function HeroScene() {
     let ready = false;
     let frame = 0;
     let cancelled = false;
-    let photoTable: { key: string; values: number[] } = { key: "", values: [] };
 
     // Draws every layer from one logical time t (ms after the hold), at the hero box's current size.
     const draw = () => {
@@ -119,43 +117,19 @@ export default function HeroScene() {
         const scale = s * zoom;
         const cx = lerp(vw / 2, hx + AIM.x * s, e);
         const cy = lerp(vh / 2, hy + AIM.y * s, e);
-        return { zoom, scale, cx, cy, tx: cx - AIM.x * scale, ty: cy - AIM.y * scale };
-      };
-      // The landscape sits farther away than the room, so it shrinks a little less than the room does (depth), and it
-      // never grows: at each moment it takes the largest size it will need from now on, which also keeps the rear
-      // opening covered at every camera position.
-      const finalFit = Math.max((886 * s) / 1425, (686 * s) / 1104);
-      const photoFor = (e: number) => {
-        const c = camera(e);
-        const vl = Math.max(0, c.tx + 780 * c.scale);
-        const vr = Math.min(vw, c.tx + 1670 * c.scale);
-        const vt = Math.max(0, c.ty + 110 * c.scale);
-        const vb = Math.min(vh, c.ty + 841 * c.scale);
-        const required = Math.max((2 * Math.max(c.cx - vl, vr - c.cx)) / 1425, (2 * Math.max(c.cy - vt, vb - c.cy)) / 1104);
-        return Math.max(required, finalFit * Math.pow(c.zoom, 0.85));
+        return { scale, tx: cx - AIM.x * scale, ty: cy - AIM.y * scale };
       };
       const e = ease(clamp01(t / CAMERA_MS));
-      const { scale, cx, cy, tx, ty } = camera(e);
+      const { scale, tx, ty } = camera(e);
       world.style.transform = `translate(${tx}px, ${ty}px) scale(${scale})`;
-      // A table of "largest size still needed" over the whole move, built once per hero size; reading it by linear
-      // interpolation keeps the size strictly non-increasing from frame to frame.
-      const key = `${vw}x${vh}`;
-      if (photoTable.key !== key) {
-        const values = new Array<number>(PHOTO_STEPS + 1);
-        for (let i = PHOTO_STEPS; i >= 0; i--) {
-          const raw = photoFor(i / PHOTO_STEPS);
-          values[i] = i === PHOTO_STEPS ? raw : Math.max(raw, values[i + 1]);
-        }
-        photoTable = { key, values };
-      }
-      const at = e * PHOTO_STEPS;
-      const lo = Math.min(PHOTO_STEPS - 1, Math.floor(at));
-      const photoScale = lerp(photoTable.values[lo], photoTable.values[lo + 1], at - lo);
-      const guarded = photoScale + 2 / 1104;
-      const pw = 1425 * guarded;
-      const ph = 1104 * guarded;
-      scenery.style.left = `${(cx - pw / 2 - tx) / scale}px`;
-      scenery.style.top = `${(cy - ph / 2 - ty) / scale}px`;
+      // The landscape photograph stays exactly as it is on load (susan, 2026-10-06): it covers the hero box, centred,
+      // and never zooms; only the classroom pulls back around it. Covering the whole box also covers the rear opening
+      // at every camera position. Its place is converted into world pixels because it lives inside the world.
+      const cover = Math.max(vw / 1425, vh / 1104) + 2 / 1104;
+      const pw = 1425 * cover;
+      const ph = 1104 * cover;
+      scenery.style.left = `${((vw - pw) / 2 - tx) / scale}px`;
+      scenery.style.top = `${((vh - ph) / 2 - ty) / scale}px`;
       scenery.style.width = `${pw / scale}px`;
       scenery.style.height = `${ph / scale}px`;
 
