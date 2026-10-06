@@ -385,9 +385,9 @@ function DefineProblemCard({
         <div className="mt-4 flex flex-col gap-4 sm:flex-row sm:items-start">
           {define.image && (
             // eslint-disable-next-line @next/next/no-img-element -- a small story photo
-            <img src={define.image} alt="" className="w-full rounded-2xl sm:w-[40%]" />
+            <img src={define.image} alt="" className="w-full rounded-2xl sm:sticky sm:top-4 sm:w-[58%]" />
           )}
-          <div className="flex flex-1 flex-col gap-2" aria-live="polite">
+          <div className="flex min-w-0 flex-1 flex-col gap-1.5" aria-live="polite">
             <p className="font-body text-xs font-bold text-[#2D6FC4]">
               {current
                 ? t('define_progress', { n: currentIndex + 1, total: define.prompts.length })
@@ -401,13 +401,13 @@ function DefineProblemCard({
                   key={p.key}
                   data-testid={`define-${p.key}`}
                   data-state="done"
-                  className="story-rise rounded-xl border border-[#bfe6c8] bg-[#F3FBF5] px-3 py-2"
+                  className="story-rise rounded-lg border border-[#bfe6c8] bg-[#F3FBF5] px-2.5 py-1.5"
                 >
-                  <p className="flex items-center gap-2 font-body text-sm font-bold text-[#1B3A6B]">
-                    <span className="rounded-md bg-[#2e9e55] px-1.5 py-0.5 text-xs text-white">{p.label}</span>
+                  <p className="flex items-center gap-1.5 font-body text-xs font-bold text-[#1B3A6B]">
+                    <span className="rounded bg-[#2e9e55] px-1 py-px text-[11px] text-white">{p.label}</span>
                     {p.question} <span aria-hidden="true">✓</span>
                   </p>
-                  <p dir="auto" className="mt-1 font-body text-sm font-semibold text-[#1d7a3a]">
+                  <p dir="auto" className="mt-0.5 font-body text-xs font-semibold text-[#1d7a3a]">
                     {answers[p.key]}
                   </p>
                 </div>
@@ -418,17 +418,17 @@ function DefineProblemCard({
                 key={current.key}
                 data-testid={`define-${current.key}`}
                 data-state="current"
-                className="story-rise rounded-xl border-2 border-challenge bg-white px-3 py-2.5 shadow-[0_4px_14px_rgba(45,156,219,0.18)]"
+                className="story-rise rounded-lg border-2 border-challenge bg-white px-2.5 py-2 shadow-[0_4px_14px_rgba(45,156,219,0.18)]"
               >
                 <label
                   htmlFor={`define-input-${current.key}`}
-                  className="flex items-center gap-2 font-body text-sm font-bold text-[#1B3A6B]"
+                  className="flex items-center gap-1.5 font-body text-xs font-bold text-[#1B3A6B]"
                 >
-                  <span className="rounded-md bg-[#2D6FC4] px-1.5 py-0.5 text-xs text-white">{current.label}</span>
+                  <span className="rounded bg-[#2D6FC4] px-1 py-px text-[11px] text-white">{current.label}</span>
                   {current.question}
                 </label>
                 <form
-                  className="mt-2 flex gap-2"
+                  className="mt-1.5 flex gap-2"
                   onSubmit={(e) => {
                     e.preventDefault();
                     check();
@@ -443,13 +443,13 @@ function DefineProblemCard({
                     placeholder={t('define_placeholder')}
                     maxLength={120}
                     dir="auto"
-                    className="min-w-0 flex-1 rounded-xl border border-[#cfd8e3] px-3 py-2 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
+                    className="min-w-0 flex-1 rounded-lg border border-[#cfd8e3] px-2.5 py-1.5 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
                   />
                   <button
                     type="submit"
                     data-testid="define-check"
                     disabled={(answers[current.key] ?? '').trim().length < 2}
-                    className={btnPrimary}
+                    className={`${btnPrimary} !px-4 !py-1.5`}
                   >
                     {t('define_check')}
                   </button>
