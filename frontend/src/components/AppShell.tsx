@@ -79,8 +79,9 @@ const NAV: Record<Persona, NavItem[]> = { kid: KID_NAV, parent: PARENT_NAV, teac
  * text: the active nav label and icon (≥4.5:1 on white). strong: filled buttons
  * with white text (≥4.5:1 with white), so a few are a shade deeper than the mockups.
  */
-const SECTION_THEME: Record<Section, { tint: string; line: string; text: string; strong: string }> = {
-  profile: { tint: '#F3FFC2', line: '#8BBF3F', text: '#2F7D4E', strong: '#2F7D4E' },
+const SECTION_THEME: Record<Section, { tint: string; line: string; text: string; strong: string; frame?: string }> = {
+  // Sampled from the My profile Figma frame: lime outline, deep green text and dotted frame.
+  profile: { tint: '#F3FFC2', line: '#D2EB6E', text: '#18785A', strong: '#18785A', frame: '#18785A' },
   explore: { tint: '#F9DED7', line: '#E5484D', text: '#C4363C', strong: '#C4363C' },
   library: { tint: '#FBF7D5', line: '#F2994A', text: '#A8550B', strong: '#A8550B' },
   challenge: { tint: '#C0F0FF', line: '#2D9CDB', text: '#1A6FA6', strong: '#1A6FA6' },
@@ -323,6 +324,7 @@ function AppShellInner({
         {
           '--sec-tint': theme.tint,
           '--sec-line': theme.line,
+          '--sec-frame': theme.frame ?? theme.line,
           '--sec-text': theme.text,
           '--sec-strong': theme.strong,
         } as React.CSSProperties
@@ -385,7 +387,7 @@ function AppShellInner({
         {/* Scrollable content — a dotted frame in the section colour + top-right logo */}
         <main
           id="main-content"
-          className="relative m-2 flex-1 overflow-y-auto rounded-[1.75rem] border-[1.5px] border-dotted border-[color:var(--sec-line)] bg-[var(--sec-tint)] pb-20 md:m-3"
+          className="relative m-2 flex-1 overflow-y-auto rounded-[1.75rem] border-[1.5px] border-dotted border-[color:var(--sec-frame)] bg-[var(--sec-tint)] pb-20 md:m-3"
         >
           <div className="pointer-events-none absolute right-5 top-4 z-10 hidden md:block">
             <span className="pointer-events-auto">
