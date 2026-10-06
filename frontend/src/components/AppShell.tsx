@@ -45,8 +45,9 @@ interface NavItem {
   href: string;
 }
 
-// The active item is always coral (the sidebar's own accent) — the chameleon
-// section colours live in the content-area tint, not the nav labels.
+// Each section paints the whole shell in its own colour (TEMP rule 28): the page
+// background, the sidebar outline, the active nav item and its notch, the dotted
+// frame around the content, and the Upgrade card. See SECTION_THEME below.
 const KID_NAV: NavItem[] = [
   { id: 'profile', labelKey: 'nav.profile', href: '/profile' },
   { id: 'explore', labelKey: 'nav.explore', href: '/explore' },
@@ -72,12 +73,18 @@ const TEACHER_NAV: NavItem[] = [
 
 const NAV: Record<Persona, NavItem[]> = { kid: KID_NAV, parent: PARENT_NAV, teacher: TEACHER_NAV };
 
-const sectionTint: Record<Section, string> = {
-  profile: 'bg-tint-lime',
-  explore: 'bg-tint-lime',
-  library: 'bg-tint-cream',
-  challenge: 'bg-tint-blue',
-  studio: 'bg-tint-lavender',
+/**
+ * Section colours, from the designer's four page designs (TEMP rule 28).
+ * tint: the page background. line: outlines, the dotted frame, the notch.
+ * text: the active nav label and icon (≥4.5:1 on white). strong: filled buttons
+ * with white text (≥4.5:1 with white), so a few are a shade deeper than the mockups.
+ */
+const SECTION_THEME: Record<Section, { tint: string; line: string; text: string; strong: string }> = {
+  profile: { tint: '#F3FFC2', line: '#8BBF3F', text: '#2F7D4E', strong: '#2F7D4E' },
+  explore: { tint: '#F9DED7', line: '#E5484D', text: '#C4363C', strong: '#C4363C' },
+  library: { tint: '#FBF7D5', line: '#F2994A', text: '#A8550B', strong: '#A8550B' },
+  challenge: { tint: '#C0F0FF', line: '#2D9CDB', text: '#1A6FA6', strong: '#1A6FA6' },
+  studio: { tint: '#F1D8FB', line: '#B57BD9', text: '#7B3FA8', strong: '#7B3FA8' },
 };
 
 // ── Nav icons (from the designer's Figma export; stroke inherits currentColor
@@ -171,18 +178,18 @@ function ActiveNotch({ id }: { id: NavItem['id'] }) {
               edge; the fill overlaps to x=42 to cover the straight border) */}
           <path
             d="M40 16 C40 24 35 28 30.1 34 A34 34 0 0 0 30.1 86 C35 92 40 96 40 104 L42 104 L42 16 Z"
-            fill="var(--color-tint-blush)"
+            fill="var(--sec-tint)"
           />
           {/* coral hairline: the panel border sweeping around the notch */}
           <path
             d="M40 16 C40 24 35 28 30.1 34 A34 34 0 0 0 30.1 86 C35 92 40 96 40 104"
-            stroke="var(--color-coral-faint)"
-            strokeWidth="1"
+            stroke="var(--sec-line)"
+            strokeWidth="1.5"
             fill="none"
           />
         </svg>
         {/* the docked circle floating in the notch */}
-        <span className="absolute left-[52px] top-[60px] flex h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-coral shadow-[0_2px_8px_rgba(0,0,0,0.14)] rtl:-scale-x-100">
+        <span className="absolute left-[52px] top-[60px] flex h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[color:var(--sec-text)] shadow-[0_2px_8px_rgba(0,0,0,0.14)] rtl:-scale-x-100">
           <NavIcon id={id} className="h-6 w-6" />
         </span>
       </span>
@@ -208,7 +215,7 @@ function AppShellInner({
   const persona = personaFromPath(pathname);
   const activeSection = sectionFromPath(pathname) ?? section;
   const items = NAV[persona];
-  const tint = sectionTint[activeSection];
+  const theme = SECTION_THEME[activeSection];
   const showUpgrade = persona === 'kid' || persona === 'parent';
 
   useEffect(() => {
@@ -234,7 +241,7 @@ function AppShellInner({
   const sidebar = (
     <nav
       aria-label={t('shell.main_nav')}
-      className="flex h-full flex-col gap-6 rounded-[1.75rem] border border-coral-faint bg-white px-3 py-6 shadow-md"
+      className="flex h-full flex-col gap-6 rounded-[1.75rem] border-[1.5px] border-[color:var(--sec-line)] bg-white px-3 py-6 shadow-md"
     >
       {/* Avatar — slim, gently-shimmering gradient ring around the avatar */}
       <div className="flex flex-col items-center gap-2.5 px-3">
@@ -268,8 +275,8 @@ function AppShellInner({
                   'flex items-center justify-between gap-3 rounded-card px-4 py-3.5 font-body text-[15px] font-bold transition-colors duration-150',
                   'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
                   isActive
-                    ? 'text-coral focus-visible:ring-coral'
-                    : 'text-ink/70 hover:bg-tint-blush hover:text-ink focus-visible:ring-ink/20',
+                    ? 'text-[color:var(--sec-text)] focus-visible:ring-[color:var(--sec-text)]'
+                    : 'text-ink/70 hover:bg-[var(--sec-tint)] hover:text-ink focus-visible:ring-ink/20',
                 ].join(' ')}
               >
                 <span>{t(item.labelKey)}</span>
@@ -289,13 +296,13 @@ function AppShellInner({
       {showUpgrade && (
         <a
           href={persona === 'parent' ? '/dashboard/parent#account' : '/profile'}
-          className={`flex flex-col items-center gap-2 rounded-[1.25rem] p-3 text-center transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-coral ${tint}`}
+          className={`flex flex-col items-center gap-2 rounded-[1.25rem] p-3 text-center transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--sec-text)] bg-[var(--sec-tint)]`}
         >
           <Image src="/kid/upgrade-girl.png" alt="" width={72} height={72} className="h-16 w-auto" aria-hidden="true" />
           <span className="font-body text-sm font-semibold text-ink/80">
             {t('shell.upgrade_body')}
           </span>
-          <span className="rounded-pill bg-coral px-5 py-2 font-display text-sm font-bold text-white">
+          <span className="rounded-pill bg-[var(--sec-strong)] px-6 py-2.5 font-body text-base font-extrabold text-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.15),0_4px_4px_rgba(0,0,0,0.2)]">
             {t('shell.upgrade_cta')}
           </span>
         </a>
@@ -310,7 +317,17 @@ function AppShellInner({
   );
 
   return (
-    <div className="app-typography h-screen overflow-hidden bg-tint-blush font-body">
+    <div
+      className="app-typography h-screen overflow-hidden bg-[var(--sec-tint)] font-body"
+      style={
+        {
+          '--sec-tint': theme.tint,
+          '--sec-line': theme.line,
+          '--sec-text': theme.text,
+          '--sec-strong': theme.strong,
+        } as React.CSSProperties
+      }
+    >
       {/* Canonical desktop frame: the shell is capped at 1440px and centred, so
           content never stretches on wide monitors (only the blush background
           fills the overflow). Sidebar 256px + content ≈ 1150px at the cap. */}
@@ -330,7 +347,7 @@ function AppShellInner({
       {/* Mobile drawer */}
       <aside
         className={[
-          'fixed inset-y-0 z-30 flex w-64 flex-col bg-tint-blush px-3 pb-3 transition-transform duration-200 ltr:left-0 rtl:right-0 md:hidden',
+          'fixed inset-y-0 z-30 flex w-64 flex-col bg-[var(--sec-tint)] px-3 pb-3 transition-transform duration-200 ltr:left-0 rtl:right-0 md:hidden',
           drawerOpen ? 'translate-x-0' : 'ltr:-translate-x-full rtl:translate-x-full',
         ].join(' ')}
         aria-label={t('shell.main_nav')}
@@ -348,8 +365,8 @@ function AppShellInner({
         {sidebar}
       </aside>
 
-      {/* Main content area — dashed coral seam against the sidebar */}
-      <div className="flex min-w-0 flex-1 flex-col overflow-hidden border-dashed border-coral-soft md:ltr:border-l md:rtl:border-r">
+      {/* Main content area */}
+      <div className="flex min-w-0 flex-1 flex-col overflow-hidden">
         {/* Mobile top bar */}
         <header className="flex shrink-0 items-center gap-3 border-b border-ink/10 bg-white px-4 py-3 md:hidden">
           <button
@@ -365,10 +382,10 @@ function AppShellInner({
           <Logo size="sm" showWordmark />
         </header>
 
-        {/* Scrollable content — rounded card with the section tint + top-right logo */}
+        {/* Scrollable content — a dotted frame in the section colour + top-right logo */}
         <main
           id="main-content"
-          className={`relative m-2 flex-1 overflow-y-auto rounded-[1.75rem] pb-20 md:m-3 ${tint}`}
+          className="relative m-2 flex-1 overflow-y-auto rounded-[1.75rem] border-[1.5px] border-dotted border-[color:var(--sec-line)] bg-[var(--sec-tint)] pb-20 md:m-3"
         >
           <div className="pointer-events-none absolute right-5 top-4 z-10 hidden md:block">
             <span className="pointer-events-auto">

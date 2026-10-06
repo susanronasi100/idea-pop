@@ -17,29 +17,29 @@ type XpAwardResponse = components['schemas']['XpAwardResponse'];
 const CATEGORIES = [
   {
     slug: 'masters_of_disguise' as const,
-    card: '#C0F0FF',
-    ink: '#0E3742',
+    card: '#F9A88E',
+    ink: '#3A1712',
     avatar: '/explore/reptile-avatar.png',
     icon: '/explore/reptile-icon.png',
   },
   {
     slug: 'soft_engineers' as const,
-    card: '#F1D8FB',
-    ink: '#46204F',
+    card: '#F9A88E',
+    ink: '#3A1712',
     avatar: '/explore/mollusca-avatar.png',
     icon: null,
   },
   {
     slug: 'speed_champions' as const,
-    card: '#F9DED7',
-    ink: '#63281B',
+    card: '#F9A88E',
+    ink: '#3A1712',
     avatar: '/explore/bird-avatar.png',
     icon: '/explore/bird-icon.png',
   },
   {
     slug: 'master_builders' as const,
-    card: '#FBF7D5',
-    ink: '#494015',
+    card: '#F9A88E',
+    ink: '#3A1712',
     avatar: '/explore/arthropoda-avatar.png',
     icon: '/explore/arthropoda-icon.png',
   },
@@ -133,12 +133,12 @@ export default function ExplorePage() {
                   aria-pressed={isActive}
                   aria-label={t('category_animals_aria', { label, count })}
                   onClick={() => setSelectedCategory(isActive ? null : cat.slug)}
-                  className="group relative block rounded-[1.75rem] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore focus-visible:ring-offset-2"
+                  className="group relative block rounded-[1.75rem] text-left focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#C4363C] focus-visible:ring-offset-2"
                 >
                   <div
                     className={[
                       'relative h-52 rounded-[1.75rem] px-6 pt-5 transition-transform duration-150 group-hover:-translate-y-0.5',
-                      isActive ? 'ring-4 ring-explore' : 'ring-1 ring-black/5',
+                      isActive ? 'ring-4 ring-[#C4363C]' : 'ring-1 ring-[#E5484D]/40',
                     ].join(' ')}
                     style={{ backgroundColor: cat.card }}
                   >
