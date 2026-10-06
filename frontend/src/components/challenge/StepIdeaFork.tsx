@@ -54,7 +54,7 @@ export default function StepIdeaFork({
             />
           </span>
           <span className="font-display text-2xl text-ink">{t('fork_yes_title')}</span>
-          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_yes_sub')} →</span>
+          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_yes_sub')}</span>
         </button>
 
         <button
@@ -74,7 +74,7 @@ export default function StepIdeaFork({
             />
           </span>
           <span className="font-display text-2xl text-ink">{t('fork_no_title')}</span>
-          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_no_sub')} →</span>
+          <span className={`${btnPrimary} pointer-events-none`}>{t('fork_no_sub')}</span>
         </button>
       </div>
 

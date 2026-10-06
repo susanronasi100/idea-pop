@@ -95,7 +95,7 @@ describe('StepIdeaFork', () => {
       />,
     );
 
-    fireEvent.click(screen.getByText(/← Back/));
+    fireEvent.click(screen.getByText(/Back/));
 
     expect(onBack).toHaveBeenCalledTimes(1);
   });

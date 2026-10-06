@@ -443,13 +443,13 @@ function DefineProblemCard({
                     placeholder={t('define_placeholder')}
                     maxLength={120}
                     dir="auto"
-                    className="min-w-0 flex-1 rounded-lg border border-[#cfd8e3] px-2.5 py-1.5 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
+                    className="min-h-11 min-w-0 flex-1 rounded-lg border border-[#8FA3B8] px-2.5 py-1.5 font-body text-sm text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
                   />
                   <button
                     type="submit"
                     data-testid="define-check"
                     disabled={(answers[current.key] ?? '').trim().length < 2}
-                    className={`${btnPrimary} !px-4 !py-1.5`}
+                    className={`${btnPrimary} !min-h-11 !px-5 !py-1.5`}
                   >
                     {t('define_check')}
                   </button>
