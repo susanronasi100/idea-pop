@@ -3,7 +3,8 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'next/image';
 import { useTranslations } from 'next-intl';
-import { usePathname } from '@/i18n/routing';
+import { Link, usePathname, useRouter } from '@/i18n/routing';
+import { logout } from '@/lib/api/auth';
 import Logo from './Logo';
 import PenguinMascot from './PenguinMascot';
 import LocaleSwitcher from './marketing/LocaleSwitcher';
@@ -78,14 +79,16 @@ const NAV: Record<Persona, NavItem[]> = { kid: KID_NAV, parent: PARENT_NAV, teac
  * tint: the page background. line: outlines, the dotted frame, the notch.
  * text: the active nav label and icon (≥4.5:1 on white). strong: filled buttons
  * with white text (≥4.5:1 with white), so a few are a shade deeper than the mockups.
+ * upBg/upText: the Upgrade button, from the designer's Upgrade cards (text darkened
+ * where the mockup's grey would not pass AA on that colour).
  */
-const SECTION_THEME: Record<Section, { tint: string; line: string; text: string; strong: string; frame?: string }> = {
+const SECTION_THEME: Record<Section, { tint: string; line: string; text: string; strong: string; frame?: string; upBg: string; upText: string }> = {
   // Sampled from the My profile Figma frame: lime outline, deep green text and dotted frame.
-  profile: { tint: '#F3FFC2', line: '#D2EB6E', text: '#18785A', strong: '#18785A', frame: '#18785A' },
-  explore: { tint: '#F9DED7', line: '#E5484D', text: '#C4363C', strong: '#C4363C' },
-  library: { tint: '#FBF7D5', line: '#F2994A', text: '#A8550B', strong: '#A8550B' },
-  challenge: { tint: '#C0F0FF', line: '#2D9CDB', text: '#1A6FA6', strong: '#1A6FA6' },
-  studio: { tint: '#F1D8FB', line: '#B57BD9', text: '#7B3FA8', strong: '#7B3FA8' },
+  profile: { tint: '#F3FFC2', line: '#D2EB6E', text: '#18785A', strong: '#18785A', frame: '#18785A', upBg: '#D1EF5A', upText: '#194D3D' },
+  explore: { tint: '#F9DED7', line: '#E5484D', text: '#C4363C', strong: '#C4363C', upBg: '#F9A88E', upText: '#4A1C14' },
+  library: { tint: '#FBF7D5', line: '#F2994A', text: '#A8550B', strong: '#A8550B', upBg: '#F1984A', upText: '#2D2D2D' },
+  challenge: { tint: '#C0F0FF', line: '#2D9CDB', text: '#1A6FA6', strong: '#1A6FA6', upBg: '#2D9CDB', upText: '#14202A' },
+  studio: { tint: '#F1D8FB', line: '#B57BD9', text: '#7B3FA8', strong: '#7B3FA8', upBg: '#D7B4F0', upText: '#3B1A55' },
 };
 
 // ── Nav icons (from the designer's Figma export; stroke inherits currentColor
@@ -198,6 +201,134 @@ function ActiveNotch({ id }: { id: NavItem['id'] }) {
   );
 }
 
+// ── Account menu (designer's "Account" popover) ─────────────────────────────────
+// Parent portal (controls + subscription), the kid's own profile, add another
+// child, and sign out. Kids can't add children or pay themselves: those rows go
+// to the parent portal, which asks for the grown-up's own sign-in.
+
+function AccountMenu({
+  persona,
+  kid,
+  avatar,
+  label,
+}: {
+  persona: Persona;
+  kid: { nickname: string; avatar_id: string } | null;
+  avatar: (typeof AVATARS)[number] | undefined;
+  label: string;
+}) {
+  const t = useTranslations('shell');
+  const router = useRouter();
+  const [open, setOpen] = useState(false);
+  const boxRef = React.useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+    const onDown = (e: MouseEvent) => {
+      if (!boxRef.current?.contains(e.target as Node)) setOpen(false);
+    };
+    const onKey = (e: KeyboardEvent) => e.key === 'Escape' && setOpen(false);
+    document.addEventListener('mousedown', onDown);
+    document.addEventListener('keydown', onKey);
+    return () => {
+      document.removeEventListener('mousedown', onDown);
+      document.removeEventListener('keydown', onKey);
+    };
+  }, [open]);
+
+  async function signOut() {
+    setOpen(false);
+    try {
+      localStorage.removeItem('kidProfile');
+    } catch {
+      /* ignore */
+    }
+    await logout();
+    router.push('/login');
+  }
+
+  const row =
+    'flex items-center gap-3 rounded-xl px-3 py-2.5 text-start transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#18785A]';
+  const iconCircle = 'flex h-11 w-11 shrink-0 items-center justify-center rounded-full';
+
+  return (
+    <div ref={boxRef}>
+      <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
+        onClick={() => setOpen((v) => !v)}
+        className="flex w-full items-center justify-between gap-3 rounded-card px-4 py-3.5 font-body text-[15px] font-bold text-ink/70 transition-colors duration-150 hover:bg-[var(--sec-tint)] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-1"
+      >
+        <span>{label}</span>
+        <NavIcon id="account" className="shrink-0" />
+      </button>
+      {open && (
+        <div
+          role="menu"
+          aria-label={label}
+          className="absolute top-full z-50 mt-2 flex w-[17.5rem] flex-col gap-1 rounded-[1.25rem] bg-white p-2 shadow-[0_8px_28px_rgba(0,0,0,0.22)] ltr:left-0 rtl:right-0"
+        >
+          <Link role="menuitem" href="/dashboard/parent" onClick={() => setOpen(false)} className={`${row} bg-[#E3F8EC] hover:bg-[#D3F2E0]`}>
+            <span className={`${iconCircle} bg-[#D9D9D9] text-[#18785A]`} aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="9" cy="8" r="4" />
+                <path d="M2 21c0-3.9 3.1-7 7-7 1.3 0 2.5.3 3.5.9" />
+                <rect x="15" y="15" width="7" height="6" rx="1.2" />
+                <path d="M16.5 15v-1.5a2 2 0 0 1 4 0V15" />
+              </svg>
+            </span>
+            <span className="flex flex-col">
+              <span className="font-display text-lg leading-tight text-[#111]">{t('account_parent_portal')}</span>
+              <span className="font-body text-xs font-semibold text-ink/70">{t('account_parent_portal_sub')}</span>
+            </span>
+          </Link>
+
+          {persona === 'kid' && (
+            <Link role="menuitem" href="/profile" onClick={() => setOpen(false)} className={`${row} hover:bg-ink/5`}>
+              <span
+                className={`${iconCircle} overflow-hidden text-xl`}
+                style={{ backgroundColor: avatar?.bg ?? '#FBF7D5' }}
+                aria-hidden="true"
+              >
+                {avatar?.img ? (
+                  <Image src={avatar.img} alt="" width={44} height={44} className="h-full w-full object-contain" />
+                ) : (
+                  <span>{avatar?.emoji ?? '🐧'}</span>
+                )}
+              </span>
+              <span className="flex flex-col">
+                <span className="font-display text-lg leading-tight text-[#111]">{kid?.nickname ?? t('default_kid_name')}</span>
+                <span className="font-body text-xs font-semibold text-ink/70">{t('account_edit_profile')}</span>
+              </span>
+            </Link>
+          )}
+
+          <p className="px-3 pt-2 font-body text-sm font-bold text-ink/70">{t('account_other')}</p>
+          <Link role="menuitem" href="/dashboard/parent#add-child" onClick={() => setOpen(false)} className={`${row} hover:bg-ink/5`}>
+            <span className={`${iconCircle} bg-[#D9D9D9] text-2xl text-ink/70`} aria-hidden="true">
+              +
+            </span>
+            <span className="font-display text-lg leading-tight text-[#111]">{t('account_add_child')}</span>
+          </Link>
+
+          <hr className="my-1 border-ink/10" />
+          <button type="button" role="menuitem" onClick={signOut} className={`${row} hover:bg-[#FFF5F5]`}>
+            <span className={`${iconCircle} bg-[#FFEBEC] text-[#E5484D]`} aria-hidden="true">
+              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <path d="M14 4h4a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2h-4" />
+                <path d="M10 8l-4 4 4 4" />
+                <path d="M6 12h9" />
+              </svg>
+            </span>
+            <span className="font-display text-lg text-[#D92D32]">{t('account_sign_out')}</span>
+          </button>
+        </div>
+      )}
+    </div>
+  );
+}
+
 // ── Sidebar ─────────────────────────────────────────────────────────────────────
 
 function AppShellInner({
@@ -267,6 +398,13 @@ function AppShellInner({
       <ul className="flex flex-1 flex-col gap-3" role="list">
         {items.map((item) => {
           const isActive = item.id !== 'account' && activeSection === item.id;
+          if (item.id === 'account') {
+            return (
+              <li key="account" className="relative">
+                <AccountMenu persona={persona} kid={kid} avatar={avatar} label={t(item.labelKey)} />
+              </li>
+            );
+          }
           return (
             <li key={`${item.id}-${item.href}`} className="relative">
               <a
@@ -297,13 +435,21 @@ function AppShellInner({
       {showUpgrade && (
         <a
           href={persona === 'parent' ? '/dashboard/parent#account' : '/profile'}
-          className={`flex flex-col items-center gap-2 rounded-[1.25rem] p-3 text-center transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--sec-text)] bg-[var(--sec-tint)]`}
+          className="group mt-14 flex flex-col items-center gap-3 rounded-[0.75rem] bg-[var(--sec-tint)] px-3 pb-4 text-center focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[color:var(--sec-text)]"
         >
-          <Image src="/kid/upgrade-girl.png" alt="" width={72} height={72} className="h-16 w-auto" aria-hidden="true" />
-          <span className="font-body text-sm font-semibold text-ink/80">
+          {/* The girl stands up out of the card, as in the design. */}
+          <Image
+            src="/kid/upgrade-girl.png"
+            alt=""
+            width={140}
+            height={140}
+            className="-mt-16 h-[7.5rem] w-auto drop-shadow-[0_4px_6px_rgba(0,0,0,0.15)]"
+            aria-hidden="true"
+          />
+          <span className="font-body text-[15px] font-semibold leading-snug text-[#2D2D2D]">
             {t('shell.upgrade_body')}
           </span>
-          <span className="rounded-pill bg-[var(--sec-strong)] px-6 py-2.5 font-body text-base font-extrabold text-white shadow-[inset_0_0_0_1px_rgba(0,0,0,0.15),0_4px_4px_rgba(0,0,0,0.2)]">
+          <span className="inline-flex min-h-12 items-center rounded-pill bg-[var(--sec-up-bg)] px-8 font-body text-lg font-extrabold text-[color:var(--sec-up-text)] shadow-[inset_0_0_0_1px_rgba(0,0,0,0.18),0_4px_4px_rgba(0,0,0,0.25)] transition-transform group-hover:scale-105 group-active:scale-[0.97]">
             {t('shell.upgrade_cta')}
           </span>
         </a>
@@ -327,6 +473,8 @@ function AppShellInner({
           '--sec-frame': theme.frame ?? theme.line,
           '--sec-text': theme.text,
           '--sec-strong': theme.strong,
+          '--sec-up-bg': theme.upBg,
+          '--sec-up-text': theme.upText,
         } as React.CSSProperties
       }
     >

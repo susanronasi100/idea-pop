@@ -38,7 +38,15 @@ const DEFAULT_EMAIL_PREFS: EmailPreferences = {
   activity_reports: false,
 };
 
-const GREEN = '#1e7a44'; // explore green — AA-safe with white
+
+// Parent-portal buttons, from the designer's "free plan" frame: a lime pill with deep
+// green text, and a white pill with a deep green outline. Text is a shade deeper than
+// the mockup's #18785A so it passes AA on lime. 48px tall, landing-page shadow.
+const limeBtn =
+  'inline-flex min-h-12 items-center justify-center rounded-pill bg-[#D1EF5A] px-7 font-body text-base font-extrabold text-[#145F48] shadow-[inset_0_0_0_1px_rgba(24,120,90,0.35),0_4px_4px_rgba(0,0,0,0.2)] transition-all hover:scale-[1.04] hover:brightness-105 active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#145F48] focus-visible:ring-offset-2';
+const outlineBtn =
+  'inline-flex min-h-12 items-center justify-center rounded-pill border-2 border-[#18785A] bg-white px-7 font-body text-base font-extrabold text-[#145F48] shadow-[0_4px_4px_rgba(0,0,0,0.15)] transition-all hover:scale-[1.04] hover:bg-[#F3FFC2] active:scale-[0.97] disabled:cursor-not-allowed disabled:opacity-60 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#145F48] focus-visible:ring-offset-2';
+const card = 'rounded-[1rem] bg-white shadow-[0_2px_10px_rgba(0,0,0,0.05)]';
 
 function avatarFor(id: string) {
   return AVATARS.find((a) => a.id === id) ?? null;
@@ -303,7 +311,7 @@ export default function ParentDashboardPage() {
   const pendingConsent = children.filter((c) => !c.consent_granted);
 
   return (
-    <div data-testid="parent-dashboard" className="mx-auto flex max-w-3xl flex-col gap-7 px-4 py-6 md:px-8">
+    <div data-testid="parent-dashboard" className="mx-auto flex max-w-4xl flex-col gap-7 px-4 py-6 md:px-8">
       {reportChild && (
         <WeeklyReportModal
           childNickname={reportChild.nickname}
@@ -315,7 +323,7 @@ export default function ParentDashboardPage() {
       {/* Header */}
       <header className="flex items-center gap-4">
         <span
-          className="flex h-16 w-16 items-center justify-center rounded-full bg-white text-3xl shadow-sm ring-4 ring-white"
+          className="flex h-28 w-28 items-center justify-center rounded-full bg-[#F7EFE3] text-5xl ring-[6px] ring-[#EFE6D6]"
           aria-hidden="true"
         >
           🧑
@@ -324,16 +332,16 @@ export default function ParentDashboardPage() {
           <h1 className="font-display text-3xl font-bold text-ink">
             {greetingName ? t('greeting', { name: greetingName }) : t('welcome')}
           </h1>
-          <p className="font-body font-semibold text-ink/60">{t('portal_subtitle')}</p>
+          <p className="font-display text-lg text-ink">{t('portal_subtitle')}</p>
         </div>
       </header>
 
       <div className="grid grid-cols-1 gap-5 md:grid-cols-2">
         {/* My account */}
-        <section id="account" className="flex flex-col gap-3 rounded-card bg-white p-5 shadow-sm scroll-mt-4">
+        <section id="account" className={`flex flex-col gap-3 ${card} p-5 scroll-mt-4`}>
           <div className="flex items-center justify-between">
             <h2 className="font-display text-lg font-bold text-ink">{t('account_heading')}</h2>
-            <Link href="/login" className="font-body text-sm font-semibold text-explore hover:underline">
+            <Link href="/login" className="font-display text-sm text-[#18785A] hover:underline">
               {t('forgot_password')}
             </Link>
           </div>
@@ -373,10 +381,10 @@ export default function ParentDashboardPage() {
         {/* My Plan (billing) */}
         <section
           data-testid="billing-section"
-          className="flex flex-col gap-3 rounded-card bg-white p-5 shadow-sm"
+          className={`flex flex-col gap-3 ${card} p-5`}
         >
           <h2 className="font-display text-lg font-bold text-ink">{t('billing_heading')}</h2>
-          <div className="rounded-card border border-explore/30 bg-tint-lime/40 p-4">
+          <div className="rounded-[1rem] border border-[#D1EF5A] bg-white p-4">
             {isPremium ? (
               <>
                 <p className="font-display font-bold text-ink">{t('billing_active', { plan: sub?.plan ?? t('plan_default') })}</p>
@@ -390,7 +398,7 @@ export default function ParentDashboardPage() {
                   data-testid="manage-billing-btn"
                   onClick={handlePortal}
                   disabled={billingLoading}
-                  className="mt-3 font-body text-sm font-semibold text-explore underline disabled:opacity-50"
+                  className={`mt-3 ${outlineBtn}`}
                 >
                   {t('billing_manage')}
                 </button>
@@ -401,14 +409,13 @@ export default function ParentDashboardPage() {
                 <p className="mt-1 font-body text-sm text-ink/70">
                   {t('plan_free_desc')}
                 </p>
-                <div className="mt-3 flex gap-2">
+                <div className="mt-3 flex flex-wrap gap-2">
                   <button
                     type="button"
                     data-testid="checkout-monthly-btn"
                     onClick={() => handleCheckout('monthly')}
                     disabled={billingLoading}
-                    className="flex-1 rounded-pill px-4 py-2.5 font-display text-sm font-bold text-white transition-all hover:brightness-105 disabled:opacity-50"
-                    style={{ backgroundColor: GREEN }}
+                    className={`flex-1 ${limeBtn}`}
                   >
                     {t('billing_monthly')}
                   </button>
@@ -417,7 +424,7 @@ export default function ParentDashboardPage() {
                     data-testid="checkout-annual-btn"
                     onClick={() => handleCheckout('annual')}
                     disabled={billingLoading}
-                    className="flex-1 rounded-pill border-2 border-explore px-4 py-2.5 font-display text-sm font-bold text-explore transition-all hover:bg-tint-lime disabled:opacity-50"
+                    className={`flex-1 ${outlineBtn}`}
                   >
                     {t('billing_annual')}
                   </button>
@@ -442,7 +449,7 @@ export default function ParentDashboardPage() {
               <div
                 key={child.id}
                 data-testid="child-card"
-                className="flex flex-col gap-2 rounded-card bg-tint-lime/60 p-4"
+                className="flex flex-col gap-2 rounded-[1rem] bg-[#EEFFA9] p-5"
               >
                 <div className="flex items-center gap-3">
                   <AvatarBubble avatarId={child.avatar_id} />
@@ -469,7 +476,7 @@ export default function ParentDashboardPage() {
                     type="button"
                     data-testid="view-report-btn"
                     onClick={() => handleViewReport(child)}
-                    className="w-fit font-display text-sm font-bold text-explore hover:underline"
+                    className="w-fit font-body text-sm font-bold text-[#145F48] underline-offset-2 hover:underline"
                   >
                     {t('view_report')}
                   </button>
@@ -479,7 +486,7 @@ export default function ParentDashboardPage() {
                     type="button"
                     data-testid="reset-child-pin-btn"
                     onClick={() => handleResetPin(child)}
-                    className="w-fit font-display text-sm font-bold text-explore hover:underline"
+                    className="w-fit font-body text-sm font-bold text-[#145F48] underline-offset-2 hover:underline"
                   >
                     {t('new_pin')}
                   </button>
@@ -502,10 +509,11 @@ export default function ParentDashboardPage() {
         )}
         <Link
           href="/onboarding/kid"
+          id="add-child"
           data-testid="add-child-btn"
-          className="flex items-center justify-center gap-2 rounded-card border-2 border-dashed border-explore/50 py-4 font-display text-sm font-bold text-explore transition-colors hover:border-explore hover:bg-tint-lime/40 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
+          className="flex scroll-mt-4 flex-col items-center justify-center gap-0.5 rounded-[1rem] border-2 border-dashed border-[#C9E64A] py-3 font-body text-base font-semibold text-ink/80 transition-colors hover:bg-[#EEFFA9] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#145F48]"
         >
-          <span aria-hidden="true">+</span> {t('invite_child')}
+          <span aria-hidden="true" className="text-3xl font-extrabold leading-none text-[#C9E64A]">+</span> {t('invite_child')}
         </Link>
       </section>
 
@@ -514,7 +522,7 @@ export default function ParentDashboardPage() {
         <section aria-label={t('needs_ok_heading')} className="flex flex-col gap-3">
           <h2 className="font-display text-2xl font-bold text-ink">{t('needs_ok_heading')}</h2>
           {pendingConsent.length === 0 && approvals.length === 0 ? (
-            <div className="rounded-card bg-white p-4 font-body text-sm text-ink/60 shadow-sm">
+            <div className={`${card} p-5 font-body text-base text-ink/70`}>
               ✅ {t('all_caught_up')}
             </div>
           ) : (
@@ -522,16 +530,15 @@ export default function ParentDashboardPage() {
               {pendingConsent.map((child) => (
                 <div
                   key={child.id}
-                  className="flex flex-col items-start justify-between gap-3 rounded-card bg-white p-4 shadow-sm sm:flex-row sm:items-center"
+                  className={`flex flex-col items-start justify-between gap-3 ${card} p-5 sm:flex-row sm:items-center`}
                 >
-                  <p className="font-display text-base font-bold text-ink">
+                  <p className="font-body text-lg font-semibold text-ink">
                     🛡️ {t('approve_account', { name: child.nickname })}
                   </p>
                   <button
                     type="button"
                     onClick={() => handleTogglePublic(child)}
-                    className="rounded-pill px-5 py-2 font-display text-sm font-bold text-white"
-                    style={{ backgroundColor: GREEN }}
+                    className={outlineBtn}
                   >
                     {t('review')}
                   </button>
@@ -541,9 +548,9 @@ export default function ParentDashboardPage() {
                 <div
                   key={item.id}
                   data-testid="approval-item"
-                  className="flex flex-col items-start justify-between gap-3 rounded-card bg-white p-4 shadow-sm sm:flex-row sm:items-center"
+                  className={`flex flex-col items-start justify-between gap-3 ${card} p-5 sm:flex-row sm:items-center`}
                 >
-                  <p className="font-display text-base font-bold text-ink">
+                  <p className="font-body text-lg font-semibold text-ink">
                     {item.kind === 'premium_unlock' ? (
                       <>🔓 {t('approval_premium', { name: item.child_nickname })}</>
                     ) : (
@@ -563,8 +570,7 @@ export default function ParentDashboardPage() {
                       type="button"
                       data-testid="approval-approve-btn"
                       onClick={() => handleResolveApproval(item, true)}
-                      className="rounded-pill px-5 py-2 font-display text-sm font-bold text-white transition-all hover:brightness-105"
-                      style={{ backgroundColor: GREEN }}
+                      className={limeBtn}
                     >
                       {t('approve')}
                     </button>
@@ -572,7 +578,7 @@ export default function ParentDashboardPage() {
                       type="button"
                       data-testid="approval-dismiss-btn"
                       onClick={() => handleResolveApproval(item, false)}
-                      className="rounded-pill border-2 border-ink/20 px-5 py-2 font-display text-sm font-bold text-ink/70 transition-colors hover:border-ink/40"
+                      className={outlineBtn}
                     >
                       {t('dismiss')}
                     </button>
@@ -586,7 +592,7 @@ export default function ParentDashboardPage() {
 
       {/* Safety */}
       {!loading && children.length > 0 && (
-        <section aria-label={t('safety_heading')} className="flex flex-col gap-3 rounded-card bg-white p-5 shadow-sm">
+        <section aria-label={t('safety_heading')} className={`flex max-w-xl flex-col gap-3 ${card} p-5`}>
           <h2 className="font-display text-lg font-bold text-ink">{t('safety_heading')}</h2>
           {children.map((child) => (
             <div key={child.id} className="flex flex-col gap-3">
@@ -621,7 +627,7 @@ export default function ParentDashboardPage() {
                   data-testid="display-mode-select"
                   value={child.display_mode}
                   onChange={(e) => handleDisplayMode(child, e.target.value as DisplayMode)}
-                  className="rounded-pill bg-tint-lime px-3 py-1.5 font-body text-sm font-semibold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-explore"
+                  className="rounded-pill bg-[#EEFFA9] px-3 py-1.5 font-body text-sm font-semibold text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-[#145F48]"
                 >
                   <option value="avatar_nickname">{t('display_avatar_nickname')}</option>
                   <option value="first_name">{t('display_first_name')}</option>
@@ -661,7 +667,7 @@ function EmailPref({
         disabled={disabled}
         data-testid={testid}
         onChange={(e) => onChange(e.target.checked)}
-        className="mt-0.5 h-4 w-4 shrink-0 accent-explore"
+        className="mt-0.5 h-4 w-4 shrink-0 accent-[#18785A]"
       />
       <span>
         <span className="block font-body text-sm font-semibold text-ink">{label}</span>
@@ -695,7 +701,7 @@ function SafetyToggle({
         data-testid={testid}
         onClick={onToggle}
         className={`relative inline-flex h-6 w-11 shrink-0 rounded-full transition-colors ${
-          checked ? 'bg-explore' : 'bg-ink/25'
+          checked ? 'bg-[#0F766E]' : 'bg-ink/25'
         }`}
       >
         <span

@@ -1239,7 +1239,13 @@
     "upgrade_cta": "ارتقا",
     "open_nav": "باز کردن منو",
     "close_nav": "بستن منو",
-    "main_nav": "منوی اصلی"
+    "main_nav": "منوی اصلی",
+    "account_parent_portal": "پرتال والدین",
+    "account_parent_portal_sub": "مدیریت کنترل‌ها و اشتراک",
+    "account_edit_profile": "ویرایش پروفایل من",
+    "account_other": "حساب دیگر",
+    "account_add_child": "افزودن کودک دیگر",
+    "account_sign_out": "خروج"
   },
   "mission": {
     "brief_title": "مأموریت تو",

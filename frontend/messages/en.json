@@ -1239,7 +1239,13 @@
     "upgrade_cta": "Upgrade",
     "open_nav": "Open navigation",
     "close_nav": "Close navigation",
-    "main_nav": "Main navigation"
+    "main_nav": "Main navigation",
+    "account_parent_portal": "Parent portal",
+    "account_parent_portal_sub": "Manage controls & subscription",
+    "account_edit_profile": "Edit my profile",
+    "account_other": "Other account",
+    "account_add_child": "Add another child",
+    "account_sign_out": "Sign out"
   },
   "mission": {
     "brief_title": "Your mission",
