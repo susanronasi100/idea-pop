@@ -9,8 +9,8 @@ import { useEffect, useRef, useState } from "react";
    one 3.96s camera pull-back in which the near classroom plane and the far landscape share the same camera distance
    and quintic easing (their depths make the parallax), then the subjects fade in (deer → sketching boy → middle group →
    girl → bird → question → papers and graphite marks), 23.45s in all, played once. Every artwork layer is a full
-   1670×942 canvas at (0,0) inside one `world`; the landscape is Nature_Camera_Backing (the 1425×1104 photo with
-   320/256px reflected margins) moving inside a fixed aperture. Site tweaks kept from susan: smaller, lower question
+   1670×942 canvas at (0,0) inside one `world`; the landscape is susan's Nature_Damavand_Hero_Safe_v5 (2065×1616,
+   reference region at 320,256), drawn in the fixed aperture and behind the room with one far-plane projection. Site tweaks kept from susan: smaller, lower question
    paper; bird and papers lower; the wall copy fades in with the girl; lossless people. */
 
 const W = 1670;
@@ -20,7 +20,7 @@ const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
-const REV = "camera-17";
+const REV = "damavand-v5";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
@@ -157,20 +157,13 @@ export default function HeroScene() {
         const photoCy = L.vh / 2 + dy * e * farZoom;
         const nearScale = L.s * nearZoom;
         set(world, "transform", `translate3d(${cx - AIM.x * nearScale}px, ${cy - AIM.y * nearScale}px, 0) scale(${nearScale})`);
-        // the far-plane photograph inside the aperture (the photo's centre sits at 1032.5, 808 in the backing)
-        const relativeScale = (L.photoScale * L.s * farZoom) / nearScale;
-        set(
-          scenery,
-          "transform",
-          `translate3d(${AIM.x - 780 + (photoCx - cx) / nearScale - 1032.5 * relativeScale}px, ${AIM.y - 110 + (photoCy - cy) / nearScale - 808 * relativeScale}px, 0) scale(${relativeScale})`,
-        );
-        // the supporting nature base, counter-transformed inside the near world to follow the far plane
-        const backingRatio = farZoom / nearZoom;
-        set(
-          nature,
-          "transform",
-          `translate3d(${AIM.x + (photoCx - cx) / nearScale - AIM.x * backingRatio}px, ${AIM.y + (photoCy - cy) / nearScale - AIM.y * backingRatio}px, 0) scale(${backingRatio})`,
-        );
+        // The far plane: one landscape texture (the reference photo region's centre sits at 1032.5, 808), drawn both
+        // inside the aperture and behind the room with the same projection, so the scenery around the opening matches.
+        const textureScale = (L.photoScale * L.s * farZoom) / nearScale;
+        const textureLeft = AIM.x + (photoCx - cx) / nearScale - 1032.5 * textureScale;
+        const textureTop = AIM.y + (photoCy - cy) / nearScale - 808 * textureScale;
+        set(scenery, "transform", `translate3d(${textureLeft - 780}px, ${textureTop - 110}px, 0) scale(${textureScale})`);
+        set(nature, "transform", `translate3d(${textureLeft}px, ${textureTop}px, 0) scale(${textureScale})`);
         lastQ = q;
       }
       for (const [id, start, end] of FADES) {
@@ -289,10 +282,10 @@ export default function HeroScene() {
   return (
     <div ref={viewportRef} aria-hidden="true" className="hero-viewport" data-state={state}>
       <div ref={worldRef} className="hero-world">
-        <img ref={natureRef} className="hero-layer hero-nature" style={{ zIndex: 0 }} src={src("nature-continuous")} alt="" />
+        <img ref={natureRef} className="hero-nature" style={{ zIndex: 0 }} src={src("nature-damavand")} alt="" />
         {/* the fixed rear-opening aperture; the far-plane photograph moves inside it */}
         <div className="hero-scenery">
-          <img ref={sceneryRef} className="hero-scenery-image" src={src("nature-camera-backing")} alt="" />
+          <img ref={sceneryRef} className="hero-scenery-image" src={src("nature-damavand")} alt="" />
         </div>
         {LAYERS.slice(0, 1).map((l) => (
           <img key={l.id} className="hero-layer" style={{ zIndex: l.z }} src={src(l.file)} alt="" />

@@ -54,8 +54,16 @@
   transform-origin: 0 0;
   will-change: transform;
 }
-/* The supporting nature base follows the far plane through a counter-transform. */
+/* The same landscape texture behind the room, on the same far-plane projection. */
 .hero-nature {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 2065px;
+  max-width: none;
+  height: 1616px;
+  object-fit: fill;
+  pointer-events: none;
   transform-origin: 0 0;
   will-change: transform;
 }
