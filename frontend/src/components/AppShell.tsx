@@ -164,13 +164,26 @@ function NavIcon({ id, className }: { id: NavItem['id']; className?: string }) {
 // background showing through the cut) with the coral border sweeping around
 // it; the circle floats in the notch with a thin crescent gap, crossing the
 // dashed seam into the content area. In RTL the whole thing mirrors.
-function ActiveNotch({ id }: { id: NavItem['id'] }) {
+// The sidebar's link style and motion follow the landing page's navigation bar: ADLaM
+// Display labels that grow a little on hover, the current page set heavier, and the
+// docked circle that slides to the new page while its icon fades out and back in.
+const NAV_LABEL =
+  'flex items-center justify-between gap-3 rounded-card px-4 py-3.5 text-[16px] [font-family:var(--font-adlam)] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1';
+const NAV_IDLE = 'font-normal text-[#4F4F4F] hover:scale-[1.08] hover:bg-ink/5 hover:text-ink focus-visible:ring-ink/20';
+const NAV_CURRENT = 'font-bold text-[color:var(--sec-text)] focus-visible:ring-[color:var(--sec-text)]';
+const SLIDE = { ms: 420, out: 180, in: 240, ease: 'cubic-bezier(.65,0,.35,1)' }; // the top bar's timings
+
+function ActiveNotch({ id, y, animate, iconOn }: { id: NavItem['id'] | null; y: number; animate: boolean; iconOn: boolean }) {
   return (
     <span
       aria-hidden="true"
-      className="pointer-events-none absolute top-1/2 z-20 hidden -translate-y-1/2 md:block ltr:left-full ltr:-ml-7 rtl:right-full rtl:-mr-7 rtl:-scale-x-100"
+      className="pointer-events-none absolute top-0 z-20 hidden md:block ltr:left-full ltr:-ml-7 rtl:right-full rtl:-mr-7"
+      style={{
+        transform: `translateY(${y - 60}px)`,
+        transition: animate ? `transform ${SLIDE.ms}ms ${SLIDE.ease}` : 'none',
+      }}
     >
-      <span className="relative block h-[120px] w-[120px]">
+      <span className="relative block h-[120px] w-[120px] rtl:-scale-x-100">
         <svg
           width="120"
           height="120"
@@ -178,13 +191,13 @@ function ActiveNotch({ id }: { id: NavItem['id'] }) {
           fill="none"
           className="absolute inset-0 overflow-visible"
         >
-          {/* the notch: a blush lens cut into the panel (x=40 is the panel's
+          {/* the notch: a lens cut into the panel in the page colour (x=40 is the panel's
               edge; the fill overlaps to x=42 to cover the straight border) */}
           <path
             d="M40 16 C40 24 35 28 30.1 34 A34 34 0 0 0 30.1 86 C35 92 40 96 40 104 L42 104 L42 16 Z"
             fill="var(--sec-tint)"
           />
-          {/* coral hairline: the panel border sweeping around the notch */}
+          {/* the panel border sweeping around the notch */}
           <path
             d="M40 16 C40 24 35 28 30.1 34 A34 34 0 0 0 30.1 86 C35 92 40 96 40 104"
             stroke="var(--sec-line)"
@@ -194,10 +207,121 @@ function ActiveNotch({ id }: { id: NavItem['id'] }) {
         </svg>
         {/* the docked circle floating in the notch */}
         <span className="absolute left-[52px] top-[60px] flex h-[60px] w-[60px] -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white text-[color:var(--sec-text)] shadow-[0_2px_8px_rgba(0,0,0,0.14)] rtl:-scale-x-100">
-          <NavIcon id={id} className="h-6 w-6" />
+          <span
+            className="flex"
+            style={{
+              opacity: iconOn ? 1 : 0,
+              transition: animate ? `opacity ${iconOn ? SLIDE.in : SLIDE.out}ms cubic-bezier(.37,0,.63,1)` : 'none',
+            }}
+          >
+            {id && <NavIcon id={id} className="h-6 w-6" />}
+          </span>
         </span>
       </span>
     </span>
+  );
+}
+
+/** The nav list with the sliding circle. Each copy (desktop panel, phone drawer) measures itself. */
+function NavList({
+  items,
+  activeSection,
+  persona,
+  kid,
+  avatar,
+}: {
+  items: NavItem[];
+  activeSection: Section;
+  persona: Persona;
+  kid: { nickname: string; avatar_id: string } | null;
+  avatar: (typeof AVATARS)[number] | undefined;
+}) {
+  const t = useTranslations();
+  const activeId = items.find((i) => i.id !== 'account' && i.id === activeSection)?.id ?? null;
+  const itemRefs = React.useRef<Record<string, HTMLLIElement | null>>({});
+  const listRef = React.useRef<HTMLUListElement>(null);
+  const [y, setY] = useState<number | null>(null);
+  const [animate, setAnimate] = useState(false);
+  const [shownIcon, setShownIcon] = useState(activeId);
+  const [iconOn, setIconOn] = useState(true);
+  const [reduced] = useState(
+    () => typeof window !== 'undefined' && typeof window.matchMedia === 'function' && window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+  );
+
+  // Where the current item's middle is; re-measured when the panel changes size.
+  React.useLayoutEffect(() => {
+    const li = activeId ? itemRefs.current[activeId] : null;
+    const list = listRef.current;
+    if (!li || !list) {
+      setY(null);
+      return;
+    }
+    const measure = () => setY(li.offsetTop + li.offsetHeight / 2);
+    measure();
+    if (typeof ResizeObserver === 'undefined') return;
+    const ro = new ResizeObserver(measure);
+    ro.observe(list);
+    return () => ro.disconnect();
+  }, [activeId]);
+
+  // The first position is drawn in place; from then on the circle slides.
+  useEffect(() => {
+    if (y === null || animate || reduced) return;
+    const id = window.setTimeout(() => setAnimate(true), 50);
+    return () => window.clearTimeout(id);
+  }, [y, animate, reduced]);
+
+  // A new page: the old icon finishes fading, the new one takes its place and fades in.
+  useEffect(() => {
+    if (activeId === shownIcon) return;
+    if (reduced) {
+      setShownIcon(activeId);
+      setIconOn(true);
+      return;
+    }
+    setIconOn(false);
+    const timer = window.setTimeout(() => {
+      setShownIcon(activeId);
+      setIconOn(true);
+    }, SLIDE.out);
+    return () => window.clearTimeout(timer);
+  }, [activeId, shownIcon, reduced]);
+
+  return (
+    <ul ref={listRef} className="relative flex flex-1 flex-col gap-3" role="list">
+      {items.map((item) => {
+        const isActive = item.id === activeId;
+        if (item.id === 'account') {
+          return (
+            <li key="account" className="relative">
+              <AccountMenu persona={persona} kid={kid} avatar={avatar} label={t(item.labelKey)} />
+            </li>
+          );
+        }
+        return (
+          <li
+            key={`${item.id}-${item.href}`}
+            ref={(el) => {
+              itemRefs.current[item.id] = el;
+            }}
+            className="relative"
+          >
+            <Link
+              href={item.href}
+              aria-current={isActive ? 'page' : undefined}
+              // Like the top bar, a click starts the circle's icon fading at once.
+              onClick={isActive || reduced ? undefined : () => setIconOn(false)}
+              className={`${NAV_LABEL} ${isActive ? NAV_CURRENT : NAV_IDLE}`}
+            >
+              <span>{t(item.labelKey)}</span>
+              {/* The docked circle IS the active icon on md+, so the inline one hides there. */}
+              <NavIcon id={item.id} className={isActive ? 'shrink-0 md:opacity-0' : 'shrink-0'} />
+            </Link>
+          </li>
+        );
+      })}
+      {y !== null && <ActiveNotch id={shownIcon} y={y} animate={animate} iconOn={iconOn} />}
+    </ul>
   );
 }
 
@@ -258,7 +382,7 @@ function AccountMenu({
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex w-full items-center justify-between gap-3 rounded-card px-4 py-3.5 font-body text-[15px] font-bold text-ink/70 transition-colors duration-150 hover:bg-[var(--sec-tint)] hover:text-ink focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-ink/20 focus-visible:ring-offset-1"
+        className={`w-full ${NAV_LABEL} ${NAV_IDLE}`}
       >
         <span>{label}</span>
         <NavIcon id="account" className="shrink-0" />
@@ -395,41 +519,7 @@ function AppShellInner({
       </div>
 
       {/* Nav */}
-      <ul className="flex flex-1 flex-col gap-3" role="list">
-        {items.map((item) => {
-          const isActive = item.id !== 'account' && activeSection === item.id;
-          if (item.id === 'account') {
-            return (
-              <li key="account" className="relative">
-                <AccountMenu persona={persona} kid={kid} avatar={avatar} label={t(item.labelKey)} />
-              </li>
-            );
-          }
-          return (
-            <li key={`${item.id}-${item.href}`} className="relative">
-              <a
-                href={item.href}
-                aria-current={isActive ? 'page' : undefined}
-                className={[
-                  'flex items-center justify-between gap-3 rounded-card px-4 py-3.5 font-body text-[15px] font-bold transition-colors duration-150',
-                  'focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1',
-                  isActive
-                    ? 'text-[color:var(--sec-text)] focus-visible:ring-[color:var(--sec-text)]'
-                    : 'text-ink/70 hover:bg-[var(--sec-tint)] hover:text-ink focus-visible:ring-ink/20',
-                ].join(' ')}
-              >
-                <span>{t(item.labelKey)}</span>
-                {/* The scoop circle IS the active icon on md+ — hide the
-                    inline one there so they don't overlap at the row edge. */}
-                <NavIcon id={item.id} className={isActive ? 'shrink-0 md:opacity-0' : 'shrink-0'} />
-              </a>
-              {/* Active indicator: a circle cradled by a concave scoop carved
-                  into the panel's right edge (the designer's signature curve). */}
-              {isActive && <ActiveNotch id={item.id} />}
-            </li>
-          );
-        })}
-      </ul>
+      <NavList items={items} activeSection={activeSection} persona={persona} kid={kid} avatar={avatar} />
 
       {/* Upgrade card (kid + parent) */}
       {showUpgrade && (
