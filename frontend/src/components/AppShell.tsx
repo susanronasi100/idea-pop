@@ -171,6 +171,8 @@ const NAV_LABEL =
   'flex items-center justify-between gap-3 rounded-card px-4 py-3.5 text-[16px] [font-family:var(--font-adlam)] transition-all duration-150 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-offset-1';
 const NAV_IDLE = 'font-normal text-[#4F4F4F] hover:scale-[1.08] hover:bg-ink/5 hover:text-ink focus-visible:ring-ink/20';
 const NAV_CURRENT = 'font-bold text-[color:var(--sec-text)] focus-visible:ring-[color:var(--sec-text)]';
+// The docked circle and its icon, drawn bigger than the Figma frame at her request.
+const NOTCH_SCALE = 1.3;
 const SLIDE = { ms: 420, out: 180, in: 240, ease: 'cubic-bezier(.65,0,.35,1)' }; // the top bar's timings
 
 function ActiveNotch({ id, y, animate, iconOn }: { id: NavItem['id'] | null; y: number; animate: boolean; iconOn: boolean }) {
@@ -184,6 +186,8 @@ function ActiveNotch({ id, y, animate, iconOn }: { id: NavItem['id'] | null; y: 
       }}
     >
       <span className="relative block h-[120px] w-[120px] rtl:-scale-x-100">
+        {/* Everything in the notch is drawn 1.3x, grown from the panel edge so it still docks there. */}
+        <span className="absolute inset-0 block" style={{ transform: `scale(${NOTCH_SCALE})`, transformOrigin: '40px 60px' }}>
         <svg
           width="120"
           height="120"
@@ -202,6 +206,7 @@ function ActiveNotch({ id, y, animate, iconOn }: { id: NavItem['id'] | null; y: 
             d="M40 16 C40 24 35 28 30.1 34 A34 34 0 0 0 30.1 86 C35 92 40 96 40 104"
             stroke="var(--sec-line)"
             strokeWidth="1.5"
+            vectorEffect="non-scaling-stroke"
             fill="none"
           />
         </svg>
@@ -214,8 +219,9 @@ function ActiveNotch({ id, y, animate, iconOn }: { id: NavItem['id'] | null; y: 
               transition: animate ? `opacity ${iconOn ? SLIDE.in : SLIDE.out}ms cubic-bezier(.37,0,.63,1)` : 'none',
             }}
           >
-            {id && <NavIcon id={id} className="h-6 w-6" />}
+            {id && <NavIcon id={id} className="h-7 w-7" />}
           </span>
+        </span>
         </span>
       </span>
     </span>
