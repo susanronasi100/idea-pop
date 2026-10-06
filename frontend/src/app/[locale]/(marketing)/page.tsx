@@ -177,8 +177,6 @@ export default async function LandingPage({ params }: Props) {
         <div className="relative flex w-full flex-col xl:block xl:aspect-[1670/942]">
           <div className="relative order-2 aspect-[1670/942] w-full xl:absolute xl:inset-0 xl:aspect-auto">
             <HeroScene />
-            {/* Wide screens: a soft blur along the top of the photo, so the nav and Sign up button read clearly over it. */}
-            <div aria-hidden="true" className="hero-navblur hidden xl:block" />
           </div>
 
           {/* hero copy — fluid type per the designer's responsive spec
