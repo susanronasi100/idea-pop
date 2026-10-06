@@ -11,7 +11,6 @@ import type { components } from '@/lib/api/schema';
 
 type ChallengeDetail = components['schemas']['ChallengeDetail'];
 
-const CHALLENGE = '#1a6fa6'; // --color-challenge (AA-safe with white)
 
 // ── Parent handoff (kids never check out — CLAUDE.md safety rule) ───────────────
 
@@ -101,10 +100,10 @@ export default function ChallengesList() {
           {t('header_title')}
         </h1>
         {featured && (
-          <p className="mt-2 font-display text-lg font-bold text-ink/80 md:text-xl">
+          <p className="mt-2 font-body text-lg font-bold text-[#3B4A44] md:text-2xl">
             {t.rich('header_today', {
               title: featured.title,
-              hl: (chunks) => <span className="text-library-deep">{chunks}</span>,
+              hl: (chunks) => <span className="text-[#C2610E]">{chunks}</span>,
             })}
           </p>
         )}
@@ -112,16 +111,13 @@ export default function ChallengesList() {
 
       {/* Tab toggle */}
       <div className="flex justify-center">
-        <div className="inline-flex rounded-pill bg-white p-1 shadow-sm" role="tablist">
+        <div className="inline-flex gap-1 rounded-pill bg-white p-1.5 shadow-sm" role="tablist">
           <button
             role="tab"
             aria-selected={tab === 'mission'}
             data-testid="tab-mission"
             onClick={() => setTab('mission')}
-            className={`rounded-pill px-5 py-2 font-display text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge ${
-              tab === 'mission' ? 'text-white' : 'text-ink/60 hover:text-ink'
-            }`}
-            style={tab === 'mission' ? { backgroundColor: CHALLENGE } : undefined}
+            className={`rounded-pill px-6 min-h-11 font-body text-base font-bold transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-1 ${tab === 'mission' ? 'bg-[#1A6FA6] text-white shadow-[0_2px_4px_rgba(0,0,0,0.2)]' : 'text-[#3E5566] hover:bg-[#EAF5FC] hover:text-[#1F2A33]'}`}
           >
             {t('tab_mission')}
           </button>
@@ -130,10 +126,7 @@ export default function ChallengesList() {
             aria-selected={tab === 'wall'}
             data-testid="tab-wall"
             onClick={() => setTab('wall')}
-            className={`rounded-pill px-5 py-2 font-display text-sm font-bold transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge ${
-              tab === 'wall' ? 'text-white' : 'text-ink/60 hover:text-ink'
-            }`}
-            style={tab === 'wall' ? { backgroundColor: CHALLENGE } : undefined}
+            className={`rounded-pill px-6 min-h-11 font-body text-base font-bold transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-1 ${tab === 'wall' ? 'bg-[#1A6FA6] text-white shadow-[0_2px_4px_rgba(0,0,0,0.2)]' : 'text-[#3E5566] hover:bg-[#EAF5FC] hover:text-[#1F2A33]'}`}
           >
             {t('tab_wall')}
           </button>
@@ -153,7 +146,7 @@ export default function ChallengesList() {
                 type="button"
                 data-testid="continue-mission"
                 onClick={() => router.push(`/challenges/${featured.id}`)}
-                className="flex items-center gap-4 rounded-[1.5rem] bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2"
+                className="group flex items-center gap-4 rounded-[1rem] border border-[#58C6EE] bg-white p-3 text-left shadow-sm transition-shadow hover:shadow-md focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-2"
               >
                 <span
                   className="flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-tint-cream text-3xl"
@@ -162,13 +155,10 @@ export default function ChallengesList() {
                   {featured.emoji || '🚀'}
                 </span>
                 <div className="min-w-0 flex-1">
-                  <p className="font-display text-lg font-bold text-ink">{featured.title}</p>
-                  <p className="line-clamp-1 font-body text-sm text-ink/60">{featured.brief}</p>
+                  <p className="font-body text-lg font-extrabold text-ink">{featured.title}</p>
+                  <p className="line-clamp-1 font-body text-[15px] font-medium text-[#4A5560]">{featured.brief}</p>
                 </div>
-                <span
-                  className="hidden shrink-0 rounded-pill px-5 py-2.5 font-display text-sm font-bold text-white sm:inline-block"
-                  style={{ backgroundColor: CHALLENGE }}
-                >
+                <span className="hidden min-h-12 shrink-0 items-center rounded-pill bg-[#1A6FA6] px-7 font-body text-base font-extrabold text-white shadow-[inset_0_0_0_1px_#0F4F7A,0_4px_4px_rgba(0,0,0,0.25)] transition-transform group-hover:scale-105 sm:inline-flex">
                   {t('continue_button')}
                 </span>
               </button>
@@ -217,6 +207,10 @@ export default function ChallengesList() {
 
 // ── Cards ──────────────────────────────────────────────────────────────────────
 
+// The "challenge N" circle from the design: sky blue with dark text (11:1), big enough to read.
+const BADGE =
+  'absolute bottom-3 right-3 flex h-20 w-20 items-center justify-center rounded-full bg-[#58C6EE] p-1 text-center font-display text-[15px] leading-tight text-[#0E2A3A] shadow-[0_4px_8px_rgba(0,0,0,0.2)] ring-4 ring-white/70';
+
 // Per-mission cover art. Missions not listed here fall back to the shared
 // cover, so adding a new image is just a slug → path entry + the file.
 const DEFAULT_COVER = '/challenge/mission-cover.png';
@@ -246,7 +240,7 @@ function UnlockedChallengeCard({
       data-testid="challenge-card"
       data-assigned={assigned || undefined}
       onClick={onOpen}
-      className={`group relative overflow-hidden rounded-[1.5rem] text-left shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2 ${
+      className={`group relative overflow-hidden rounded-[1.25rem] border border-[#58C6EE] text-left shadow-sm transition-transform hover:-translate-y-0.5 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-2 ${
         assigned ? 'ring-2 ring-library ring-offset-2' : ''
       }`}
     >
@@ -258,9 +252,10 @@ function UnlockedChallengeCard({
           {t('pinned_badge')}
         </span>
       )}
-      <div className="px-5 py-4 text-white" style={{ backgroundColor: CHALLENGE }}>
-        <p className="font-display text-xl font-bold leading-tight">{challenge.title}</p>
-        <p className="mt-0.5 line-clamp-1 font-body text-sm text-white/90">{challenge.brief}</p>
+      {/* #1A7AB8 keeps white text at 4.7:1, close to the design's sky blue. */}
+      <div className="bg-[#1A7AB8] px-5 py-4 text-white">
+        <p className="font-body text-xl font-extrabold leading-tight">{challenge.title}</p>
+        <p className="mt-1 line-clamp-1 font-body text-[15px] font-semibold">{challenge.brief}</p>
       </div>
       <div className="relative h-44">
         <Image
@@ -272,8 +267,7 @@ function UnlockedChallengeCard({
           sizes="(max-width: 640px) 100vw, 400px"
         />
         <span
-          className="absolute bottom-3 right-3 flex h-16 w-16 items-center justify-center rounded-full text-center font-display text-xs font-bold leading-tight text-white shadow-md"
-          style={{ backgroundColor: CHALLENGE }}
+          className={BADGE}
         >
           {t('challenge_badge', { index })}
         </span>
@@ -300,7 +294,7 @@ function LockedChallengeCard({
       data-assigned={assigned || undefined}
       onClick={onUpgrade}
       aria-label={t('locked_card_aria', { index })}
-      className={`group relative flex min-h-[15rem] flex-col items-center justify-center overflow-hidden rounded-[1.5rem] p-6 text-center shadow-sm focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-challenge focus-visible:ring-offset-2 ${
+      className={`group relative flex min-h-[15rem] flex-col items-center justify-center overflow-hidden rounded-[1.25rem] border border-[#58C6EE] p-6 text-center shadow-sm focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-2 ${
         assigned ? 'ring-2 ring-library ring-offset-2' : ''
       }`}
     >
@@ -323,12 +317,11 @@ function LockedChallengeCard({
       />
       <div className="absolute inset-0 bg-tint-blue/70" aria-hidden="true" />
       <span className="relative text-4xl" aria-hidden="true">🔒</span>
-      <p className="relative mt-3 font-display text-lg font-bold text-ink">
+      <p className="relative mt-3 max-w-[16rem] font-body text-xl font-extrabold leading-snug text-[#1F2A33]">
         {t('locked_card_title')}
       </p>
       <span
-        className="absolute bottom-3 right-3 flex h-16 w-16 items-center justify-center rounded-full font-display text-xs font-bold text-white shadow-md"
-        style={{ backgroundColor: CHALLENGE }}
+        className={BADGE}
       >
         {t('challenge_badge', { index })}
       </span>

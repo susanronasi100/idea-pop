@@ -200,17 +200,13 @@ export default function ChallengePage() {
 
       {/* Mission / Ideas Wall tabs */}
       <div className={`${wide} mx-auto px-4 pt-4`}>
-        <div className="flex gap-0 rounded-card overflow-hidden border border-ink/10 mb-4" role="tablist">
+        <div className="mb-4 flex gap-1 rounded-pill bg-white p-1.5 shadow-sm" role="tablist">
           <button
             role="tab"
             aria-selected={activeTab === 'mission'}
             data-testid="tab-mission"
             onClick={() => setActiveTab('mission')}
-            className={`flex-1 py-2.5 font-display text-sm font-bold transition-colors ${
-              activeTab === 'mission'
-                ? 'bg-challenge text-white'
-                : 'bg-white text-ink/60 hover:bg-tint-blue'
-            }`}
+            className={`flex-1 rounded-pill px-6 min-h-11 font-body text-base font-bold transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-1 ${activeTab === 'mission' ? 'bg-[#1A6FA6] text-white shadow-[0_2px_4px_rgba(0,0,0,0.2)]' : 'text-[#3E5566] hover:bg-[#EAF5FC] hover:text-[#1F2A33]'}`}
           >
             {t('tab_mission')}
           </button>
@@ -219,11 +215,7 @@ export default function ChallengePage() {
             aria-selected={activeTab === 'wall'}
             data-testid="tab-wall"
             onClick={() => setActiveTab('wall')}
-            className={`flex-1 py-2.5 font-display text-sm font-bold transition-colors ${
-              activeTab === 'wall'
-                ? 'bg-challenge text-white'
-                : 'bg-white text-ink/60 hover:bg-tint-blue'
-            }`}
+            className={`flex-1 rounded-pill px-6 min-h-11 font-body text-base font-bold transition-colors focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63] focus-visible:ring-offset-1 ${activeTab === 'wall' ? 'bg-[#1A6FA6] text-white shadow-[0_2px_4px_rgba(0,0,0,0.2)]' : 'text-[#3E5566] hover:bg-[#EAF5FC] hover:text-[#1F2A33]'}`}
           >
             {t('tab_wall')}
           </button>
