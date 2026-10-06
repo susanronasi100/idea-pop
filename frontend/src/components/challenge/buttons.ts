@@ -1,30 +1,33 @@
 /**
- * The one button kit for every challenge page (TEMP rules 18, 25, 26). Four kinds, all
- * round and in Challenge blue, with the same type as every other CTA on the site (the
- * display face, bold). Built for readability and accessibility:
- * - 16px text with a little letter-spacing, and no arrow icons: the words say where it goes.
+ * The one button kit for every challenge page (TEMP rules 18, 25, 26, 27). The buttons look
+ * like the landing page's CTAs: a lime pill with dark green extra-bold text, a thin green
+ * outline and a soft drop shadow; the second kind is a white pill with green text. They grow
+ * on hover and press down on tap, the same as on the landing page.
+ *
+ * Kept for readability and accessibility:
+ * - 16px extra-bold text, no arrow icons: the words say where it goes.
  * - At least 48px tall (icon buttons 48×48): an easy target for small fingers (WCAG 2.5.5).
- * - Colours pass WCAG AA: white on Challenge blue is 5.0:1, blue on white the same.
- * - A thick dark focus ring for keyboard users, visible on white and on the blue page.
+ * - Colours pass WCAG AA: dark green on lime and green on white are both above 7:1.
+ * - A thick dark focus ring for keyboard users.
  * - Disabled is a solid grey with readable text, not a faded copy that looks broken.
- * - A raised 3D edge that sinks when pressed, so a tap visibly "clicks".
+ * The body font is Montserrat in English and Playpen Sans Arabic in Persian.
  * Pass extra layout classes (w-full, self-center…) after these.
  */
 const base =
-  'inline-flex min-h-12 select-none items-center justify-center gap-2 rounded-pill text-center font-display text-base font-bold leading-tight tracking-[0.02em] transition-[transform,box-shadow,background-color,filter] duration-150 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#1B3A6B] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed';
+  'inline-flex min-h-12 select-none items-center justify-center gap-2 rounded-pill text-center font-body text-base font-extrabold leading-tight transition-all duration-150 focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#1F4D33] focus-visible:ring-offset-2 focus-visible:ring-offset-white disabled:cursor-not-allowed disabled:bg-[#D5DCD8] disabled:text-[#3F4E47] disabled:shadow-none disabled:hover:scale-100 disabled:active:scale-100';
 
-const raised =
-  'active:translate-y-[3px] active:shadow-none disabled:translate-y-0 disabled:border-[#C9D3DE] disabled:bg-[#C9D3DE] disabled:text-[#3F4E61] disabled:shadow-none disabled:hover:brightness-100';
+/** The landing page's outline + drop shadow, and its stronger outline on hover and press. */
+const landing =
+  'shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] hover:scale-[1.06] hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:scale-[0.97] active:shadow-[inset_0_0_0_2px_#18785A,0_2px_2px_rgba(0,0,0,0.25)]';
 
 /** Main action: Next, Let's go, Submit, Check. */
-export const btnPrimary = `${base} ${raised} border-2 border-challenge bg-challenge px-7 py-2.5 text-white shadow-[0_3px_0_#0F4F7A] hover:brightness-110`;
+export const btnPrimary = `${base} ${landing} bg-[#D1EF5A] px-8 py-3 text-[#1F4D33] hover:brightness-105 active:bg-[#B8D24F]`;
 
 /** Second action: Back, Show hint, Try again. */
-export const btnSecondary = `${base} ${raised} border-2 border-challenge bg-white px-7 py-2.5 text-challenge shadow-[0_3px_0_#1a6fa6] hover:bg-[#EAF5FC]`;
+export const btnSecondary = `${base} ${landing} bg-white px-8 py-3 text-[#146047] hover:bg-[#F4FADD] active:bg-[#E3EFC4] active:text-[#0F4C39]`;
 
 /** Small text action: Skip, I don't know. Underlined, so it reads as a link without relying on colour. */
-export const btnText = `${base} !font-body px-3 py-2 text-challenge underline decoration-2 underline-offset-4 hover:decoration-[3px] disabled:text-[#5B6878] disabled:no-underline`;
+export const btnText = `${base} px-3 py-2 font-bold text-[#146047] underline decoration-2 underline-offset-4 hover:decoration-[3px] disabled:bg-transparent disabled:text-[#5B6878] disabled:no-underline`;
 
-/** Round icon: Listen, plus/minus, microphone. Give it an aria-label. A raised 3D
- *  button: a lighter top, a darker edge underneath, and it sinks onto the edge when pressed. */
-export const btnIcon = `${base} h-12 w-12 shrink-0 bg-gradient-to-b from-[#3E95CC] to-challenge text-lg text-white shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_4px_0_#0F4F7A,0_7px_12px_rgba(15,79,122,0.3)] hover:brightness-110 active:translate-y-[3px] active:shadow-[inset_0_2px_0_rgba(255,255,255,0.35),0_1px_0_#0F4F7A]`;
+/** Round icon: Listen, plus/minus, microphone. Give it an aria-label. Same lime and outline as the main button. */
+export const btnIcon = `${base} ${landing} h-12 w-12 shrink-0 bg-[#D1EF5A] text-lg text-[#1F4D33] hover:brightness-105 active:bg-[#B8D24F]`;
