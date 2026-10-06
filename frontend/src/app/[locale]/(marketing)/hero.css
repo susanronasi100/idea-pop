@@ -31,18 +31,33 @@
   object-fit: fill;
   pointer-events: none;
 }
+/* The rear-opening aperture: fixed native geometry that moves with the world; the far-plane photograph (2065×1616
+   backing) is transformed inside it each frame. */
 .hero-scenery {
   position: absolute;
-  inset: 0;
+  left: 780px;
+  top: 110px;
   z-index: 1;
-  width: 1670px;
-  height: 942px;
-  clip-path: polygon(780px 110px, 1670px 110px, 1670px 841px, 780px 841px);
+  width: 890px;
+  height: 731px;
+  overflow: hidden;
+  contain: paint;
 }
 .hero-scenery-image {
   position: absolute;
+  left: 0;
+  top: 0;
+  width: 2065px;
   max-width: none;
+  height: 1616px;
   object-fit: fill;
+  transform-origin: 0 0;
+  will-change: transform;
+}
+/* The supporting nature base follows the far plane through a counter-transform. */
+.hero-nature {
+  transform-origin: 0 0;
+  will-change: transform;
 }
 .hero-floor {
   position: absolute;
