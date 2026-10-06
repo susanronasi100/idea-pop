@@ -539,7 +539,7 @@ function AppShellInner({
         >
           <div className="pointer-events-none absolute right-5 top-4 z-10 hidden md:block">
             <span className="pointer-events-auto">
-              <Logo size="sm" showWordmark />
+              <Logo size="md" showWordmark showBadge={false} />
             </span>
           </div>
           {children}

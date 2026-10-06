@@ -9,16 +9,16 @@ describe('Logo', () => {
 
   it('shows wordmark when showWordmark is true', () => {
     render(<Logo showWordmark />);
-    expect(screen.getByText(/IDEA POP/i)).toBeInTheDocument();
+    expect(screen.getByAltText('IDEA POP')).toBeInTheDocument();
   });
 
   it('hides wordmark when showWordmark is false', () => {
     render(<Logo showWordmark={false} />);
-    expect(screen.queryByText(/IDEA POP/i)).not.toBeInTheDocument();
+    expect(screen.queryByAltText('IDEA POP')).not.toBeInTheDocument();
   });
 
   it('shows wordmark by default', () => {
     render(<Logo />);
-    expect(screen.getByText(/IDEA POP/i)).toBeInTheDocument();
+    expect(screen.getByAltText('IDEA POP')).toBeInTheDocument();
   });
 });
