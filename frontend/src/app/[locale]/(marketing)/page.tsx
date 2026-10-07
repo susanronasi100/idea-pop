@@ -47,8 +47,8 @@ import expertScience from "../../../../public/landing/experts/science.png";
 import expertHistory from "../../../../public/landing/experts/history.png";
 import expertArt from "../../../../public/landing/experts/art.png";
 import expertMath from "../../../../public/landing/experts/math.png";
-// On the wall (xl) the hero buttons are a size smaller so the pair fits between the shelves and the girl.
-const heroWallButton = "xl:px-8 xl:py-2.5 xl:text-[clamp(0.875rem,1vw,1.0625rem)]";
+// On the wall (xl) the hero buttons are a size smaller so the pair fits side by side between the shelves and the girl.
+const heroWallButton = "xl:px-6 xl:py-2.5 xl:text-[clamp(0.875rem,1vw,1.0625rem)]";
 const kidMakes = [kidMake1, kidMake2, kidMake3, kidMake4, kidMake5, kidMake6];
 
 const DEEP = "#2E5F4B";
@@ -75,6 +75,12 @@ export async function generateMetadata({ params }: Props) {
 export default async function LandingPage({ params }: Props) {
   const { locale } = await params;
   const t = await getTranslations({ locale, namespace: "marketing" });
+
+  // The hero description's second sentence and the age line ("Ages 8+"), so the wall can set them on separate lines.
+  const heroBody2 = ((text: string) => {
+    const at = text.lastIndexOf(". ");
+    return at < 0 ? [text, ""] : [text.slice(0, at + 1), text.slice(at + 2)];
+  })(t("hero.body_2"));
 
   const faqItems = t.raw("faq.items") as Array<{ q: string; a: string }>;
   const kidMakeAlts = t.raw("kids_made.alts") as string[];
@@ -192,7 +198,7 @@ export default async function LandingPage({ params }: Props) {
           >
             {/* Cherry Bomb One ships a single 400 weight — the spec's Regular.
                 Motion: the lines rise in one after another while the scene settles. */}
-            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.5rem,2.15vw,2.75rem)]" : "xl:text-[clamp(2.125rem,3.15vw,4rem)]"}`} data-intro="rise" style={motionDelay(350)}>
+            <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.625rem,2.3vw,3rem)]" : "xl:text-[clamp(2.5rem,3.6vw,4.75rem)] xl:leading-[1.1] xl:whitespace-nowrap"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
                 <span className="text-[#18785A]">
@@ -202,21 +208,24 @@ export default async function LandingPage({ params }: Props) {
               </span>{" "}
               <span className="text-[#194D3D]">{t("hero.headline_2")}</span>
             </h1>
-            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.375rem,2.05vw,2.5rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
+            <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.625rem,2.5vw,3.125rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
               <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
             </p>
-            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:text-[clamp(0.875rem,0.95vw,1.125rem)] mt-3 xl:mt-2" data-intro="rise" style={motionDelay(770)}>
+            <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:max-w-none xl:whitespace-nowrap xl:text-[clamp(0.8125rem,0.95vw,1.3125rem)] mt-3 xl:mt-2" data-intro="rise" style={motionDelay(770)}>
               {t("hero.body_1_pre")}
               <span className="text-[#18785A]">{t("hero.body_1_word")}</span>
               {t("hero.body_1_post")}
               {/* Desktop: one sentence per line (the designer's break); phones wrap naturally. */}
               <br className="hidden md:block" />{" "}
-              {t("hero.body_2")}
+              {heroBody2[0]}
+              {/* On the wall: the age goes on a third line. */}
+              <br className="hidden xl:block" />{" "}
+              {heroBody2[1]}
             </p>
             {/* A hovered button grows 11% (up to ~19px a side), so the pair needs 32px side by side and 16px stacked to
                 keep a grown button clear of its neighbour. */}
-            <div className="flex flex-col sm:flex-row xl:flex-col items-center xl:items-start justify-center gap-4 sm:gap-8 xl:gap-2.5 xl:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
+            <div className="flex flex-col sm:flex-row items-center justify-center xl:justify-start gap-4 sm:gap-8 xl:gap-3 xl:whitespace-nowrap mt-[clamp(0.5rem,0.3rem+0.6vw,0.75rem)]" data-intro="rise" style={motionDelay(980)}>
               <Link
                 href="/exploring"
                 className={`${btnLime} ${heroWallButton}`}
