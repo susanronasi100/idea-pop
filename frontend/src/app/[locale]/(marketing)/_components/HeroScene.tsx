@@ -3,6 +3,7 @@
 /* eslint-disable @next/next/no-img-element -- full-canvas artwork layers inside one camera-transformed world; their
    native 1670×942 placement is the point, so next/image's resizing does not apply */
 import { useEffect, useRef, useState } from "react";
+import { preload } from "react-dom";
 
 /* The accepted IDEA POP hero animation, reproduced from the designer's reference runtime (IDEA_POP_Engineering_Handoff,
    "approved shared camera distance revision 17", 2026-10-06): a 650ms hold on nature at normal viewport cover, then
@@ -74,6 +75,8 @@ export default function HeroScene() {
   const natureRef = useRef<HTMLImageElement>(null);
   const layerRefs = useRef<Record<string, HTMLImageElement | null>>({});
   const [state, setState] = useState<"preparing" | "ready" | "fallback">("preparing");
+  // The landscape is the first thing on screen: fetch it first, and show it as a still poster while the rest loads.
+  preload(src("nature-damavand"), { as: "image", fetchPriority: "high" });
 
   useEffect(() => {
     const viewport = viewportRef.current;
@@ -90,6 +93,15 @@ export default function HeroScene() {
       if (!copy) return;
       copy.style.opacity = String(opacity);
       copy.style.visibility = opacity === 0 ? "hidden" : "visible";
+    };
+    // Wide screens: the nav bar and Sign up button come in once the camera has settled (susan, 2026-10-07).
+    const nav = document.querySelector<HTMLElement>('[data-testid="marketing-nav"]');
+    const showNav = (opacity: number) => {
+      if (!nav) return;
+      const o = String(opacity);
+      if (nav.style.opacity !== o) nav.style.opacity = o;
+      const v = opacity === 0 ? "hidden" : "visible";
+      if (nav.style.visibility !== v) nav.style.visibility = v;
     };
 
     let clock = 0; // accumulated playback time after readiness, ms
@@ -174,6 +186,7 @@ export default function HeroScene() {
         set(el, "visibility", opacity === 0 ? "hidden" : "visible");
       }
       showCopy(wide.matches ? ease(clamp01((t - 9000) / 2200)) : 1);
+      showNav(wide.matches ? ease(clamp01((t - CAMERA_MS) / 600)) : 1);
     };
 
     const finish = () => {
@@ -268,11 +281,13 @@ export default function HeroScene() {
         if (cancelled) return;
         setState("fallback");
         showCopy(1);
+        showNav(1);
       });
 
     return () => {
       cancelled = true;
       stop();
+      showNav(1);
       resize.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
       reduced.removeEventListener("change", onReducedChange);
@@ -281,6 +296,8 @@ export default function HeroScene() {
 
   return (
     <div ref={viewportRef} aria-hidden="true" className="hero-viewport" data-state={state}>
+      {/* the opening frame (the reference photo region at normal centred cover) until every layer is ready */}
+      <div className="hero-poster" style={{ backgroundImage: `url(${src("nature-damavand")})` }} />
       <div ref={worldRef} className="hero-world">
         <img ref={natureRef} className="hero-nature" style={{ zIndex: 0 }} src={src("nature-damavand")} alt="" />
         {/* the fixed rear-opening aperture; the far-plane photograph moves inside it */}

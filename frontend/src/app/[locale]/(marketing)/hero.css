@@ -5,8 +5,29 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  /* the page lime (the spec's #263522 showed as a dark band while the pictures load) */
-  background: #f3ffc2;
+  /* sky blue under the poster, so the first instant is never a flat lime page */
+  background: #5aa9ee;
+  container-type: size;
+}
+/* While the layers load: the landscape exactly as the camera's first frame shows it (the 1425×1104 reference region
+   of the 2065×1616 texture, centred at normal viewport cover). Hidden once the scene is ready. */
+.hero-poster {
+  --k: max(calc(100cqw / 1425), calc(100cqh / 1104));
+  position: absolute;
+  inset: 0;
+  background-repeat: no-repeat;
+  background-size: calc(var(--k) * 2065) calc(var(--k) * 1616);
+  background-position: calc(50cqw - var(--k) * 1032.5) calc(50cqh - var(--k) * 808);
+}
+.hero-viewport:not([data-state="preparing"]) .hero-poster {
+  display: none;
+}
+/* Wide screens: the nav waits for the camera to settle (HeroScene.tsx fades it in); hidden until then. */
+@media (min-width: 1280px) {
+  body:has(.hero-viewport) [data-testid="marketing-nav"] {
+    opacity: 0;
+    visibility: hidden;
+  }
 }
 .hero-world {
   position: absolute;
