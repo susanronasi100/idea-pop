@@ -29,7 +29,7 @@ export interface PricingLabels {
   familyFeatures: string[];
   ctaFamily: string;
   badgeValue: string;
-  // Launch offer: the paid plans' prices are shown struck through with this line under them ("Free until December").
+  // Launch offer: the paid plans' prices are shown struck through with this line under them ("Free until Nowruz").
   freeUntil: string;
   // Read by screen readers before a struck-through price, which they otherwise read as a plain price.
   wasPrice: string;
@@ -48,7 +48,7 @@ const outlineCta =
 const filledCta =
   "bg-[#D1EF5A] text-[#1F4D33] hover:brightness-105 hover:shadow-[inset_0_0_0_2px_#18785A,0_4px_4px_rgba(0,0,0,0.25)] active:bg-[#B8D24F] focus-visible:ring-[#1F4D33] shadow-[inset_0_0_0_1px_#18785A,0_4px_4px_rgba(0,0,0,0.25)]";
 
-// One price style for all three plans: Free's "0 Toman" and the paid plans' "Free until December" look the same.
+// One price style for all three plans: Free's "0 Toman" and the paid plans' "Free until Nowruz" look the same.
 const priceText = "font-display font-bold text-[1.5rem] leading-tight text-ink";
 
 interface PlanCardProps {
