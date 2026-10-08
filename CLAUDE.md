@@ -51,8 +51,9 @@ packages/api-types, .github/workflows, docs/.
 
 ## Challenge engine (canonical)
 Challenge = DATA, not a page. One generic engine renders any challenge from its JSON.
-8 steps: 1 Brief, 2 Your idea?, 3 Nature clues, 4 Design secret, 5 Skill, 6 Sketch, 7 Build & test, 8 Celebrate & share.
-"Yes, I have an idea" jumps to step 6; all steps stay reachable from the mission menu. Ideas Wall is locked until the kid submits.
+8 steps: 1 Brief, 2 Your idea?, 3 Nature clues, 4 Sketch, 5 Design secret, 6 Skill, 7 Build & test, 8 Celebrate & share.
+Finishing the Sketch celebrates "you solved it!" and invites the kid on to find more ideas (steps 5-7); step 8 shows the mission's total XP.
+"Yes, I have an idea" jumps to step 4; all steps stay reachable from the mission menu. Ideas Wall is locked until the kid submits.
 
 ## Commands
 - Dev up: `docker compose up` (or `just up`). DB UI: adminer (:8081). Mail: mailhog (:8025). Storage: minio (:9001).

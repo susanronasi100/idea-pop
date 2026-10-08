@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 /** Bonus badges every story mission can award. */
-export type BadgeKey = 'clue' | 'tool' | 'retry' | 'define';
+export type BadgeKey = 'clue' | 'tool' | 'retry' | 'define' | 'solved';
 
 /**
  * The kid's in-mission game state for a story mission: quiz answers, lab and

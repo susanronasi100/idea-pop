@@ -6,9 +6,12 @@ import { useTranslations } from 'next-intl';
 import { btnPrimary } from '@/components/challenge/buttons';
 
 interface Props {
-  /** XP the server just awarded (0 when it was already given before). */
-  xp: number;
+  /** XP the server just awarded (0 when it was already given before). Define variant only. */
+  xp?: number;
   onClose: () => void;
+  /** 'define': the 5W problem is defined (+5 XP). 'solved': the first idea is sketched, so the
+   *  problem is solved; it cheers and invites the kid on to find more ideas (TEMP rule 35). */
+  variant?: 'define' | 'solved';
 }
 
 const CONFETTI_COLORS = ['#2D9CDB', '#FFD93D', '#6BCB77', '#FF6B6B', '#C77DFF', '#FF9F45'];
@@ -21,7 +24,8 @@ const CONFETTI = Array.from({ length: 22 }, (_, i) => ({
 
 /** The reward for defining the problem with the 5W1H questions: the floating jellyfish,
  *  reward chips that bob around it, falling confetti, and a way back to the mission. */
-export default function DefineCelebration({ xp, onClose }: Props) {
+export default function DefineCelebration({ xp = 0, onClose, variant = 'define' }: Props) {
+  const solved = variant === 'solved';
   const t = useTranslations('story');
   const goRef = useRef<HTMLButtonElement>(null);
 
@@ -67,10 +71,16 @@ export default function DefineCelebration({ xp, onClose }: Props) {
             className="celebrate-float absolute bottom-1 left-1/2 h-[230px] drop-shadow-[0_0_18px_rgba(80,200,255,0.75)]"
           />
           <span className={`${chip} left-1 top-5 bg-white text-ink`}>
-            ⭐ <span dir="ltr">+{xp > 0 ? xp : 5} XP</span>
+            {solved ? (
+              <>🏅 {t('solved_badge')}</>
+            ) : (
+              <>
+                ⭐ <span dir="ltr">+{xp > 0 ? xp : 5} XP</span>
+              </>
+            )}
           </span>
           <span className={`${chip} bottom-8 left-3 bg-white text-ink`} style={{ animationDelay: '1.2s' }}>
-            ✅ {t('celebrate_defined')}
+            ✅ {solved ? t('solved_chip') : t('celebrate_defined')}
           </span>
           <span className="celebrate-twinkle absolute left-[28%] top-2 text-xl">✨</span>
           <span
@@ -88,10 +98,18 @@ export default function DefineCelebration({ xp, onClose }: Props) {
         </div>
 
         <h2 id="define-celebration-title" className="mt-3 font-display text-3xl text-ink">
-          {t('celebrate_title_1')} <span className="text-challenge">{t('celebrate_title_2')}</span>{' '}
-          <span className="text-challenge">{t('celebrate_title_3')}</span>
+          {solved ? (
+            <>
+              {t('solved_title_1')} <span className="text-challenge">{t('solved_title_2')}</span>
+            </>
+          ) : (
+            <>
+              {t('celebrate_title_1')} <span className="text-challenge">{t('celebrate_title_2')}</span>{' '}
+              <span className="text-challenge">{t('celebrate_title_3')}</span>
+            </>
+          )}
         </h2>
-        <p className="mt-1.5 font-body text-[15px] leading-relaxed text-ink/70">{t('celebrate_text')}</p>
+        <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved ? t('solved_text') : t('celebrate_text')}</p>
         <button
           ref={goRef}
           type="button"
@@ -99,7 +117,7 @@ export default function DefineCelebration({ xp, onClose }: Props) {
           onClick={onClose}
           className={`${btnPrimary} mt-5 w-full`}
         >
-          {t('celebrate_go')}
+          {solved ? t('solved_go') : t('celebrate_go')}
         </button>
       </div>
     </div>,

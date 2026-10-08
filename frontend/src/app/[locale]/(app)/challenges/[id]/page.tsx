@@ -18,6 +18,7 @@ import StepBuild from '@/components/challenge/StepBuild';
 import StepCelebrate from '@/components/challenge/StepCelebrate';
 import IdeasWallTab from '@/components/challenge/IdeasWallTab';
 import XpBurst from '@/components/explore/XpBurst';
+import DefineCelebration from '@/components/challenge/story/DefineCelebration';
 import StoryBrief from '@/components/challenge/story/StoryBrief';
 import StoryClues from '@/components/challenge/story/StoryClues';
 import StorySecret from '@/components/challenge/story/StorySecret';
@@ -67,6 +68,8 @@ export default function ChallengePage() {
   const [wallUnlocked, setWallUnlocked] = useState(false);
   // Story missions split step 5 into the lab and the creativity-tool power-up.
   const [skillPhase, setSkillPhase] = useState<'lab' | 'tool'>('lab');
+  // The "you solved it!" moment after the sketch (TEMP rule 35).
+  const [solvedCelebration, setSolvedCelebration] = useState(false);
   const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
 
   const locale = useLocale();
@@ -119,7 +122,7 @@ export default function ChallengePage() {
       }
 
       setCurrentStep(step);
-      if (step === 5) setSkillPhase('lab');
+      if (step === 6) setSkillPhase('lab');
       setReachedSteps((prev) => {
         const next = new Set(prev);
         next.add(step);
@@ -133,15 +136,9 @@ export default function ChallengePage() {
 
   const handleIdeaYes = useCallback(() => {
     setIdeaPath('yes');
-    // Mark steps 3/4/5 as optionally reachable via mission menu (no dead ends)
-    setReachedSteps((prev) => {
-      const next = new Set(prev);
-      next.add(3);
-      next.add(4);
-      next.add(5);
-      return next;
-    });
-    goToStep(6);
+    // A kid with an idea goes straight to the sketch; Nature clues stays open in the menu.
+    setReachedSteps((prev) => new Set(prev).add(3));
+    goToStep(4);
   }, [goToStep]);
 
   const handleIdeaNo = useCallback(() => {
@@ -264,24 +261,40 @@ export default function ChallengePage() {
               />
             ))}
 
-          {currentStep === 4 &&
+          {currentStep === 4 && story && <StorySketchTop story={story} {...gameProps} />}
+
+          {currentStep === 4 && (
+            <StepSketch
+              {...sharedProps}
+              hideTools={story !== null}
+              onNext={(projectId) => {
+                if (projectId) setSketchProjectId(projectId);
+                // The kid has solved the problem with a first idea: celebrate, then
+                // invite them on to find more ideas (design secret, skill, build).
+                setSolvedCelebration(true);
+              }}
+              onBack={() => goToStep(ideaPath === 'yes' ? 2 : 3)}
+            />
+          )}
+
+          {currentStep === 5 &&
             (story ? (
               <StorySecret
                 challenge={challenge}
                 story={story}
                 {...gameProps}
-                onNext={() => goToStep(5)}
-                onBack={() => goToStep(3)}
+                onNext={() => goToStep(6)}
+                onBack={() => goToStep(4)}
               />
             ) : (
               <StepDesignSecret
                 {...sharedProps}
-                onNext={() => goToStep(5)}
-                onBack={() => goToStep(3)}
+                onNext={() => goToStep(6)}
+                onBack={() => goToStep(4)}
               />
             ))}
 
-          {currentStep === 5 &&
+          {currentStep === 6 &&
             (story ? (
               skillPhase === 'lab' ? (
                 <StoryLab
@@ -292,41 +305,24 @@ export default function ChallengePage() {
                     setSkillPhase('tool');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
-                  onBack={() => goToStep(4)}
+                  onBack={() => goToStep(5)}
                 />
               ) : (
                 <ToolLesson
                   story={story}
                   {...gameProps}
                   award={awardBadge}
-                  onNext={() => goToStep(6)}
+                  onNext={() => goToStep(7)}
                   onBack={() => setSkillPhase('lab')}
                 />
               )
             ) : (
               <StepSkill
                 {...sharedProps}
-                onNext={() => goToStep(6)}
-                onBack={() => goToStep(4)}
+                onNext={() => goToStep(7)}
+                onBack={() => goToStep(5)}
               />
             ))}
-
-          {currentStep === 6 && story && <StorySketchTop story={story} {...gameProps} />}
-
-          {currentStep === 6 && (
-            <StepSketch
-              {...sharedProps}
-              hideTools={story !== null}
-              onNext={(projectId) => {
-                if (projectId) setSketchProjectId(projectId);
-                goToStep(7);
-              }}
-              onBack={() => {
-                if (ideaPath === 'yes') return goToStep(2);
-                void goToStep(5).then(() => story && setSkillPhase('tool'));
-              }}
-            />
-          )}
 
           {currentStep === 7 && story && <StoryFairTest story={story} {...gameProps} />}
 
@@ -356,6 +352,8 @@ export default function ChallengePage() {
             <StepCelebrate
               {...sharedProps}
               completionXp={challenge.completion_xp}
+              // The define-the-problem bonus (+5, story missions) counts toward the total too.
+              bonusXp={game.badges.includes('define') ? 5 : 0}
               sketchProjectId={sketchProjectId}
               wallAlreadySubmitted={wallUnlocked}
               onWallSubmitted={handleWallSubmitted}
@@ -380,6 +378,17 @@ export default function ChallengePage() {
             }}
           />
         </div>
+      )}
+
+      {solvedCelebration && (
+        <DefineCelebration
+          variant="solved"
+          onClose={() => {
+            setSolvedCelebration(false);
+            if (story) updateGame((g) => ({ badges: g.badges.includes('solved') ? g.badges : [...g.badges, 'solved'] }));
+            goToStep(5);
+          }}
+        />
       )}
 
       {visible && award && (

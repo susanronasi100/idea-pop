@@ -13,23 +13,18 @@ interface StepCelebrateProps {
   challenge: ChallengeDetail;
   ageMode: 'young' | 'older';
   completionXp: number;
+  /** Extra XP earned along the way in this mission (e.g. the define-the-problem bonus). */
+  bonusXp?: number;
   sketchProjectId: string | null;
   wallAlreadySubmitted: boolean;
   onWallSubmitted: () => void;
   onRestart: () => void;
 }
 
-const XP_BREAKDOWN = [
-  { labelKey: 'xp_watched_clue', xp: 5 },
-  { labelKey: 'xp_learned_skill', xp: 10 },
-  { labelKey: 'xp_built_tested', xp: 20 },
-  { labelKey: 'xp_cycle_bonus', xp: 15 },
-] as const;
-
 export default function StepCelebrate({
   challenge,
-  ageMode,
   completionXp,
+  bonusXp = 0,
   sketchProjectId,
   wallAlreadySubmitted,
   onWallSubmitted,
@@ -72,17 +67,18 @@ export default function StepCelebrate({
 
       {/* XP card */}
       <div data-testid="celebrate-xp" className="bg-challenge text-white rounded-card p-6 text-center mb-6">
-        <p dir="ltr" className="font-display text-4xl">{t('xp_chip', { xp: completionXp })}</p>
-        {ageMode === 'older' && (
-          <div className="mt-3 flex flex-col items-center gap-1">
-            {XP_BREAKDOWN.map(({ labelKey, xp }) => (
-              <p key={labelKey} className="font-body text-sm text-white/80">
-                {t(labelKey)}:{' '}
-                <span dir="ltr">+{format.number(xp)}</span>
-              </p>
-            ))}
-          </div>
-        )}
+        <p className="font-body text-base font-bold text-white/90">{t('total_xp_heading')}</p>
+        <p dir="ltr" className="font-display text-5xl">{t('xp_chip', { xp: completionXp + bonusXp })}</p>
+        <div className="mt-3 flex flex-col items-center gap-1">
+          <p className="font-body text-base text-white/90">
+            {t('xp_mission_complete')}: <span dir="ltr">+{format.number(completionXp)}</span>
+          </p>
+          {bonusXp > 0 && (
+            <p className="font-body text-base text-white/90">
+              {t('xp_problem_defined')}: <span dir="ltr">+{format.number(bonusXp)}</span>
+            </p>
+          )}
+        </div>
       </div>
 
       {/* Audience picker — real API integration */}
