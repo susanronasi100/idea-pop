@@ -22,7 +22,10 @@ use uuid::Uuid;
 
 use idea_pop_domain::{
     challenge::ChallengeStep,
-    help::{build_system_prompt, screen_question, CANNED_REFUSAL},
+    help::{
+        build_idea_check_prompt, build_system_prompt, parse_idea_feedback, screen_question,
+        IdeaCheckContext, CANNED_REFUSAL,
+    },
     DomainError, GatedAction, Role,
 };
 
@@ -63,6 +66,25 @@ pub struct HelpMessageResponse {
     pub answer: Option<String>,
     pub blocked: bool,
     pub created_at: String,
+}
+
+#[derive(Deserialize, ToSchema)]
+pub struct IdeaFeedbackRequest {
+    /// The kid's own words about their idea (what they made and how it works).
+    pub idea: String,
+    /// "en" or "fa": the language Popi answers in.
+    #[serde(default)]
+    pub lang: Option<String>,
+}
+
+#[derive(Serialize, ToSchema)]
+pub struct IdeaFeedbackResponse {
+    /// Popi's two short sentences for the kid.
+    pub message: String,
+    /// True when the idea is a real attempt at this mission's problem.
+    pub fits: bool,
+    /// True when safety checks stopped the exchange (the message is a gentle canned one).
+    pub blocked: bool,
 }
 
 #[derive(Deserialize, ToSchema)]
@@ -229,6 +251,209 @@ pub async fn ask_helper(
         blocked: false,
     })
     .into_response())
+}
+
+// ── POST /challenges/{id}/idea-feedback ───────────────────────────────────────
+
+/// The Sketch step's step number in the mission's data, for the review transcript.
+const SKETCH_STEP: i16 = 6;
+
+/// Popi checks a kid's sketched idea and answers with what's good about it and one
+/// question to improve it, or kindly asks them to try again when it doesn't solve the
+/// problem. The same gates as the helper: feature flag, consent, the parent's opt-in,
+/// pre-screen, hourly limit, input and output moderation, and a reviewable transcript.
+/// XP never depends on this: it was already given when the idea was saved.
+#[utoipa::path(post, path = "/challenges/{id}/idea-feedback", tag = "challenges",
+    params(("id" = Uuid, Path, description = "Challenge UUID")),
+    request_body = IdeaFeedbackRequest,
+    security(("bearer_auth" = [])),
+    responses(
+        (status = 200, description = "Popi's feedback (or a gentle refusal with blocked=true)", body = IdeaFeedbackResponse),
+        (status = 403, description = "Consent or opt-in missing / not a kid token", body = crate::ProblemDetail),
+        (status = 404, description = "Feature off, or unknown challenge", body = crate::ProblemDetail),
+        (status = 429, description = "Hourly helper limit reached", body = crate::ProblemDetail),
+    ))]
+pub async fn idea_feedback(
+    kid: KidAuth,
+    State(state): State<AppState>,
+    Path(challenge_id): Path<Uuid>,
+    Json(body): Json<IdeaFeedbackRequest>,
+) -> Result<Response, ApiError> {
+    if !state.helper_config.enabled {
+        return Err(DomainError::NotFound.into());
+    }
+    let child_id = kid.child_id;
+    state
+        .consent
+        .check_gate(child_id, &GatedAction::CollectExtraData)
+        .await?;
+    let enabled: Option<bool> =
+        sqlx::query_scalar("SELECT helper_enabled FROM child_profiles WHERE id = $1")
+            .bind(child_id)
+            .fetch_optional(&state.db)
+            .await
+            .map_err(internal)?;
+    if !enabled.unwrap_or(false) {
+        return Err(DomainError::Forbidden(
+            "the mission helper is not switched on for this profile".into(),
+        )
+        .into());
+    }
+
+    let idea = body.idea.trim().to_owned();
+    if screen_question(&idea).is_some() {
+        log_exchange(
+            &state,
+            child_id,
+            challenge_id,
+            SKETCH_STEP,
+            &idea,
+            None,
+            true,
+        )
+        .await?;
+        return Ok(blocked_idea_response());
+    }
+
+    let recent: i64 = sqlx::query_scalar(
+        "SELECT COUNT(*) FROM help_messages
+         WHERE child_id = $1 AND created_at > now() - interval '1 hour'",
+    )
+    .bind(child_id)
+    .fetch_one(&state.db)
+    .await
+    .map_err(internal)?;
+    if recent >= state.helper_config.hourly_limit {
+        return Ok(problem(
+            StatusCode::TOO_MANY_REQUESTS,
+            "helper-rate-limited",
+            "Popi needs a little rest — try again soon.",
+        ));
+    }
+
+    // The mission's own story text is the only context (no PII).
+    let lang = body.lang.as_deref().unwrap_or("en");
+    let row = sqlx::query("SELECT title, story, translations FROM challenges WHERE id = $1")
+        .bind(challenge_id)
+        .fetch_optional(&state.db)
+        .await
+        .map_err(internal)?
+        .ok_or(DomainError::NotFound)?;
+    let title: String = row.get("title");
+    let story_en: Option<serde_json::Value> = row.get("story");
+    let translations: serde_json::Value = row.get("translations");
+    let story = (if lang == "fa" {
+        translations.get("fa").and_then(|t| t.get("story")).cloned()
+    } else {
+        None
+    })
+    .or(story_en)
+    .ok_or(DomainError::NotFound)?;
+    let text = |v: &serde_json::Value, path: &[&str]| -> String {
+        let mut cur = v;
+        for p in path {
+            match cur.get(p) {
+                Some(next) => cur = next,
+                None => return String::new(),
+            }
+        }
+        cur.as_str().unwrap_or_default().to_owned()
+    };
+    let heroes: Vec<String> = story
+        .get("clue_cards")
+        .and_then(|c| c.as_array())
+        .map(|cards| {
+            cards
+                .iter()
+                .filter_map(|c| c.get("name")?.as_str().map(str::to_owned))
+                .collect()
+        })
+        .unwrap_or_default();
+    let (hero, problem_text, goal, question) = (
+        text(&story, &["hero", "name"]),
+        text(&story, &["card", "problem"]),
+        text(&story, &["card", "goal"]),
+        text(&story, &["function_question"]),
+    );
+    let ctx = IdeaCheckContext {
+        challenge_title: &title,
+        hero: &hero,
+        problem: &problem_text,
+        goal: &goal,
+        function_question: &question,
+        nature_heroes: &heroes,
+        lang,
+    };
+
+    if !state.helper.moderate(&idea).await? {
+        log_exchange(
+            &state,
+            child_id,
+            challenge_id,
+            SKETCH_STEP,
+            &idea,
+            None,
+            true,
+        )
+        .await?;
+        return Ok(blocked_idea_response());
+    }
+    let raw = state
+        .helper
+        .answer(&build_idea_check_prompt(&ctx), &idea)
+        .await?;
+    let Some(feedback) = parse_idea_feedback(&raw) else {
+        log_exchange(
+            &state,
+            child_id,
+            challenge_id,
+            SKETCH_STEP,
+            &idea,
+            Some(&raw),
+            true,
+        )
+        .await?;
+        return Ok(blocked_idea_response());
+    };
+    if !state.helper.moderate(&feedback.message).await? {
+        log_exchange(
+            &state,
+            child_id,
+            challenge_id,
+            SKETCH_STEP,
+            &idea,
+            Some(&raw),
+            true,
+        )
+        .await?;
+        return Ok(blocked_idea_response());
+    }
+    log_exchange(
+        &state,
+        child_id,
+        challenge_id,
+        SKETCH_STEP,
+        &idea,
+        Some(&feedback.message),
+        false,
+    )
+    .await?;
+
+    Ok(Json(IdeaFeedbackResponse {
+        message: feedback.message,
+        fits: feedback.fits,
+        blocked: false,
+    })
+    .into_response())
+}
+
+fn blocked_idea_response() -> Response {
+    Json(IdeaFeedbackResponse {
+        message: CANNED_REFUSAL.to_owned(),
+        fits: false,
+        blocked: true,
+    })
+    .into_response()
 }
 
 fn blocked_response() -> Response {

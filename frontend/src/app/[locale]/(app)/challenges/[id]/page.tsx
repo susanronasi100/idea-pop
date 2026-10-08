@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { useXpToast } from '@/lib/hooks/useXpToast';
-import { fetchChallenge, startAttempt, advanceStep, claimSketchBonus } from '@/lib/api/client';
+import { fetchChallenge, startAttempt, advanceStep, claimSketchBonus, getIdeaFeedback } from '@/lib/api/client';
 import MissionHUD from '@/components/challenge/MissionHUD';
 import StepBrief from '@/components/challenge/StepBrief';
 import StepIdeaFork from '@/components/challenge/StepIdeaFork';
@@ -69,7 +69,10 @@ export default function ChallengePage() {
   // Story missions split step 5 into the lab and the creativity-tool power-up.
   const [skillPhase, setSkillPhase] = useState<'lab' | 'tool'>('lab');
   // The "you solved it!" moment after the sketch (TEMP rule 35).
-  const [solvedCelebration, setSolvedCelebration] = useState<{ xp: number } | null>(null);
+  const [solvedCelebration, setSolvedCelebration] = useState<{
+    xp: number;
+    popi: { state: 'loading' | 'done' | 'off'; text?: string; fits?: boolean };
+  } | null>(null);
   const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
 
   const locale = useLocale();
@@ -267,14 +270,27 @@ export default function ChallengePage() {
             <StepSketch
               {...sharedProps}
               hideTools={story !== null}
-              onNext={(projectId) => {
+              onNext={(projectId, idea) => {
                 if (projectId) setSketchProjectId(projectId);
                 // The kid has solved the problem with a first idea: celebrate, then
                 // invite them on to find more ideas (design secret, skill, build).
-                setSolvedCelebration({ xp: 0 });
+                setSolvedCelebration({ xp: 0, popi: { state: idea ? 'loading' : 'off' } });
                 claimSketchBonus(challenge.id)
-                  .then((r) => setSolvedCelebration((c) => (c ? { xp: r?.xp_earned ?? 0 } : c)))
+                  .then((r) => setSolvedCelebration((c) => (c ? { ...c, xp: r?.xp_earned ?? 0 } : c)))
                   .catch(() => {});
+                // Popi reads the idea (AI helper). The XP never waits for this.
+                if (idea) {
+                  void getIdeaFeedback(challenge.id, idea, locale).then((f) =>
+                    setSolvedCelebration((c) =>
+                      c
+                        ? {
+                            ...c,
+                            popi: f && !f.blocked ? { state: 'done', text: f.message, fits: f.fits } : { state: 'off' },
+                          }
+                        : c,
+                    ),
+                  );
+                }
               }}
               onBack={() => goToStep(ideaPath === 'yes' ? 2 : 3)}
             />
@@ -389,6 +405,9 @@ export default function ChallengePage() {
         <DefineCelebration
           variant="solved"
           xp={solvedCelebration.xp}
+          popi={solvedCelebration.popi}
+          // Back to the sketch to make the idea better (the XP is already theirs).
+          onImprove={() => setSolvedCelebration(null)}
           onClose={() => {
             setSolvedCelebration(null);
             if (story) updateGame((g) => ({ badges: g.badges.includes('solved') ? g.badges : [...g.badges, 'solved'] }));

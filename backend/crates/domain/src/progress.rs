@@ -689,7 +689,8 @@ mod tests {
         let child_id = Uuid::new_v4();
         let chal_id = Uuid::new_v4();
         let now = Utc::now();
-        let first = award_sketch_bonus(child_id, chal_id, now, &[]).expect("first sketch awards XP");
+        let first =
+            award_sketch_bonus(child_id, chal_id, now, &[]).expect("first sketch awards XP");
         assert_eq!(first.amount, XP_SKETCH_BONUS);
         assert_eq!(first.source_type.as_str(), "sketch_bonus");
         assert!(award_sketch_bonus(child_id, chal_id, now, &[first.clone()]).is_none());

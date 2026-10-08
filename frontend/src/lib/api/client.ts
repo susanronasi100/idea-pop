@@ -420,6 +420,22 @@ export async function claimDefineBonus(challengeId: string) {
   return data;
 }
 
+/** Popi checks a sketched idea with the AI helper. Null when the helper is off for this
+ *  child (feature flag, consent or the parent's switch) or anything else goes wrong, so the
+ *  page can fall back to a friendly fixed tip. */
+export async function getIdeaFeedback(challengeId: string, idea: string, lang: string) {
+  try {
+    const { data, error } = await apiClient.POST("/api/challenges/{id}/idea-feedback", {
+      params: { path: { id: challengeId } },
+      body: { idea, lang },
+    });
+    if (error || !data) return null;
+    return data;
+  } catch {
+    return null;
+  }
+}
+
 /** +10 XP, once per mission, for solving the problem with a first sketched idea. */
 export async function claimSketchBonus(challengeId: string) {
   const { data, error } = await apiClient.POST("/api/challenges/{id}/sketch-bonus", {

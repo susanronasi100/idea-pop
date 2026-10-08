@@ -3,7 +3,7 @@
 import { useEffect, useRef } from 'react';
 import { createPortal } from 'react-dom';
 import { useTranslations } from 'next-intl';
-import { btnPrimary } from '@/components/challenge/buttons';
+import { btnPrimary, btnSecondary } from '@/components/challenge/buttons';
 
 interface Props {
   /** XP the server just awarded (0 when it was already given before). Define variant only. */
@@ -12,6 +12,11 @@ interface Props {
   /** 'define': the 5W problem is defined (+5 XP). 'solved': the first idea is sketched, so the
    *  problem is solved; it cheers and invites the kid on to find more ideas (TEMP rule 35). */
   variant?: 'define' | 'solved';
+  /** Solved variant: Popi's check of the idea — reading, his answer, or a fixed tip
+   *  when the AI helper isn't on for this child. */
+  popi?: { state: 'loading' | 'done' | 'off'; text?: string; fits?: boolean };
+  /** Solved variant: go back and improve the idea. */
+  onImprove?: () => void;
 }
 
 const CONFETTI_COLORS = ['#2D9CDB', '#FFD93D', '#6BCB77', '#FF6B6B', '#C77DFF', '#FF9F45'];
@@ -24,7 +29,7 @@ const CONFETTI = Array.from({ length: 22 }, (_, i) => ({
 
 /** The reward for defining the problem with the 5W1H questions: the floating jellyfish,
  *  reward chips that bob around it, falling confetti, and a way back to the mission. */
-export default function DefineCelebration({ xp = 0, onClose, variant = 'define' }: Props) {
+export default function DefineCelebration({ xp = 0, onClose, variant = 'define', popi, onImprove }: Props) {
   const solved = variant === 'solved';
   const t = useTranslations('story');
   const goRef = useRef<HTMLButtonElement>(null);
@@ -109,6 +114,31 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define' 
           )}
         </h2>
         <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved ? t.rich('solved_text', { b: (chunks) => <b className="font-extrabold text-ink">{chunks}</b> }) : t('celebrate_text')}</p>
+        {solved && popi && (
+          <div
+            data-testid="popi-idea-check"
+            aria-live="polite"
+            className="mt-4 flex items-start gap-3 rounded-[18px] bg-[#EAF5FC] p-3 text-start"
+          >
+            {/* eslint-disable-next-line @next/next/no-img-element -- Popi's small cut-out */}
+            <img src="/popi/popi.png" alt="" aria-hidden="true" className="h-14 w-auto shrink-0" />
+            <div className="min-w-0">
+              <p className="font-body text-sm font-bold text-challenge">{t('popi_says')}</p>
+              <p className="font-body text-base font-semibold leading-snug text-ink">
+                {popi.state === 'loading'
+                  ? t('popi_reading')
+                  : popi.state === 'done'
+                    ? popi.text
+                    : t('popi_offline')}
+              </p>
+            </div>
+          </div>
+        )}
+        {solved && popi?.state === 'done' && popi.fits === false && onImprove && (
+          <button type="button" data-testid="improve-idea" onClick={onImprove} className={`${btnSecondary} mt-4 w-full`}>
+            {t('improve_idea')}
+          </button>
+        )}
         <button
           ref={goRef}
           type="button"

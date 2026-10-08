@@ -13,7 +13,8 @@ type ChallengeDetail = import('@/lib/api/schema').components['schemas']['Challen
 interface StepSketchProps {
   challenge: ChallengeDetail;
   ageMode: 'young' | 'older';
-  onNext: (projectId: string | null) => void;
+  /** `idea`: the kid's own words about the idea, for Popi's check. */
+  onNext: (projectId: string | null, idea?: string) => void;
   onBack: () => void;
   /** Story missions teach their tool in the chapter-5½ power-up instead. */
   hideTools?: boolean;
@@ -28,6 +29,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
 
   async function handleSubmit(data: CaptureData) {
     setSubmitting(true);
+    const idea = [data.title, data.what_i_made, data.what_i_used].map((x) => x?.trim()).filter(Boolean).join('. ');
     try {
       const project = await createProject({
         title: data.title || t('default_sketch_title'),
@@ -38,9 +40,9 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
         challenge_id: challenge.id,
         step_type: 'sketch',
       });
-      onNext(project.id);
+      onNext(project.id, idea);
     } catch {
-      onNext(null);
+      onNext(null, idea);
     } finally {
       setSubmitting(false);
     }

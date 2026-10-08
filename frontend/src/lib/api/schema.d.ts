@@ -269,6 +269,23 @@ export interface paths {
       };
     };
   };
+  "/api/challenges/{id}/idea-feedback": {
+    post: {
+      parameters: { path: { id: string } };
+      requestBody: {
+        content: {
+          "application/json": { idea: string; lang?: string | null };
+        };
+      };
+      responses: {
+        200: {
+          content: {
+            "application/json": { message: string; fits: boolean; blocked: boolean };
+          };
+        };
+      };
+    };
+  };
   "/api/challenges/{id}/sketch-bonus": {
     post: {
       parameters: { path: { id: string } };

@@ -19,9 +19,10 @@ use uuid::Uuid;
 
 use idea_pop_domain::{
     progress::{
-        award_cycle_bonus, award_define_bonus, award_sketch_bonus, evaluate_new_badges, level_from_xp,
-        medal_from_count, rank_from_level, xp_total, AnalyticsEvent, AnalyticsEventKind,
-        AttemptStatus, ChallengeAttempt, CycleActivityResult, XpEvent, XpSourceType,
+        award_cycle_bonus, award_define_bonus, award_sketch_bonus, evaluate_new_badges,
+        level_from_xp, medal_from_count, rank_from_level, xp_total, AnalyticsEvent,
+        AnalyticsEventKind, AttemptStatus, ChallengeAttempt, CycleActivityResult, XpEvent,
+        XpSourceType,
     },
     DomainError,
 };

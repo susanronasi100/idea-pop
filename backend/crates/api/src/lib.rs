@@ -74,8 +74,8 @@ use crate::{
     },
     explore::{ExplorePageResponse, ExploreVideoResponse},
     help::{
-        HelpMessageResponse, HelpRequest, HelpResponse, HelperEnabledResponse,
-        UpdateHelperEnabledRequest,
+        HelpMessageResponse, HelpRequest, HelpResponse, HelperEnabledResponse, IdeaFeedbackRequest,
+        IdeaFeedbackResponse, UpdateHelperEnabledRequest,
     },
     library::{
         CourseDetailResponse, CourseSummaryResponse, CreatorResponse, LessonResponse,
@@ -245,7 +245,7 @@ pub struct CreateHealthLogRequest {
         library::list_studios, library::list_courses, library::list_quick_makes,
         library::get_course, library::get_creator,
         challenges::list_challenges, challenges::get_challenge,
-        help::ask_helper, help::parent_help_messages,
+        help::ask_helper, help::idea_feedback, help::parent_help_messages,
         help::teacher_help_messages, help::set_helper_enabled,
         progress::post_video_view, progress::post_lesson_complete, progress::post_define_bonus,
         progress::post_sketch_bonus,
@@ -279,7 +279,7 @@ pub struct CreateHealthLogRequest {
         LessonResponse, CourseDetailResponse, CreatorResponse,
         ChallengeResponse, ChallengePageResponse, AgeTierVariantResponse, ToolResponse,
         NatureClueResponse,
-        HelpRequest, HelpResponse, HelpMessageResponse,
+        HelpRequest, HelpResponse, HelpMessageResponse, IdeaFeedbackRequest, IdeaFeedbackResponse,
         UpdateHelperEnabledRequest, HelperEnabledResponse,
         VideoViewRequest, LessonCompleteRequest, XpAwardResponse,
         StartAttemptResponse, AdvanceStepRequest, AdvanceStepResponse,
@@ -602,6 +602,7 @@ pub fn router_with_metrics(
         .route("/challenges/:id", get(challenges::get_challenge))
         // Scoped AI mission helper (kid-scoped; flag+consent+opt-in gated)
         .route("/challenges/:id/steps/:step/help", post(help::ask_helper))
+        .route("/challenges/:id/idea-feedback", post(help::idea_feedback))
         .route(
             "/parent/children/:id/help-messages",
             get(help::parent_help_messages),
