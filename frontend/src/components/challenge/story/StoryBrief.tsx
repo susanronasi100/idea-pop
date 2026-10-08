@@ -102,7 +102,7 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
       <Popi text={story.guide.brief} grand talking={auto.phase === 'finale' && voice.speaking} />
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-body font-bold text-xs text-challenge">{t('your_mission')}</p>
+        <p className="font-display text-2xl text-challenge">{t('your_mission')}</p>
         <h2 className="font-display text-2xl text-ink">{challenge.title}</h2>
         <dl data-testid="story-card" className="grid grid-cols-2 gap-2 sm:grid-cols-3">
           {CARD_KEYS.map((k) => (

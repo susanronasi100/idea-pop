@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Popi, backClass, pillCtaClass } from './StoryBits';
+import { Popi, StepNav, pillCtaClass } from './StoryBits';
 import type { ChallengeDetail, MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
 
@@ -26,12 +26,12 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
       <Popi text={story.guide.design_secret} />
 
       <div className="story-rise flex flex-col gap-2 rounded-card bg-gradient-to-br from-white from-60% to-tint-blue p-5">
-        <p className="font-body font-bold text-xs text-challenge">{t('secret_unlocked')}</p>
-        <p className="font-body text-base text-ink">{challenge.design_secret}</p>
+        <p className="font-display text-2xl text-challenge">{t('secret_unlocked')}</p>
+        <p className="font-body text-lg font-medium leading-snug text-ink">{challenge.design_secret}</p>
       </div>
 
       <div data-testid="predict-game" className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-body font-bold text-xs text-challenge">{p.prompt}</p>
+        <p className="font-display text-2xl text-challenge">{p.prompt}</p>
         <div className="grid grid-cols-1 gap-3 sm:grid-cols-3">
           {p.items.map((item, i) => {
             const guess = game.predictions[i];
@@ -50,9 +50,14 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
                   aria-hidden="true"
                   className={`relative text-4xl transition-transform duration-700 ${answered ? 'story-float' : ''}`}
                 >
-                  {item.emoji}
+                  {item.image ? (
+                    // eslint-disable-next-line @next/next/no-img-element -- a small transparent cut-out
+                    <img src={item.image} alt="" width={112} height={112} className="h-28 w-28 object-contain drop-shadow-[0_6px_8px_rgba(0,0,0,0.18)]" />
+                  ) : (
+                    item.emoji
+                  )}
                 </span>
-                <span className="relative font-body text-sm font-bold text-ink">{item.label}</span>
+                <span className="relative font-body text-base font-extrabold text-ink">{item.label}</span>
                 {answered ? (
                   <span className="story-pop relative font-body text-sm font-bold text-ink" aria-live="polite">
                     {guess === item.answer ? '✅' : '💡'} {t('predict_answer', { answer: p.choices[item.answer] })}
@@ -65,7 +70,7 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
                         type="button"
                         data-testid={`predict-${i}-${ci}`}
                         onClick={() => update((g) => ({ predictions: { ...g.predictions, [i]: ci } }))}
-                        className="rounded-pill border-2 border-ink/10 bg-white px-3 py-1 font-body text-xs font-bold text-ink hover:border-challenge"
+                        className="min-h-11 rounded-pill border-2 border-ink/15 bg-white px-4 font-body text-sm font-bold text-ink hover:border-challenge"
                       >
                         {c}
                       </button>
@@ -81,12 +86,11 @@ export default function StorySecret({ challenge, story, game, update, onNext, on
         </p>
       </div>
 
-      <button type="button" data-testid="secret-next" onClick={onNext} disabled={!done} className={pillCtaClass}>
-        {t('secret_next')}
-      </button>
-      <button type="button" onClick={onBack} className={backClass}>
-        {t('back')}
-      </button>
+      <StepNav onBack={onBack} backLabel={t('back')}>
+        <button type="button" data-testid="secret-next" onClick={onNext} disabled={!done} className={pillCtaClass}>
+          {t('secret_next')}
+        </button>
+      </StepNav>
     </div>
   );
 }

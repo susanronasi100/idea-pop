@@ -180,6 +180,9 @@ pub struct PredictGame {
 #[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
 pub struct PredictItem {
     pub emoji: String,
+    /// A picture of the item; shown instead of the emoji when there is one.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub image: Option<String>,
     pub label: String,
     /// Index into `PredictGame::choices`.
     pub answer: usize,
@@ -485,6 +488,7 @@ mod tests {
                 choices: vec!["Sink".into(), "Float".into()],
                 items: vec![PredictItem {
                     emoji: "🚢".into(),
+                    image: None,
                     label: "Ship".into(),
                     answer: 1,
                 }],

@@ -54,7 +54,7 @@ export default function StoryEnding({ story, game, update }: Props) {
       </div>
 
       <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-        <p className="font-body font-bold text-xs text-challenge">{t('tell_your_part')}</p>
+        <p className="font-display text-2xl text-challenge">{t('tell_your_part')}</p>
         <p className="font-body text-sm font-semibold text-ink">{story.reflection.question}</p>
         <div className="flex flex-wrap gap-2">
           {story.reflection.options.map((o) => (

@@ -1,7 +1,7 @@
 'use client';
 
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, type ReactNode } from 'react';
 import { useLocale, useTranslations } from 'next-intl';
 import PopiAvatar from '@/components/PopiAvatar';
 import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
@@ -12,6 +12,21 @@ import { btnIcon, btnPrimary, btnSecondary } from '@/components/challenge/button
  * Popi — the ONE penguin (same character as the Ask-Me mascot), here as the
  * story guide who narrates each chapter.
  */
+const POPI_ENTRANCES = ['popi-in-spin', 'popi-in-turn', 'popi-in-fade', 'popi-in-swing', 'popi-in-drop'];
+
+/** Back on the left, the step's next action(s) on the right, on one line at the bottom
+ *  of every step (TEMP rule 32). */
+export function StepNav({ onBack, backLabel, children }: { onBack: () => void; backLabel: string; children?: ReactNode }) {
+  return (
+    <div data-testid="step-nav" className="mt-2 flex flex-wrap items-center justify-between gap-3 border-t border-ink/10 pt-4">
+      <button type="button" onClick={onBack} className={btnSecondary}>
+        {backLabel}
+      </button>
+      <div className="flex flex-wrap items-center justify-end gap-3">{children}</div>
+    </div>
+  );
+}
+
 /** `grand`: the moment Popi starts reading his line, he grows big, then settles back to his
  *  normal size (step 1, TEMP rule 24). `talking` says his line is being read by someone
  *  else's voice (the automatic narration), so he reacts to that too. */
@@ -35,14 +50,19 @@ export function Popi({
   useEffect(() => {
     if (speaking) setPulse((n) => n + 1);
   }, [speaking]);
+  // Each page's Popi arrives with his own move (spin, turn around, fade, swing…), picked
+  // from his line so a page always gets the same one and neighbouring pages differ.
+  const entrance = POPI_ENTRANCES[[...text].reduce((h, ch) => (h * 31 + ch.charCodeAt(0)) >>> 0, 7) % POPI_ENTRANCES.length];
   return (
-    <div data-testid="story-popi" className="flex items-end gap-3">
-      <span key={pulse} className={`shrink-0 ${grand && pulse > 0 ? 'popi-grand' : ''}`}>
-        <PopiAvatar size={84} />
+    <div data-testid="story-popi" className="flex items-end gap-4">
+      <span key={text} className={`shrink-0 ${entrance}`}>
+        <span key={pulse} className={`block ${grand && pulse > 0 ? 'popi-grand' : ''}`}>
+          <PopiAvatar size={120} />
+        </span>
       </span>
-      <div className="flex flex-1 items-center gap-3 rounded-[18px] bg-white px-4 py-3 shadow-sm ltr:rounded-bl-[4px] rtl:rounded-br-[4px]">
+      <div className="flex flex-1 items-center gap-3 rounded-[22px] bg-white px-5 py-4 shadow-[0_4px_14px_rgba(0,0,0,0.08)] ltr:rounded-bl-[6px] rtl:rounded-br-[6px]">
         <div className="min-w-0 flex-1">
-          <p className="flex items-center gap-2 font-body font-bold text-xs text-challenge">
+          <p className="flex items-center gap-2 font-body text-sm font-bold text-challenge">
             {label ?? t('popi_says')}
             {speaking && (
               <span aria-hidden="true" className="inline-flex h-3 items-end gap-[2px]">
@@ -56,7 +76,7 @@ export function Popi({
               </span>
             )}
           </p>
-          <p className="font-body text-sm font-medium text-ink sm:text-base">{text}</p>
+          <p className="font-body text-lg font-semibold leading-snug text-ink sm:text-xl">{text}</p>
         </div>
         {voice.available && (
           <button

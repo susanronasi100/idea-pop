@@ -45,10 +45,10 @@
     "wrong": "Not quite. Try 3 hours take away 10 minutes."
   },
   "clue_cards": [
-    { "name": "Water strider", "emoji": "🦟", "image": null, "tagline": "Pond skater", "trick": "Long legs covered in tiny waxy hairs.", "does": "Spreads its weight so it stands on the water's skin without breaking it.", "group": "weight" },
-    { "name": "Fire ants", "emoji": "🐜", "image": null, "tagline": "Flood survivors", "trick": "They link their bodies into a living raft.", "does": "Air trapped between them keeps the colony afloat for days.", "group": "air" },
-    { "name": "Giant water lily", "emoji": "🪷", "image": null, "tagline": "Amazon river", "trick": "A huge leaf with a rim and air-filled ribs underneath.", "does": "It floats even with a small child sitting on it.", "group": "rim" },
-    { "name": "Coconut", "emoji": "🥥", "image": null, "tagline": "Ocean traveller", "trick": "A thick, hairy husk full of air.", "does": "Floats across oceans for months and keeps the seed dry.", "group": "air" }
+    { "name": "Water strider", "emoji": "🦟", "image": "/challenge/max/clues/water-strider.webp", "tagline": "Pond skater", "trick": "Long legs covered in tiny waxy hairs.", "does": "Spreads its weight so it stands on the water's skin without breaking it.", "group": "weight" },
+    { "name": "Fire ants", "emoji": "🐜", "image": "/challenge/max/clues/fire-ants.webp", "tagline": "Flood survivors", "trick": "They link their bodies into a living raft.", "does": "Air trapped between them keeps the colony afloat for days.", "group": "air" },
+    { "name": "Giant water lily", "emoji": "🪷", "image": "/challenge/max/clues/giant-water-lily.webp", "tagline": "Amazon river", "trick": "A huge leaf with a rim and air-filled ribs underneath.", "does": "It floats even with a small child sitting on it.", "group": "rim" },
+    { "name": "Coconut", "emoji": "🥥", "image": "/challenge/max/clues/coconut.webp", "tagline": "Ocean traveller", "trick": "A thick, hairy husk full of air.", "does": "Floats across oceans for months and keeps the seed dry.", "group": "air" }
   ],
   "match_groups": [
     { "key": "weight", "label": "🦶 Spreads the weight" },
@@ -59,9 +59,9 @@
     "prompt": "Sink or float? Predict first!",
     "choices": ["Sink", "Float"],
     "items": [
-      { "emoji": "⚙️", "label": "Steel ball", "answer": 0 },
-      { "emoji": "🚢", "label": "Steel ship", "answer": 1 },
-      { "emoji": "🟤", "label": "Ball of clay", "answer": 0 }
+      { "emoji": "⚙️", "image": "/challenge/max/predict/metal-nut.webp", "label": "Metal nut", "answer": 0 },
+      { "emoji": "🚢", "image": "/challenge/max/predict/boat.webp", "label": "Steel boat", "answer": 1 },
+      { "emoji": "🟤", "image": "/challenge/max/predict/clay-ball.webp", "label": "Ball of clay", "answer": 0 }
     ],
     "explain": "Same steel, different shape. The ship is wide and hollow, so it pushes aside lots of water."
   },

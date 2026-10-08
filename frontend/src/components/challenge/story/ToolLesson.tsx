@@ -1,7 +1,7 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { Popi, RewardPop, backClass, pillCtaClass } from './StoryBits';
+import { Popi, RewardPop, StepNav, pillCtaClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame, GameUpdate } from './useMissionGame';
 
@@ -65,7 +65,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
         <>
           <Popi label={t('popi_power_up')} text={tool.intro} />
           <div className="flex flex-col gap-3 rounded-card bg-white p-5">
-            <p className="font-body font-bold text-xs text-challenge">{t('tool_what_is', { tool: tool.name })}</p>
+            <p className="font-display text-2xl text-challenge">{t('tool_what_is', { tool: tool.name })}</p>
             <div className="flex flex-wrap justify-center gap-1.5" aria-label={t('tool_pieces_aria')}>
               {tool.parts.map((p, i) => (
                 <span
@@ -90,9 +90,6 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
               </div>
             ))}
           </div>
-          <button type="button" data-testid="tool-to-see" onClick={() => update({ toolPhase: 1 })} className={pillCtaClass}>
-            {t('tool_show_example')}
-          </button>
         </>
       )}
 
@@ -126,15 +123,6 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
               );
             })}
           </div>
-          <button
-            type="button"
-            data-testid="tool-to-try"
-            disabled={game.seen.length < tool.parts.length}
-            onClick={() => update({ toolPhase: 2 })}
-            className={pillCtaClass}
-          >
-            {t('tool_my_turn')}
-          </button>
         </>
       )}
 
@@ -143,7 +131,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
           <Popi label={t('popi_power_up')} text={t('tool_try_intro', { count: tool.parts.length })} />
           <div className="flex flex-col gap-3 rounded-card bg-white p-5">
             <div className="flex items-center justify-between">
-              <p className="font-body font-bold text-xs text-challenge">{t('tool_try_title', { tool: tool.name })}</p>
+              <p className="font-display text-2xl text-challenge">{t('tool_try_title', { tool: tool.name })}</p>
               <b className="font-body text-sm tabular-nums">{t('tool_lit', { lit, total: tool.parts.length })}</b>
             </div>
             <div className="h-3 overflow-hidden rounded-pill bg-ink/10" role="progressbar" aria-valuemin={0} aria-valuemax={tool.parts.length} aria-valuenow={lit}>
@@ -190,15 +178,33 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
             </p>
             {allLit && <RewardPop text={t('badge_earned', { badge: tool.badge })} />}
           </div>
-          <button type="button" data-testid="tool-done" disabled={!allLit} onClick={() => { award('tool'); onNext(); }} className={pillCtaClass}>
-            {t('tool_to_sketch')}
-          </button>
         </>
       )}
 
-      <button type="button" onClick={phase > 0 ? () => update({ toolPhase: (phase - 1) as 0 | 1 }) : onBack} className={backClass}>
-        {t('back')}
-      </button>
+      {/* Back and this phase's next step on one line at the bottom (TEMP rule 32). */}
+      <StepNav onBack={phase > 0 ? () => update({ toolPhase: (phase - 1) as 0 | 1 }) : onBack} backLabel={t('back')}>
+        {phase === 0 && (
+              <button type="button" data-testid="tool-to-see" onClick={() => update({ toolPhase: 1 })} className={pillCtaClass}>
+                {t('tool_show_example')}
+              </button>
+        )}
+        {phase === 1 && (
+              <button
+                type="button"
+                data-testid="tool-to-try"
+                disabled={game.seen.length < tool.parts.length}
+                onClick={() => update({ toolPhase: 2 })}
+                className={pillCtaClass}
+              >
+                {t('tool_my_turn')}
+              </button>
+        )}
+        {phase === 2 && (
+              <button type="button" data-testid="tool-done" disabled={!allLit} onClick={() => { award('tool'); onNext(); }} className={pillCtaClass}>
+                {t('tool_to_sketch')}
+              </button>
+        )}
+      </StepNav>
     </div>
   );
 }

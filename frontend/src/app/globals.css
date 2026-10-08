@@ -232,6 +232,17 @@ html {
   100% { transform: scale(1); }
 }
 .popi-grand { display: inline-block; transform-origin: bottom center; animation: popi-grand 2.4s cubic-bezier(0.3, 1.2, 0.4, 1) both; }
+/* Popi's entrance on each page (TEMP rule 33): spinning, turning around, fading in, swinging, dropping in. */
+@keyframes popi-in-spin { 0% { transform: rotate(-200deg) scale(0.3); opacity: 0; } 70% { transform: rotate(15deg) scale(1.08); opacity: 1; } 100% { transform: none; } }
+@keyframes popi-in-turn { 0% { transform: scaleX(1); } 25% { transform: scaleX(-1); } 50% { transform: scaleX(1); } 75% { transform: scaleX(-1) translateY(-6px); } 100% { transform: none; } }
+@keyframes popi-in-fade { 0% { opacity: 0; filter: blur(6px); transform: scale(0.85); } 40% { opacity: 1; filter: none; } 55% { opacity: 0.35; } 75% { opacity: 1; transform: scale(1.04); } 100% { opacity: 1; transform: none; } }
+@keyframes popi-in-swing { 0% { transform: rotate(0); } 20% { transform: rotate(-18deg); } 40% { transform: rotate(14deg); } 60% { transform: rotate(-9deg); } 80% { transform: rotate(5deg); } 100% { transform: none; } }
+@keyframes popi-in-drop { 0% { transform: translateY(-70px) rotate(-10deg); opacity: 0; } 55% { transform: translateY(6px) rotate(4deg); opacity: 1; } 75% { transform: translateY(-8px); } 100% { transform: none; } }
+.popi-in-spin { display: inline-block; animation: popi-in-spin 1.1s cubic-bezier(0.3, 1.3, 0.5, 1) both; }
+.popi-in-turn { display: inline-block; animation: popi-in-turn 1.4s ease-in-out both; }
+.popi-in-fade { display: inline-block; animation: popi-in-fade 1.6s ease-in-out both; }
+.popi-in-swing { display: inline-block; transform-origin: bottom center; animation: popi-in-swing 1.3s ease-in-out both; }
+.popi-in-drop { display: inline-block; animation: popi-in-drop 1.1s cubic-bezier(0.3, 1.3, 0.5, 1) both; }
 .story-float { animation: story-float 3.2s ease-in-out infinite; }
 .story-bob { animation: story-bob 3s ease-in-out infinite; }
 .story-pop { animation: story-pop 0.45s ease-out; }

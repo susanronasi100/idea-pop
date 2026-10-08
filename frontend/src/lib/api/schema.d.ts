@@ -1048,7 +1048,7 @@ export interface components {
       predict: {
         prompt: string;
         choices: string[];
-        items: { emoji: string; label: string; answer: number }[];
+        items: { emoji: string; image?: string | null; label: string; answer: number }[];
         explain: string;
       };
       lab: { title: string; predict: string; options: string[]; measure: string; higher_is_better: boolean };
