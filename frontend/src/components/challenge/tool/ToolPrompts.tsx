@@ -39,6 +39,7 @@ export default function ToolPrompts({ kind, ageMode, topic }: ToolPromptsProps) 
             {t(`${kind}_${field}`)}
           </label>
           <textarea
+            autoComplete="off"
             id={`${kind}-${field}`}
             data-testid={`${kind}-${field}`}
             value={answers[field] ?? ''}

@@ -81,6 +81,7 @@ export default function StoryLab({ challenge, story, game, update, onNext, onBac
                 <td className={`rounded-e-xl px-3 py-2.5 text-end ${winner === i ? 'bg-[#fff5d1]' : 'bg-tint-blue'}`}>
                   <label className="inline-flex items-center gap-2">
                     <input
+                      autoComplete="off"
                       inputMode="numeric"
                       data-testid={`lab-value-${i}`}
                       value={game.lab[i] ?? ''}

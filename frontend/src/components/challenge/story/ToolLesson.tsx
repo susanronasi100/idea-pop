@@ -161,6 +161,7 @@ export default function ToolLesson({ story, game, update, award, onNext, onBack 
                   </div>
                   <label htmlFor={`tool-${p.key}`} className="font-body text-sm font-semibold text-ink">{p.starter}</label>
                   <textarea
+                    autoComplete="off"
                     id={`tool-${p.key}`}
                     data-testid={`tool-answer-${p.key}`}
                     rows={2}

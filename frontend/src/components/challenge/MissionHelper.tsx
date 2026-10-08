@@ -95,6 +95,7 @@ export default function MissionHelper({
 
           <div className="flex flex-col gap-2 sm:flex-row">
             <input
+              autoComplete="off"
               type="text"
               value={question}
               maxLength={400}

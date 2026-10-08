@@ -50,6 +50,7 @@ export default function ToolMindMap({ ageMode, topic }: ToolMindMapProps) {
             <span className="font-body text-xs text-ink/40 w-5 shrink-0 text-right">{i + 1}.</span>
             <div className="w-3 h-px bg-ink/30 shrink-0" />
             <input
+              autoComplete="off"
               data-testid={`branch-${i}`}
               type="text"
               value={branch}

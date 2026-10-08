@@ -43,6 +43,7 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
         <div key={i} className="flex flex-col gap-1 mb-3">
           <label className="font-body text-xs text-ink/50">{getLabel(i)}</label>
           <input
+            autoComplete="off"
             data-testid={`why-input-${i}`}
             type="text"
             value={answer}
@@ -62,6 +63,7 @@ export default function ToolFiveWhys({ ageMode, topic }: ToolFiveWhysProps) {
             {t('five_whys_root')}
           </p>
           <textarea
+            autoComplete="off"
             data-testid="hmw-input"
             value={hmw}
             onChange={(e) => setHmw(e.target.value)}

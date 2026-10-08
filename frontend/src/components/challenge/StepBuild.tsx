@@ -119,6 +119,7 @@ export default function StepBuild({
           {CHECKLIST_KEYS.map((key, i) => (
             <label key={i} className="flex items-center gap-3 cursor-pointer font-body text-sm text-ink">
               <input
+                autoComplete="off"
                 type="checkbox"
                 checked={checked.has(i)}
                 onChange={() => toggleCheck(i)}

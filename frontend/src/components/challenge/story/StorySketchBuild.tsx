@@ -24,6 +24,7 @@ export function StorySketchTop({ story, game, update }: { story: MissionStory; g
           return (
             <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl bg-tint-blue px-3 py-2.5 font-body text-sm font-semibold text-ink">
               <input
+                autoComplete="off"
                 type="checkbox"
                 data-testid={`sketch-check-${i}`}
                 checked={on}
@@ -145,6 +146,7 @@ export function StoryFairTest({
           <Counter label={test.measure} value={game.round2} onChange={(n) => setRound('round2', n)} testId="round2" />
           <label htmlFor="story-change" className="font-body text-sm font-semibold text-ink">{test.change_prompt}</label>
           <input
+            autoComplete="off"
             id="story-change"
             data-testid="round-change"
             type="text"

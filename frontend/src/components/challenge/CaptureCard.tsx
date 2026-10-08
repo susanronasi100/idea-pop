@@ -95,6 +95,7 @@ export default function CaptureCard({
         className="bg-tint-blue rounded-card border-2 border-dashed border-challenge/30"
       >
         <input
+          autoComplete="off"
           ref={fileInputRef}
           type="file"
           accept="image/*"
@@ -148,6 +149,7 @@ export default function CaptureCard({
       <div className="flex flex-col gap-1">
         <label className="font-body text-sm text-ink/60">{t('capture_title_label')}</label>
         <input
+          autoComplete="off"
           data-testid="field-title"
           type="text"
           value={title}
@@ -164,6 +166,7 @@ export default function CaptureCard({
       <div className="flex flex-col gap-1">
         <label className="font-body text-sm text-ink/60">{t('capture_used_label')}</label>
         <input
+          autoComplete="off"
           data-testid="field-used"
           type="text"
           value={whatIUsed}
@@ -179,6 +182,7 @@ export default function CaptureCard({
           <div className="flex flex-col gap-1">
             <label className="font-body text-sm text-ink/60">{t('capture_hard_label')}</label>
             <input
+              autoComplete="off"
               data-testid="field-hard"
               type="text"
               value={whatWasHard}
@@ -190,6 +194,7 @@ export default function CaptureCard({
           <div className="flex flex-col gap-1">
             <label className="font-body text-sm text-ink/60">{t('capture_improve_label')}</label>
             <input
+              autoComplete="off"
               data-testid="field-improve"
               type="text"
               value={whatIdImprove}

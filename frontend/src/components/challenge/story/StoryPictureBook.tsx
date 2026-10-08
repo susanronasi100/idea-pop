@@ -435,6 +435,7 @@ function DefineProblemCard({
                   }}
                 >
                   <input
+                    autoComplete="off"
                     ref={inputRef}
                     id={`define-input-${current.key}`}
                     type="text"

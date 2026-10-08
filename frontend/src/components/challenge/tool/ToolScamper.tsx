@@ -69,6 +69,7 @@ export default function ToolScamper({ ageMode, topic }: ToolScamperProps) {
                 : t(`scamper_${item.key}_older`)}
             </p>
             <textarea
+              autoComplete="off"
               value={answers[item.key]}
               onChange={(e) => handleChange(item.key, e.target.value)}
               placeholder={t('your_ideas')}
