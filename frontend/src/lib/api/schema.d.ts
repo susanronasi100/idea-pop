@@ -269,6 +269,18 @@ export interface paths {
       };
     };
   };
+  "/api/challenges/{id}/sketch-bonus": {
+    post: {
+      parameters: { path: { id: string } };
+      responses: {
+        200: {
+          content: {
+            "application/json": components["schemas"]["XpAwardResponse"];
+          };
+        };
+      };
+    };
+  };
   "/api/challenges/{id}/define-bonus": {
     post: {
       parameters: { path: { id: string } };

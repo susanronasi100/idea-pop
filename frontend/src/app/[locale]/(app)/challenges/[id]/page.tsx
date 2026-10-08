@@ -6,7 +6,7 @@ import { Link } from '@/i18n/routing';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { useXpToast } from '@/lib/hooks/useXpToast';
-import { fetchChallenge, startAttempt, advanceStep } from '@/lib/api/client';
+import { fetchChallenge, startAttempt, advanceStep, claimSketchBonus } from '@/lib/api/client';
 import MissionHUD from '@/components/challenge/MissionHUD';
 import StepBrief from '@/components/challenge/StepBrief';
 import StepIdeaFork from '@/components/challenge/StepIdeaFork';
@@ -69,7 +69,7 @@ export default function ChallengePage() {
   // Story missions split step 5 into the lab and the creativity-tool power-up.
   const [skillPhase, setSkillPhase] = useState<'lab' | 'tool'>('lab');
   // The "you solved it!" moment after the sketch (TEMP rule 35).
-  const [solvedCelebration, setSolvedCelebration] = useState(false);
+  const [solvedCelebration, setSolvedCelebration] = useState<{ xp: number } | null>(null);
   const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
 
   const locale = useLocale();
@@ -271,7 +271,10 @@ export default function ChallengePage() {
                 if (projectId) setSketchProjectId(projectId);
                 // The kid has solved the problem with a first idea: celebrate, then
                 // invite them on to find more ideas (design secret, skill, build).
-                setSolvedCelebration(true);
+                setSolvedCelebration({ xp: 0 });
+                claimSketchBonus(challenge.id)
+                  .then((r) => setSolvedCelebration((c) => (c ? { xp: r?.xp_earned ?? 0 } : c)))
+                  .catch(() => {});
               }}
               onBack={() => goToStep(ideaPath === 'yes' ? 2 : 3)}
             />
@@ -352,8 +355,10 @@ export default function ChallengePage() {
             <StepCelebrate
               {...sharedProps}
               completionXp={challenge.completion_xp}
-              // The define-the-problem bonus (+5, story missions) counts toward the total too.
-              bonusXp={game.badges.includes('define') ? 5 : 0}
+              // Bonuses earned along the way count toward the total too: defining the problem (+5)
+              defineXp={game.badges.includes('define') ? 5 : 0}
+              // The "you solved it!" bonus after the sketch (+10).
+              sketchXp={game.badges.includes('solved') ? 10 : 0}
               sketchProjectId={sketchProjectId}
               wallAlreadySubmitted={wallUnlocked}
               onWallSubmitted={handleWallSubmitted}
@@ -383,8 +388,9 @@ export default function ChallengePage() {
       {solvedCelebration && (
         <DefineCelebration
           variant="solved"
+          xp={solvedCelebration.xp}
           onClose={() => {
-            setSolvedCelebration(false);
+            setSolvedCelebration(null);
             if (story) updateGame((g) => ({ badges: g.badges.includes('solved') ? g.badges : [...g.badges, 'solved'] }));
             goToStep(5);
           }}

@@ -48,11 +48,11 @@ pub use ports::{
     ProgressRepo, ProjectRepo, ReportRepo, SubscriptionRepo, TokenIssuer, WebhookEventLog, XpRepo,
 };
 pub use progress::{
-    award_cycle_bonus, award_define_bonus, award_explore, award_learn, award_solve,
+    award_cycle_bonus, award_define_bonus, award_explore, award_sketch_bonus, award_learn, award_solve,
     compute_snapshot, evaluate_new_badges, level_from_xp, medal_from_count, rank_from_level,
     xp_total, AnalyticsEvent, AnalyticsEventKind, AttemptStatus, BadgeCriteria, BadgeDefinition,
     ChallengeAttempt, ChildBadge, CycleActivityResult, Medal, ProgressSnapshot, Rank, XpEvent,
-    XpSourceType, XP_CYCLE_BONUS, XP_DEFINE_BONUS, XP_EXPLORE, XP_LEARN, XP_SOLVE,
+    XpSourceType, XP_CYCLE_BONUS, XP_DEFINE_BONUS, XP_SKETCH_BONUS, XP_EXPLORE, XP_LEARN, XP_SOLVE,
 };
 
 use thiserror::Error;

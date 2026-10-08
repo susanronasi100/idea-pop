@@ -63,13 +63,39 @@ export default function StoryEnding({ story, game, update }: Props) {
               type="button"
               aria-pressed={game.reflection === o}
               onClick={() => update({ reflection: o })}
-              className={`flex-1 basis-36 ${optionClass(game.reflection === o ? 'picked' : 'idle')}`}
+              className={`flex flex-1 basis-36 flex-col items-center gap-2 ${optionClass(game.reflection === o ? 'picked' : 'idle')}`}
             >
-              {o}
+              {/* The nature hero's photo instead of its emoji, when the mission has one. */}
+              {(() => {
+                const hero = heroFor(o, story);
+                return hero?.image ? (
+                  <>
+                    {/* eslint-disable-next-line @next/next/no-img-element -- a small transparent cut-out */}
+                    <img src={hero.image} alt="" width={80} height={80} className="h-20 w-20 object-contain" />
+                    <span className="text-base font-bold">{withoutEmoji(o)}</span>
+                  </>
+                ) : (
+                  o
+                );
+              })()}
             </button>
           ))}
         </div>
       </div>
     </div>
   );
+}
+
+/** An answer such as "🦟 Water strider" without its leading emoji. */
+function withoutEmoji(option: string): string {
+  return option.replace(/^[^\p{L}\p{N}]+/u, '').trim();
+}
+
+/** The nature hero an answer names ("Water lily" matches "Giant water lily"). */
+function heroFor(option: string, story: MissionStory) {
+  const name = withoutEmoji(option).toLowerCase();
+  return story.clue_cards.find((c) => {
+    const card = c.name.toLowerCase();
+    return card.includes(name) || name.includes(card);
+  });
 }

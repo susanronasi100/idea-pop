@@ -15,6 +15,8 @@ pub const XP_SOLVE: i16 = 20;
 pub const XP_CYCLE_BONUS: i16 = 15;
 /// Defining a mission's problem with the 5W1H questions (once per mission).
 pub const XP_DEFINE_BONUS: i16 = 5;
+/// Solving a mission's problem with a first sketched idea (once per mission).
+pub const XP_SKETCH_BONUS: i16 = 10;
 
 // ── XP source type ────────────────────────────────────────────────────────────
 
@@ -26,6 +28,7 @@ pub enum XpSourceType {
     Solve,
     CycleBonus,
     DefineBonus,
+    SketchBonus,
 }
 
 impl XpSourceType {
@@ -36,6 +39,7 @@ impl XpSourceType {
             XpSourceType::Solve => "solve",
             XpSourceType::CycleBonus => "cycle_bonus",
             XpSourceType::DefineBonus => "define_bonus",
+            XpSourceType::SketchBonus => "sketch_bonus",
         }
     }
 
@@ -46,6 +50,7 @@ impl XpSourceType {
             "solve" => Some(XpSourceType::Solve),
             "cycle_bonus" => Some(XpSourceType::CycleBonus),
             "define_bonus" => Some(XpSourceType::DefineBonus),
+            "sketch_bonus" => Some(XpSourceType::SketchBonus),
             _ => None,
         }
     }
@@ -57,6 +62,7 @@ impl XpSourceType {
             XpSourceType::Solve => XP_SOLVE,
             XpSourceType::CycleBonus => XP_CYCLE_BONUS,
             XpSourceType::DefineBonus => XP_DEFINE_BONUS,
+            XpSourceType::SketchBonus => XP_SKETCH_BONUS,
         }
     }
 }
@@ -166,6 +172,31 @@ pub fn award_define_bonus(
         source_type: XpSourceType::DefineBonus,
         source_id: challenge_id,
         amount: XP_DEFINE_BONUS,
+        created_at: now,
+    })
+}
+
+/// Award +10 XP the first time a kid solves a mission's problem with a sketched
+/// idea (the "you solved it!" moment). Returns None if already awarded for this
+/// mission (idempotent).
+pub fn award_sketch_bonus(
+    child_id: Uuid,
+    challenge_id: Uuid,
+    now: DateTime<Utc>,
+    existing: &[XpEvent],
+) -> Option<XpEvent> {
+    if existing
+        .iter()
+        .any(|e| e.source_type == XpSourceType::SketchBonus && e.source_id == challenge_id)
+    {
+        return None;
+    }
+    Some(XpEvent {
+        id: Uuid::new_v4(),
+        child_id,
+        source_type: XpSourceType::SketchBonus,
+        source_id: challenge_id,
+        amount: XP_SKETCH_BONUS,
         created_at: now,
     })
 }
@@ -651,6 +682,18 @@ mod tests {
             second.is_none(),
             "completing same challenge twice must not re-award XP"
         );
+    }
+
+    #[test]
+    fn award_sketch_bonus_once_per_mission() {
+        let child_id = Uuid::new_v4();
+        let chal_id = Uuid::new_v4();
+        let now = Utc::now();
+        let first = award_sketch_bonus(child_id, chal_id, now, &[]).expect("first sketch awards XP");
+        assert_eq!(first.amount, XP_SKETCH_BONUS);
+        assert_eq!(first.source_type.as_str(), "sketch_bonus");
+        assert!(award_sketch_bonus(child_id, chal_id, now, &[first.clone()]).is_none());
+        assert!(award_sketch_bonus(child_id, Uuid::new_v4(), now, &[first]).is_some());
     }
 
     #[test]

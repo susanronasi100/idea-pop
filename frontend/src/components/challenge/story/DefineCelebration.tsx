@@ -71,14 +71,13 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define' 
             className="celebrate-float absolute bottom-1 left-1/2 h-[230px] drop-shadow-[0_0_18px_rgba(80,200,255,0.75)]"
           />
           <span className={`${chip} left-1 top-5 bg-white text-ink`}>
-            {solved ? (
-              <>🏅 {t('solved_badge')}</>
-            ) : (
-              <>
-                ⭐ <span dir="ltr">+{xp > 0 ? xp : 5} XP</span>
-              </>
-            )}
+            ⭐ <span dir="ltr">+{xp > 0 ? xp : solved ? 10 : 5} XP</span>
           </span>
+          {solved && (
+            <span className={`${chip} right-1 top-16 bg-white text-ink`} style={{ animationDelay: '0.6s' }}>
+              🏅 {t('solved_badge')}
+            </span>
+          )}
           <span className={`${chip} bottom-8 left-3 bg-white text-ink`} style={{ animationDelay: '1.2s' }}>
             ✅ {solved ? t('solved_chip') : t('celebrate_defined')}
           </span>

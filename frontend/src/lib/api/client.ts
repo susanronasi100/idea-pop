@@ -420,6 +420,15 @@ export async function claimDefineBonus(challengeId: string) {
   return data;
 }
 
+/** +10 XP, once per mission, for solving the problem with a first sketched idea. */
+export async function claimSketchBonus(challengeId: string) {
+  const { data, error } = await apiClient.POST("/api/challenges/{id}/sketch-bonus", {
+    params: { path: { id: challengeId } },
+  });
+  if (error) throw new Error("Failed to claim the bonus");
+  return data;
+}
+
 export async function fetchKidProgress() {
   const { data, error } = await apiClient.GET("/api/me/progress");
   if (error) throw new Error("Failed to load progress");

@@ -13,8 +13,9 @@ interface StepCelebrateProps {
   challenge: ChallengeDetail;
   ageMode: 'young' | 'older';
   completionXp: number;
-  /** Extra XP earned along the way in this mission (e.g. the define-the-problem bonus). */
-  bonusXp?: number;
+  /** XP for defining the problem (+5) and for solving it with a sketch (+10), when earned. */
+  defineXp?: number;
+  sketchXp?: number;
   sketchProjectId: string | null;
   wallAlreadySubmitted: boolean;
   onWallSubmitted: () => void;
@@ -24,7 +25,8 @@ interface StepCelebrateProps {
 export default function StepCelebrate({
   challenge,
   completionXp,
-  bonusXp = 0,
+  defineXp = 0,
+  sketchXp = 0,
   sketchProjectId,
   wallAlreadySubmitted,
   onWallSubmitted,
@@ -68,14 +70,19 @@ export default function StepCelebrate({
       {/* XP card */}
       <div data-testid="celebrate-xp" className="bg-challenge text-white rounded-card p-6 text-center mb-6">
         <p className="font-body text-base font-bold text-white/90">{t('total_xp_heading')}</p>
-        <p dir="ltr" className="font-display text-5xl">{t('xp_chip', { xp: completionXp + bonusXp })}</p>
+        <p dir="ltr" className="font-display text-5xl">{t('xp_chip', { xp: completionXp + defineXp + sketchXp })}</p>
         <div className="mt-3 flex flex-col items-center gap-1">
           <p className="font-body text-base text-white/90">
             {t('xp_mission_complete')}: <span dir="ltr">+{format.number(completionXp)}</span>
           </p>
-          {bonusXp > 0 && (
+          {defineXp > 0 && (
             <p className="font-body text-base text-white/90">
-              {t('xp_problem_defined')}: <span dir="ltr">+{format.number(bonusXp)}</span>
+              {t('xp_problem_defined')}: <span dir="ltr">+{format.number(defineXp)}</span>
+            </p>
+          )}
+          {sketchXp > 0 && (
+            <p className="font-body text-base text-white/90">
+              {t('xp_problem_solved')}: <span dir="ltr">+{format.number(sketchXp)}</span>
             </p>
           )}
         </div>

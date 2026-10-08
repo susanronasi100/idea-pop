@@ -248,6 +248,7 @@ pub struct CreateHealthLogRequest {
         help::ask_helper, help::parent_help_messages,
         help::teacher_help_messages, help::set_helper_enabled,
         progress::post_video_view, progress::post_lesson_complete, progress::post_define_bonus,
+        progress::post_sketch_bonus,
         progress::start_attempt, progress::advance_step,
         progress::get_me_progress,
         portfolio::create_project, portfolio::list_my_projects,
@@ -615,6 +616,10 @@ pub fn router_with_metrics(
         .route(
             "/challenges/:id/define-bonus",
             post(progress::post_define_bonus),
+        )
+        .route(
+            "/challenges/:id/sketch-bonus",
+            post(progress::post_sketch_bonus),
         )
         .route(
             "/progress/lesson-complete",
