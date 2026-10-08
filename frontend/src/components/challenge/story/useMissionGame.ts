@@ -70,7 +70,11 @@ function load(challengeId: string): MissionGame {
   try {
     const raw = localStorage.getItem(storageKey(challengeId));
     if (!raw) return EMPTY_GAME;
-    return { ...EMPTY_GAME, ...(JSON.parse(raw) as Partial<MissionGame>) };
+    // For now every visit opens the mission fresh (susan, 2026-10-08): only the earned
+    // badges carry over, so one-time bonuses are not replayed. Before merging, answers will be
+    // saved to the kid's account and earlier tries kept (see the kid-work-must-be-saved rule).
+    const saved = JSON.parse(raw) as Partial<MissionGame>;
+    return { ...EMPTY_GAME, badges: saved.badges ?? [] };
   } catch {
     return EMPTY_GAME;
   }

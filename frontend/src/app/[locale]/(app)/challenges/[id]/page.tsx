@@ -82,6 +82,11 @@ export default function ChallengePage() {
   const locale = useLocale();
 
   // Load challenge data
+  // Every visit opens the mission fresh, so Popi reads the story again too.
+  useEffect(() => {
+    forgetNarration(params.id);
+  }, [params.id]);
+
   useEffect(() => {
     fetchChallenge(params.id, locale)
       .then((c) => setChallenge(c as ChallengeDetail))
@@ -216,7 +221,6 @@ export default function ChallengePage() {
         ideaPath={ideaPath}
         keyInfo={story ? story.card : null}
         summary={challenge.brief}
-        onRestart={restartMission}
       />
 
       {/* Mission / Ideas Wall tabs */}
