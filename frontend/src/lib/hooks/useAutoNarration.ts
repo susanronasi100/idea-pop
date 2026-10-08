@@ -14,6 +14,11 @@ export type AutoPhase = 'wait' | 'pages' | 'finale' | 'blocked' | 'off';
 // Popi reads a challenge's opening once per visit, not every time the child comes back to step 1.
 const narrated = new Set<string>();
 
+/** Lets Popi read a mission's opening again (when the kid starts it over). */
+export function forgetNarration(id: string) {
+  narrated.delete(id);
+}
+
 /**
  * TEMP rule 19: when a challenge opens, Popi waits, reads the opening pages one after
  * another (turning the page himself), waits again, then reads his own message. Any tap or

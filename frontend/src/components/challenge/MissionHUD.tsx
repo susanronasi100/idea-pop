@@ -3,6 +3,7 @@
 import React, { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import XpInfoDialog from './XpInfoDialog';
+import { btnPrimary, btnSecondary } from '@/components/challenge/buttons';
 
 const ALL_STEPS = [1, 2, 3, 4, 5, 6, 7, 8] as const;
 const INFO_KEYS = ['problem', 'goal', 'rules'] as const;
@@ -24,6 +25,8 @@ interface MissionHUDProps {
   keyInfo?: MissionKeyInfo | null;
   /** Fallback one-line problem statement when there is no story card. */
   summary?: string | null;
+  /** Clears this challenge's answers and goes back to step 1. */
+  onRestart?: () => void;
 }
 
 export default function MissionHUD({
@@ -33,11 +36,13 @@ export default function MissionHUD({
   onJumpTo,
   keyInfo = null,
   summary = null,
+  onRestart,
 }: MissionHUDProps) {
   const t = useTranslations('challenge');
   const tStory = useTranslations('story');
   const [menuOpen, setMenuOpen] = useState(false);
   const [xpOpen, setXpOpen] = useState(false);
+  const [confirmRestart, setConfirmRestart] = useState(false);
 
   function handleStepClick(step: number) {
     if (reachedSteps.has(step)) {
@@ -243,6 +248,36 @@ export default function MissionHUD({
               );
             })}
           </ul>
+          {onRestart && (
+            <div className="mx-2 mb-4 border-t border-ink/10 px-3 pt-4">
+              {confirmRestart ? (
+                <div data-testid="restart-confirm" className="flex flex-col gap-3 rounded-xl bg-[#FFF7E0] p-4">
+                  <p className="font-body text-base font-semibold text-ink">{t('restart_confirm')}</p>
+                  <div className="flex flex-wrap gap-2">
+                    <button
+                      type="button"
+                      data-testid="restart-yes"
+                      onClick={() => {
+                        setConfirmRestart(false);
+                        setMenuOpen(false);
+                        onRestart();
+                      }}
+                      className={btnPrimary}
+                    >
+                      {t('restart_yes')}
+                    </button>
+                    <button type="button" onClick={() => setConfirmRestart(false)} className={btnSecondary}>
+                      {t('restart_cancel')}
+                    </button>
+                  </div>
+                </div>
+              ) : (
+                <button type="button" data-testid="restart-mission" onClick={() => setConfirmRestart(true)} className={btnSecondary}>
+                  🔄 {t('restart_cta')}
+                </button>
+              )}
+            </div>
+          )}
           </div>
         </div>
       )}

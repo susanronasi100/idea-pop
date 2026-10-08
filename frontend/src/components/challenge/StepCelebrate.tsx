@@ -5,7 +5,7 @@ import { useTranslations, useFormatter } from 'next-intl';
 import Link from 'next/link';
 import AudiencePicker from './AudiencePicker';
 import { submitIdea } from '@/lib/api/client';
-import { btnPrimary } from '@/components/challenge/buttons';
+import { btnPrimary, btnSecondary } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
@@ -141,6 +141,9 @@ export default function StepCelebrate({
       )}
 
       {/* Action buttons */}
+      <button type="button" data-testid="play-again" onClick={onRestart} className={`${btnSecondary} w-full`}>
+        🔄 {t('play_again')}
+      </button>
       <Link
         href="/challenges"
         className="bg-challenge text-white font-display text-lg px-6 py-3 rounded-card w-full text-center block"

@@ -104,7 +104,21 @@ export function useMissionGame(challengeId: string) {
     [update],
   );
 
-  return { game, update, award };
+  /** Start the mission over: every answer is cleared. Earned badges stay, so the
+   *  one-time bonuses (and their celebrations) aren't replayed for nothing. */
+  const reset = useCallback(() => {
+    setGame((prev) => {
+      const next = { ...EMPTY_GAME, badges: prev.badges };
+      try {
+        localStorage.setItem(storageKey(challengeId), JSON.stringify(next));
+      } catch {
+        // storage blocked — the reset still applies for this visit
+      }
+      return next;
+    });
+  }, [challengeId]);
+
+  return { game, update, award, reset };
 }
 
 /** The `update` callback components receive: a patch, or a function of the

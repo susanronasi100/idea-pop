@@ -29,6 +29,7 @@ import { StoryFairTest, StorySketchTop } from '@/components/challenge/story/Stor
 import { Popi } from '@/components/challenge/story/StoryBits';
 import { howQuestion } from '@/components/challenge/story/StoryPictureBook';
 import { useMissionGame } from '@/components/challenge/story/useMissionGame';
+import { forgetNarration } from '@/lib/hooks/useAutoNarration';
 import type { components } from '@/lib/api/schema';
 
 type ChallengeDetail = components['schemas']['ChallengeDetail'];
@@ -71,9 +72,12 @@ export default function ChallengePage() {
   // The "you solved it!" moment after the sketch (TEMP rule 35).
   const [solvedCelebration, setSolvedCelebration] = useState<{
     xp: number;
+    again: boolean;
     popi: { state: 'loading' | 'done' | 'off'; text?: string; fits?: boolean };
   } | null>(null);
-  const { game, update: updateGame, award: awardBadge } = useMissionGame(params.id);
+  const { game, update: updateGame, award: awardBadge, reset: resetGame } = useMissionGame(params.id);
+  // Bumped on "start over", so every step's own state starts fresh too.
+  const [runKey, setRunKey] = useState(0);
 
   const locale = useLocale();
 
@@ -149,6 +153,22 @@ export default function ChallengePage() {
     goToStep(3);
   }, [goToStep]);
 
+  // "Start over": clear this challenge's answers and go back to step 1. XP and badges stay.
+  const restartMission = useCallback(() => {
+    resetGame();
+    forgetNarration(params.id);
+    setIdeaPath(null);
+    setSketchProjectId(null);
+    setSkillPhase('lab');
+    setSolvedCelebration(null);
+    setReachedSteps(new Set([1]));
+    setCurrentStep(1);
+    setActiveTab('mission');
+    setRunKey((k) => k + 1);
+    window.scrollTo({ top: 0 });
+    document.querySelector('main')?.scrollTo({ top: 0 });
+  }, [resetGame, params.id]);
+
   function handleWallSubmitted() {
     setWallUnlocked(true);
     if (params.id) {
@@ -196,6 +216,7 @@ export default function ChallengePage() {
         ideaPath={ideaPath}
         keyInfo={story ? story.card : null}
         summary={challenge.brief}
+        onRestart={restartMission}
       />
 
       {/* Mission / Ideas Wall tabs */}
@@ -224,7 +245,7 @@ export default function ChallengePage() {
 
       {/* Mission tab content */}
       {activeTab === 'mission' && (
-        <div className={`${wide} mx-auto px-4 pb-24`}>
+        <div key={runKey} className={`${wide} mx-auto px-4 pb-24`}>
           {currentStep === 1 &&
             (story ? (
               <StoryBrief challenge={challenge} story={story} {...gameProps} onNext={() => goToStep(2)} />
@@ -274,7 +295,7 @@ export default function ChallengePage() {
                 if (projectId) setSketchProjectId(projectId);
                 // The kid has solved the problem with a first idea: celebrate, then
                 // invite them on to find more ideas (design secret, skill, build).
-                setSolvedCelebration({ xp: 0, popi: { state: idea ? 'loading' : 'off' } });
+                setSolvedCelebration({ xp: 0, again: game.badges.includes('solved'), popi: { state: idea ? 'loading' : 'off' } });
                 claimSketchBonus(challenge.id)
                   .then((r) => setSolvedCelebration((c) => (c ? { ...c, xp: r?.xp_earned ?? 0 } : c)))
                   .catch(() => {});
@@ -378,9 +399,7 @@ export default function ChallengePage() {
               sketchProjectId={sketchProjectId}
               wallAlreadySubmitted={wallUnlocked}
               onWallSubmitted={handleWallSubmitted}
-              onRestart={() => {
-                window.location.href = '/challenges';
-              }}
+              onRestart={restartMission}
             />
           )}
         </div>
@@ -406,6 +425,7 @@ export default function ChallengePage() {
           variant="solved"
           xp={solvedCelebration.xp}
           popi={solvedCelebration.popi}
+          again={solvedCelebration.again}
           // Back to the sketch to make the idea better (the XP is already theirs).
           onImprove={() => setSolvedCelebration(null)}
           onClose={() => {

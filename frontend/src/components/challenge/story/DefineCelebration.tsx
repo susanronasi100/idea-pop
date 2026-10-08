@@ -17,6 +17,8 @@ interface Props {
   popi?: { state: 'loading' | 'done' | 'off'; text?: string; fits?: boolean };
   /** Solved variant: go back and improve the idea. */
   onImprove?: () => void;
+  /** Solved again after starting the mission over: the XP was collected before. */
+  again?: boolean;
 }
 
 const CONFETTI_COLORS = ['#2D9CDB', '#FFD93D', '#6BCB77', '#FF6B6B', '#C77DFF', '#FF9F45'];
@@ -29,7 +31,7 @@ const CONFETTI = Array.from({ length: 22 }, (_, i) => ({
 
 /** The reward for defining the problem with the 5W1H questions: the floating jellyfish,
  *  reward chips that bob around it, falling confetti, and a way back to the mission. */
-export default function DefineCelebration({ xp = 0, onClose, variant = 'define', popi, onImprove }: Props) {
+export default function DefineCelebration({ xp = 0, onClose, variant = 'define', popi, onImprove, again = false }: Props) {
   const solved = variant === 'solved';
   const t = useTranslations('story');
   const goRef = useRef<HTMLButtonElement>(null);
@@ -76,7 +78,13 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define',
             className="celebrate-float absolute bottom-1 left-1/2 h-[230px] drop-shadow-[0_0_18px_rgba(80,200,255,0.75)]"
           />
           <span className={`${chip} left-1 top-5 bg-white text-ink`}>
-            ⭐ <span dir="ltr">+{xp > 0 ? xp : solved ? 10 : 5} XP</span>
+            {solved && again ? (
+              <>✅ {t('xp_already')}</>
+            ) : (
+              <>
+                ⭐ <span dir="ltr">+{xp > 0 ? xp : solved ? 10 : 5} XP</span>
+              </>
+            )}
           </span>
           {solved && (
             <span className={`${chip} right-1 top-16 bg-white text-ink`} style={{ animationDelay: '0.6s' }}>
@@ -113,7 +121,7 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define',
             </>
           )}
         </h2>
-        <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved ? t.rich('solved_text', { b: (chunks) => <b className="font-extrabold text-ink">{chunks}</b> }) : t('celebrate_text')}</p>
+        <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved && again ? t('solved_text_again') : solved ? t.rich('solved_text', { b: (chunks) => <b className="font-extrabold text-ink">{chunks}</b> }) : t('celebrate_text')}</p>
         {solved && popi && (
           <div
             data-testid="popi-idea-check"
