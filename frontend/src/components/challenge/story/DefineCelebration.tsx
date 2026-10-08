@@ -108,7 +108,7 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define' 
             </>
           )}
         </h2>
-        <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved ? t('solved_text') : t('celebrate_text')}</p>
+        <p className="mt-1.5 font-body text-base leading-relaxed text-ink/75">{solved ? t.rich('solved_text', { b: (chunks) => <b className="font-extrabold text-ink">{chunks}</b> }) : t('celebrate_text')}</p>
         <button
           ref={goRef}
           type="button"

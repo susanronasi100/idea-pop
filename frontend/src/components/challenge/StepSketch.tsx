@@ -83,8 +83,11 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
     <div data-testid="step-sketch" className="flex flex-col gap-4 px-4 py-6">
       <div>
         <h2 className="font-display text-2xl text-challenge">{t('sketch_heading')}</h2>
-        <p className="font-body text-sm text-ink/50 mt-1">
-          {challenge.sketch_prompt?.trim() || t('sketch_prompt_fallback')}
+        <p className="mt-1 font-body text-lg font-semibold leading-snug text-ink">
+          {/* Story missions ask the kid for their own idea and never list answers (TEMP rule 36). */}
+          {challenge.story
+            ? t('sketch_prompt_story', { hero: challenge.story.hero.name })
+            : challenge.sketch_prompt?.trim() || t('sketch_prompt_fallback')}
         </p>
         {/* The paper-and-photo instruction contradicts the on-screen games. */}
         {!game && (
@@ -95,7 +98,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
             ✏️ {t('sketch_instruction')}
           </p>
         )}
-        {challenge.sketch_guidance?.trim() && (
+        {!challenge.story && challenge.sketch_guidance?.trim() && (
           <p
             data-testid="sketch-guidance"
             className="mt-2 rounded-card bg-tint-cream px-3 py-2 font-body text-sm text-ink/70"

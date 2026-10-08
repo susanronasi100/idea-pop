@@ -7,24 +7,19 @@ import type { MissionGame, GameUpdate } from './useMissionGame';
 import { btnIcon } from '@/components/challenge/buttons';
 
 
-/** Story top for step 6: chapter, Popi, the starred tool idea as a reminder
- *  and the engineer's checklist. The existing sketch capture sits below. */
+/** Story top for the Sketch step (step 4): Popi's question and the engineer's
+ *  checklist. The sketch capture sits below. We never name ideas for the kid. */
 export function StorySketchTop({ story, game, update }: { story: MissionStory; game: MissionGame; update: GameUpdate }) {
   const t = useTranslations('story');
-  const fav = game.favourite ? story.tool.parts.find((p) => p.key === game.favourite) : null;
-  const favText = fav ? game.toolAnswers[fav.key] : null;
+  // The same checklist on every mission; it never hints at an answer (TEMP rule 36).
+  const checklist = [t('sketch_check_1'), t('sketch_check_2'), t('sketch_check_3')];
   return (
     <div data-testid="story-sketch" className="flex flex-col gap-4 pt-4">
-      <Popi text={story.guide.sketch} />
-      {favText && (
-        <p className="rounded-2xl bg-[#fff5d1] px-4 py-2.5 font-body text-sm font-semibold text-ink">
-          ⭐ {t('your_favourite', { idea: favText })}
-        </p>
-      )}
+      <Popi text={t('sketch_popi')} />
       <fieldset className="flex flex-col gap-2 rounded-card bg-white p-4">
         <legend className="sr-only">{t('checklist_title')}</legend>
         <p aria-hidden="true" className="font-body font-bold text-sm text-ink">{t('checklist_title')}</p>
-        {story.sketch_checklist.map((item, i) => {
+        {checklist.map((item, i) => {
           const on = game.sketchChecks.includes(i);
           return (
             <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl bg-tint-blue px-3 py-2.5 font-body text-sm font-semibold text-ink">
