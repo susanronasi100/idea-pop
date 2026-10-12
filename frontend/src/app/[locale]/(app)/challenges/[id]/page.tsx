@@ -295,6 +295,7 @@ export default function ChallengePage() {
                 award={awardBadge}
                 onNext={() => goToStep(4)}
                 onBack={() => goToStep(2)}
+                fullInspirationTip={challenge.season === 1 && challenge.week_number <= 5}
               />
             ) : (
               <StepNatureClues
@@ -314,13 +315,23 @@ export default function ChallengePage() {
                 if (projectId) setSketchProjectId(projectId);
                 // The kid has solved the problem with a first idea: celebrate, then
                 // invite them on to find more ideas (design secret, skill, build).
-                setSolvedCelebration({ xp: 0, again: game.badges.includes('solved'), popi: { state: idea ? 'loading' : 'off' } });
+                setSolvedCelebration({ xp: 0, again: game.badges.includes('solved'), popi: { state: idea || game.partnerAnswers?.inspired ? 'loading' : 'off' } });
                 claimSketchBonus(challenge.id)
                   .then((r) => setSolvedCelebration((c) => (c ? { ...c, xp: r?.xp_earned ?? 0 } : c)))
                   .catch(() => {});
                 // Popi reads the idea (AI helper). The XP never waits for this.
-                if (idea) {
-                  void getIdeaFeedback(challenge.id, idea, locale).then((f) =>
+                // Popi reads the whole plan: the idea, how nature inspired it, the map labels.
+                const plan = [
+                  idea,
+                  game.partnerAnswers?.inspired,
+                  ...(game.mapLabels ?? []),
+                  game.materials?.length ? game.materials.join(', ') : '',
+                ]
+                  .map((x) => x?.trim())
+                  .filter(Boolean)
+                  .join('. ');
+                if (plan) {
+                  void getIdeaFeedback(challenge.id, plan, locale).then((f) =>
                     setSolvedCelebration((c) =>
                       c
                         ? {

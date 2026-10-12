@@ -36,6 +36,14 @@ export interface MissionGame {
   defineAnswers: Record<string, string>;
   /** The 5W1H questions answered so far, in order (they open one by one). */
   defineDone: string[];
+  /** Nature clues: the hero the kid picked as their nature partner (card index). */
+  partner: number | null;
+  /** The three "think like your partner" answers (what, how, inspired). */
+  partnerAnswers: Record<string, string>;
+  partnerDone: string[];
+  /** Sketch: the things the kid needs to build it, and the labels on their idea map. */
+  materials: string[];
+  mapLabels: string[];
 }
 
 export const EMPTY_GAME: MissionGame = {
@@ -60,6 +68,11 @@ export const EMPTY_GAME: MissionGame = {
   badges: [],
   defineAnswers: {},
   defineDone: [],
+  partner: null,
+  partnerAnswers: {},
+  partnerDone: [],
+  materials: [],
+  mapLabels: ['', '', ''],
 };
 
 function storageKey(challengeId: string) {

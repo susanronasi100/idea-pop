@@ -1,45 +1,121 @@
 'use client';
 
+import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import { Character3D, Popi, RewardPop, optionClass } from './StoryBits';
 import type { MissionStory } from './types';
 import type { MissionGame, GameUpdate } from './useMissionGame';
-import { btnIcon } from '@/components/challenge/buttons';
+import { btnIcon, btnSecondary } from '@/components/challenge/buttons';
 
 
-/** Story top for the Sketch step (step 4): Popi's question and the engineer's
- *  checklist. The sketch capture sits below. We never name ideas for the kid. */
+/** The things a kid might need, offered as chips on every mission; they can add their own. */
+const MATERIAL_KEYS = ['paper', 'cardboard', 'straws', 'string', 'tape', 'clay', 'foil', 'bottle_caps', 'sticks', 'plastic_bottle'] as const;
+
+/** Story top for the Sketch step (step 4, TEMP rule 37): Popi's question, the kid's nature
+ *  partner as a reminder, "what will you need?" and "map your idea" with a star per label.
+ *  The sketch capture sits below. We never name ideas for the kid. */
 export function StorySketchTop({ story, game, update }: { story: MissionStory; game: MissionGame; update: GameUpdate }) {
   const t = useTranslations('story');
-  // The same checklist on every mission; it never hints at an answer (TEMP rule 36).
-  const checklist = [t('sketch_check_1'), t('sketch_check_2'), t('sketch_check_3')];
+  const [own, setOwn] = useState('');
+  const partner = game.partner !== null && game.partner !== undefined ? story.clue_cards[game.partner] : null;
+  const labels = game.mapLabels?.length ? game.mapLabels : ['', '', ''];
+  const stars = labels.filter((l) => l.trim().length >= 3).length;
+  const toggle = (m: string) =>
+    update((g) => ({ materials: g.materials.includes(m) ? g.materials.filter((x) => x !== m) : [...g.materials, m] }));
+  const custom = game.materials.filter((m) => !MATERIAL_KEYS.some((k) => t(`material_${k}`) === m));
   return (
-    <div data-testid="story-sketch" className="flex flex-col gap-4 pt-4">
+    <div data-testid="story-sketch" className="flex flex-col gap-5 pt-4">
       <Popi text={t('sketch_popi')} />
-      <fieldset className="flex flex-col gap-2 rounded-card bg-white p-4">
-        <legend className="sr-only">{t('checklist_title')}</legend>
-        <p aria-hidden="true" className="font-body font-bold text-sm text-ink">{t('checklist_title')}</p>
-        {checklist.map((item, i) => {
-          const on = game.sketchChecks.includes(i);
-          return (
-            <label key={item} className="flex cursor-pointer items-center gap-3 rounded-xl bg-tint-blue px-3 py-2.5 font-body text-sm font-semibold text-ink">
-              <input
-                autoComplete="off"
-                type="checkbox"
-                data-testid={`sketch-check-${i}`}
-                checked={on}
-                onChange={() =>
-                  update((g) => ({
-                    sketchChecks: on ? g.sketchChecks.filter((x) => x !== i) : [...g.sketchChecks, i],
-                  }))
-                }
-                className="h-5 w-5 accent-explore"
-              />
-              {item}
-            </label>
-          );
-        })}
-      </fieldset>
+      {partner && (
+        <p className="self-start rounded-pill bg-[#EAF5FC] px-4 py-2 font-body text-base font-bold text-[#1A6FA6]">
+          ⭐ {t('partner_reminder', { name: partner.name })}
+        </p>
+      )}
+
+      {/* Plan your build */}
+      <section data-testid="plan-build" className="flex flex-col gap-3 rounded-[20px] bg-white p-5 shadow-sm">
+        <h2 className="font-display text-2xl text-challenge">{t('plan_title')}</h2>
+        <p className="font-body text-base font-semibold text-ink">{t('plan_question')}</p>
+        <div className="flex flex-wrap gap-2">
+          {[...MATERIAL_KEYS.map((k) => t(`material_${k}`)), ...custom].map((m) => {
+            const on = game.materials.includes(m);
+            return (
+              <button
+                key={m}
+                type="button"
+                aria-pressed={on}
+                onClick={() => toggle(m)}
+                className={[
+                  'min-h-11 rounded-pill border-2 px-4 font-body text-base font-bold transition-all focus-visible:outline-none focus-visible:ring-[3px] focus-visible:ring-[#0F3F63]',
+                  on ? 'border-[#1E7A44] bg-[#F3FBF5] text-[#1E7A44]' : 'border-[#D6E4EE] bg-white text-ink hover:border-[#58C6EE]',
+                ].join(' ')}
+              >
+                {on ? '✔ ' : ''}
+                {m}
+              </button>
+            );
+          })}
+        </div>
+        <form
+          className="flex flex-wrap gap-2"
+          onSubmit={(e) => {
+            e.preventDefault();
+            const m = own.trim();
+            if (m && !game.materials.includes(m)) update((g) => ({ materials: [...g.materials, m] }));
+            setOwn('');
+          }}
+        >
+          <input
+            autoComplete="off"
+            value={own}
+            onChange={(e) => setOwn(e.target.value)}
+            maxLength={40}
+            dir="auto"
+            placeholder={t('plan_add_placeholder')}
+            aria-label={t('plan_add_placeholder')}
+            className="min-h-11 min-w-0 flex-1 rounded-lg border border-[#8FA3B8] px-3 font-body text-base text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
+          />
+          <button type="submit" className={btnSecondary}>
+            {t('plan_add')}
+          </button>
+        </form>
+      </section>
+
+      {/* Map your idea */}
+      <section data-testid="map-idea" className="flex flex-col gap-3 rounded-[20px] bg-white p-5 shadow-sm">
+        <h2 className="font-display text-2xl text-challenge">{t('map_title')}</h2>
+        <p className="font-body text-base font-semibold text-ink">{t('map_question')}</p>
+        <div className="flex items-center gap-2" aria-label={t('map_stars', { count: stars })}>
+          {[0, 1, 2].map((i) => (
+            <span key={i} aria-hidden="true" className={`text-3xl transition-all ${i < stars ? 'story-pop' : 'opacity-25 grayscale'}`}>
+              ⭐
+            </span>
+          ))}
+          <span className="font-body text-sm font-bold text-[#4A5560]">{t('map_stars', { count: stars })}</span>
+        </div>
+        {labels.map((l, i) => (
+          <label key={i} className="flex items-center gap-3">
+            <span className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-[#1A6FA6] font-body text-base font-extrabold text-white">
+              {i + 1}
+            </span>
+            <input
+              autoComplete="off"
+              data-testid={`map-label-${i}`}
+              value={l}
+              onChange={(e) => update((g) => {
+                const next = [...(g.mapLabels?.length ? g.mapLabels : ['', '', ''])];
+                next[i] = e.target.value;
+                return { mapLabels: next };
+              })}
+              maxLength={120}
+              dir="auto"
+              placeholder={t(`map_label_${i + 1}`)}
+              className="min-h-11 min-w-0 flex-1 rounded-lg border border-[#8FA3B8] px-3 font-body text-base text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
+            />
+          </label>
+        ))}
+        {stars === 3 && <RewardPop text={t('map_all_stars')} />}
+      </section>
     </div>
   );
 }
