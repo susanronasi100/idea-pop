@@ -42,7 +42,16 @@ export default function ChildLogin({ onDone }: { onDone?: () => void } = {}) {
       }
       setPersona("kid");
       onDone?.();
-      router.push("/dashboard/kid");
+      // Back to the page that sent them here (only our own paths), else the dashboard.
+      let back = "/dashboard/kid";
+      try {
+        const saved = sessionStorage.getItem("ideapop_return_to");
+        sessionStorage.removeItem("ideapop_return_to");
+        if (saved && saved.startsWith("/") && !saved.startsWith("//")) back = saved;
+      } catch {
+        /* private mode */
+      }
+      router.push(back as "/dashboard/kid");
     } catch (err) {
       const message = err instanceof Error ? err.message : "";
       setFailed(message.includes("429") ? "locked" : "wrong");

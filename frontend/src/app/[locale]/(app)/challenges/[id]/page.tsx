@@ -2,7 +2,8 @@
 
 import { useEffect, useState, useCallback, useRef } from 'react';
 import { useParams } from 'next/navigation';
-import { Link } from '@/i18n/routing';
+import { Link, useRouter } from '@/i18n/routing';
+import { getAccessToken } from '@/lib/api/auth';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { useXpToast } from '@/lib/hooks/useXpToast';
@@ -80,6 +81,7 @@ export default function ChallengePage() {
   const [runKey, setRunKey] = useState(0);
 
   const locale = useLocale();
+  const router = useRouter();
 
   // Load challenge data
   // Every visit opens the mission fresh, so Popi reads the story again too.
@@ -90,7 +92,20 @@ export default function ChallengePage() {
   useEffect(() => {
     fetchChallenge(params.id, locale)
       .then((c) => setChallenge(c as ChallengeDetail))
-      .catch(() => setFetchError(true))
+      .catch(() => {
+        // Signed out (the session ran out and couldn't be renewed): sign in again and come
+        // straight back to this mission, instead of a "could not load" dead end.
+        if (!getAccessToken()) {
+          try {
+            sessionStorage.setItem('ideapop_return_to', `/challenges/${params.id}`);
+          } catch {
+            /* private mode — they land on their dashboard instead */
+          }
+          router.replace('/child-login');
+          return;
+        }
+        setFetchError(true);
+      })
       .finally(() => setLoading(false));
   }, [params.id, locale]);
 
