@@ -33,6 +33,9 @@ interface Props {
   card?: { hero: string; place: string } | null;
 }
 
+/** Where the right answer sits among the three options, so it isn't always in the same place. */
+const TAP_SEED: Record<string, number> = { who: 1, what: 0, where: 2, when: 2, why: 1 };
+
 /* The words are written over the picture rather than printed into it, so they use the app's fonts and change with
    the language. Sizes are a share of the picture's measured width, so text, badge and bubble stay in the same place
    on the picture at every screen size. Positions use left/right, not start/end: the picture does not flip in
@@ -351,6 +354,9 @@ function DefineProblemCard({
   const t = useTranslations('story');
   const [missed, setMissed] = useState<Record<string, number>>({});
   const current = define.prompts.find((p) => !done.includes(p.key)) ?? null;
+  // The right answer to tap: Who and Where from the story card, the others from the prompt's example.
+  const tapAnswer = (p: { key: string; example?: string | null }) =>
+    (p.key === 'who' && card?.hero) || (p.key === 'where' && card?.place) || p.example || null;
   const currentIndex = current ? define.prompts.indexOf(current) : define.prompts.length;
   const locked = define.prompts.slice(currentIndex + 1);
   const inputRef = useRef<HTMLInputElement>(null);
@@ -433,15 +439,15 @@ function DefineProblemCard({
                   <span className="rounded bg-[#2D6FC4] px-1 py-px text-[11px] text-white">{current.label}</span>
                   {current.question}
                 </label>
-                {card && (current.key === 'who' || current.key === 'where') ? (
-                  // Who and Where are tapped (TEMP rule 38): the story card's answer among two silly ones.
+                {tapAnswer(current) ? (
+                  // Every question is tapped (TEMP rule 39): the right answer among two silly ones.
                   <div className="mt-2">
                     <TapChoice
                       testId={`define-choice-${current.key}`}
                       {...arrangeChoices(
-                        current.key === 'who' ? card.hero : card.place,
-                        current.key === 'who' ? [t('tap_who_wrong_1'), t('tap_who_wrong_2')] : [t('tap_where_wrong_1'), t('tap_where_wrong_2')],
-                        current.key === 'who' ? 1 : 2,
+                        tapAnswer(current) as string,
+                        [t(`tap_${current.key}_wrong_1`), t(`tap_${current.key}_wrong_2`)],
+                        TAP_SEED[current.key] ?? 1,
                       )}
                       onCorrect={(v) => {
                         onAnswer(current.key, v);

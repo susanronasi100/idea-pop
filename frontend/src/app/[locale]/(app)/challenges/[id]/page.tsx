@@ -311,8 +311,6 @@ export default function ChallengePage() {
             <StepSketch
               {...sharedProps}
               hideTools={story !== null}
-              // Story missions: the first map label explains the idea, so it's the one that's needed.
-              blockedHint={story && !(game.mapLabels?.[0] ?? '').trim() ? t('sketch_needs_label') : null}
               onNext={(projectId, idea) => {
                 if (projectId) setSketchProjectId(projectId);
                 // The kid has solved the problem with a first idea: celebrate, then
