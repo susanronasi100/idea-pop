@@ -28,6 +28,11 @@ interface CaptureCardProps {
   onBrainstorm?: () => void;
   /** No helper on this step yet: the CTA reveals an embedded one. */
   helper?: { challengeId: string; step: number };
+  /** Story sketch: one box only ("name your idea"); materials and labels are asked above. */
+  nameOnly?: boolean;
+  titleLabel?: string;
+  /** Something above the card still needs doing (e.g. the first map label); the hint says what. */
+  blockedHint?: string | null;
 }
 
 export default function CaptureCard({
@@ -39,6 +44,9 @@ export default function CaptureCard({
   ageMode,
   onBrainstorm,
   helper,
+  nameOnly = false,
+  titleLabel,
+  blockedHint = null,
 }: CaptureCardProps) {
   const t = useTranslations('mission');
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
@@ -50,7 +58,7 @@ export default function CaptureCard({
   const [whatIdImprove, setWhatIdImprove] = useState('');
   const [showPopi, setShowPopi] = useState(false);
 
-  const canSubmit = title.trim().length > 0 && whatIMade.trim().length > 0;
+  const canSubmit = title.trim().length > 0 && whatIMade.trim().length > 0 && !blockedHint;
 
   // Revoke the object URL when it changes or the card unmounts, so previewing
   // a photo doesn't leak blob URLs.
@@ -147,7 +155,7 @@ export default function CaptureCard({
 
       {/* Title / What did you make? */}
       <div className="flex flex-col gap-1">
-        <label className="font-body text-sm text-ink/60">{t('capture_title_label')}</label>
+        <label className="font-body text-sm text-ink/60">{titleLabel ?? t('capture_title_label')}</label>
         <input
           autoComplete="off"
           data-testid="field-title"
@@ -163,6 +171,7 @@ export default function CaptureCard({
       </div>
 
       {/* What did you use? */}
+      {!nameOnly && (
       <div className="flex flex-col gap-1">
         <label className="font-body text-sm text-ink/60">{t('capture_used_label')}</label>
         <input
@@ -175,6 +184,7 @@ export default function CaptureCard({
           className={inputClass}
         />
       </div>
+      )}
 
       {/* Extended fields */}
       {showExtendedFields && (
@@ -234,6 +244,12 @@ export default function CaptureCard({
             )
           ))}
       </div>
+
+      {blockedHint && (
+        <p data-testid="capture-blocked" className="rounded-xl bg-[#FFF7E0] px-3 py-2 font-body text-base text-[#5a4300]">
+          💡 {blockedHint}
+        </p>
+      )}
 
       {/* Submit */}
       <button

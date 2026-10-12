@@ -18,9 +18,11 @@ interface StepSketchProps {
   onBack: () => void;
   /** Story missions teach their tool in the chapter-5½ power-up instead. */
   hideTools?: boolean;
+  /** Story sketch: what still needs doing before the idea can be saved (null when ready). */
+  blockedHint?: string | null;
 }
 
-export default function StepSketch({ challenge, ageMode, onNext, onBack, hideTools = false }: StepSketchProps) {
+export default function StepSketch({ challenge, ageMode, onNext, onBack, hideTools = false, blockedHint = null }: StepSketchProps) {
   const t = useTranslations('mission');
   const game = GAME_BY_SLUG[challenge.slug];
   // The hook must run unconditionally; the namespace is only read when a game exists.
@@ -142,6 +144,9 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
           onSubmit={handleSubmit}
           submitting={submitting}
           helper={{ challengeId: challenge.id, step: 6 }}
+          nameOnly={!!challenge.story}
+          titleLabel={challenge.story ? t('name_your_idea') : undefined}
+          blockedHint={blockedHint}
         />
       )}
 

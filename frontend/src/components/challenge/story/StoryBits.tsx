@@ -218,6 +218,62 @@ export function Confetti({ pieces = 70 }: { pieces?: number }) {
 }
 
 /** Small celebratory pill (badge earned, clue unlocked…). */
+/** Puts the right answer at a fixed, varied place among the others (no randomness, so every
+ *  render matches): `seed` picks where it goes. */
+export function arrangeChoices(correct: string, others: string[], seed: number) {
+  const list = others.filter((o) => o && o !== correct).slice(0, 2);
+  const at = seed % (list.length + 1);
+  list.splice(at, 0, correct);
+  return { options: list, answer: at };
+}
+
+/** A question answered by tapping one of a few options (TEMP rule 38: less typing for kids).
+ *  A wrong tap shakes and shows a gentle hint; the right one calls onCorrect with its words. */
+export function TapChoice({
+  testId,
+  options,
+  answer,
+  onCorrect,
+  wrongHint,
+}: {
+  testId: string;
+  options: string[];
+  answer: number;
+  onCorrect: (value: string) => void;
+  wrongHint: string;
+}) {
+  const [wrong, setWrong] = useState<number | null>(null);
+  return (
+    <div data-testid={testId} className="flex flex-col gap-2">
+      <div className="flex flex-col gap-2">
+        {options.map((o, i) => (
+          <button
+            key={o}
+            type="button"
+            data-testid={`${testId}-option-${i}`}
+            onClick={() => {
+              if (i === answer) {
+                setWrong(null);
+                onCorrect(o);
+              } else {
+                setWrong(i);
+              }
+            }}
+            className={`text-start ${optionClass(wrong === i ? 'wrong' : 'idle')} !text-base`}
+          >
+            {o}
+          </button>
+        ))}
+      </div>
+      {wrong !== null && (
+        <p role="status" className="rounded-xl bg-[#FFF7E0] px-3 py-2 font-body text-base text-[#5a4300]">
+          💡 {wrongHint}
+        </p>
+      )}
+    </div>
+  );
+}
+
 export function RewardPop({ text }: { text: string }) {
   return (
     <p

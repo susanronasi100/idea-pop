@@ -5,7 +5,7 @@ import { useLocale, useTranslations } from 'next-intl';
 import { usePopiVoice } from '@/lib/hooks/usePopiVoice';
 import { useAutoNarration } from '@/lib/hooks/useAutoNarration';
 import { joinSegments } from '@/lib/narration';
-import { Popi } from './StoryBits';
+import { Popi, TapChoice, arrangeChoices } from './StoryBits';
 import DefineCelebration from './DefineCelebration';
 import { claimDefineBonus } from '@/lib/api/client';
 import type { MissionStory } from './types';
@@ -29,6 +29,8 @@ interface Props {
   celebrated: boolean;
   onCelebrated: () => void;
   onDone: () => void;
+  /** The story card: the right answers for the tapped Who and Where questions. */
+  card?: { hero: string; place: string } | null;
 }
 
 /* The words are written over the picture rather than printed into it, so they use the app's fonts and change with
@@ -58,6 +60,7 @@ export default function StoryPictureBook({
   celebrated,
   onCelebrated,
   onDone,
+  card = null,
 }: Props) {
   const t = useTranslations('story');
   const voice = usePopiVoice(useLocale());
@@ -280,6 +283,7 @@ export default function StoryPictureBook({
         <DefineProblemCard
           define={define}
           popiTalking={auto.phase === 'finale' && voice.speaking}
+          card={card}
           answers={answers}
           onAnswer={onAnswer}
           done={done}
@@ -332,8 +336,10 @@ function DefineProblemCard({
   done,
   onDone,
   popiTalking,
+  card,
 }: {
   define: Define;
+  card: { hero: string; place: string } | null;
   /** Popi's line is being read aloud by the automatic narration. */
   popiTalking: boolean;
   answers: Record<string, string>;
@@ -427,6 +433,24 @@ function DefineProblemCard({
                   <span className="rounded bg-[#2D6FC4] px-1 py-px text-[11px] text-white">{current.label}</span>
                   {current.question}
                 </label>
+                {card && (current.key === 'who' || current.key === 'where') ? (
+                  // Who and Where are tapped (TEMP rule 38): the story card's answer among two silly ones.
+                  <div className="mt-2">
+                    <TapChoice
+                      testId={`define-choice-${current.key}`}
+                      {...arrangeChoices(
+                        current.key === 'who' ? card.hero : card.place,
+                        current.key === 'who' ? [t('tap_who_wrong_1'), t('tap_who_wrong_2')] : [t('tap_where_wrong_1'), t('tap_where_wrong_2')],
+                        current.key === 'who' ? 1 : 2,
+                      )}
+                      onCorrect={(v) => {
+                        onAnswer(current.key, v);
+                        onDone(current.key);
+                      }}
+                      wrongHint={t('tap_wrong_hint')}
+                    />
+                  </div>
+                ) : (
                 <form
                   className="mt-1.5 flex gap-2"
                   onSubmit={(e) => {
@@ -455,6 +479,7 @@ function DefineProblemCard({
                     {t('define_check')}
                   </button>
                 </form>
+                )}
                 {(missed[current.key] ?? 0) > 0 && current.hint && (
                   <p
                     data-testid="define-hint"

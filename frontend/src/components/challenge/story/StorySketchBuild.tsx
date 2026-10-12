@@ -110,10 +110,12 @@ export function StorySketchTop({ story, game, update }: { story: MissionStory; g
               maxLength={120}
               dir="auto"
               placeholder={t(`map_label_${i + 1}`)}
+              aria-describedby={i > 0 ? 'map-bonus-note' : undefined}
               className="min-h-11 min-w-0 flex-1 rounded-lg border border-[#8FA3B8] px-3 font-body text-base text-ink placeholder:text-ink/40 focus:border-challenge focus:outline-none"
             />
           </label>
         ))}
+        <p id="map-bonus-note" className="font-body text-sm font-semibold text-[#4A5560]">{t('map_bonus_note')}</p>
         {stars === 3 && <RewardPop text={t('map_all_stars')} />}
       </section>
     </div>

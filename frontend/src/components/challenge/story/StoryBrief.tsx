@@ -55,6 +55,7 @@ export default function StoryBrief({ challenge, story, game, update, onNext }: P
         celebrated={game.badges.includes('define')}
         onCelebrated={() => update({ badges: game.badges.includes('define') ? game.badges : [...game.badges, 'define'] })}
         onDone={onNext}
+        card={story.card}
       />
     );
   }

@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState } from 'react';
 import { useTranslations } from 'next-intl';
-import { Character3D, Popi, RewardPop, StepNav, pillCtaClass } from './StoryBits';
+import { Character3D, Popi, RewardPop, StepNav, TapChoice, arrangeChoices, pillCtaClass } from './StoryBits';
 import { btnPrimary, btnText } from '@/components/challenge/buttons';
 import type { MissionStory } from './types';
 import type { BadgeKey, MissionGame, GameUpdate } from './useMissionGame';
@@ -158,7 +158,28 @@ export default function StoryClues({ story, game, update, award, onNext, onBack,
             </div>
           ))}
 
-          {current && (
+          {current && current !== 'inspired' && partner && game.partner !== null && (
+            // "What does it do?" and "How?" are tapped: the partner's own card words among two others'.
+            <div key={`${game.partner}-${current}`} className="story-rise flex flex-col gap-2 rounded-xl border-2 border-[#1A6FA6] bg-white p-4">
+              <p className="font-body text-base font-bold text-ink">{question(current)}</p>
+              <TapChoice
+                testId={`partner-choice-${current}`}
+                {...arrangeChoices(
+                  current === 'what' ? partner.does : partner.trick,
+                  cards
+                    .filter((_, i) => i !== game.partner)
+                    .map((c) => (current === 'what' ? c.does : c.trick)),
+                  game.partner + (current === 'what' ? 1 : 2),
+                )}
+                onCorrect={(v) =>
+                  update((g) => ({ partnerAnswers: { ...g.partnerAnswers, [current]: v }, partnerDone: [...g.partnerDone, current] }))
+                }
+                wrongHint={t('partner_wrong', { name: partner.name })}
+              />
+            </div>
+          )}
+
+          {current === 'inspired' && (
             <PartnerQuestionBox
               key={`${game.partner}-${current}`}
               id={current}
