@@ -201,7 +201,7 @@ export default async function LandingPage({ params }: Props) {
             <h1 className={`[font-family:var(--font-cherry)] font-normal leading-tight text-[clamp(2rem,1.16rem+4.2vw,4rem)] ${locale === "fa" ? "xl:text-[clamp(1.625rem,2.3vw,3rem)]" : "xl:text-[clamp(2.5rem,3.6vw,4.75rem)] xl:leading-[1.1] xl:whitespace-nowrap"}`} data-intro="rise" style={motionDelay(350)}>
               <span className="text-[#194D3D]">
                 {t("hero.headline_1_pre")}
-                <span className="text-[#18785A]">
+                <span className="text-[#146047]">
                   {t("hero.headline_1_word")}
                   {t("hero.headline_1_post")}
                 </span>
@@ -210,11 +210,12 @@ export default async function LandingPage({ params }: Props) {
             </h1>
             <p className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.375rem,0.87rem+2.5vw,2.5rem)] xl:text-[clamp(1.625rem,2.5vw,3.125rem)] mt-[clamp(0.125rem,0.1rem+0.25vw,0.375rem)]" data-intro="rise" style={motionDelay(560)}>
               <span className="text-[#194D3D]">{t("hero.sub_1")}</span>{" "}
-              <span className="text-[#F2994A]">{t("hero.sub_2")}</span>
+              {/* the Library orange with a thin dark-green outline, so it stays readable on the green wall */}
+              <span className="text-[#F2994A] [-webkit-text-stroke:0.17em_#194D3D] [paint-order:stroke_fill]">{t("hero.sub_2")}</span>
             </p>
             <p className="[font-family:var(--font-adlam)] font-normal text-[#4F4F4F] text-[clamp(0.9375rem,0.79rem+0.68vw,1.25rem)] leading-[normal] [text-shadow:0_4px_4px_rgba(0,0,0,0.25)] max-w-[680px] mx-auto xl:mx-0 xl:max-w-none xl:whitespace-nowrap xl:text-[clamp(0.8125rem,0.95vw,1.3125rem)] mt-3 xl:mt-2" data-intro="rise" style={motionDelay(770)}>
               {t("hero.body_1_pre")}
-              <span className="text-[#18785A]">{t("hero.body_1_word")}</span>
+              <span className="text-[#0F4C39]">{t("hero.body_1_word")}</span>
               {t("hero.body_1_post")}
               {/* Desktop: one sentence per line (the designer's break); phones wrap naturally. */}
               <br className="hidden md:block" />{" "}
