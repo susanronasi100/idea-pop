@@ -5,19 +5,19 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  /* sky blue under the poster, so the first instant is never a flat lime page */
-  background: #5aa9ee;
+  /* the photo's own sampled sky (Classroom_Framing.json), so the first instant is never a flat lime page */
+  background: #6ea8f0;
   container-type: size;
 }
-/* While the layers load: the landscape exactly as the camera's first frame shows it (the 1425×1104 reference region
-   of the 2065×1616 texture, centred at normal viewport cover). Hidden once the scene is ready. */
+/* While the layers load: the landscape as the camera's first frame shows it (the 2705×2128 logical photo centred on
+   1352.5, 1064; HeroScene.tsx sets the exact first-frame scale in --poster-k, full cover until then). */
 .hero-poster {
-  --k: max(calc(100cqw / 1425), calc(100cqh / 1104));
+  --k: var(--poster-k, max(calc(100cqw / 2705), calc(100cqh / 2128)));
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
-  background-size: calc(var(--k) * 2065) calc(var(--k) * 1616);
-  background-position: calc(50cqw - var(--k) * 1032.5) calc(50cqh - var(--k) * 808);
+  background-size: calc(var(--k) * 2705) calc(var(--k) * 2128);
+  background-position: calc(50cqw - var(--k) * 1352.5) calc(50cqh - var(--k) * 1064);
 }
 .hero-viewport:not([data-state="preparing"]) .hero-poster {
   display: none;
@@ -52,8 +52,8 @@
   object-fit: fill;
   pointer-events: none;
 }
-/* The rear-opening aperture: fixed native geometry that moves with the world; the far-plane photograph (2065×1616
-   backing) is transformed inside it each frame. */
+/* The rear-opening aperture: fixed native geometry that moves with the world; the far-plane photograph (2705×2128
+   logical, 3323×2616 pixels) is transformed inside it each frame. */
 .hero-scenery {
   position: absolute;
   left: 780px;
@@ -68,9 +68,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 2065px;
+  width: 2705px;
   max-width: none;
-  height: 1616px;
+  height: 2128px;
   object-fit: fill;
   transform-origin: 0 0;
   will-change: transform;
@@ -80,9 +80,9 @@
   position: absolute;
   left: 0;
   top: 0;
-  width: 2065px;
+  width: 2705px;
   max-width: none;
-  height: 1616px;
+  height: 2128px;
   object-fit: fill;
   pointer-events: none;
   transform-origin: 0 0;

@@ -11,7 +11,11 @@ import { preload } from "react-dom";
    and quintic easing (their depths make the parallax), then the subjects fade in (deer → sketching boy → middle group →
    girl → bird → question → papers and graphite marks), 23.45s in all, played once. Every artwork layer is a full
    1670×942 canvas at (0,0) inside one `world`; the landscape is susan's Nature_Damavand_Hero_Safe_v5 (2065×1616,
-   reference region at 320,256), drawn in the fixed aperture and behind the room with one far-plane projection. Site tweaks kept from susan: smaller, lower question
+   reference region at 320,256), drawn in the fixed aperture and behind the room with one far-plane projection.
+   2026-10-13: the landscape is now the high-resolution Nature_Damavand_Photoreal_Wide (3323×2616 pixels, drawn at
+   2705×2128 logical units) with its Camera_Framing.js registration: far base scale 0.61, a far-plane start solved so
+   the classroom opening never shows an edge, and a late pan of the photo centre from (1352.5, 1064) to (1241, 650)
+   in the last 40% of the eased pull-back so Damavand ends up centred in the opening. Site tweaks kept from susan: smaller, lower question
    paper; bird and papers lower; the wall copy fades in with the girl; lossless people. */
 
 const W = 1670;
@@ -21,11 +25,76 @@ const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
-const REV = "damavand-v5";
+const REV = "hero-2026-10-14";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ease = (x: number) => x * x * x * (x * (x * 6 - 15) + 10);
+
+// The landscape texture in logical drawing units (its PNG is 3323×2616; the extra pixels are detail, not geometry).
+const PHOTO = { w: 2705, h: 2128, startX: 1352.5, startY: 1064, endX: 1241, endY: 650 };
+// The photo centre pans only in the last 40% of the eased pull-back (smoothstep), keeping the wide opening view.
+const photoCentreAt = (e: number) => {
+  const t = clamp01((e - 0.6) / 0.4);
+  const pan = t * t * (3 - 2 * t);
+  return { x: PHOTO.startX + (PHOTO.endX - PHOTO.startX) * pan, y: PHOTO.startY + (PHOTO.endY - PHOTO.startY) * pan };
+};
+
+// The smallest far-plane start that keeps the photo 2px beyond the visible classroom opening for the whole pull-back
+// (Camera_Framing.js chooseNatureStart): sampled progress plus the exact viewport crossings, then bisection.
+const solveFarStart = (vw: number, vh: number, s: number, photoScale: number, nearStart: number, travel: number, dx: number, dy: number) => {
+  const samples: number[] = [];
+  for (let i = 0; i <= 1000; i++) samples.push(i / 1000);
+  for (const [edge, half, d] of [
+    [-447, -vw / 2, dx],
+    [443, vw / 2, dx],
+    [-386, -vh / 2, dy],
+    [345, vh / 2, dy],
+  ]) {
+    const at = (nearStart * edge * s - half) / (half * (nearStart - 1) - nearStart * d);
+    if (Number.isFinite(at) && at >= 0 && at <= 1) samples.push(at);
+  }
+  const covers = (fs: number) => {
+    const depth = (fs * travel) / (fs - 1);
+    for (const e of samples) {
+      const nz = 1 / (1 / nearStart + travel * e);
+      const fz = depth / (depth - travel + travel * e);
+      const near = s * nz;
+      const far = photoScale * s * fz;
+      const nx = vw / 2 + dx * e * nz;
+      const ny = vh / 2 + dy * e * nz;
+      const fx = vw / 2 + dx * e * fz;
+      const fy = vh / 2 + dy * e * fz;
+      const c = photoCentreAt(e);
+      const left = Math.max(0, nx - 447 * near);
+      const top = Math.max(0, ny - 386 * near);
+      const right = Math.min(vw, nx + 443 * near);
+      const bottom = Math.min(vh, ny + 345 * near);
+      if (right <= left || bottom <= top) continue;
+      if (
+        fx - c.x * far > left - 2 + 1e-7 ||
+        fy - c.y * far > top - 2 + 1e-7 ||
+        fx + (PHOTO.w - c.x) * far < right + 2 - 1e-7 ||
+        fy + (PHOTO.h - c.y) * far < bottom + 2 - 1e-7
+      )
+        return false;
+    }
+    return true;
+  };
+  const cover = Math.max(
+    vw / (2 * Math.min(PHOTO.startX, PHOTO.w - PHOTO.startX)),
+    vh / (2 * Math.min(PHOTO.startY, PHOTO.h - PHOTO.startY)),
+  );
+  let low = Math.max(1.15, cover / (photoScale * s));
+  let high = nearStart;
+  if (low >= high || !covers(high)) return Math.max(low, high) * 1.0005;
+  for (let i = 0; i < 36; i++) {
+    const mid = (low + high) / 2;
+    if (covers(mid)) high = mid;
+    else low = mid;
+  }
+  return Math.min(nearStart, high * 1.0005);
+};
 
 // Timed opacity fades, in ms after the hold (spec section 5).
 const FADES: ReadonlyArray<readonly [id: string, start: number, end: number]> = [
@@ -138,13 +207,14 @@ export default function HeroScene() {
       const s = narrow ? vw / W : Math.min(vw / W, vh / H);
       const hx = (vw - W * s) / 2;
       const hy = narrow ? 0 : (vh - H * s) / 2;
-      const photoScale = Math.max(894 / 1425, 772 / 1104) + 2 / (1104 * s);
+      const photoScale = 0.61 + 2 / (PHOTO.h * s);
       const nearStart = Math.max(4, (2 * vw) / (886 * s), (2 * vh) / (690 * s));
-      const coverScale = Math.max(vw / 1425, vh / 1104);
-      const farStart = coverScale / (photoScale * s);
       const travel = 1 - 1 / nearStart;
+      const farStart = solveFarStart(vw, vh, s, photoScale, nearStart, travel, hx + AIM.x * s - vw / 2, hy + AIM.y * s - vh / 2);
       const farDepth = (farStart * travel) / (farStart - 1);
       L = { vw, vh, s, hx, hy, photoScale, nearStart, travel, farDepth };
+      // the loading poster shows exactly the camera's first frame of the photo
+      viewport.style.setProperty("--poster-k", `${photoScale * s * farStart}px`);
       set(floor, "height", `${narrow ? Math.max(103, vh / s - 839) : 103}px`);
       lastQ = null;
       return true;
@@ -169,11 +239,12 @@ export default function HeroScene() {
         const photoCy = L.vh / 2 + dy * e * farZoom;
         const nearScale = L.s * nearZoom;
         set(world, "transform", `translate3d(${cx - AIM.x * nearScale}px, ${cy - AIM.y * nearScale}px, 0) scale(${nearScale})`);
-        // The far plane: one landscape texture (the reference photo region's centre sits at 1032.5, 808), drawn both
-        // inside the aperture and behind the room with the same projection, so the scenery around the opening matches.
+        // The far plane: one landscape texture, drawn both inside the aperture and behind the room with the same
+        // projection and the same (late-panning) photo centre, so the scenery around the opening matches.
+        const centre = photoCentreAt(e);
         const textureScale = (L.photoScale * L.s * farZoom) / nearScale;
-        const textureLeft = AIM.x + (photoCx - cx) / nearScale - 1032.5 * textureScale;
-        const textureTop = AIM.y + (photoCy - cy) / nearScale - 808 * textureScale;
+        const textureLeft = AIM.x + (photoCx - cx) / nearScale - centre.x * textureScale;
+        const textureTop = AIM.y + (photoCy - cy) / nearScale - centre.y * textureScale;
         set(scenery, "transform", `translate3d(${textureLeft - 780}px, ${textureTop - 110}px, 0) scale(${textureScale})`);
         set(nature, "transform", `translate3d(${textureLeft}px, ${textureTop}px, 0) scale(${textureScale})`);
         lastQ = q;
