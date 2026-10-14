@@ -32,11 +32,19 @@ const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ease = (x: number) => x * x * x * (x * (x * 6 - 15) + 10);
 
 // The landscape texture in logical drawing units (its PNG is 3323×2616; the extra pixels are detail, not geometry).
-// The photo keeps one registration point for the whole move (susan, 2026-10-14): Damavand, the sky and the waterfall
-// end exactly where the approved framing puts them, and because the point never moves, the landscape only recedes with
-// the camera, with no extra slide of its own. (The earlier late pan from the photo centre made it slide down.)
-const PHOTO = { w: 2705, h: 2128, x: 1241, y: 650 };
-const photoCentreAt = () => PHOTO;
+// One continuous move (susan, 2026-10-14): the opening frame is the whole nature view (the photo centred on its middle,
+// at plain viewport cover), and the photo's registration point travels to the approved final framing (Damavand, sky and
+// waterfall in the window) on the SAME eased progress as the camera, so the landscape never moves on its own schedule:
+// no late slide, and no zoomed-in mountain step before the move.
+const PHOTO = { w: 2705, h: 2128, startX: 1352.5, startY: 1064, endX: 1241, endY: 650 };
+const photoCentreAt = (e: number) => ({
+  x: PHOTO.startX + (PHOTO.endX - PHOTO.startX) * e,
+  y: PHOTO.startY + (PHOTO.endY - PHOTO.startY) * e,
+});
+// The first frame's photo scale: plain cover of the hero box around the photo centre (hero.css draws the loading poster
+// with the same formula, so the poster and the camera's first frame are identical).
+const coverScale = (vw: number, vh: number) =>
+  Math.max(vw / (2 * Math.min(PHOTO.startX, PHOTO.w - PHOTO.startX)), vh / (2 * Math.min(PHOTO.startY, PHOTO.h - PHOTO.startY)));
 
 // The smallest far-plane start that keeps the photo 2px beyond the visible classroom opening for the whole pull-back
 // (Camera_Framing.js chooseNatureStart): sampled progress plus the exact viewport crossings, then bisection.
@@ -63,7 +71,7 @@ const solveFarStart = (vw: number, vh: number, s: number, photoScale: number, ne
       const ny = vh / 2 + dy * e * nz;
       const fx = vw / 2 + dx * e * fz;
       const fy = vh / 2 + dy * e * fz;
-      const c = photoCentreAt();
+      const c = photoCentreAt(e);
       const left = Math.max(0, nx - 447 * near);
       const top = Math.max(0, ny - 386 * near);
       const right = Math.min(vw, nx + 443 * near);
@@ -79,11 +87,10 @@ const solveFarStart = (vw: number, vh: number, s: number, photoScale: number, ne
     }
     return true;
   };
-  const cover = Math.max(
-    vw / (2 * Math.min(PHOTO.x, PHOTO.w - PHOTO.x)),
-    vh / (2 * Math.min(PHOTO.y, PHOTO.h - PHOTO.y)),
-  );
-  let low = Math.max(1.15, cover / (photoScale * s));
+  const cover = coverScale(vw, vh);
+  let low = cover / (photoScale * s);
+  // plain cover already keeps the opening covered: start exactly there, so nothing jumps from the loading poster
+  if (covers(low * 1.0005)) return low * 1.0005;
   let high = nearStart;
   if (low >= high || !covers(high)) return Math.max(low, high) * 1.0005;
   for (let i = 0; i < 36; i++) {
@@ -213,6 +220,7 @@ export default function HeroScene() {
       L = { vw, vh, s, hx, hy, photoScale, nearStart, travel, farDepth };
       // the loading poster shows exactly the camera's first frame of the photo
       viewport.style.setProperty("--poster-k", `${photoScale * s * farStart}px`);
+      viewport.dataset.poster = "";
       set(floor, "height", `${narrow ? Math.max(103, vh / s - 839) : 103}px`);
       lastQ = null;
       return true;
@@ -239,7 +247,7 @@ export default function HeroScene() {
         set(world, "transform", `translate3d(${cx - AIM.x * nearScale}px, ${cy - AIM.y * nearScale}px, 0) scale(${nearScale})`);
         // The far plane: one landscape texture, drawn both inside the aperture and behind the room with the same
         // projection and the same (late-panning) photo centre, so the scenery around the opening matches.
-        const centre = photoCentreAt();
+        const centre = photoCentreAt(e);
         const textureScale = (L.photoScale * L.s * farZoom) / nearScale;
         const textureLeft = AIM.x + (photoCx - cx) / nearScale - centre.x * textureScale;
         const textureTop = AIM.y + (photoCy - cy) / nearScale - centre.y * textureScale;
