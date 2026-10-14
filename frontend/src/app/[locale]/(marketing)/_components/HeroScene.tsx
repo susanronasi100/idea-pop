@@ -25,7 +25,7 @@ const DURATION_MS = 22800;
 const CAMERA_MS = 3960;
 const AIM = { x: 1227, y: 496 };
 // bump when the designer delivers corrected artwork, so no browser keeps an older cached copy
-const REV = "hero-2026-10-14c";
+const REV = "hero-2026-10-14d";
 const src = (name: string) => `/landing/hero-final/${name}.webp?v=${REV}`;
 
 const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
