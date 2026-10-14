@@ -5,8 +5,8 @@
   position: absolute;
   inset: 0;
   overflow: hidden;
-  /* the photo's own sampled sky (Classroom_Framing.json), so the first instant is never a flat lime page */
-  background: #6ea8f0;
+  /* the page lime while the pictures load (susan, 2026-10-14) */
+  background: #f3ffc2;
   container-type: size;
 }
 /* While the layers load: the landscape as the camera's first frame shows it (the 2705×2128 logical photo centred on
