@@ -10,14 +10,14 @@
   container-type: size;
 }
 /* While the layers load: the landscape as the camera's first frame shows it (the 2705×2128 logical photo centred on
-   1352.5, 1064; HeroScene.tsx sets the exact first-frame scale in --poster-k, full cover until then). */
+   1241, 650; HeroScene.tsx sets the exact first-frame scale in --poster-k, full cover until then). */
 .hero-poster {
   --k: var(--poster-k, max(calc(100cqw / 2705), calc(100cqh / 2128)));
   position: absolute;
   inset: 0;
   background-repeat: no-repeat;
   background-size: calc(var(--k) * 2705) calc(var(--k) * 2128);
-  background-position: calc(50cqw - var(--k) * 1352.5) calc(50cqh - var(--k) * 1064);
+  background-position: calc(50cqw - var(--k) * 1241) calc(50cqh - var(--k) * 650);
 }
 .hero-viewport:not([data-state="preparing"]) .hero-poster {
   display: none;

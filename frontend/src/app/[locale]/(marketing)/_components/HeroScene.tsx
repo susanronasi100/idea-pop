@@ -14,8 +14,8 @@ import { preload } from "react-dom";
    reference region at 320,256), drawn in the fixed aperture and behind the room with one far-plane projection.
    2026-10-13: the landscape is now the high-resolution Nature_Damavand_Photoreal_Wide (3323×2616 pixels, drawn at
    2705×2128 logical units) with its Camera_Framing.js registration: far base scale 0.61, a far-plane start solved so
-   the classroom opening never shows an edge, and a late pan of the photo centre from (1352.5, 1064) to (1241, 650)
-   in the last 40% of the eased pull-back so Damavand ends up centred in the opening. Site tweaks kept from susan: smaller, lower question
+   the classroom opening never shows an edge, and one fixed photo registration point (1241, 650) so Damavand ends up centred in the
+   opening and the landscape moves only with the camera. Site tweaks kept from susan: smaller, lower question
    paper; bird and papers lower; the wall copy fades in with the girl; lossless people. */
 
 const W = 1670;
@@ -32,13 +32,11 @@ const clamp01 = (x: number) => Math.max(0, Math.min(1, x));
 const ease = (x: number) => x * x * x * (x * (x * 6 - 15) + 10);
 
 // The landscape texture in logical drawing units (its PNG is 3323×2616; the extra pixels are detail, not geometry).
-const PHOTO = { w: 2705, h: 2128, startX: 1352.5, startY: 1064, endX: 1241, endY: 650 };
-// The photo centre pans only in the last 40% of the eased pull-back (smoothstep), keeping the wide opening view.
-const photoCentreAt = (e: number) => {
-  const t = clamp01((e - 0.6) / 0.4);
-  const pan = t * t * (3 - 2 * t);
-  return { x: PHOTO.startX + (PHOTO.endX - PHOTO.startX) * pan, y: PHOTO.startY + (PHOTO.endY - PHOTO.startY) * pan };
-};
+// The photo keeps one registration point for the whole move (susan, 2026-10-14): Damavand, the sky and the waterfall
+// end exactly where the approved framing puts them, and because the point never moves, the landscape only recedes with
+// the camera, with no extra slide of its own. (The earlier late pan from the photo centre made it slide down.)
+const PHOTO = { w: 2705, h: 2128, x: 1241, y: 650 };
+const photoCentreAt = () => PHOTO;
 
 // The smallest far-plane start that keeps the photo 2px beyond the visible classroom opening for the whole pull-back
 // (Camera_Framing.js chooseNatureStart): sampled progress plus the exact viewport crossings, then bisection.
@@ -65,7 +63,7 @@ const solveFarStart = (vw: number, vh: number, s: number, photoScale: number, ne
       const ny = vh / 2 + dy * e * nz;
       const fx = vw / 2 + dx * e * fz;
       const fy = vh / 2 + dy * e * fz;
-      const c = photoCentreAt(e);
+      const c = photoCentreAt();
       const left = Math.max(0, nx - 447 * near);
       const top = Math.max(0, ny - 386 * near);
       const right = Math.min(vw, nx + 443 * near);
@@ -82,8 +80,8 @@ const solveFarStart = (vw: number, vh: number, s: number, photoScale: number, ne
     return true;
   };
   const cover = Math.max(
-    vw / (2 * Math.min(PHOTO.startX, PHOTO.w - PHOTO.startX)),
-    vh / (2 * Math.min(PHOTO.startY, PHOTO.h - PHOTO.startY)),
+    vw / (2 * Math.min(PHOTO.x, PHOTO.w - PHOTO.x)),
+    vh / (2 * Math.min(PHOTO.y, PHOTO.h - PHOTO.y)),
   );
   let low = Math.max(1.15, cover / (photoScale * s));
   let high = nearStart;
@@ -241,7 +239,7 @@ export default function HeroScene() {
         set(world, "transform", `translate3d(${cx - AIM.x * nearScale}px, ${cy - AIM.y * nearScale}px, 0) scale(${nearScale})`);
         // The far plane: one landscape texture, drawn both inside the aperture and behind the room with the same
         // projection and the same (late-panning) photo centre, so the scenery around the opening matches.
-        const centre = photoCentreAt(e);
+        const centre = photoCentreAt();
         const textureScale = (L.photoScale * L.s * farZoom) / nearScale;
         const textureLeft = AIM.x + (photoCx - cx) / nearScale - centre.x * textureScale;
         const textureTop = AIM.y + (photoCy - cy) / nearScale - centre.y * textureScale;
