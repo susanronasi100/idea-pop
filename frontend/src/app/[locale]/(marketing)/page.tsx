@@ -22,8 +22,7 @@ import portfolioAvatar from "../../../../public/landing/portfolio-avatar.png";
 import seeTheWorld from "../../../../public/landing/see-the-world.png";
 import learnCircle from "../../../../public/landing/learn.png";
 import solveAndMake from "../../../../public/landing/solve-and-make.png";
-// The designer's river PNG, cropped past the generator sparkle in the corner and kept at the 1400:503 shape:
-// 1320x474 WebP, 168 KB.
+// susan's picture (2026-10-15): a boy with his cardboard kingfisher train and sketches, 1670×942 WebP.
 import tryMissionBg from "../../../../public/landing/try-mission-river.webp";
 import startFreeGirl from "../../../../public/landing/start-free-girl.png";
 // "Made by kids this month": the designer's photos of real makes, cropped to the tile with the make in the middle and
