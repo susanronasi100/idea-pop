@@ -18,7 +18,7 @@ import { useEffect, useRef } from "react";
    renderer is the handoff's own wing-flight.js, unchanged. */
 
 const BIRD = "/landing/bird/";
-const REV = "bird-2026-10-15";
+const REV = "bird-2026-10-15c";
 const ANCHOR = { x: 738, y: 644 };
 const WING_SPEED_MULTIPLIER = 0.25;
 const ARRIVAL_AT = 8120;
