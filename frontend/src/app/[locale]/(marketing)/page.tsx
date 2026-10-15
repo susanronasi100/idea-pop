@@ -9,12 +9,13 @@ import { btnGlass, btnLime, cardShape, cardShapeLime, fromCenter, keepTogether, 
 import FaqList from "./_components/FaqList";
 // The hero: the designer's accepted camera pull-back from nature into the classroom (IDEA_POP_Final_Assets spec).
 import HeroScene from "./_components/HeroScene";
+// The one flying bird that travels the whole page (hands off to the girl's painting on the way).
+import FlyingBird from "./_components/FlyingBird";
 import "./motion.css";
 import "./hero.css";
 
 // The designer's Figma export (5760×3060) at 2880 wide. Its left ~42% is 49% opaque in the export; flattened on white,
 // which matches the Figma frame (over the page's #F3FFC2 that side turned green).
-import paintingGirl from "../../../../public/landing/paint-together.webp";
 import thinkingToolsAvatar from "../../../../public/landing/thinking-tools-avatar.png";
 import realMakesAvatar from "../../../../public/landing/real-makes-avatar.png";
 import portfolioAvatar from "../../../../public/landing/portfolio-avatar.png";
@@ -175,6 +176,7 @@ export default async function LandingPage({ params }: Props) {
     // so the scroll-linked motion still follows the page.
     <div className="bg-[#F3FFC2] overflow-x-clip">
       <ScrollReveal />
+      <FlyingBird />
       {/* 1. Hero — the animated nature-to-classroom scene (HeroScene.tsx), the copy layered above it */}
       <section aria-label="hero" className="relative" dir="ltr" data-scroll-timeline="hero">
         {/* The box has the artwork's own 1670:942 shape, so the designer's contain layout fills it edge to edge.
@@ -347,15 +349,29 @@ export default async function LandingPage({ params }: Props) {
       >
         {/* Phones: below the copy (order-2), 260px tall and cropped at 90% across so the girl sits right of centre,
             larger, face clear and helmet in view — no scrim. md+: fills the section behind the copy, as in Figma. */}
-        {/* Motion: the picture zooms out as it scrolls in (the section clips the overflow). */}
-        <Image
-          unoptimized
-          src={paintingGirl}
-          alt=""
-          aria-hidden="true"
-          className="order-2 h-[260px] w-full object-cover object-[90%_50%] md:absolute md:inset-0 md:h-full md:object-right"
-          data-scroll="zoom-out"
-        />
+        {/* The approved painting: the canvas before the bird is painted, and the approved photo on top, revealed as
+            the flying bird lands on the canvas (FlyingBird.tsx sets --painted-reveal). Both plates are registered to
+            the same 1720×914 picture, so they stay still: no zoom, the bird docks on the exact painted bird. */}
+        <div aria-hidden="true" className="relative order-2 h-[260px] w-full md:absolute md:inset-0 md:h-full">
+          {/* eslint-disable-next-line @next/next/no-img-element -- a registered plate: its exact pixels and rectangle matter */}
+          <img
+            src="/landing/bird/canvas-before.webp?v=bird-2026-10-15"
+            alt=""
+            width={1720}
+            height={914}
+            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-right"
+          />
+          {/* eslint-disable-next-line @next/next/no-img-element -- a registered plate: its exact pixels and rectangle matter */}
+          <img
+            src="/landing/bird/canvas-after.webp?v=bird-2026-10-15"
+            alt=""
+            width={1720}
+            height={914}
+            data-bird-canvas
+            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-right"
+            style={{ opacity: "var(--painted-reveal, 1)" }}
+          />
+        </div>
         {/* md+: the box takes the photo's own proportions, so the whole picture shows uncropped (1440×765 at 1440 wide).
             Heading box per Figma: 738px wide, 68px from the left and 73px from the top of the 1440 frame — kept as
             percentages with a vw font size, so the layout scales with the picture. The button sits 15px below it.

@@ -133,3 +133,42 @@
   height: 100%;
   object-fit: cover;
 }
+
+/* The flying bird (FlyingBird.tsx): one fixed rig of four registered 1659×1348 parts, back to front far wing → tail →
+   body → near wing. The handoff's wing renderer replaces the two wing images with WebGL canvases at the same depths. */
+.flying-bird {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 40;
+  width: 1659px;
+  height: 1348px;
+  overflow: visible;
+  pointer-events: none;
+  transform-origin: 0 0;
+  will-change: transform, opacity;
+  visibility: hidden;
+}
+.flying-bird .part {
+  position: absolute;
+  inset: 0;
+  display: block;
+  width: 1659px;
+  max-width: none;
+  height: 1348px;
+  pointer-events: none;
+  transform-origin: 738px 644px;
+}
+.flying-bird .far-wing {
+  z-index: 0;
+}
+.flying-bird .tail {
+  z-index: 1;
+  transform-origin: 925px 929px;
+}
+.flying-bird .body {
+  z-index: 2;
+}
+.flying-bird .near-wing {
+  z-index: 3;
+}

@@ -107,8 +107,6 @@ const FADES: ReadonlyArray<readonly [id: string, start: number, end: number]> = 
   ["boy", 5280, 7480],
   ["kids", 6424, 8800],
   ["girl", 9000, 11200],
-  ["birdBody", 11400, 13400],
-  ["birdWing", 11400, 13800],
   ["question", 14000, 15800],
   ["paper1", 16200, 18100],
   ["marks1", 17100, 19200],
@@ -130,11 +128,9 @@ const LAYERS: ReadonlyArray<{ id: string; file: string; z: number; fade?: boolea
   { id: "kids", file: "kids-group", z: 4, fade: true },
   { id: "table", file: "foreground-table", z: 5 },
   { id: "girl", file: "main-girl", z: 6, fade: true },
-  { id: "birdWing", file: "bird-wing-sketch", z: 7, fade: true, className: "hero-sky-art" },
   { id: "paper1", file: "observation-paper-01", z: 7, fade: true, className: "hero-sky-art" },
   { id: "paper2", file: "observation-paper-02", z: 7, fade: true, className: "hero-sky-art" },
   { id: "paper3", file: "observation-paper-03", z: 7, fade: true, className: "hero-sky-art" },
-  { id: "birdBody", file: "bird-body", z: 8, fade: true, className: "hero-sky-art" },
   { id: "marks1", file: "motion-sketch-01", z: 9, fade: true, className: "hero-sky-art" },
   { id: "marks2", file: "motion-sketch-02", z: 9, fade: true, className: "hero-sky-art" },
   { id: "marks3", file: "motion-sketch-03", z: 9, fade: true, className: "hero-sky-art" },
@@ -218,6 +214,10 @@ export default function HeroScene() {
       const farStart = solveFarStart(vw, vh, s, photoScale, nearStart, travel, hx + AIM.x * s - vw / 2, hy + AIM.y * s - vh / 2);
       const farDepth = (farStart * travel) / (farStart - 1);
       L = { vw, vh, s, hx, hy, photoScale, nearStart, travel, farDepth };
+      // The flying bird (FlyingBird.tsx) starts in the hero: it reads the finished artwork rectangle from here.
+      viewport.dataset.artHx = String(hx);
+      viewport.dataset.artHy = String(hy);
+      viewport.dataset.artS = String(s);
       // the loading poster shows exactly the camera's first frame of the photo
       viewport.style.setProperty("--poster-k", `${photoScale * s * farStart}px`);
       viewport.dataset.poster = "";
@@ -264,6 +264,8 @@ export default function HeroScene() {
       }
       showCopy(wide.matches ? ease(clamp01((t - 9000) / 2200)) : 1);
       showNav(wide.matches ? ease(clamp01((t - CAMERA_MS) / 600)) : 1);
+      // The bird is no longer a hero layer: the one flying rig (FlyingBird.tsx) appears on the old bird schedule.
+      viewport.dataset.birdIn = ease(clamp01((t - 11400) / 2000)).toFixed(4);
     };
 
     const finish = () => {
@@ -357,6 +359,7 @@ export default function HeroScene() {
         // An essential layer failed: show the completed Master Hero instead; the copy stays usable.
         if (cancelled) return;
         setState("fallback");
+        viewport.dataset.birdIn = "1";
         showCopy(1);
         showNav(1);
       });
