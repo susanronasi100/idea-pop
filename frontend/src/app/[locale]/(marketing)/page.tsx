@@ -341,14 +341,18 @@ export default async function LandingPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 4. Paint together — the heading and button sit in a band like "Try one mission" (susan, 2026-10-15: on the
-          photo they weren't readable), and the approved painting follows, uncropped from md up. */}
+      {/* 4. Paint together — the heading, a line under it and the button sit on the page lime above the painting, styled
+          like "Try one mission" (susan, 2026-10-15: on the photo they weren't readable); the approved painting follows,
+          uncropped from md up. */}
       <section aria-label="paint together" className="relative flex flex-col overflow-hidden">
-        <div className="bg-[#CFEC5A] px-4 pt-6 pb-5 md:pt-[26px] md:pb-[22px] text-center">
-          <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.875rem,1.435rem+1.878vw,3rem)] leading-[normal] text-[#4F4F4F] mb-[11px]" data-reveal="grow">
+        <div className="px-4 pt-8 pb-6 md:pt-10 md:pb-8 text-center">
+          <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.875rem,1.435rem+1.878vw,3rem)] leading-[normal] text-[#4F4F4F]" data-reveal="grow">
             {keepTogether(t("paint.heading"))}
           </h2>
-          {/* The kit's primary, as in the mission band: its fill matches the band, the outline and shadow mark it out. */}
+          <p className="[font-family:var(--font-adlam)] font-normal text-[clamp(1rem,0.85rem+0.6vw,1.25rem)] leading-[1.48] text-[#4F4F4F] mb-[14px]" data-reveal="grow" style={motionDelay(140)}>
+            {keepTogether(t("paint.body"))}
+          </p>
+          {/* The kit's primary, as in the mission band. */}
           <Link href="/explore" prefetch={false} className={btnLime} data-reveal="pop" style={motionDelay(220)}>
             {t("paint.cta")}
           </Link>
