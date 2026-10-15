@@ -341,25 +341,30 @@ export default async function LandingPage({ params }: Props) {
         </div>
       </section>
 
-      {/* 4. Paint together banner — full-bleed image with overlaid copy */}
-      <section
-        aria-label="paint together"
-        className="relative flex flex-col overflow-hidden md:block"
-        data-zoom-frame
-      >
-        {/* Phones: below the copy (order-2), 260px tall and cropped at 90% across so the girl sits right of centre,
-            larger, face clear and helmet in view — no scrim. md+: fills the section behind the copy, as in Figma. */}
+      {/* 4. Paint together — the heading and button sit in a band like "Try one mission" (susan, 2026-10-15: on the
+          photo they weren't readable), and the approved painting follows, uncropped from md up. */}
+      <section aria-label="paint together" className="relative flex flex-col overflow-hidden">
+        <div className="bg-[#CFEC5A] px-4 pt-6 pb-5 md:pt-[26px] md:pb-[22px] text-center">
+          <h2 className="[font-family:var(--font-cherry)] font-normal text-[clamp(1.875rem,1.435rem+1.878vw,3rem)] leading-[normal] text-[#4F4F4F] mb-[11px]" data-reveal="grow">
+            {keepTogether(t("paint.heading"))}
+          </h2>
+          {/* The kit's primary, as in the mission band: its fill matches the band, the outline and shadow mark it out. */}
+          <Link href="/explore" prefetch={false} className={btnLime} data-reveal="pop" style={motionDelay(220)}>
+            {t("paint.cta")}
+          </Link>
+        </div>
         {/* The approved painting: the canvas before the bird is painted, and the approved photo on top, revealed as
             the flying bird lands on the canvas (FlyingBird.tsx sets --painted-reveal). Both plates are registered to
-            the same 1720×914 picture, so they stay still: no zoom, the bird docks on the exact painted bird. */}
-        <div aria-hidden="true" className="relative order-2 h-[260px] w-full md:absolute md:inset-0 md:h-full">
+            the same 1720×914 picture and stay still, so the bird docks on the exact painted bird. Phones: 260px tall,
+            cropped at 90% across so the girl stays in view; md+: the whole picture at its own proportions. */}
+        <div aria-hidden="true" className="relative h-[260px] w-full md:h-auto md:aspect-[1720/914]">
           {/* eslint-disable-next-line @next/next/no-img-element -- a registered plate: its exact pixels and rectangle matter */}
           <img
             src="/landing/bird/canvas-before.webp?v=bird-2026-10-15"
             alt=""
             width={1720}
             height={914}
-            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-right"
+            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-center"
           />
           {/* eslint-disable-next-line @next/next/no-img-element -- a registered plate: its exact pixels and rectangle matter */}
           <img
@@ -368,25 +373,9 @@ export default async function LandingPage({ params }: Props) {
             width={1720}
             height={914}
             data-bird-canvas
-            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-right"
+            className="absolute inset-0 h-full w-full object-cover object-[90%_50%] md:object-center"
             style={{ opacity: "var(--painted-reveal, 1)" }}
           />
-        </div>
-        {/* md+: the box takes the photo's own proportions, so the whole picture shows uncropped (1440×765 at 1440 wide).
-            Heading box per Figma: 738px wide, 68px from the left and 73px from the top of the 1440 frame — kept as
-            percentages with a vw font size, so the layout scales with the picture. The button sits 15px below it.
-            Phones: the heading and button come first (order-1) on the page background, above the photo. */}
-        <div className="relative order-1 mx-auto flex w-full max-w-6xl items-center px-4 pt-10 pb-8 md:block md:max-w-none md:p-0 md:aspect-[5760/3060]">
-          <div className="mx-auto max-w-sm text-center md:absolute md:left-[4.722%] md:top-[9.54%] md:mx-0 md:w-[51.25%] md:max-w-none">
-            <h2 className="[font-family:var(--font-cherry)] font-normal text-3xl md:text-[3.333vw] leading-[normal] text-[#4F4F4F]" data-reveal="grow">
-              {keepTogether(t("paint.heading"))}
-            </h2>
-            <div className="mt-6 md:mt-[15px]" data-reveal="grow" style={motionDelay(220)}>
-              <Link href="/explore" prefetch={false} className={btnGlass}>
-                {t("paint.cta")}
-              </Link>
-            </div>
-          </div>
         </div>
       </section>
 
