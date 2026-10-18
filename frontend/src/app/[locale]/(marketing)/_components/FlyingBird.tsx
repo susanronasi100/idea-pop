@@ -74,7 +74,8 @@ const HERO_ART = { x: 1418 / 1.1497, y: 387 / 1.1497 + 40, scale: 0.369 / 1.1497
 // The canvas docking pose on the 1720×914 painting image (the reference shows it at 1920×1020, ×1.11628).
 // In the "Try one mission" photo (1670×942) the bird fades out on the paper just in front of the cardboard train's
 // nose (susan, 2026-10-18), where it stands mid-way along its earlier path to the sketch.
-const MISSION_ART = { x: 1035, y: 760, scale: 0.32, w: 1670 };
+// (The spot susan approved, now measured on the unzoomed photo: it was 1035, 760, 0.32 on the photo mid zoom-out.)
+const MISSION_ART = { x: 1085, y: 832, scale: 0.4, w: 1670 };
 const CANVAS_ART = { x: 815 / 1.11628, y: (2595 - 2217) / 1.11628, scale: 0.7 / 1.11628 };
 const PAINT = { w: 1720, h: 914 };
 
@@ -213,7 +214,8 @@ export default function FlyingBird() {
       const missionImg = document.querySelector<HTMLImageElement>("[data-bird-mission]");
       const missionPose = (() => {
         if (!missionImg) return null;
-        const r = missionImg.getBoundingClientRect();
+        // measured on the photo's frame: the photo itself is still mid zoom-out (motion.css) until it scrolls in
+        const r = (missionImg.closest("[data-zoom-frame]") ?? missionImg).getBoundingClientRect();
         const k = r.width / MISSION_ART.w;
         const X = r.left + window.scrollX + MISSION_ART.x * k;
         const Y = r.top + window.scrollY + MISSION_ART.y * k;
@@ -233,7 +235,7 @@ export default function FlyingBird() {
       geo.route = ROUTE.map((p) => {
         if (p.at === 387 && heroPose) return { at: p.at, ...heroPose };
         if (p.at >= 2450 && p.at <= 3000 && canvasPose) return { at: p.at, ...canvasPose };
-        if ("mission" in p && missionPose) return { at: p.mission === "land" ? missionPose.land : missionPose.leave, X: missionPose.X, Y: missionPose.Y, S: missionPose.S };
+        if ("mission" in p && missionPose) return { at: p.mission === "land" ? missionPose.land - 50 : missionPose.leave, X: missionPose.X, Y: missionPose.Y, S: missionPose.S };
         if ("mission" in p) return { at: p.at, X: 180 * g, Y: toDoc(p.at), S: 0.17 * g };
         return { at: p.at, X: p.x * g, Y: toDoc(p.y), S: p.scale * g };
       });
@@ -266,7 +268,7 @@ export default function FlyingBird() {
       const a = r[i];
       const b = r[i + 1];
       const t = smoothstep(a.at, b.at, focus);
-      const vt = focus >= 3360 ? clamp((focus - a.at) / (b.at - a.at), 0, 1) : t;
+      const vt = focus >= 3360 && b.at !== geo!.mission.land - 50 ? clamp((focus - a.at) / (b.at - a.at), 0, 1) : t;
       return { at: focus, X: mix(a.X, b.X, t), Y: mix(a.Y, b.Y, vt), S: mix(a.S, b.S, t) };
     };
 
@@ -291,7 +293,9 @@ export default function FlyingBird() {
       const canvasHold = f >= 2500 && f <= 3000;
       const M = G.mission;
       const missionHold = f >= M.land && f <= M.leave;
-      const missionFade = missionHold ? 1 : f > M.land - 120 && f < M.land ? smoothstep(M.land - 120, M.land, f) : f > M.leave && f < M.leave + 120 ? 1 - smoothstep(M.leave, M.leave + 120, f) : 0;
+      // the same jump as into the girl's canvas: it glides in, fades over the last 150 units as the sketch appears, and
+      // on leaving fades back out over 300 units while it flies off
+      const missionFade = missionHold ? 1 : f > M.land - 150 && f < M.land ? smoothstep(M.land - 150, M.land, f) : f > M.leave && f < M.leave + 300 ? 1 - smoothstep(M.leave, M.leave + 300, f) : 0;
       const reveal = paintRevealFor(f);
       // the bird first appears with the hero animation's bird; past the hero it is always on its route
       const heroVp = document.querySelector<HTMLElement>(".hero-viewport");
@@ -310,6 +314,8 @@ export default function FlyingBird() {
       let target = f < 900 ? 0.65 : 1;
       if (f > 2200 && f < 2500) target *= 1 - smoothstep(2200, 2500, f);
       if (f > 3000 && f < 3400) target *= smoothstep(3000, 3400, f);
+      if (f > M.land - 300 && f < M.land) target *= 1 - smoothstep(M.land - 300, M.land, f);
+      if (f > M.leave && f < M.leave + 400) target *= smoothstep(M.leave, M.leave + 400, f);
       if (f > 7850) target *= mix(1, HOVER.amplitude, smoothstep(7850, ARRIVAL_AT, f));
       amplitude = resting ? 0 : mix(amplitude, target, 1 - Math.exp(-dt / 0.13));
       const bob = terminal ? Math.sin((hoverElapsed / 1000) * 1.65) * 8 * smoothstep(0, 600, hoverElapsed) : 0;
