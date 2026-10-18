@@ -24,6 +24,8 @@ import learnCircle from "../../../../public/landing/learn.png";
 import solveAndMake from "../../../../public/landing/solve-and-make.png";
 // susan's picture (2026-10-15): a boy with his cardboard kingfisher train and sketches, 1670×942 WebP.
 import tryMissionBg from "../../../../public/landing/try-mission-river.webp";
+// The same picture without the kingfisher sketches: shown first, until the flying bird lands and "becomes" the sketch.
+import tryMissionBlank from "../../../../public/landing/try-mission-blank.webp";
 import startFreeGirl from "../../../../public/landing/start-free-girl.png";
 // "Made by kids this month": the designer's photos of real makes, cropped to the tile with the make in the middle and
 // given one shared colour finish so the six read as a set. The page promises "photos show the project, not faces", so
@@ -494,16 +496,20 @@ export default async function LandingPage({ params }: Props) {
         {/* The picture opens the mission too: the same link, kept away from screen readers and the keyboard so they
             only meet the labelled button above. Motion: the river zooms out as it scrolls in, clipped to its box. */}
         <Link href="/challenges" prefetch={false} aria-hidden="true" tabIndex={-1} className="block overflow-hidden" data-zoom-frame>
-          <Image
-            unoptimized
-            src={tryMissionBg}
-            data-bird-mission
-            alt=""
-            aria-hidden="true"
-            className="w-full h-auto"
-            sizes="100vw"
-            data-scroll="zoom-out"
-          />
+          {/* Two registered plates (same 1670×942 frame): the picture without the sketched kingfisher, and the one with
+              it on top, revealed as the flying bird lands on the paper (FlyingBird.tsx sets --mission-reveal). */}
+          <div className="relative" data-scroll="zoom-out">
+            <Image unoptimized src={tryMissionBlank} data-bird-mission alt="" aria-hidden="true" className="w-full h-auto" sizes="100vw" />
+            <Image
+              unoptimized
+              src={tryMissionBg}
+              alt=""
+              aria-hidden="true"
+              className="absolute inset-0 w-full h-full"
+              sizes="100vw"
+              style={{ opacity: "var(--mission-reveal, 0)" }}
+            />
+          </div>
         </Link>
       </section>
 

@@ -328,6 +328,8 @@ export default function FlyingBird() {
         tail.style.transform = `rotateZ(${deg.toFixed(3)}deg)`;
       }
       document.documentElement.style.setProperty("--painted-reveal", reveal.toFixed(4));
+      // the "Try one mission" photo shows the sketched kingfisher while the bird has turned into it
+      document.documentElement.style.setProperty("--mission-reveal", missionFade.toFixed(4));
       lastFocus = f;
     };
 
@@ -374,6 +376,7 @@ export default function FlyingBird() {
       reducedQuery.removeEventListener("change", onReduced);
       wings?.destroy();
       document.documentElement.style.removeProperty("--painted-reveal");
+      document.documentElement.style.removeProperty("--mission-reveal");
     };
   }, []);
 
