@@ -72,8 +72,8 @@ const NATIVE_HEIGHT = 8988;
 // lowered 40 artwork px as susan asked for the bird and papers.
 const HERO_ART = { x: 1418 / 1.1497, y: 387 / 1.1497 + 40, scale: 0.369 / 1.1497 };
 // The canvas docking pose on the 1720×914 painting image (the reference shows it at 1920×1020, ×1.11628).
-// The kingfisher sketch on the paper in the "Try one mission" photo (1670×942): the bird docks on it.
-const MISSION_ART = { x: 1163, y: 935, scale: 0.3, w: 1670 };
+// The pencil train sketch on the paper in the "Try one mission" photo (1670×942): the bird fades into it.
+const MISSION_ART = { x: 540, y: 790, scale: 0.3, w: 1670 };
 const CANVAS_ART = { x: 815 / 1.11628, y: (2595 - 2217) / 1.11628, scale: 0.7 / 1.11628 };
 const PAINT = { w: 1720, h: 914 };
 
