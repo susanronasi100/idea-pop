@@ -29,6 +29,10 @@ const HOVER_GAP = 180;
 // Effective route (spec section 5): focus `at`, native X/Y, sprite scale. Heading and pitch are always zero.
 const ROUTE = [
   { at: 387, x: 1418, y: 387, scale: 0.369 },
+  // susan, 2026-10-18: first the bird flies into the girl's sketchbook on the hero desk and becomes the sketch, then
+  // lifts off again (positions come from SKETCH_ART on the hero artwork)
+  { at: 560, x: 0, y: 0, scale: 0 },
+  { at: 700, x: 0, y: 0, scale: 0 },
   { at: 1450, x: 1780, y: 1450, scale: 0.17 },
   { at: 1990, x: 1680, y: 1990, scale: 0.2 },
   { at: 2450, x: 815, y: 2595, scale: 0.7 },
@@ -69,6 +73,10 @@ const NATIVE_HEIGHT = 8988;
 // The hero pose on the 1670×942 hero artwork: the reference hero is that artwork stretched to 1920×1083 (×1.14970),
 // lowered 40 artwork px as susan asked for the bird and papers.
 const HERO_ART = { x: 1418 / 1.1497, y: 387 / 1.1497 + 40, scale: 0.369 / 1.1497 };
+// The open sketchbook on the girl's desk in the hero artwork (1670×942 art px): the bird docks on its wing sketches.
+const SKETCH_ART = { x: 760, y: 820, scale: 0.16 };
+// the sketchbook landing: the bird fades into the sketch, rests there, then fades back in as it lifts off
+const SKETCH = { in: 480, land: 560, leave: 700, out: 790 };
 // The canvas docking pose on the 1720×914 painting image (the reference shows it at 1920×1020, ×1.11628).
 const CANVAS_ART = { x: 815 / 1.11628, y: (2595 - 2217) / 1.11628, scale: 0.7 / 1.11628 };
 const PAINT = { w: 1720, h: 914 };
@@ -201,7 +209,10 @@ export default function FlyingBird() {
         const s = Number(heroVp.dataset.artS);
         const left = r.left + window.scrollX + Number(heroVp.dataset.artHx);
         const top = r.top + window.scrollY + Number(heroVp.dataset.artHy);
-        return { X: left + HERO_ART.x * s, Y: top + HERO_ART.y * s, S: HERO_ART.scale * s };
+        return {
+          hero: { X: left + HERO_ART.x * s, Y: top + HERO_ART.y * s, S: HERO_ART.scale * s },
+          sketch: { X: left + SKETCH_ART.x * s, Y: top + SKETCH_ART.y * s, S: SKETCH_ART.scale * s },
+        };
       })();
       // the canvas docking pose on the displayed painting image
       const paintImg = document.querySelector<HTMLImageElement>("[data-bird-canvas]");
@@ -211,7 +222,9 @@ export default function FlyingBird() {
         return { X: c.left + CANVAS_ART.x * c.k, Y: c.top + CANVAS_ART.y * c.k, S: CANVAS_ART.scale * c.k };
       })();
       geo.route = ROUTE.map((p) => {
-        if (p.at === 387 && heroPose) return { at: p.at, ...heroPose };
+        if (p.at === 387 && heroPose) return { at: p.at, ...heroPose.hero };
+        if ((p.at === SKETCH.land || p.at === SKETCH.leave) && heroPose) return { at: p.at, ...heroPose.sketch };
+        if (p.at === SKETCH.land || p.at === SKETCH.leave) return { at: p.at, X: 760 * g, Y: toDoc(780), S: 0.15 * g };
         if (p.at >= 2450 && p.at <= 3000 && canvasPose) return { at: p.at, ...canvasPose };
         return { at: p.at, X: p.x * g, Y: toDoc(p.y), S: p.scale * g };
       });
@@ -267,11 +280,13 @@ export default function FlyingBird() {
 
       const pose = poseAt(f);
       const canvasHold = f >= 2500 && f <= 3000;
+      const sketchHold = f >= SKETCH.land && f <= SKETCH.leave;
+      const sketchFade = f > SKETCH.in && f < SKETCH.land ? smoothstep(SKETCH.in, SKETCH.land, f) : f > SKETCH.leave && f < SKETCH.out ? 1 - smoothstep(SKETCH.leave, SKETCH.out, f) : sketchHold ? 1 : 0;
       const reveal = paintRevealFor(f);
       // the bird first appears with the hero animation's bird; past the hero it is always on its route
       const heroVp = document.querySelector<HTMLElement>(".hero-viewport");
       const heroIn = Math.max(Number(heroVp?.dataset.birdIn ?? 1), smoothstep(400, 900, f));
-      const opacity = (canvasHold ? 0 : f > 2350 && f < 2500 ? 1 - reveal : f > 3000 && f < 3300 ? 1 - reveal : 1) * heroIn;
+      const opacity = (1 - sketchFade) * (canvasHold ? 0 : f > 2350 && f < 2500 ? 1 - reveal : f > 3000 && f < 3300 ? 1 - reveal : 1) * heroIn;
 
       const terminal = f >= ARRIVAL_AT;
       if (terminal && hoverStartedAt === null) hoverStartedAt = now;
@@ -279,7 +294,7 @@ export default function FlyingBird() {
       const hoverElapsed = terminal ? now - hoverStartedAt! : 0;
       const slide = terminal ? (reduced ? 1 : smoothstep(0, HOVER.slideMs, hoverElapsed)) : 0;
 
-      const resting = reduced || canvasHold;
+      const resting = reduced || canvasHold || sketchHold;
       const speed = dt && Math.abs(f - lastFocus) < 650 ? Math.abs(f - lastFocus) / dt : 0;
       const rate = (f < 900 ? 7.2 : 7.8 + clamp(speed / 1800, 0, 1) * 0.8) * WING_SPEED_MULTIPLIER;
       let target = f < 900 ? 0.65 : 1;
