@@ -72,8 +72,8 @@ const NATIVE_HEIGHT = 8988;
 // lowered 40 artwork px as susan asked for the bird and papers.
 const HERO_ART = { x: 1418 / 1.1497, y: 387 / 1.1497 + 40, scale: 0.369 / 1.1497 };
 // The canvas docking pose on the 1720×914 painting image (the reference shows it at 1920×1020, ×1.11628).
-// The roof of the cardboard kingfisher train in the "Try one mission" photo (1670×942): the bird lands on it.
-const MISSION_ART = { x: 1121, y: 404, scale: 0.3, w: 1670 };
+// The kingfisher sketch on the paper in the "Try one mission" photo (1670×942): the bird docks on it.
+const MISSION_ART = { x: 1163, y: 935, scale: 0.3, w: 1670 };
 const CANVAS_ART = { x: 815 / 1.11628, y: (2595 - 2217) / 1.11628, scale: 0.7 / 1.11628 };
 const PAINT = { w: 1720, h: 914 };
 
@@ -217,9 +217,8 @@ export default function FlyingBird() {
         const X = r.left + window.scrollX + MISSION_ART.x * k;
         const Y = r.top + window.scrollY + MISSION_ART.y * k;
         // land when the spot sits at 55% of the screen; the bird rests for ~30% of a screen of scrolling
-        const land = clamp(toNative(Y - vh * 0.55 + geo!.lead), 4100, 5000);
-        // the bird arrives on the spot 140 focus units early and fades out there, so it melts into it in place
-        const leave = clamp(toNative(Y - vh * 0.25 + geo!.lead), land + 40, 5000);
+        const land = clamp(toNative(Y - vh * 0.55 + geo!.lead), 3960, 5000);
+        const leave = clamp(toNative(Y - vh * 0.25 + geo!.lead), land + 40, 5150);
         return { X, Y, S: MISSION_ART.scale * k, land, leave };
       })();
       geo.mission = missionPose ? { land: missionPose.land, leave: missionPose.leave } : { land: 4400, leave: 4700 };
@@ -233,7 +232,7 @@ export default function FlyingBird() {
       geo.route = ROUTE.map((p) => {
         if (p.at === 387 && heroPose) return { at: p.at, ...heroPose };
         if (p.at >= 2450 && p.at <= 3000 && canvasPose) return { at: p.at, ...canvasPose };
-        if ("mission" in p && missionPose) return { at: p.mission === "land" ? missionPose.land - 140 : missionPose.leave + 140, X: missionPose.X, Y: missionPose.Y, S: missionPose.S };
+        if ("mission" in p && missionPose) return { at: p.mission === "land" ? missionPose.land : missionPose.leave, X: missionPose.X, Y: missionPose.Y, S: missionPose.S };
         if ("mission" in p) return { at: p.at, X: 180 * g, Y: toDoc(p.at), S: 0.17 * g };
         return { at: p.at, X: p.x * g, Y: toDoc(p.y), S: p.scale * g };
       });
