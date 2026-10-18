@@ -37,9 +37,11 @@ const ROUTE = [
   { at: 3150, x: 350, y: 3140, scale: 0.3 },
   { at: 3360, x: 180, y: 3360, scale: 0.18 },
   { at: 3880, x: 160, y: 3880, scale: 0.17 },
-  { at: 4400, x: 180, y: 4400, scale: 0.17 },
-  { at: 4850, x: 150, y: 4850, scale: 0.16 },
-  { at: 4980, x: 180, y: 4980, scale: 0.16 },
+  // susan, 2026-10-18: in the mission the bird flies into the kingfisher sketch on the boy's paper in the "Try one
+  // mission" photo, fades into it like the painting, rests, then flies out right to Made by kids. Positions and the
+  // exact focus window are measured from the photo (MISSION_ART); these rows are placeholders in route order.
+  { at: 4400, x: 0, y: 0, scale: 0, mission: "land" },
+  { at: 4700, x: 0, y: 0, scale: 0, mission: "leave" },
   { at: 5217, x: 1740, y: 5217, scale: 0.17 },
   { at: 5950, x: 1750, y: 5950, scale: 0.17 },
   { at: 6500, x: 1740, y: 6500, scale: 0.16 },
@@ -70,6 +72,8 @@ const NATIVE_HEIGHT = 8988;
 // lowered 40 artwork px as susan asked for the bird and papers.
 const HERO_ART = { x: 1418 / 1.1497, y: 387 / 1.1497 + 40, scale: 0.369 / 1.1497 };
 // The canvas docking pose on the 1720×914 painting image (the reference shows it at 1920×1020, ×1.11628).
+// The kingfisher sketch on the paper in the "Try one mission" photo (1670×942): the bird docks on it.
+const MISSION_ART = { x: 1163, y: 935, scale: 0.3, w: 1670 };
 const CANVAS_ART = { x: 815 / 1.11628, y: (2595 - 2217) / 1.11628, scale: 0.7 / 1.11628 };
 const PAINT = { w: 1720, h: 914 };
 
@@ -147,6 +151,7 @@ export default function FlyingBird() {
       native: number[];
       doc: number[];
       route: Point[];
+      mission: { land: number; leave: number };
       arrivalY: number;
       arrivalX: number;
       settleX: number;
@@ -191,7 +196,7 @@ export default function FlyingBird() {
       native.push(NATIVE_HEIGHT);
       doc.push(Math.max(document.documentElement.scrollHeight, (doc[doc.length - 1] ?? 0) + 1));
       if (native.length < 2) return false;
-      geo = { g, lead: Math.min(vh * 0.38, 300 * g), maxScroll: Math.max(0, document.documentElement.scrollHeight - vh), native, doc, route: [], arrivalY: 0, arrivalX: 0, settleX: 0 };
+      geo = { g, lead: Math.min(vh * 0.38, 300 * g), maxScroll: Math.max(0, document.documentElement.scrollHeight - vh), native, doc, route: [], mission: { land: 4400, leave: 4700 }, arrivalY: 0, arrivalX: 0, settleX: 0 };
 
       // the hero pose on the finished hero artwork
       const heroVp = document.querySelector<HTMLElement>(".hero-viewport");
@@ -203,6 +208,20 @@ export default function FlyingBird() {
         const top = r.top + window.scrollY + Number(heroVp.dataset.artHy);
         return { X: left + HERO_ART.x * s, Y: top + HERO_ART.y * s, S: HERO_ART.scale * s };
       })();
+      // the mission docking pose on the displayed photo, and the focus window while that spot is mid-screen
+      const missionImg = document.querySelector<HTMLImageElement>("[data-bird-mission]");
+      const missionPose = (() => {
+        if (!missionImg) return null;
+        const r = missionImg.getBoundingClientRect();
+        const k = r.width / MISSION_ART.w;
+        const X = r.left + window.scrollX + MISSION_ART.x * k;
+        const Y = r.top + window.scrollY + MISSION_ART.y * k;
+        // land when the spot sits at 55% of the screen; the bird rests for ~30% of a screen of scrolling
+        const land = clamp(toNative(Y - vh * 0.55 + geo!.lead), 3960, 5000);
+        const leave = clamp(toNative(Y - vh * 0.25 + geo!.lead), land + 40, 5150);
+        return { X, Y, S: MISSION_ART.scale * k, land, leave };
+      })();
+      geo.mission = missionPose ? { land: missionPose.land, leave: missionPose.leave } : { land: 4400, leave: 4700 };
       // the canvas docking pose on the displayed painting image
       const paintImg = document.querySelector<HTMLImageElement>("[data-bird-canvas]");
       const canvasPose = (() => {
@@ -213,6 +232,8 @@ export default function FlyingBird() {
       geo.route = ROUTE.map((p) => {
         if (p.at === 387 && heroPose) return { at: p.at, ...heroPose };
         if (p.at >= 2450 && p.at <= 3000 && canvasPose) return { at: p.at, ...canvasPose };
+        if ("mission" in p && missionPose) return { at: p.mission === "land" ? missionPose.land : missionPose.leave, X: missionPose.X, Y: missionPose.Y, S: missionPose.S };
+        if ("mission" in p) return { at: p.at, X: 180 * g, Y: toDoc(p.at), S: 0.17 * g };
         return { at: p.at, X: p.x * g, Y: toDoc(p.y), S: p.scale * g };
       });
       // The ending. On the real page the final lime is not on screen at the bottom (the CTA panel straddles the
@@ -267,11 +288,14 @@ export default function FlyingBird() {
 
       const pose = poseAt(f);
       const canvasHold = f >= 2500 && f <= 3000;
+      const M = G.mission;
+      const missionHold = f >= M.land && f <= M.leave;
+      const missionFade = missionHold ? 1 : f > M.land - 120 && f < M.land ? smoothstep(M.land - 120, M.land, f) : f > M.leave && f < M.leave + 120 ? 1 - smoothstep(M.leave, M.leave + 120, f) : 0;
       const reveal = paintRevealFor(f);
       // the bird first appears with the hero animation's bird; past the hero it is always on its route
       const heroVp = document.querySelector<HTMLElement>(".hero-viewport");
       const heroIn = Math.max(Number(heroVp?.dataset.birdIn ?? 1), smoothstep(400, 900, f));
-      const opacity = (canvasHold ? 0 : f > 2350 && f < 2500 ? 1 - reveal : f > 3000 && f < 3300 ? 1 - reveal : 1) * heroIn;
+      const opacity = (1 - missionFade) * (canvasHold ? 0 : f > 2350 && f < 2500 ? 1 - reveal : f > 3000 && f < 3300 ? 1 - reveal : 1) * heroIn;
 
       const terminal = f >= ARRIVAL_AT;
       if (terminal && hoverStartedAt === null) hoverStartedAt = now;
@@ -279,7 +303,7 @@ export default function FlyingBird() {
       const hoverElapsed = terminal ? now - hoverStartedAt! : 0;
       const slide = terminal ? (reduced ? 1 : smoothstep(0, HOVER.slideMs, hoverElapsed)) : 0;
 
-      const resting = reduced || canvasHold;
+      const resting = reduced || canvasHold || missionHold;
       const speed = dt && Math.abs(f - lastFocus) < 650 ? Math.abs(f - lastFocus) / dt : 0;
       const rate = (f < 900 ? 7.2 : 7.8 + clamp(speed / 1800, 0, 1) * 0.8) * WING_SPEED_MULTIPLIER;
       let target = f < 900 ? 0.65 : 1;

@@ -497,6 +497,7 @@ export default async function LandingPage({ params }: Props) {
           <Image
             unoptimized
             src={tryMissionBg}
+            data-bird-mission
             alt=""
             aria-hidden="true"
             className="w-full h-auto"
