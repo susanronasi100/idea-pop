@@ -282,6 +282,9 @@ pub struct MissionStory {
     /// or from the lab's model when there is none). Optional.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub substitute: Option<SubstitutePractice>,
+    /// Steps this mission leaves out (e.g. [7] = no Build & test). The rest renumber.
+    #[serde(default, skip_serializing_if = "Vec::is_empty")]
+    pub hidden_steps: Vec<u8>,
 }
 
 /// Mission words for the S — Substitute practice.
@@ -553,6 +556,7 @@ mod tests {
             },
             define_problem: None,
             substitute: None,
+            hidden_steps: vec![],
         }
     }
 

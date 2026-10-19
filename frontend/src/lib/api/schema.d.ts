@@ -1113,6 +1113,8 @@ export interface components {
       };
       reflection: { question: string; options: string[] };
       sticker: { name: string; emoji: string };
+      /** Steps this mission leaves out (e.g. [7] = no Build & test); the rest renumber. */
+      hidden_steps?: number[];
       /** The S — Substitute practice's mission words (Skill step). */
       substitute?: {
         model_name: string;

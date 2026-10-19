@@ -9,6 +9,7 @@ interface Props {
   story: MissionStory;
   game: MissionGame;
   update: (patch: Partial<MissionGame>) => void;
+  hiddenSteps?: number[];
 }
 
 const BADGES: BadgeKey[] = ['define', 'clue', 'tool', 'retry'];
@@ -16,7 +17,7 @@ const BADGES: BadgeKey[] = ['define', 'clue', 'tool', 'retry'];
 /** Story top for step 8 — "And ever since then…": the hero in the scene,
  *  confetti, the mission sticker, the bonus badges and a one-tap reflection.
  *  The existing celebrate step (XP summary + Ideas Wall) sits below it. */
-export default function StoryEnding({ story, game, update }: Props) {
+export default function StoryEnding({ story, game, update, hiddenSteps = [] }: Props) {
   const t = useTranslations('story');
   return (
     <div data-testid="story-ending" className="flex flex-col gap-5 pt-4">
@@ -36,7 +37,7 @@ export default function StoryEnding({ story, game, update }: Props) {
         </span>
         <p className="font-display text-xl text-ink">{t('sticker_earned', { name: story.sticker.name })}</p>
         <ul className="flex flex-wrap justify-center gap-2" aria-label={t('badges_aria')}>
-          {BADGES.map((b) => {
+          {BADGES.filter((b) => !(b === 'retry' && hiddenSteps.includes(7))).map((b) => {
             const got = game.badges.includes(b);
             const name = b === 'tool' ? story.tool.badge : t(`badge_${b}`);
             return (

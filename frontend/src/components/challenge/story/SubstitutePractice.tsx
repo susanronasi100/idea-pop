@@ -18,6 +18,7 @@ interface Props {
   /** This visit's photos of the saved idea and the lab model (they aren't kept on the device). */
   ideaPhotoUrl: string | null;
   labPhotoUrl: string | null;
+  /** On to the next step (Celebrate & share in Max's challenge). */
   onDone: () => void;
   onBack: () => void;
 }

@@ -188,5 +188,6 @@
     "hint": "What material could you try instead of clay?",
     "example": "Aluminum foil",
     "model_material": "Clay"
-  }
+  },
+  "hidden_steps": [7]
 }

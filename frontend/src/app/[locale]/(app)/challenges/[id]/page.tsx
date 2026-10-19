@@ -224,6 +224,13 @@ export default function ChallengePage() {
   }
 
   const sharedProps = { challenge, ageMode };
+  // Steps this mission leaves out (Max: no Build & test); moving on skips them.
+  const hiddenSteps = challenge.story?.hidden_steps ?? [];
+  const after = (step: number) => {
+    let next = step + 1;
+    while (hiddenSteps.includes(next) && next < 8) next += 1;
+    return next;
+  };
   // The storytelling + Popi instructor layer; null → the classic mission.
   const story = challenge.story ?? null;
   const gameProps = { game, update: updateGame };
@@ -243,6 +250,7 @@ export default function ChallengePage() {
         onJumpTo={goToStep}
         ideaPath={ideaPath}
         keyInfo={story ? story.card : null}
+        hiddenSteps={challenge.story?.hidden_steps ?? []}
         summary={challenge.brief}
       />
 
@@ -425,7 +433,7 @@ export default function ChallengePage() {
                   award={awardBadge}
                   ideaPhotoUrl={ideaPhotoUrl}
                   labPhotoUrl={labPhotoUrl}
-                  onDone={() => goToStep(7)}
+                  onDone={() => goToStep(after(6))}
                   onBack={() => setSkillPhase('lab')}
                 />
               ) : (
@@ -433,21 +441,21 @@ export default function ChallengePage() {
                   story={story}
                   {...gameProps}
                   award={awardBadge}
-                  onNext={() => goToStep(7)}
+                  onNext={() => goToStep(after(6))}
                   onBack={() => setSkillPhase('lab')}
                 />
               )
             ) : (
               <StepSkill
                 {...sharedProps}
-                onNext={() => goToStep(7)}
+                onNext={() => goToStep(after(6))}
                 onBack={() => goToStep(5)}
               />
             ))}
 
-          {currentStep === 7 && story && <StoryFairTest story={story} {...gameProps} />}
+          {currentStep === 7 && !hiddenSteps.includes(7) && story && <StoryFairTest story={story} {...gameProps} />}
 
-          {currentStep === 7 && (
+          {currentStep === 7 && !hiddenSteps.includes(7) && (
             <StepBuild
               {...sharedProps}
               hideTestQuestion={story !== null}
@@ -467,7 +475,7 @@ export default function ChallengePage() {
             />
           )}
 
-          {currentStep === 8 && story && <StoryEnding story={story} {...gameProps} />}
+          {currentStep === 8 && story && <StoryEnding story={story} {...gameProps} hiddenSteps={hiddenSteps} />}
 
           {currentStep === 8 && (
             <StepCelebrate

@@ -27,6 +27,8 @@ interface MissionHUDProps {
   summary?: string | null;
   /** Clears this challenge's answers and goes back to step 1. */
   onRestart?: () => void;
+  /** Steps this mission leaves out; the others are numbered 1, 2, 3… in order. */
+  hiddenSteps?: number[];
 }
 
 export default function MissionHUD({
@@ -37,7 +39,11 @@ export default function MissionHUD({
   keyInfo = null,
   summary = null,
   onRestart,
+  hiddenSteps = [],
 }: MissionHUDProps) {
+  const steps = ALL_STEPS.filter((s) => !hiddenSteps.includes(s));
+  // The number the kid sees: the step's place among the steps this mission shows.
+  const shown = (step: number) => steps.indexOf(step as (typeof ALL_STEPS)[number]) + 1;
   const t = useTranslations('challenge');
   const tStory = useTranslations('story');
   const [menuOpen, setMenuOpen] = useState(false);
@@ -135,7 +141,7 @@ export default function MissionHUD({
           not yet unlocked = hollow ring. Under them, the current step's name,
           the same name the menu uses. */}
       <div className="flex items-center justify-center gap-1.5 bg-white px-4 pb-2.5 pt-1">
-        {ALL_STEPS.map((step) => {
+        {steps.map((step) => {
           const isCurrent = step === currentStep;
           const isVisited = !isCurrent && reachedSteps.has(step);
           const state = isCurrent ? 'current' : isVisited ? 'done' : 'locked';
@@ -148,7 +154,7 @@ export default function MissionHUD({
               data-state={state}
               disabled={!isCurrent && !isVisited}
               aria-current={isCurrent ? 'step' : undefined}
-              aria-label={t('hud_step_aria', { step, state })}
+              aria-label={t('hud_step_aria', { step: shown(step), state })}
               onClick={() => isVisited && onJumpTo(step)}
               className={[
                 'flex shrink-0 items-center justify-center rounded-full font-display leading-none transition-all duration-300',
@@ -159,7 +165,7 @@ export default function MissionHUD({
                     : 'h-6 w-6 cursor-not-allowed border-2 border-challenge/40 bg-transparent text-[11px] text-challenge/60',
               ].join(' ')}
             >
-              {step}
+              {shown(step)}
             </button>
           );
         })}
@@ -206,7 +212,7 @@ export default function MissionHUD({
             </button>
           </div>
           <ul role="list" className="flex flex-col gap-1 p-2 pb-4">
-            {ALL_STEPS.map((step) => {
+            {steps.map((step) => {
               const isReached = reachedSteps.has(step);
               const isCurrent = step === currentStep;
 
@@ -237,7 +243,7 @@ export default function MissionHUD({
 
                     {/* Step number */}
                     <span className="w-5 shrink-0 font-body font-bold text-base text-ink/50">
-                      {step}
+                      {shown(step)}
                     </span>
 
                     {/* Step name */}
