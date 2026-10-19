@@ -4,17 +4,24 @@ import { useState } from 'react';
 import { useTranslations } from 'next-intl';
 import CaptureCard, { type CaptureData } from './CaptureCard';
 import ToolSelector, { isToolKey } from './tool/ToolSelector';
-import { createProject } from '@/lib/api/client';
+import { createProject, uploadProjectPhoto } from '@/lib/api/client';
 import { GAME_BY_SLUG } from './gameEmbeds';
 import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
 
+export interface SavedIdea {
+  title: string;
+  description: string;
+  photo: File | null;
+}
+
 interface StepSketchProps {
   challenge: ChallengeDetail;
   ageMode: 'young' | 'older';
-  /** `idea`: the kid's own words about the idea, for Popi's check. */
-  onNext: (projectId: string | null, idea?: string) => void;
+  /** `idea`: the kid's own words about the idea, for Popi's check; `saved`: what they
+   *  saved (name, words, photo), so later steps can build on it. */
+  onNext: (projectId: string | null, idea?: string, saved?: SavedIdea) => void;
   onBack: () => void;
   /** Story missions teach their tool in the chapter-5½ power-up instead. */
   hideTools?: boolean;
@@ -32,6 +39,7 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
   async function handleSubmit(data: CaptureData) {
     setSubmitting(true);
     const idea = [data.title, data.what_i_made, data.what_i_used].map((x) => x?.trim()).filter(Boolean).join('. ');
+    const saved: SavedIdea = { title: data.title, description: data.what_i_made, photo: data.photo ?? null };
     try {
       const project = await createProject({
         title: data.title || t('default_sketch_title'),
@@ -42,9 +50,11 @@ export default function StepSketch({ challenge, ageMode, onNext, onBack, hideToo
         challenge_id: challenge.id,
         step_type: 'sketch',
       });
-      onNext(project.id, idea);
+      // The sketch photo is optional and private; the idea counts as saved without it.
+      if (data.photo) await uploadProjectPhoto(project.id, data.photo).catch(() => {});
+      onNext(project.id, idea, saved);
     } catch {
-      onNext(null, idea);
+      onNext(null, idea, saved);
     } finally {
       setSubmitting(false);
     }

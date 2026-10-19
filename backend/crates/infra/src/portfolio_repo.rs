@@ -151,6 +151,25 @@ impl ProjectRepo for SqlxProjectRepo {
         .map_err(db_err)?;
         Ok(())
     }
+
+    async fn add_photo_key(
+        &self,
+        id: Uuid,
+        key: &str,
+        now: DateTime<Utc>,
+    ) -> Result<(), DomainError> {
+        sqlx::query(
+            "UPDATE projects SET photo_keys = array_append(photo_keys, $2), updated_at = $3
+             WHERE id = $1",
+        )
+        .bind(id)
+        .bind(key)
+        .bind(now)
+        .execute(&self.pool)
+        .await
+        .map_err(db_err)?;
+        Ok(())
+    }
 }
 
 // ── S3PhotoStore ──────────────────────────────────────────────────────────────
@@ -199,6 +218,35 @@ impl PhotoStore for S3PhotoStore {
             .map_err(|e| domain_err(e.to_string()))?;
 
         Ok(presigned.uri().to_string())
+    }
+
+    async fn put(&self, key: &str, bytes: Vec<u8>, content_type: &str) -> Result<(), DomainError> {
+        // A fresh dev MinIO has no bucket yet: make it the first time (an existing one is fine).
+        if self
+            .client
+            .head_bucket()
+            .bucket(&self.bucket)
+            .send()
+            .await
+            .is_err()
+        {
+            let _ = self
+                .client
+                .create_bucket()
+                .bucket(&self.bucket)
+                .send()
+                .await;
+        }
+        self.client
+            .put_object()
+            .bucket(&self.bucket)
+            .key(key)
+            .content_type(content_type)
+            .body(bytes.into())
+            .send()
+            .await
+            .map_err(|e| domain_err(e.to_string()))?;
+        Ok(())
     }
 }
 

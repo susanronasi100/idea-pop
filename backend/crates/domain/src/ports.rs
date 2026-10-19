@@ -264,12 +264,21 @@ pub trait ProjectRepo: Send + Sync {
         effective: &Visibility,
         now: DateTime<Utc>,
     ) -> Result<(), DomainError>;
+    /// Adds a stored photo's key to a project.
+    async fn add_photo_key(
+        &self,
+        id: Uuid,
+        key: &str,
+        now: DateTime<Utc>,
+    ) -> Result<(), DomainError>;
 }
 
 #[async_trait]
 pub trait PhotoStore: Send + Sync {
     /// Returns a presigned PUT URL for a photo upload (expires_in_secs).
     async fn presign_upload(&self, key: &str, expires_in_secs: u64) -> Result<String, DomainError>;
+    /// Stores a photo the server received (private; never served publicly).
+    async fn put(&self, key: &str, bytes: Vec<u8>, content_type: &str) -> Result<(), DomainError>;
 }
 
 #[async_trait]

@@ -7,7 +7,9 @@ import { getAccessToken } from '@/lib/api/auth';
 import { useLocale, useTranslations } from 'next-intl';
 import { useAgeMode } from '@/lib/hooks/useAgeMode';
 import { useXpToast } from '@/lib/hooks/useXpToast';
-import { fetchChallenge, startAttempt, advanceStep, claimSketchBonus, getIdeaFeedback } from '@/lib/api/client';
+import { fetchChallenge, startAttempt, advanceStep, claimSketchBonus, getIdeaFeedback, createProject, uploadProjectPhoto } from '@/lib/api/client';
+import LabCelebration from '@/components/challenge/story/LabCelebration';
+import SubstitutePractice from '@/components/challenge/story/SubstitutePractice';
 import MissionHUD from '@/components/challenge/MissionHUD';
 import StepBrief from '@/components/challenge/StepBrief';
 import StepIdeaFork from '@/components/challenge/StepIdeaFork';
@@ -77,6 +79,12 @@ export default function ChallengePage() {
     popi: { state: 'loading' | 'done' | 'off'; text?: string; fits?: boolean };
   } | null>(null);
   const { game, update: updateGame, award: awardBadge, reset: resetGame } = useMissionGame(params.id);
+  // The lab is done: "What Did You Build?" with an optional photo (the lab project it goes on).
+  const [labCelebration, setLabCelebration] = useState<{ projectId: string | null } | null>(null);
+  // This visit's photos of the saved idea and the lab model, shown on the Substitute practice.
+  const [ideaPhotoUrl, setIdeaPhotoUrl] = useState<string | null>(null);
+  const [labPhotoUrl, setLabPhotoUrl] = useState<string | null>(null);
+  const tStory = useTranslations('story');
   // Bumped on "start over", so every step's own state starts fresh too.
   const [runKey, setRunKey] = useState(0);
 
@@ -311,8 +319,13 @@ export default function ChallengePage() {
             <StepSketch
               {...sharedProps}
               hideTools={story !== null}
-              onNext={(projectId, idea) => {
+              onNext={(projectId, idea, saved) => {
                 if (projectId) setSketchProjectId(projectId);
+                // The saved idea goes on to the Substitute practice (and is kept for next time).
+                if (saved) {
+                  updateGame({ savedIdea: { title: saved.title, description: saved.description, projectId } });
+                  setIdeaPhotoUrl(saved.photo ? URL.createObjectURL(saved.photo) : null);
+                }
                 // The kid has solved the problem with a first idea: celebrate, then
                 // invite them on to find more ideas (design secret, skill, build).
                 setSolvedCelebration({ xp: 0, again: game.badges.includes('solved'), popi: { state: idea || game.partnerAnswers?.inspired ? 'loading' : 'off' } });
@@ -375,7 +388,45 @@ export default function ChallengePage() {
                     setSkillPhase('tool');
                     window.scrollTo({ top: 0, behavior: 'smooth' });
                   }}
+                  onFinished={() => {
+                    // Save the prediction and results to the kid's account, then celebrate.
+                    const lab = story.lab;
+                    const values = lab.options.map((_, i) => Number(game.lab[i] ?? 0));
+                    const bestAt = values.indexOf(lab.higher_is_better ? Math.max(...values) : Math.min(...values));
+                    const prediction = game.labPick !== null ? lab.options[game.labPick] : '';
+                    const results = lab.options.map((o, i) => `${o}: ${values[i]}`).join(', ');
+                    const words = `${tStory('my_prediction')} ${prediction}\n${tStory('my_results')}: ${results} (${lab.measure})`;
+                    setLabCelebration({ projectId: null });
+                    createProject({
+                      title: lab.title,
+                      what_i_made: words,
+                      what_i_used: '',
+                      what_was_hard: '',
+                      what_id_improve: '',
+                      challenge_id: challenge.id,
+                      step_type: 'lab',
+                    })
+                      .then((p) => p.id)
+                      .catch(() => null)
+                      .then((projectId) => {
+                        updateGame({
+                          savedLab: { prediction, results, best: lab.options[bestAt], bestValue: values[bestAt], measure: lab.measure, projectId },
+                        });
+                        setLabCelebration((c) => (c ? { projectId } : c));
+                      });
+                  }}
                   onBack={() => goToStep(5)}
+                />
+              ) : story.substitute ? (
+                <SubstitutePractice
+                  challengeId={challenge.id}
+                  story={story}
+                  {...gameProps}
+                  award={awardBadge}
+                  ideaPhotoUrl={ideaPhotoUrl}
+                  labPhotoUrl={labPhotoUrl}
+                  onDone={() => goToStep(7)}
+                  onBack={() => setSkillPhase('lab')}
                 />
               ) : (
                 <ToolLesson
@@ -458,10 +509,38 @@ export default function ChallengePage() {
           again={solvedCelebration.again}
           // Back to the sketch to make the idea better (the XP is already theirs).
           onImprove={() => setSolvedCelebration(null)}
+          // "That's Enough for Today": the idea is already saved; back to the Challenges page.
+          onEnough={() => {
+            setSolvedCelebration(null);
+            if (story) updateGame((g) => ({ badges: g.badges.includes('solved') ? g.badges : [...g.badges, 'solved'] }));
+            router.push('/challenges');
+          }}
           onClose={() => {
             setSolvedCelebration(null);
             if (story) updateGame((g) => ({ badges: g.badges.includes('solved') ? g.badges : [...g.badges, 'solved'] }));
             goToStep(5);
+          }}
+        />
+      )}
+
+      {labCelebration && (
+        <LabCelebration
+          onPhoto={async (photo) => {
+            setLabPhotoUrl(URL.createObjectURL(photo));
+            if (!labCelebration.projectId) return false;
+            return uploadProjectPhoto(labCelebration.projectId, photo)
+              .then(() => true)
+              .catch(() => false);
+          }}
+          onKeepExploring={() => {
+            setLabCelebration(null);
+            setSkillPhase('tool');
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+            document.querySelector('main')?.scrollTo({ top: 0, behavior: 'smooth' });
+          }}
+          onEnough={() => {
+            setLabCelebration(null);
+            router.push('/challenges');
           }}
         />
       )}

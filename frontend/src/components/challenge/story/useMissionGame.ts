@@ -44,7 +44,59 @@ export interface MissionGame {
   /** Sketch: the things the kid needs to build it, and the labels on their idea map. */
   materials: string[];
   mapLabels: string[];
+  /** The idea the kid saved on the Sketch step (also saved to their account). Kept between visits. */
+  savedIdea: { title: string; description: string; projectId: string | null } | null;
+  /** The lab the kid finished: prediction, results, best shape (also saved to their account). Kept. */
+  savedLab: { prediction: string; results: string; best: string; bestValue: number; measure: string; projectId: string | null } | null;
+  /** The S — Substitute practice in progress. */
+  subst: SubstState | null;
+  /** The saved Substitute practice, as the words saved to the kid's account. Kept. */
+  substSaved: string | null;
 }
+
+export interface SubstState {
+  page: 1 | 2 | 3;
+  /** Where the practice starts: the kid's saved idea, or the lab's clay boat. */
+  start: 'idea' | 'boat' | null;
+  /** The saved idea as the kid edited it here (null = as saved). */
+  ideaText: string | null;
+  replace: string;
+  withWhat: string;
+  popi: string | null;
+  clarify: string;
+  hintOpen: boolean;
+  exampleOpen: boolean;
+  prediction: string;
+  kind: 'material' | 'other' | null;
+  checks: string[];
+  cantMatch: string;
+  testPlan: string;
+  before: number;
+  after: number;
+  observe: string;
+  saved: boolean;
+}
+
+export const EMPTY_SUBST: SubstState = {
+  page: 1,
+  start: null,
+  ideaText: null,
+  replace: '',
+  withWhat: '',
+  popi: null,
+  clarify: '',
+  hintOpen: false,
+  exampleOpen: false,
+  prediction: '',
+  kind: null,
+  checks: [],
+  cantMatch: '',
+  testPlan: '',
+  before: 0,
+  after: 0,
+  observe: '',
+  saved: false,
+};
 
 export const EMPTY_GAME: MissionGame = {
   quickCheckDone: false,
@@ -73,6 +125,10 @@ export const EMPTY_GAME: MissionGame = {
   partnerDone: [],
   materials: [],
   mapLabels: ['', '', ''],
+  savedIdea: null,
+  savedLab: null,
+  subst: null,
+  substSaved: null,
 };
 
 function storageKey(challengeId: string) {
@@ -86,8 +142,16 @@ function load(challengeId: string): MissionGame {
     // For now every visit opens the mission fresh (susan, 2026-10-08): only the earned
     // badges carry over, so one-time bonuses are not replayed. Before merging, answers will be
     // saved to the kid's account and earlier tries kept (see the kid-work-must-be-saved rule).
+    // What the kid saved (their idea, their lab, their Substitute practice) is kept, so the
+    // next steps can build on it after "That's enough for today".
     const saved = JSON.parse(raw) as Partial<MissionGame>;
-    return { ...EMPTY_GAME, badges: saved.badges ?? [] };
+    return {
+      ...EMPTY_GAME,
+      badges: saved.badges ?? [],
+      savedIdea: saved.savedIdea ?? null,
+      savedLab: saved.savedLab ?? null,
+      substSaved: saved.substSaved ?? null,
+    };
   } catch {
     return EMPTY_GAME;
   }
@@ -125,7 +189,7 @@ export function useMissionGame(challengeId: string) {
    *  one-time bonuses (and their celebrations) aren't replayed for nothing. */
   const reset = useCallback(() => {
     setGame((prev) => {
-      const next = { ...EMPTY_GAME, badges: prev.badges };
+      const next = { ...EMPTY_GAME, badges: prev.badges, savedIdea: prev.savedIdea, savedLab: prev.savedLab, substSaved: prev.substSaved };
       try {
         localStorage.setItem(storageKey(challengeId), JSON.stringify(next));
       } catch {

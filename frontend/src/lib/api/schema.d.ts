@@ -274,7 +274,7 @@ export interface paths {
       parameters: { path: { id: string } };
       requestBody: {
         content: {
-          "application/json": { idea: string; lang?: string | null };
+          "application/json": { idea: string; lang?: string | null; kind?: "substitute" };
         };
       };
       responses: {
@@ -503,6 +503,19 @@ export interface paths {
           "application/json": components["schemas"]["ProjectCreateRequest"];
         };
       };
+      responses: {
+        201: {
+          content: {
+            "application/json": components["schemas"]["ProjectResponse"];
+          };
+        };
+      };
+    };
+  };
+  "/api/projects/{id}/photos": {
+    post: {
+      parameters: { path: { id: string } };
+      requestBody: { content: { "image/jpeg": Blob } };
       responses: {
         201: {
           content: {
@@ -1100,6 +1113,14 @@ export interface components {
       };
       reflection: { question: string; options: string[] };
       sticker: { name: string; emoji: string };
+      /** The S — Substitute practice's mission words (Skill step). */
+      substitute?: {
+        model_name: string;
+        model_question: string;
+        hint: string;
+        example: string;
+        model_material: string;
+      } | null;
       /** 5W1H problem definition shown with Popi under the last opening picture. */
       define_problem?: {
         popi: string;
@@ -1159,18 +1180,26 @@ export interface components {
       cycle_bonus_earned: boolean;
     };
     ProjectCreateRequest: {
+      origin_type: "challenge" | "lesson" | "quick_make";
+      origin_id: string;
       title: string;
-      what_i_made: string;
-      what_i_used: string;
-      what_was_hard: string;
-      what_id_improve: string;
-      challenge_id: string | null;
-      step_type: "sketch" | "build";
+      description?: string;
+      materials?: string;
+      what_was_hard?: string;
+      what_to_improve?: string;
     };
     ProjectResponse: {
       id: string;
+      origin_type: string;
+      origin_id: string;
       title: string;
-      visibility: "private" | "class" | "public";
+      description: string;
+      materials: string;
+      what_was_hard: string;
+      what_to_improve: string;
+      photo_keys: string[];
+      requested_visibility: string;
+      effective_visibility: string;
       created_at: string;
     };
     SubscriptionResponse: {

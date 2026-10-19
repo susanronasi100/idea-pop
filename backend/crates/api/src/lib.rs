@@ -252,7 +252,7 @@ pub struct CreateHealthLogRequest {
         progress::start_attempt, progress::advance_step,
         progress::get_me_progress,
         portfolio::create_project, portfolio::list_my_projects,
-        portfolio::presign_photo_upload, portfolio::update_project_visibility,
+        portfolio::presign_photo_upload, portfolio::add_project_photo, portfolio::update_project_visibility,
         portfolio::submit_idea, portfolio::list_ideas,
         portfolio::react_to_idea, portfolio::remix_idea,
         portfolio::list_moderation_queue, portfolio::approve_item, portfolio::reject_item,
@@ -634,6 +634,12 @@ pub fn router_with_metrics(
         .route("/me/progress", get(progress::get_me_progress))
         // Portfolio (kid-owned; child_id from JWT)
         .route("/projects", post(portfolio::create_project))
+        // A project photo comes in as the request body: allow up to 8 MB (+ headroom).
+        .route(
+            "/projects/:id/photos",
+            post(portfolio::add_project_photo)
+                .layer(axum::extract::DefaultBodyLimit::max(9 * 1024 * 1024)),
+        )
         .route("/me/projects", get(portfolio::list_my_projects))
         .route(
             "/projects/:id/photos/presign",
@@ -1022,6 +1028,9 @@ impl ProjectRepo for NullProjectRepo {
     ) -> Result<(), DomainError> {
         Ok(())
     }
+    async fn add_photo_key(&self, _: Uuid, _: &str, _: DateTime<Utc>) -> Result<(), DomainError> {
+        Ok(())
+    }
 }
 
 pub struct NullPhotoStore;
@@ -1029,6 +1038,9 @@ pub struct NullPhotoStore;
 impl PhotoStore for NullPhotoStore {
     async fn presign_upload(&self, key: &str, _: u64) -> Result<String, DomainError> {
         Ok(format!("https://null-storage.test/{key}"))
+    }
+    async fn put(&self, _: &str, _: Vec<u8>, _: &str) -> Result<(), DomainError> {
+        Ok(())
     }
 }
 

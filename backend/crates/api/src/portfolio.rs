@@ -9,8 +9,9 @@
 //! - Reviewer endpoints require Role::Reviewer or Role::Admin.
 
 use axum::{
+    body::Bytes,
     extract::{Path, State},
-    http::StatusCode,
+    http::{header::CONTENT_TYPE, HeaderMap, StatusCode},
     response::IntoResponse,
     Json,
 };
@@ -21,8 +22,8 @@ use uuid::Uuid;
 
 use idea_pop_domain::{
     portfolio::{
-        ChallengeIdea, ModerationContentType, ModerationItem, OriginType, Project, ReactionType,
-        Report, VisibilityChangeResult,
+        check_project_photo, clean_project_text, ChallengeIdea, ModerationContentType,
+        ModerationItem, OriginType, Project, ReactionType, Report, VisibilityChangeResult,
     },
     request_visibility_change, DomainError, Role, Visibility,
 };
@@ -40,6 +41,16 @@ pub struct CreateProjectRequest {
     pub origin_type: String,
     pub origin_id: Uuid,
     pub title: String,
+    /// What the child made, in their own words.
+    #[serde(default)]
+    pub description: String,
+    /// What they used.
+    #[serde(default)]
+    pub materials: String,
+    #[serde(default)]
+    pub what_was_hard: String,
+    #[serde(default)]
+    pub what_to_improve: String,
 }
 
 #[derive(Debug, Serialize, ToSchema)]
@@ -236,7 +247,11 @@ pub async fn create_project(
     })?;
 
     let now = Utc::now();
-    let project = Project::new(child_id, origin_type, body.origin_id, title, now);
+    let mut project = Project::new(child_id, origin_type, body.origin_id, title, now);
+    project.description = clean_project_text(&body.description);
+    project.materials = clean_project_text(&body.materials);
+    project.what_was_hard = clean_project_text(&body.what_was_hard);
+    project.what_to_improve = clean_project_text(&body.what_to_improve);
 
     state.portfolio.projects.create(&project).await?;
 
@@ -295,6 +310,71 @@ pub async fn presign_photo_upload(
     let upload_url = state.portfolio.photos.presign_upload(&key, 900).await?;
 
     Ok(Json(PresignResponse { upload_url, key }))
+}
+
+// ── POST /projects/:id/photos ─────────────────────────────────────────────────
+
+/// Adds a photo of the child's project. The image bytes are the request body and its
+/// type is the Content-Type header. The photo is stored privately and never changes the
+/// project's visibility, so adding one never publishes anything.
+#[utoipa::path(
+    post, path = "/projects/{id}/photos", tag = "portfolio",
+    params(("id" = Uuid, Path, description = "Project ID")),
+    request_body(content = Vec<u8>, content_type = "image/jpeg", description = "The photo (JPEG, PNG or WebP, up to 8 MB)"),
+    responses(
+        (status = 201, description = "Photo added", body = ProjectResponse),
+        (status = 403, description = "Non-kid token or not the owner", body = crate::ProblemDetail),
+        (status = 404, description = "Project not found", body = crate::ProblemDetail),
+        (status = 422, description = "Not an image, too big, or too many photos", body = crate::ProblemDetail),
+    )
+)]
+pub async fn add_project_photo(
+    KidAuth { child_id, .. }: KidAuth,
+    Path(project_id): Path<Uuid>,
+    State(state): State<AppState>,
+    headers: HeaderMap,
+    body: Bytes,
+) -> Result<impl IntoResponse, ApiError> {
+    let project = state
+        .portfolio
+        .projects
+        .find_by_id(project_id)
+        .await?
+        .ok_or(ApiError::Domain(DomainError::NotFound))?;
+    if project.child_id != child_id {
+        return Err(ApiError::Domain(DomainError::Forbidden(
+            "Project belongs to another child".into(),
+        )));
+    }
+
+    let content_type = headers
+        .get(CONTENT_TYPE)
+        .and_then(|v| v.to_str().ok())
+        .unwrap_or("")
+        .split(';')
+        .next()
+        .unwrap_or("")
+        .trim()
+        .to_ascii_lowercase();
+    let ext = check_project_photo(&content_type, body.len(), project.photo_keys.len())?;
+
+    let key = format!("projects/{child_id}/{project_id}/{}.{ext}", Uuid::new_v4());
+    state
+        .portfolio
+        .photos
+        .put(&key, body.to_vec(), &content_type)
+        .await?;
+    let now = Utc::now();
+    state
+        .portfolio
+        .projects
+        .add_photo_key(project_id, &key, now)
+        .await?;
+
+    let mut project = project;
+    project.photo_keys.push(key);
+    project.updated_at = now;
+    Ok((StatusCode::CREATED, Json(map_project(project))))
 }
 
 // ── PATCH /projects/:id/visibility ───────────────────────────────────────────

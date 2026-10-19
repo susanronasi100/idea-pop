@@ -19,6 +19,8 @@ interface Props {
   onImprove?: () => void;
   /** Solved again after starting the mission over: the XP was collected before. */
   again?: boolean;
+  /** Solved variant: stop for today (back to the Challenges page). */
+  onEnough?: () => void;
 }
 
 const CONFETTI_COLORS = ['#2D9CDB', '#FFD93D', '#6BCB77', '#FF6B6B', '#C77DFF', '#FF9F45'];
@@ -31,7 +33,7 @@ const CONFETTI = Array.from({ length: 22 }, (_, i) => ({
 
 /** The reward for defining the problem with the 5W1H questions: the floating jellyfish,
  *  reward chips that bob around it, falling confetti, and a way back to the mission. */
-export default function DefineCelebration({ xp = 0, onClose, variant = 'define', popi, onImprove, again = false }: Props) {
+export default function DefineCelebration({ xp = 0, onClose, variant = 'define', popi, onImprove, again = false, onEnough }: Props) {
   const solved = variant === 'solved';
   const t = useTranslations('story');
   const goRef = useRef<HTMLButtonElement>(null);
@@ -156,6 +158,11 @@ export default function DefineCelebration({ xp = 0, onClose, variant = 'define',
         >
           {solved ? t('solved_go') : t('celebrate_go')}
         </button>
+        {solved && onEnough && (
+          <button type="button" data-testid="solved-enough" onClick={onEnough} className={`${btnSecondary} mt-3 w-full`}>
+            {t('enough_today')}
+          </button>
+        )}
       </div>
     </div>,
     document.body,

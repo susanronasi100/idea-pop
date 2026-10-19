@@ -12,7 +12,7 @@ import { GAME_BY_SLUG } from './gameEmbeds';
 
 // Dark-launch flag for the scoped AI helper (server enforces the real gates).
 const HELPER_ON = process.env.NEXT_PUBLIC_MISSION_HELPER === 'true';
-import { createProject } from '@/lib/api/client';
+import { createProject, uploadProjectPhoto } from '@/lib/api/client';
 import { btnPrimary, btnText } from '@/components/challenge/buttons';
 
 type ChallengeDetail = import('@/lib/api/schema').components['schemas']['ChallengeDetail'];
@@ -65,7 +65,7 @@ export default function StepBuild({
   async function handleSubmit(data: CaptureData) {
     setSubmitting(true);
     try {
-      await createProject({
+      const project = await createProject({
         title: data.title || t('default_build_title'),
         what_i_made: data.what_i_made,
         what_i_used: data.what_i_used,
@@ -74,6 +74,7 @@ export default function StepBuild({
         challenge_id: challenge.id,
         step_type: 'build',
       });
+      if (data.photo) await uploadProjectPhoto(project.id, data.photo).catch(() => {});
     } catch {
       // never block progression
     } finally {

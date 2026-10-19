@@ -23,8 +23,8 @@ use uuid::Uuid;
 use idea_pop_domain::{
     challenge::ChallengeStep,
     help::{
-        build_idea_check_prompt, build_system_prompt, parse_idea_feedback, screen_question,
-        IdeaCheckContext, CANNED_REFUSAL,
+        build_idea_check_prompt, build_substitute_prompt, build_system_prompt, parse_idea_feedback,
+        screen_question, IdeaCheckContext, CANNED_REFUSAL,
     },
     DomainError, GatedAction, Role,
 };
@@ -75,6 +75,10 @@ pub struct IdeaFeedbackRequest {
     /// "en" or "fa": the language Popi answers in.
     #[serde(default)]
     pub lang: Option<String>,
+    /// "substitute" for the SCAMPER S practice (Popi asks a clarifying question);
+    /// anything else is the sketch idea check.
+    #[serde(default)]
+    pub kind: Option<String>,
 }
 
 #[derive(Serialize, ToSchema)]
@@ -400,7 +404,14 @@ pub async fn idea_feedback(
     }
     let raw = state
         .helper
-        .answer(&build_idea_check_prompt(&ctx), &idea)
+        .answer(
+            &if body.kind.as_deref() == Some("substitute") {
+                build_substitute_prompt(&ctx)
+            } else {
+                build_idea_check_prompt(&ctx)
+            },
+            &idea,
+        )
         .await?;
     let Some(feedback) = parse_idea_feedback(&raw) else {
         log_exchange(

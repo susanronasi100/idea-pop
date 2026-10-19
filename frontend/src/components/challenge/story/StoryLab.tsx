@@ -14,6 +14,8 @@ interface Props {
   update: GameUpdate;
   onNext: () => void;
   onBack: () => void;
+  /** Results submitted ("Finish the lab"); without it, finishing goes straight on. */
+  onFinished?: () => void;
 }
 
 /** Winner index for a set of lab numbers, or null until every row is filled. */
@@ -28,7 +30,7 @@ export function labWinner(values: (number | null)[], higherIsBetter: boolean): n
 /** Step 5 as a story: predict which option wins, run the experiment, record
  *  one number per option. The best row gets a crown and Popi says whether the
  *  prediction was right — either way is a win ("surprises teach"). */
-export default function StoryLab({ challenge, story, game, update, onNext, onBack }: Props) {
+export default function StoryLab({ challenge, story, game, update, onNext, onBack, onFinished }: Props) {
   const t = useTranslations('story');
   const lab = story.lab;
   const values = lab.options.map((_, i) => {
@@ -117,7 +119,7 @@ export default function StoryLab({ challenge, story, game, update, onNext, onBac
           disabled={!ready}
           onClick={() => {
             update({ labDone: true });
-            onNext();
+            (onFinished ?? onNext)();
           }}
           className={pillCtaClass}
         >

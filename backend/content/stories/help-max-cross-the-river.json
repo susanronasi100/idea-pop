@@ -181,5 +181,12 @@
         "hint": ""
       }
     ]
+  },
+  "substitute": {
+    "model_name": "Our clay boat",
+    "model_question": "What could you replace in the boat we built?",
+    "hint": "What material could you try instead of clay?",
+    "example": "Aluminum foil",
+    "model_material": "Clay"
   }
 }

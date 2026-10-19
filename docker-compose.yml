@@ -26,6 +26,11 @@ services:
       # Dev-only defaults so `just up` boots without extra setup.
       # Override per environment; NEVER use these values in production.
       JWT_SECRET: ${JWT_SECRET:-dev-secret-at-least-32-bytes-long!!}
+      # Project photos go to the local MinIO (same dev-only login as the minio service).
+      S3_ENDPOINT: http://minio:9000
+      S3_ACCESS_KEY: ${S3_ACCESS_KEY:-ideapop}
+      S3_SECRET_KEY: ${S3_SECRET_KEY:-ideapop123}
+      S3_BUCKET: ${S3_BUCKET:-ideapop-projects}
       RUN_MIGRATIONS: "true"
       # AI mission helper — DARK by default. Values come from the untracked
       # root .env via compose substitution (never put the real METIS_API_KEY

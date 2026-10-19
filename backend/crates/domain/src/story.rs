@@ -278,6 +278,25 @@ pub struct MissionStory {
     /// last opening picture of a picture-book Brief. Optional.
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub define_problem: Option<DefineProblem>,
+    /// The S — Substitute practice on the Skill step (starts from the kid's saved idea,
+    /// or from the lab's model when there is none). Optional.
+    #[serde(default, skip_serializing_if = "Option::is_none")]
+    pub substitute: Option<SubstitutePractice>,
+}
+
+/// Mission words for the S — Substitute practice.
+#[derive(Debug, Clone, PartialEq, Serialize, Deserialize)]
+pub struct SubstitutePractice {
+    /// The lab model the practice starts from when the kid has no idea yet.
+    pub model_name: String,
+    /// Page 2's question about that model.
+    pub model_question: String,
+    /// The material hint for the model ("What material could you try instead of clay?").
+    pub hint: String,
+    /// One example material, shown only when the kid asks.
+    pub example: String,
+    /// What the model is made of now, for the fair comparison.
+    pub model_material: String,
 }
 
 /// "The big question": the kid pins the problem down by answering Who, What,
@@ -533,6 +552,7 @@ mod tests {
                 emoji: "🌉".into(),
             },
             define_problem: None,
+            substitute: None,
         }
     }
 

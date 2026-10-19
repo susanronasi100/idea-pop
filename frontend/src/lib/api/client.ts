@@ -423,11 +423,11 @@ export async function claimDefineBonus(challengeId: string) {
 /** Popi checks a sketched idea with the AI helper. Null when the helper is off for this
  *  child (feature flag, consent or the parent's switch) or anything else goes wrong, so the
  *  page can fall back to a friendly fixed tip. */
-export async function getIdeaFeedback(challengeId: string, idea: string, lang: string) {
+export async function getIdeaFeedback(challengeId: string, idea: string, lang: string, kind?: "substitute") {
   try {
     const { data, error } = await apiClient.POST("/api/challenges/{id}/idea-feedback", {
       params: { path: { id: challengeId } },
-      body: { idea, lang },
+      body: { idea, lang, kind },
     });
     if (error || !data) return null;
     return data;
@@ -539,10 +539,36 @@ export async function createProject(body: {
   what_was_hard: string;
   what_id_improve: string;
   challenge_id: string | null;
-  step_type: "sketch" | "build";
+  step_type: "sketch" | "build" | "lab" | "practice";
 }) {
-  const { data, error } = await apiClient.POST("/api/projects", { body });
+  // The server files a project under what it came from (here, the challenge) and keeps the
+  // kid's own words in its text fields. Every project starts private.
+  if (!body.challenge_id) throw new Error("Failed to create project");
+  const { data, error } = await apiClient.POST("/api/projects", {
+    body: {
+      origin_type: "challenge",
+      origin_id: body.challenge_id,
+      title: body.title,
+      description: body.what_i_made,
+      materials: body.what_i_used,
+      what_was_hard: body.what_was_hard,
+      what_to_improve: body.what_id_improve,
+    },
+  });
   if (error) throw new Error("Failed to create project");
+  return data;
+}
+
+/** Adds a photo to one of the kid's projects. It stays private, like the project:
+ *  adding a photo never shares or publishes anything. */
+export async function uploadProjectPhoto(projectId: string, photo: File) {
+  const { data, error } = await apiClient.POST("/api/projects/{id}/photos", {
+    params: { path: { id: projectId } },
+    body: photo,
+    bodySerializer: (b) => b as Blob,
+    headers: { "Content-Type": photo.type || "image/jpeg" },
+  });
+  if (error) throw new Error("Failed to save photo");
   return data;
 }
 

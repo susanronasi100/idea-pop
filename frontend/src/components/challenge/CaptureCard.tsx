@@ -15,6 +15,8 @@ export interface CaptureData {
   what_i_used: string;
   what_was_hard?: string;
   what_id_improve?: string;
+  /** The photo the kid chose, if any (saved privately with the project). */
+  photo?: File | null;
 }
 
 interface CaptureCardProps {
@@ -50,6 +52,7 @@ export default function CaptureCard({
 }: CaptureCardProps) {
   const t = useTranslations('mission');
   const [photoUrl, setPhotoUrl] = useState<string | null>(null);
+  const [photo, setPhoto] = useState<File | null>(null);
   const fileInputRef = useRef<HTMLInputElement>(null);
   const [title, setTitle] = useState('');
   const [whatIMade, setWhatIMade] = useState('');
@@ -70,11 +73,13 @@ export default function CaptureCard({
   function handlePhotoChange(e: React.ChangeEvent<HTMLInputElement>) {
     const file = e.target.files?.[0];
     if (!file) return;
+    setPhoto(file);
     setPhotoUrl(URL.createObjectURL(file));
   }
 
   function removePhoto() {
     setPhotoUrl(null);
+    setPhoto(null);
     if (fileInputRef.current) fileInputRef.current.value = '';
   }
 
@@ -84,6 +89,7 @@ export default function CaptureCard({
       title: title.trim(),
       what_i_made: whatIMade.trim(),
       what_i_used: whatIUsed.trim(),
+      photo,
       ...(showExtendedFields && {
         what_was_hard: whatWasHard.trim(),
         what_id_improve: whatIdImprove.trim(),

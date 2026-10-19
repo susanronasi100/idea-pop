@@ -693,7 +693,7 @@ mod tests {
             award_sketch_bonus(child_id, chal_id, now, &[]).expect("first sketch awards XP");
         assert_eq!(first.amount, XP_SKETCH_BONUS);
         assert_eq!(first.source_type.as_str(), "sketch_bonus");
-        assert!(award_sketch_bonus(child_id, chal_id, now, &[first.clone()]).is_none());
+        assert!(award_sketch_bonus(child_id, chal_id, now, std::slice::from_ref(&first)).is_none());
         assert!(award_sketch_bonus(child_id, Uuid::new_v4(), now, &[first]).is_some());
     }
 
@@ -707,7 +707,7 @@ mod tests {
             award_define_bonus(child_id, chal_id, now, &[]).expect("first definition awards XP");
         assert_eq!(first.amount, XP_DEFINE_BONUS);
         assert_eq!(first.source_type.as_str(), "define_bonus");
-        assert!(award_define_bonus(child_id, chal_id, now, &[first.clone()]).is_none());
+        assert!(award_define_bonus(child_id, chal_id, now, std::slice::from_ref(&first)).is_none());
         // A different mission earns its own bonus.
         assert!(award_define_bonus(child_id, Uuid::new_v4(), now, &[first]).is_some());
     }
